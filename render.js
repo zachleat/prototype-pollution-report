@@ -1,6 +1,6 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { faCircleCheck as faCircleCheckRegular, faCircleXmark } from "@fortawesome/free-regular-svg-icons";
-import { faArrowDown, faArrowUp, faCircleCheck, faCloud, faCloudBolt, faCloudRain, faCloudSun, faSun } from "@fortawesome/free-solid-svg-icons";
+import { faArrowDown, faArrowUp, faCircleCheck, faCloud, faCloudBolt, faCloudRain, faCloudSun, faSun, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 import frameworks from "./frameworks.js";
 
 const snapshots = JSON.parse(await readFile(new URL("./data/snapshots.json", import.meta.url), "utf8"));
@@ -36,7 +36,17 @@ const SUPPORT = {
 	yes: { label: "Optional", icon: faCircleCheckRegular },
 	no: { label: "No", icon: faCircleXmark },
 };
-const support = value => `<td><svg class="icon support ${value}" aria-hidden="true"><use href="#support-${value}"/></svg>${SUPPORT[value].label}</td>`;
+const REQUEST_TIME_WARNING = "Server code runs on every request by default";
+const cautionIcon = label => `<svg class="support warn" role="img" aria-label="${esc(label)}"><title>${esc(label)}</title><use href="#support-warn"/></svg>`;
+// Frameworks that run server code per request by default get a warning next to their vulnerability counts.
+// Left off when there are no vulnerabilities to warn about.
+const requestTimeCaution = (f, total) => f.requestTime === "default" && total !== 0 ? cautionIcon(REQUEST_TIME_WARNING) : "";
+
+// `warn` adds a separate exclamation after defaults that add risk.
+const support = (value, { warn } = {}) => {
+	let caution = warn && value === "default" ? cautionIcon(warn) : "";
+	return `<td><svg class="icon support ${value}" aria-hidden="true"><use href="#support-${value}"/></svg>${SUPPORT[value].label}${caution}</td>`;
+};
 
 const esc = s => String(s).replace(/[&<>"']/g, c => `&#${c.charCodeAt(0)};`);
 const num = n => (n ?? "—").toLocaleString("en-US");
@@ -56,6 +66,7 @@ const symbol = (id, { icon: [w, h, , , d] }) => `<symbol id="${id}" viewBox="0 0
 const sprite = `<svg class="sprite" aria-hidden="true">${[
 	...series.map(f => symbol(`icon-${f.id}`, f.icon)),
 	...Object.entries(SUPPORT).map(([key, { icon }]) => symbol(`support-${key}`, icon)),
+	symbol("support-warn", faTriangleExclamation),
 	...FORECAST.map(({ id, icon }) => symbol(`weather-${id}`, icon)),
 	symbol("trend-up", faArrowUp),
 	symbol("trend-down", faArrowDown),
@@ -137,7 +148,7 @@ function smallMultiples({ id, title, description, measures, nameOf = f => f.name
 		}).join("");
 		let labels = [{ name: primary.label, color }, { name: alt?.label, color, style: "dashed" }, { name: secondary.label, color, style: "dotted" }];
 		return `<div class="panel">
-			<h3>${icon(f)}${esc(nameOf(f))}</h3>
+			<h3>${icon(f)}${esc(nameOf(f))}${requestTimeCaution(f, present.at(-1)?.values[i])}</h3>
 			<div class="plot">
 				<svg viewBox="0 0 ${SW} ${SH}" role="img" aria-label="${esc(`${nameOf(f)}: ${title}`)}" tabindex="0" data-labels="${esc(JSON.stringify(labels))}" data-points="${esc(JSON.stringify(points))}">
 					${primary.ticks.map(t => `<line class="grid" x1="${SM.left}" x2="${SW - SM.right}" y1="${y(t)}" y2="${y(t)}"/><text class="tick" x="${SW - SM.right + 6}" y="${y(t)}" dominant-baseline="middle">${num(t)}</text>`).join("")}
@@ -190,7 +201,7 @@ let renderingTable = `<div class="scroll"><table class="scoreboard compact">
 	<tbody>${series.toSorted((a, b) => a.name.localeCompare(b.name)).map(f => `<tr>
 		<th scope="row">${icon(f)}${esc(f.name)}</th>
 		${support(f.static)}
-		${support(f.requestTime)}
+		${support(f.requestTime, { warn: REQUEST_TIME_WARNING })}
 		${support(f.mpa)}
 		${support(f.spa)}
 	</tr>`).join("")}</tbody>
@@ -209,7 +220,7 @@ let scoreboard = `<div class="scroll"><table class="scoreboard">
 	<tbody>${latest.map(({ f, s }) => `<tr>
 		${forecast(s.vulnerabilities.total)}
 		<th scope="row">${icon(f)}${esc(f.name)}</th>
-		<td class="n strong">${num(s.vulnerabilities.total)}${delta(s.vulnerabilities.total, get(dates.at(-2), f.id)?.vulnerabilities?.total)}${rawAudit(s)}</td>
+		<td class="n strong">${requestTimeCaution(f, s.vulnerabilities.total)}${num(s.vulnerabilities.total)}${delta(s.vulnerabilities.total, get(dates.at(-2), f.id)?.vulnerabilities?.total)}${rawAudit(s)}</td>
 		<td class="n">${num(s.advisories.total)}</td>
 		<td class="n">${num(s.packageCount)}</td>
 		<td class="n">${num(s.dependencies)}<br><span class="third-party">(${num(s.thirdPartyDependencies)})</span></td>
@@ -229,7 +240,7 @@ let coreScoreboard = `<div class="scroll"><table class="scoreboard">
 	<tbody>${latest.filter(({ s }) => s.core).sort((a, b) => a.s.core.vulnerabilities.total - b.s.core.vulnerabilities.total).map(({ f, s: { core } }) => `<tr>
 		${forecast(core.vulnerabilities.total)}
 		<th scope="row">${icon(f)}<a href="https://www.npmjs.com/package/${esc(core.name)}/v/${esc(core.version)}">${esc(core.name)}</a> <span class="muted">${esc(core.version)}</span></th>
-		<td class="n strong">${num(core.vulnerabilities.total)}${delta(core.vulnerabilities.total, get(dates.at(-2), f.id)?.core?.vulnerabilities.total)}${rawAudit(core)}</td>
+		<td class="n strong">${requestTimeCaution(f, core.vulnerabilities.total)}${num(core.vulnerabilities.total)}${delta(core.vulnerabilities.total, get(dates.at(-2), f.id)?.core?.vulnerabilities.total)}${rawAudit(core)}</td>
 		<td class="n">${num(core.advisories.total)}</td>
 		<td class="n">${num(core.dependencies)}<br><span class="third-party">(${num(core.thirdPartyDependencies)})</span></td>
 		<td class="sev">${pills(core.vulnerabilities) || `<span class="muted">—</span>`}</td>
@@ -282,6 +293,7 @@ let html = `<!doctype html>
 	--weather-cloudy: #ad8a52;
 	--weather-rain: #927048;
 	--weather-storms: #7a5a3a;
+	--caution: #e3b85e;
 	--good: #0ca30c;
 	--critical: #d03b3b;
 	--serious: #ec835a;
@@ -298,6 +310,7 @@ let html = `<!doctype html>
 		--axis: #383835;
 		--border: rgba(255, 255, 255, 0.1);
 		${seriesVars("dark")}
+		--caution: #c7a560;
 		--weather-clear: #f5b400;
 		--weather-partly-cloudy: #d9ab52;
 		--weather-cloudy: #c19b68;
@@ -315,6 +328,7 @@ let html = `<!doctype html>
 	--axis: #383835;
 	--border: rgba(255, 255, 255, 0.1);
 	${seriesVars("dark")}
+	--caution: #c7a560;
 	--weather-clear: #f5b400;
 	--weather-partly-cloudy: #d9ab52;
 	--weather-cloudy: #c19b68;
@@ -365,6 +379,9 @@ figure { margin: 0; display: flex; flex-direction: column; gap: 1.25em; }
 .weather { width: 1.125em; height: 1.125em; vertical-align: -0.2em; }
 .support { width: 1em; height: 1em; vertical-align: -0.125em; fill: var(--good); }
 .support.no { fill: var(--muted); }
+.support.warn { fill: var(--caution); margin-inline-start: 0.375em; }
+.footnote .support.warn { margin-inline: 0 0.25em; }
+td.n > .support.warn:first-child { margin-inline: 0 0.375em; }
 .icon { width: 1.375em; height: 1.375em; vertical-align: -0.3em; margin-inline-end: 0.5em; overflow: visible; }
 .plot { position: relative; }
 .plot svg { display: block; width: 100%; height: auto; overflow: visible; }
@@ -374,7 +391,7 @@ figure { margin: 0; display: flex; flex-direction: column; gap: 1.25em; }
 .tick { fill: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
 .line { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
 .dot { stroke: var(--surface); stroke-width: 2; }
-.multiples { display: grid; grid-template-columns: repeat(auto-fill, minmax(14em, 1fr)); gap: 1.5em; }
+.multiples { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1.5em; }
 .panel h3 { font-size: 0.875em; font-weight: 500; margin: 0 0 0.5em; }
 .line.dotted { stroke-dasharray: 0 4; }
 .line.dashed { stroke-dasharray: 5 4; stroke-linecap: butt; }
@@ -462,7 +479,7 @@ ${sprite}
 			tbody.append(...rows);
 		}
 		</script>
-		<p class="footnote">In a static build, dependencies only run on the build machine. A ReDoS in a Markdown parser might slow down a build, but visitors can’t trigger it. Request-time code runs on a live server, where anyone loading a page can reach it.</p>
+		<p class="footnote">In a static build, dependencies only run on the build machine. A ReDoS in a Markdown parser might slow down a build, but visitors can’t trigger it. ${cautionIcon(REQUEST_TIME_WARNING)}Request-time code runs on a live server, where anyone loading a page can reach it.</p>
 	</div>
 </section>
 
@@ -481,12 +498,12 @@ ${sprite}
 			<li>Snapshots are fresh installs, which pick up the newest patch releases each package allows.</li>
 		</ul>
 	</div>
+	${smallMultiples({ id: "vulnerabilities", title: "Vulnerabilities over time", description: "All official packages.", measures: [{ label: "Vulnerabilities", value: s => s.vulnerabilities.total }, { label: "Dependencies", value: s => s.dependencies }, { label: "Raw npm audit", value: s => s.nonVendoredVulnerabilities?.total ?? s.vulnerabilities.total }] })}
+	${failures.length ? `<p class="note">Missing data, where the install failed: ${failures.map(s => `${esc(series.find(f => f.id === s.framework)?.name ?? s.framework)} on ${formatDate(s.date)}`).join(", ")}.</p>` : ""}
 	<div class="stack">
 		<h3>Package Lists</h3>
 		${details}
 	</div>
-	${smallMultiples({ id: "vulnerabilities", title: "Vulnerabilities over time", description: "All official packages.", measures: [{ label: "Vulnerabilities", value: s => s.vulnerabilities.total }, { label: "Dependencies", value: s => s.dependencies }, { label: "Raw npm audit", value: s => s.nonVendoredVulnerabilities?.total ?? s.vulnerabilities.total }] })}
-	${failures.length ? `<p class="note">Missing data, where the install failed: ${failures.map(s => `${esc(series.find(f => f.id === s.framework)?.name ?? s.framework)} on ${formatDate(s.date)}`).join(", ")}.</p>` : ""}
 </section>
 
 <section class="card">
