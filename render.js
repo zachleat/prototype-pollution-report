@@ -234,7 +234,7 @@ let scoreboard = `<div class="scroll"><table class="scoreboard">
 		<th>Forecast</th>
 		<th>Framework</th>
 		<th class="n">Vulnerabilities<br><span class="third-party">(Raw npm audit)</span></th>
-		<th class="n">Advisories</th>
+		<th class="n">GitHub<br>Advisories</th>
 		<th class="n">Packages</th>
 		<th class="n">Dependencies<br><span class="third-party">(Third-party)</span></th>
 		<th>Severity</th>
@@ -255,7 +255,7 @@ let coreScoreboard = `<div class="scroll"><table class="scoreboard">
 		<th>Forecast</th>
 		<th>Package</th>
 		<th class="n">Vulnerabilities<br><span class="third-party">(Raw npm audit)</span></th>
-		<th class="n">Advisories</th>
+		<th class="n">GitHub<br>Advisories</th>
 		<th class="n">Dependencies<br><span class="third-party">(Third-party)</span></th>
 		<th>Severity</th>
 	</tr></thead>
@@ -541,7 +541,7 @@ ${sprite}
 			<li>Includes required peer dependencies, like Vite and Svelte for SvelteKit.</li>
 		</ul>
 	</div>
-	${smallMultiples({ id: "core-vulnerabilities", title: "Vulnerabilities over time (core/primary package only)", order: latestCore.map(({ f }) => f.id), measures: [{ label: "Vulnerabilities", value: s => s.core?.vulnerabilities.total }, { label: "Dependencies", value: s => s.core?.dependencies }, { label: "Raw npm audit", value: s => s.core?.nonVendoredVulnerabilities?.total ?? s.core?.vulnerabilities.total }], nameOf: f => f.coreName ?? f.name, versionOf: s => s.core?.version })}
+	${smallMultiples({ id: "core-vulnerabilities", title: "Vulnerabilities over time (core package only)", order: latestCore.map(({ f }) => f.id), measures: [{ label: "Vulnerabilities", value: s => s.core?.vulnerabilities.total }, { label: "Dependencies", value: s => s.core?.dependencies }, { label: "Raw npm audit", value: s => s.core?.nonVendoredVulnerabilities?.total ?? s.core?.vulnerabilities.total }], nameOf: f => f.coreName ?? f.name, versionOf: s => s.core?.version })}
 </section>
 </main>
 <script type="module">
