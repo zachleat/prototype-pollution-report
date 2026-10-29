@@ -1,6 +1,6 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { faCircleCheck as faCircleCheckRegular, faCircleXmark } from "@fortawesome/free-regular-svg-icons";
-import { faArrowDown, faArrowUp, faCircleCheck, faCloud, faCloudBolt, faCloudRain, faCloudSun, faSun, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
+import { faArrowDown, faArrowUp, faCircleCheck, faCircleInfo, faCloud, faCloudBolt, faCloudRain, faCloudSun, faSun } from "@fortawesome/free-solid-svg-icons";
 import frameworks from "./frameworks.js";
 
 const snapshots = JSON.parse(await readFile(new URL("./data/snapshots.json", import.meta.url), "utf8"));
@@ -8,17 +8,19 @@ const OUTPUT = new URL("./index.html", import.meta.url);
 
 const SEVERITIES = ["critical", "high", "moderate", "low"];
 // Forecast by vulnerability count, like an air-quality report: the first bucket whose `max` the total fits under.
-// Colors run from sun yellow (clear) to muddy brown (storms).
+// Each bucket borrows a severity pill color.
 const FORECAST = [
-	{ id: "clear", label: "Clear", max: 0, icon: faSun },
-	{ id: "partly-cloudy", label: "Partly cloudy", max: 9, icon: faCloudSun },
-	{ id: "cloudy", label: "Cloudy", max: 49, icon: faCloud },
-	{ id: "rain", label: "Rain", max: 149, icon: faCloudRain },
-	{ id: "storms", label: "Storms", max: Infinity, icon: faCloudBolt },
+	{ id: "clear", label: "Clear", max: 0, icon: faSun, severity: "none" },
+	{ id: "partly-cloudy", label: "Partly cloudy", max: 9, icon: faCloudSun, severity: "low" },
+	{ id: "cloudy", label: "Cloudy", max: 49, icon: faCloud, severity: "moderate" },
+	{ id: "rain", label: "Rain", max: 149, icon: faCloudRain, severity: "high" },
+	{ id: "storms", label: "Storms", max: Infinity, icon: faCloudBolt, severity: "critical" },
 ];
+// The bucket's rank shows beside the icon, from 0 (clear) to 4 (storms).
 const forecast = total => {
-	let { id, label } = FORECAST.find(f => total <= f.max);
-	return `<td class="forecast" title="${label}"><svg class="icon weather" style="fill:var(--weather-${id})" role="img" aria-label="${label}"><use href="#weather-${id}"/></svg></td>`;
+	let index = FORECAST.findIndex(f => total <= f.max);
+	let { id, label, severity } = FORECAST[index];
+	return `<td class="forecast" title="${label}"><span class="badge rank ${severity}"><svg class="weather" role="img" aria-label="${label}"><use href="#weather-${id}"/></svg>${index}</span></td>`;
 };
 
 // Change since the previous snapshot: red up arrow for more, green down arrow for fewer.
@@ -66,7 +68,7 @@ const symbol = (id, { icon: [w, h, , , d] }) => `<symbol id="${id}" viewBox="0 0
 const sprite = `<svg class="sprite" aria-hidden="true">${[
 	...series.map(f => symbol(`icon-${f.id}`, f.icon)),
 	...Object.entries(SUPPORT).map(([key, { icon }]) => symbol(`support-${key}`, icon)),
-	symbol("support-warn", faTriangleExclamation),
+	symbol("support-warn", faCircleInfo),
 	...FORECAST.map(({ id, icon }) => symbol(`weather-${id}`, icon)),
 	symbol("trend-up", faArrowUp),
 	symbol("trend-down", faArrowDown),
@@ -166,6 +168,7 @@ function smallMultiples({ id, title, description, measures, nameOf = f => f.name
 					<path d="${pathFor(primary, i)}" class="line" style="stroke:${color}"/>
 					<line class="crosshair" y1="${SM.top}" y2="${SH - SM.bottom}" visibility="hidden"/>
 				</svg>
+				<div class="tooltip-anchor"></div>
 				<div class="tooltip" hidden></div>
 			</div>
 		</div>`;
@@ -190,26 +193,35 @@ let latestCore = latest
 	.filter(({ s }) => s.core)
 	.toSorted((a, b) => a.s.core.vulnerabilities.total - b.s.core.vulnerabilities.total);
 
+let latestOf = f => latest.find(l => l.f === f)?.s;
+// Fewest core vulnerabilities first, then fewest ecosystem vulnerabilities; missing data sorts last.
+let coreTotal = f => latestOf(f)?.core?.vulnerabilities.total ?? Infinity;
+let ecosystemTotal = f => latestOf(f)?.vulnerabilities.total ?? Infinity;
 let renderingTable = `<div class="scroll"><table class="scoreboard compact">
 	<thead>
 		<tr>
 			<th rowspan="2">Framework</th>
 			<th colspan="2" class="group">Rendering</th>
 			<th colspan="2" class="group">Navigation</th>
+			<th colspan="2" class="group">Forecast</th>
 		</tr>
 		<tr>
 			<th>Static</th>
 			<th>Request-time</th>
 			<th>MPA</th>
 			<th>SPA</th>
+			<th>Ecosystem</th>
+			<th>Core</th>
 		</tr>
 	</thead>
-	<tbody>${series.toSorted((a, b) => a.name.localeCompare(b.name)).map(f => `<tr>
+	<tbody>${series.toSorted((a, b) => coreTotal(a) - coreTotal(b) || ecosystemTotal(a) - ecosystemTotal(b) || a.name.localeCompare(b.name)).map(f => `<tr>
 		<th scope="row">${icon(f)}${esc(f.name)}</th>
 		${support(f.static)}
 		${support(f.requestTime, { warn: REQUEST_TIME_WARNING })}
 		${support(f.mpa)}
 		${support(f.spa)}
+		${(s => s ? forecast(s.vulnerabilities.total) : "<td></td>")(latestOf(f))}
+		${(core => core ? forecast(core.vulnerabilities.total) : "<td></td>")(latestOf(f)?.core)}
 	</tr>`).join("")}</tbody>
 </table></div>`;
 
@@ -294,11 +306,6 @@ let html = `<!doctype html>
 	--axis: #c3c2b7;
 	--border: rgba(11, 11, 11, 0.1);
 	${seriesVars("light")}
-	--weather-clear: #e0a100;
-	--weather-partly-cloudy: #c99a3e;
-	--weather-cloudy: #ad8a52;
-	--weather-rain: #927048;
-	--weather-storms: #7a5a3a;
 	--caution: #e3b85e;
 	--good: #0ca30c;
 	--critical: #d03b3b;
@@ -317,11 +324,6 @@ let html = `<!doctype html>
 		--border: rgba(255, 255, 255, 0.1);
 		${seriesVars("dark")}
 		--caution: #c7a560;
-		--weather-clear: #f5b400;
-		--weather-partly-cloudy: #d9ab52;
-		--weather-cloudy: #c19b68;
-		--weather-rain: #a8845c;
-		--weather-storms: #94704c;
 	}
 }
 :root[data-theme="dark"] {
@@ -335,11 +337,6 @@ let html = `<!doctype html>
 	--border: rgba(255, 255, 255, 0.1);
 	${seriesVars("dark")}
 	--caution: #c7a560;
-	--weather-clear: #f5b400;
-	--weather-partly-cloudy: #d9ab52;
-	--weather-cloudy: #c19b68;
-	--weather-rain: #a8845c;
-	--weather-storms: #94704c;
 }
 * { box-sizing: border-box; }
 body {
@@ -389,7 +386,9 @@ figure { margin: 0; display: flex; flex-direction: column; gap: 1.25em; }
 .footnote .support.warn { margin-inline: 0 0.25em; }
 td.n > .support.warn:first-child { margin-inline: 0 0.375em; }
 .icon { width: 1.375em; height: 1.375em; vertical-align: -0.3em; margin-inline-end: 0.5em; overflow: visible; }
-.plot { position: relative; }
+.plot { position: relative; anchor-scope: --point; }
+/* Script moves this to the hovered point; the fixed tooltip anchors beside it and flips sides at the viewport edge, since it is wider than the plot. */
+.tooltip-anchor { position: absolute; inset-block: 0; width: 0; anchor-name: --point; }
 .plot svg { display: block; width: 100%; height: auto; overflow: visible; }
 .plot svg:focus-visible { outline: 2px solid var(--text-2); outline-offset: 4px; border-radius: 4px; }
 .grid { stroke: var(--grid); stroke-width: 1; }
@@ -414,8 +413,13 @@ td.n > .support.warn:first-child { margin-inline: 0 0.375em; }
 .tick.version { font-size: 8px; }
 .crosshair { stroke: var(--axis); stroke-width: 1; }
 .tooltip {
-	position: absolute;
-	top: 0;
+	position: fixed;
+	z-index: 1;
+	position-anchor: --point;
+	top: anchor(top);
+	left: anchor(right);
+	margin-inline-start: 12px;
+	position-try-fallbacks: flip-inline;
 	pointer-events: none;
 	background: var(--surface);
 	border: 1px solid var(--border);
@@ -434,8 +438,8 @@ td.n > .support.warn:first-child { margin-inline: 0 0.375em; }
 table { border-collapse: collapse; width: 100%; font-size: 0.875em; }
 table.compact { width: auto; }
 /* Each column group starts with extra space, and its header underline stops short so groups read apart. */
-table.compact tbody > tr > :is(:nth-child(2), :nth-child(4)),
-table.compact thead > tr:last-child > :is(:nth-child(1), :nth-child(3)),
+table.compact tbody > tr > :is(:nth-child(2), :nth-child(4), :nth-child(6)),
+table.compact thead > tr:last-child > :is(:nth-child(1), :nth-child(3), :nth-child(5)),
 th.group { padding-inline-start: 2em; }
 th.group { text-align: center; border-block-end: 0; background: linear-gradient(var(--axis), var(--axis)) right bottom / calc(100% - 2em) 1px no-repeat; }
 thead th[rowspan] { vertical-align: bottom; }
@@ -451,11 +455,16 @@ summary { cursor: pointer; color: var(--text-2); font-size: 0.875em; }
 .packages li { break-inside: avoid; padding-block: 0.1em; }
 /* Severity pills wrap between pills, never inside one. */
 td.sev { white-space: normal; line-height: 1.4; min-width: 12em; }
-.badge { white-space: nowrap; font-size: 0.75em; padding: 0 0.4em; border-radius: 4px; color: #fff; }
+/* A fixed line height keeps severity and forecast pills the same height wherever they sit. */
+.badge { display: inline-flex; align-items: center; line-height: 1.5; white-space: nowrap; font-size: 0.875em; padding: 0 0.4em; border-radius: 4px; color: #fff; }
 .badge.critical { background: var(--critical); }
 .badge.high { background: var(--serious); color: #0b0b0b; }
 .badge.moderate { background: var(--warning); color: #0b0b0b; }
 .badge.low { background: var(--axis); color: #0b0b0b; }
+/* An inset shadow outlines the pill without changing its height. */
+.badge.none { background: #fff; color: #0b0b0b; box-shadow: inset 0 0 0 1px var(--axis); }
+.badge.rank { gap: 0.3em; font-weight: 600; }
+.badge.rank .weather { fill: currentColor; }
 </style>
 </head>
 <body>
@@ -483,24 +492,8 @@ ${sprite}
 </header>
 
 <section class="card">
-	<hgroup>
-		<h2>Rendering</h2>
-		<p class="note">Static output or server code that runs on every request, and full page loads (MPA) or a client-side router (SPA).</p>
-	</hgroup>
 	<div class="stack">
 		${renderingTable}
-		<script>
-		// Shuffle rows on every load (alphabetical without JS); inline so it runs before first paint.
-		{
-			let tbody = document.currentScript.previousElementSibling.querySelector("tbody");
-			let rows = [...tbody.rows];
-			for (let i = rows.length - 1; i > 0; i--) {
-				let j = Math.floor(Math.random() * (i + 1));
-				[rows[i], rows[j]] = [rows[j], rows[i]];
-			}
-			tbody.append(...rows);
-		}
-		</script>
 		<p class="footnote">In a static build, dependencies only run on the build machine. A ReDoS in a Markdown parser might slow down a build, but visitors can’t trigger it. ${cautionIcon(REQUEST_TIME_WARNING)}Request-time code runs on a live server, where anyone loading a page can reach it.</p>
 	</div>
 </section>
@@ -546,7 +539,8 @@ ${sprite}
 for (const svg of document.querySelectorAll("svg[data-points]")) {
 	const points = JSON.parse(svg.dataset.points);
 	const labels = JSON.parse(svg.dataset.labels);
-	const tooltip = svg.nextElementSibling;
+	const anchor = svg.parentElement.querySelector(".tooltip-anchor");
+	const tooltip = svg.parentElement.querySelector(".tooltip");
 	const crosshair = svg.querySelector(".crosshair");
 	let index = -1;
 
@@ -580,11 +574,7 @@ for (const svg of document.querySelectorAll("svg[data-points]")) {
 			});
 		tooltip.replaceChildren(date, ...rows);
 		tooltip.hidden = false;
-
-		const scale = svg.clientWidth / svg.viewBox.baseVal.width;
-		const left = p.x * scale;
-		const flip = left + tooltip.offsetWidth + 16 > svg.clientWidth;
-		tooltip.style.left = (flip ? left - tooltip.offsetWidth - 12 : left + 12) + "px";
+		anchor.style.left = p.x / svg.viewBox.baseVal.width * 100 + "%";
 	}
 
 	function hide() {
