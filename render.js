@@ -1,24 +1,28 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { faCircleCheck as faCircleCheckRegular, faCircleXmark } from "@fortawesome/free-regular-svg-icons";
-import { faArrowDown, faArrowUp, faCircleCheck, faCircleInfo, faCloud, faCloudBolt, faCloudRain, faCloudSun, faSun } from "@fortawesome/free-solid-svg-icons";
+import { faArrowDown, faArrowUp, faCircleCheck, faCircleInfo, faCloud, faCloudBolt, faCloudRain, faCloudShowersHeavy, faCloudSun, faSun } from "@fortawesome/free-solid-svg-icons";
 import frameworks from "./frameworks.js";
 
 const snapshots = JSON.parse(await readFile(new URL("./data/snapshots.json", import.meta.url), "utf8"));
 const OUTPUT = new URL("./index.html", import.meta.url);
 
 const SEVERITIES = ["critical", "high", "moderate", "low"];
-// Forecast by vulnerability count, like an air-quality report: the first bucket whose `max` the total fits under.
+// Forecast by weighted vulnerability score, like an air-quality report: the first bucket whose `max` the score fits under.
 // Each bucket borrows a severity pill color.
 const FORECAST = [
 	{ id: "clear", label: "Clear", max: 0, icon: faSun, severity: "none" },
-	{ id: "partly-cloudy", label: "Partly cloudy", max: 9, icon: faCloudSun, severity: "low" },
-	{ id: "cloudy", label: "Cloudy", max: 49, icon: faCloud, severity: "moderate" },
-	{ id: "rain", label: "Rain", max: 149, icon: faCloudRain, severity: "high" },
+	{ id: "partly-cloudy", label: "Partly cloudy", max: 24, icon: faCloudSun, severity: "low" },
+	{ id: "cloudy", label: "Cloudy", max: 124, icon: faCloud, severity: "moderate" },
+	{ id: "rain", label: "Rain", max: 249, icon: faCloudRain, severity: "high" },
+	{ id: "heavy-rain", label: "Heavy rain", max: 624, icon: faCloudShowersHeavy, severity: "severe" },
 	{ id: "storms", label: "Storms", max: Infinity, icon: faCloudBolt, severity: "critical" },
 ];
-// The bucket's rank shows beside the icon, from 0 (clear) to 4 (storms).
-const forecast = total => {
-	let index = FORECAST.findIndex(f => total <= f.max);
+const SEVERITY_POINTS = { critical: 10, high: 6, moderate: 3, low: 1 };
+const forecastScore = counts => Object.entries(SEVERITY_POINTS).reduce((sum, [sev, points]) => sum + (counts[sev] ?? 0) * points, 0);
+// The bucket's rank shows beside the icon, from 0 (clear) to 5 (storms).
+const forecast = counts => {
+	let score = forecastScore(counts);
+	let index = FORECAST.findIndex(f => score <= f.max);
 	let { id, label, severity } = FORECAST[index];
 	return `<td class="forecast" title="${label}"><span class="badge rank ${severity}"><svg class="weather" role="img" aria-label="${label}"><use href="#weather-${id}"/></svg>${index}</span></td>`;
 };
@@ -38,7 +42,7 @@ const SUPPORT = {
 	yes: { label: "Optional", icon: faCircleCheckRegular },
 	no: { label: "No", icon: faCircleXmark },
 };
-const REQUEST_TIME_WARNING = "Server code runs on every request by default";
+const REQUEST_TIME_WARNING = "Code runs on request (by default)";
 const cautionIcon = label => `<svg class="support warn" role="img" aria-label="${esc(label)}"><title>${esc(label)}</title><use href="#support-warn"/></svg>`;
 // Frameworks that run server code per request by default get a warning next to their vulnerability counts.
 // Left off when there are no vulnerabilities to warn about.
@@ -220,8 +224,8 @@ let renderingTable = `<div class="scroll"><table class="scoreboard compact">
 		${support(f.requestTime, { warn: REQUEST_TIME_WARNING })}
 		${support(f.mpa)}
 		${support(f.spa)}
-		${(s => s ? forecast(s.vulnerabilities.total) : "<td></td>")(latestOf(f))}
-		${(core => core ? forecast(core.vulnerabilities.total) : "<td></td>")(latestOf(f)?.core)}
+		${(s => s ? forecast(s.vulnerabilities) : "<td></td>")(latestOf(f))}
+		${(core => core ? forecast(core.vulnerabilities) : "<td></td>")(latestOf(f)?.core)}
 	</tr>`).join("")}</tbody>
 </table></div>`;
 
@@ -236,7 +240,7 @@ let scoreboard = `<div class="scroll"><table class="scoreboard">
 		<th>Severity</th>
 	</tr></thead>
 	<tbody>${latest.map(({ f, s }) => `<tr>
-		${forecast(s.vulnerabilities.total)}
+		${forecast(s.vulnerabilities)}
 		<th scope="row">${icon(f)}${esc(f.name)}</th>
 		<td class="n strong">${requestTimeCaution(f, s.vulnerabilities.total)}${num(s.vulnerabilities.total)}${delta(s.vulnerabilities.total, get(dates.at(-2), f.id)?.vulnerabilities?.total)}${rawAudit(s)}</td>
 		<td class="n">${num(s.advisories.total)}</td>
@@ -256,7 +260,7 @@ let coreScoreboard = `<div class="scroll"><table class="scoreboard">
 		<th>Severity</th>
 	</tr></thead>
 	<tbody>${latestCore.map(({ f, s: { core } }) => `<tr>
-		${forecast(core.vulnerabilities.total)}
+		${forecast(core.vulnerabilities)}
 		<th scope="row">${icon(f)}<a href="https://www.npmjs.com/package/${esc(core.name)}/v/${esc(core.version)}">${esc(core.name)}</a> <span class="muted">${esc(core.version)}</span></th>
 		<td class="n strong">${requestTimeCaution(f, core.vulnerabilities.total)}${num(core.vulnerabilities.total)}${delta(core.vulnerabilities.total, get(dates.at(-2), f.id)?.core?.vulnerabilities.total)}${rawAudit(core)}</td>
 		<td class="n">${num(core.advisories.total)}</td>
@@ -310,6 +314,8 @@ let html = `<!doctype html>
 	--good: #0ca30c;
 	--critical: #d03b3b;
 	--serious: #ec835a;
+	--severe: #e25f4a;
+	--sun: #ffd60a;
 	--warning: #fab219;
 }
 @media (prefers-color-scheme: dark) {
@@ -459,12 +465,15 @@ td.sev { white-space: normal; line-height: 1.4; min-width: 12em; }
 .badge { display: inline-flex; align-items: center; line-height: 1.5; white-space: nowrap; font-size: 0.875em; padding: 0 0.4em; border-radius: 4px; color: #fff; }
 .badge.critical { background: var(--critical); }
 .badge.high { background: var(--serious); color: #0b0b0b; }
+.badge.severe { background: var(--severe); color: #0b0b0b; }
 .badge.moderate { background: var(--warning); color: #0b0b0b; }
-.badge.low { background: var(--axis); color: #0b0b0b; }
+.badge.low { background: #c3c2b7; color: #0b0b0b; }
 /* An inset shadow outlines the pill without changing its height. */
-.badge.none { background: #fff; color: #0b0b0b; box-shadow: inset 0 0 0 1px var(--axis); }
+/* A translucent tint stays subtle on both light and dark surfaces. */
+.badge.none { background: rgb(255 214 10 / 0.12); color: var(--text); box-shadow: inset 0 0 0 1px var(--sun); }
 .badge.rank { gap: 0.3em; font-weight: 600; }
 .badge.rank .weather { fill: currentColor; }
+.badge.rank.none .weather { fill: var(--sun); }
 </style>
 </head>
 <body>
@@ -500,7 +509,7 @@ ${sprite}
 
 <section class="card">
 	<hgroup>
-		<h2>Scoreboard</h2>
+		<h2>Ecosystem Scoreboard</h2>
 		<p class="note">As of ${formatDate(latestDate)}, sorted by fewest vulnerabilities.</p>
 	</hgroup>
 	<div class="stack">
@@ -523,7 +532,7 @@ ${sprite}
 
 <section class="card">
 	<hgroup>
-		<h2>Core package</h2>
+		<h2>Core Scoreboard</h2>
 		<p class="note">Each framework’s main package installed on its own. As of ${formatDate(latestDate)}, sorted by fewest vulnerabilities.</p>
 	</hgroup>
 	<div class="stack">
