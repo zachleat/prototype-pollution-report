@@ -112,7 +112,7 @@ const SM = { top: 12, right: 40, bottom: 24, left: 40 };
 
 // One panel per framework: the first measure (solid) on the right axis, the second (dotted) on the left, and an optional third (dashed) sharing the first's axis.
 // Each axis is shared across frameworks so sizes stay comparable.
-function smallMultiples({ id, title, description, measures, nameOf = f => f.name, versionOf }) {
+function smallMultiples({ id, title, description, measures, nameOf = f => f.name, versionOf, order = [] }) {
 	let x = timeX(SM.left, SW - SM.left - SM.right);
 	let [primary, secondary, alt] = measures.map(m => {
 		let rows = chartRows(m.value);
@@ -121,7 +121,10 @@ function smallMultiples({ id, title, description, measures, nameOf = f => f.name
 	});
 	let pathFor = ({ rows, y }, i) => rows.map((r, j) => r.values[i] == null ? "" : `${j && rows[j - 1].values[i] != null ? "L" : "M"}${x(r.date).toFixed(1)},${y(r.values[i]).toFixed(1)}`).join("");
 
-	let panels = series.map((f, i) => {
+	// Panels follow `order` (framework ids), with anything missing from it at the end.
+	let rank = f => order.includes(f.id) ? order.indexOf(f.id) : Infinity;
+	let panels = series.toSorted((a, b) => rank(a) - rank(b)).map(f => {
+		let i = series.indexOf(f);
 		let color = `var(--series-${f.slot})`;
 		let present = primary.rows.filter(r => r.values[i] != null);
 		let { y } = primary;
@@ -183,6 +186,9 @@ let latest = series
 	.map(f => ({ f, s: get(latestDate, f.id) }))
 	.filter(({ s }) => s && !s.error)
 	.sort((a, b) => a.s.vulnerabilities.total - b.s.vulnerabilities.total);
+let latestCore = latest
+	.filter(({ s }) => s.core)
+	.toSorted((a, b) => a.s.core.vulnerabilities.total - b.s.core.vulnerabilities.total);
 
 let renderingTable = `<div class="scroll"><table class="scoreboard compact">
 	<thead>
@@ -237,7 +243,7 @@ let coreScoreboard = `<div class="scroll"><table class="scoreboard">
 		<th class="n">Dependencies<br><span class="third-party">(Third-party)</span></th>
 		<th>Severity</th>
 	</tr></thead>
-	<tbody>${latest.filter(({ s }) => s.core).sort((a, b) => a.s.core.vulnerabilities.total - b.s.core.vulnerabilities.total).map(({ f, s: { core } }) => `<tr>
+	<tbody>${latestCore.map(({ f, s: { core } }) => `<tr>
 		${forecast(core.vulnerabilities.total)}
 		<th scope="row">${icon(f)}<a href="https://www.npmjs.com/package/${esc(core.name)}/v/${esc(core.version)}">${esc(core.name)}</a> <span class="muted">${esc(core.version)}</span></th>
 		<td class="n strong">${requestTimeCaution(f, core.vulnerabilities.total)}${num(core.vulnerabilities.total)}${delta(core.vulnerabilities.total, get(dates.at(-2), f.id)?.core?.vulnerabilities.total)}${rawAudit(core)}</td>
@@ -498,7 +504,7 @@ ${sprite}
 			<li>Snapshots are fresh installs, which pick up the newest patch releases each package allows.</li>
 		</ul>
 	</div>
-	${smallMultiples({ id: "vulnerabilities", title: "Vulnerabilities over time", description: "All official packages.", measures: [{ label: "Vulnerabilities", value: s => s.vulnerabilities.total }, { label: "Dependencies", value: s => s.dependencies }, { label: "Raw npm audit", value: s => s.nonVendoredVulnerabilities?.total ?? s.vulnerabilities.total }] })}
+	${smallMultiples({ id: "vulnerabilities", title: "Vulnerabilities over time (all official packages)", order: latest.map(({ f }) => f.id), measures: [{ label: "Vulnerabilities", value: s => s.vulnerabilities.total }, { label: "Dependencies", value: s => s.dependencies }, { label: "Raw npm audit", value: s => s.nonVendoredVulnerabilities?.total ?? s.vulnerabilities.total }] })}
 	${failures.length ? `<p class="note">Missing data, where the install failed: ${failures.map(s => `${esc(series.find(f => f.id === s.framework)?.name ?? s.framework)} on ${formatDate(s.date)}`).join(", ")}.</p>` : ""}
 	<div class="stack">
 		<h3>Package Lists</h3>
@@ -517,7 +523,7 @@ ${sprite}
 			<li>Includes required peer dependencies, like Vite and Svelte for SvelteKit.</li>
 		</ul>
 	</div>
-	${smallMultiples({ id: "core-vulnerabilities", title: "Vulnerabilities over time (core/primary package only)", measures: [{ label: "Vulnerabilities", value: s => s.core?.vulnerabilities.total }, { label: "Dependencies", value: s => s.core?.dependencies }, { label: "Raw npm audit", value: s => s.core?.nonVendoredVulnerabilities?.total ?? s.core?.vulnerabilities.total }], nameOf: f => f.coreName ?? f.name, versionOf: s => s.core?.version })}
+	${smallMultiples({ id: "core-vulnerabilities", title: "Vulnerabilities over time (core/primary package only)", order: latestCore.map(({ f }) => f.id), measures: [{ label: "Vulnerabilities", value: s => s.core?.vulnerabilities.total }, { label: "Dependencies", value: s => s.core?.dependencies }, { label: "Raw npm audit", value: s => s.core?.nonVendoredVulnerabilities?.total ?? s.core?.vulnerabilities.total }], nameOf: f => f.coreName ?? f.name, versionOf: s => s.core?.version })}
 </section>
 </main>
 <script type="module">
