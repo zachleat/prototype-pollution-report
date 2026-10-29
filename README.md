@@ -14,4 +14,7 @@ Ecosystem installs use `--legacy-peer-deps` because official packages' peer rang
 
 Next.js's precompiled `dist/compiled` packages are audited as regular dependencies, with versions read from the release tag's `package.json` files on GitHub.
 
-Nuxt, Next.js, Astro, Gatsby and TanStack logos in `logos.js` come from [Simple Icons](https://simpleicons.org/) (CC0).
+Icons:
+
+- [Font Awesome](https://fontawesome.com/)
+- [Simple Icons](https://simpleicons.org/) (CC0): Nuxt, Next.js, Astro, Gatsby and TanStack logos in `logos.js`
