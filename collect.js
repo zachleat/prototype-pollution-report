@@ -411,6 +411,7 @@ for (let framework of selected) {
 			console.log(`  ${date}: failed\n${snapshot.error}`);
 		}
 		snapshot.packages = Object.fromEntries(packages);
+		snapshot.published = Object.fromEntries(packages.map(([name, version]) => [name, ecosystem.find(p => p.name === name).time[version]?.slice(0, 10)]));
 
 		snapshots = snapshots.filter(s => !(s.date === date && s.framework === framework.id));
 		snapshots.push(snapshot);

@@ -47,6 +47,16 @@ const delta = (total, previous) => {
 	return `<span class="delta ${direction}" title="${change > 0 ? "Up" : "Down"} ${num(Math.abs(change))} since ${formatDate(dates.at(-2))}"><svg class="trend" aria-hidden="true"><use href="#trend-${direction}"/></svg>${num(Math.abs(change))}</span>`;
 };
 
+// Age of a published version as of the latest snapshot.
+const age = published => {
+	if (!published) {
+		return "";
+	}
+	let days = Math.round((time(latestDate) - time(published)) / 864e5);
+	let label = days < 60 ? `${days}d` : days < 730 ? `${Math.round(days / 30.44)}mo` : `${Math.round(days / 365.25)}y`;
+	return ` <span class="badge age" title="Published ${formatDate(published)}">${label}</span>`;
+};
+
 const SUPPORT = {
 	default: { label: "Default", icon: faCircleCheck },
 	yes: { label: "Optional", icon: faCircleCheckRegular },
@@ -294,9 +304,9 @@ let coreScoreboard = `<div class="scroll"><table class="scoreboard">
 		<th class="n">Dependencies<br><span class="third-party">(Third-party)</span></th>
 		<th>Severity</th>
 	</tr></thead>
-	<tbody>${latestCore.map(({ f, s: { core } }) => `<tr>
+	<tbody>${latestCore.map(({ f, s: { core, published } }) => `<tr>
 		${forecast(core.vulnerabilities)}
-		<th scope="row">${icon(f)}<a href="https://www.npmjs.com/package/${esc(core.name)}/v/${esc(core.version)}">${esc(core.name)}</a> <span class="muted">${esc(core.version)}</span></th>
+		<th scope="row">${icon(f)}<a href="https://www.npmjs.com/package/${esc(core.name)}/v/${esc(core.version)}">${esc(core.name)}</a> <span class="muted">${esc(core.version)}</span>${age(published?.[core.name])}</th>
 		<td class="n strong">${requestTimeCaution(f, core.vulnerabilities.total)}${num(core.vulnerabilities.total)}${delta(core.vulnerabilities.total, get(dates.at(-2), f.id)?.core?.vulnerabilities.total)}${rawAudit(core)}</td>
 		<td class="n">${num(core.advisories.total)}</td>
 		<td class="n">${num(core.dependencies)}<br><span class="third-party">(${num(core.thirdPartyDependencies)})</span></td>
@@ -309,7 +319,7 @@ let details = latest.map(({ f, s }) => `<details class="ecosystem">
 	<summary>${icon(f)}${esc(f.name)}: ${(affected => `${num(affected)} of ${num(s.packageCount)} official packages (${Math.round(affected / s.packageCount * 100)}%) affected`)(s.vulnerablePackages.filter(p => !p.vendoredBy).length)}</summary>
 	<ul class="packages">${Object.entries(s.packages).map(([name, version]) => {
 		let vuln = s.vulnerablePackages.find(p => p.name === name && !p.vendoredBy);
-		return `<li><a href="https://www.npmjs.com/package/${esc(name)}/v/${esc(version)}">${esc(name)}</a> <span class="muted">${esc(version)}</span>${vuln ? packagePills(vuln) : ""}</li>`;
+		return `<li><a href="https://www.npmjs.com/package/${esc(name)}/v/${esc(version)}">${esc(name)}</a> <span class="muted">${esc(version)}</span>${age(s.published?.[name])}${vuln ? packagePills(vuln) : ""}</li>`;
 	}).join("")}</ul>
 	${Object.entries(s.vendored || {}).map(([parent, deps]) => {
 		let specs = Object.values(deps);
@@ -506,6 +516,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 /* An inset shadow outlines the pill without changing its height. */
 /* A translucent tint stays subtle on both light and dark surfaces. */
 .badge.none { background: rgb(255 214 10 / 0.12); color: var(--text); box-shadow: inset 0 0 0 1px var(--sun); }
+.badge.age { color: var(--text-2); font-weight: 500; box-shadow: inset 0 0 0 1px var(--axis); }
 .badge.rank { gap: 0.3em; font-weight: 600; }
 /* The divider runs the full pill height since pills have no block padding. */
 .badge .count { font-weight: 600; padding-inline-start: 0.4em; margin-inline-start: 0.4em; border-inline-start: 1px solid color-mix(in srgb, currentColor 40%, transparent); }
