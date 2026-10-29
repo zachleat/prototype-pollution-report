@@ -357,7 +357,7 @@ for (let framework of selected) {
 			.map(p => [p.name, versionAt(p, date)])
 			.filter(([, version]) => version);
 
-		let snapshot = { date, framework: framework.id, packageCount: packages.length };
+		let snapshot = { date, collectedAt: new Date().toISOString(), framework: framework.id, packageCount: packages.length };
 		try {
 			let aliases = new Map();
 			let vendoredBy = new Map();

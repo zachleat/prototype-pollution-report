@@ -83,6 +83,10 @@ const formatDate = (d, opts = { month: "short", day: "numeric", year: "numeric" 
 
 const dates = [...new Set(snapshots.map(s => s.date))].sort();
 const latestDate = dates.at(-1);
+const collectedAt = snapshots.filter(s => s.date === latestDate && s.collectedAt).map(s => s.collectedAt).sort().at(-1);
+const lastUpdated = collectedAt
+	? new Intl.DateTimeFormat("en-US", { timeZone: "UTC", dateStyle: "medium", timeStyle: "short" }).format(new Date(collectedAt)) + " UTC"
+	: formatDate(latestDate);
 const byKey = new Map(snapshots.map(s => [`${s.date}|${s.framework}`, s]));
 const get = (date, id) => byKey.get(`${date}|${id}`);
 const series = frameworks.map((f, i) => ({ ...f, slot: i + 1 }));
@@ -582,7 +586,7 @@ ${sprite}
 <main id="main">
 <header>
 	<h1>Prototype Pollution Report</h1>
-	<p class="note">Every non-deprecated package published by each framework’s npm organization, installed as of the first of each month and checked with <code>npm audit</code>. Last updated ${formatDate(latestDate)}.</p>
+	<p class="note">Every non-deprecated package published by each framework’s npm organization, installed as of the first of each month and checked with <code>npm audit</code>. Last updated ${lastUpdated}.</p>
 </header>
 
 <section class="stack">
