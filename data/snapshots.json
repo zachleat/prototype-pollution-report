@@ -213,7 +213,6 @@
 			"@angular/material-luxon-adapter": "20.2.11",
 			"@angular/material-moment-adapter": "20.2.11",
 			"@angular/platform-browser": "20.3.9",
-			"@angular/platform-browser-dynamic": "20.3.9",
 			"@angular/platform-server": "20.3.9",
 			"@angular/platform-webworker": "10.2.3",
 			"@angular/platform-webworker-dynamic": "10.2.3",
@@ -227,15 +226,16 @@
 			"@angular/upgrade": "20.3.9",
 			"@angular/youtube-player": "20.2.11",
 			"@schematics/angular": "20.3.8",
+			"angular-in-memory-web-api": "0.20.0",
 			"zone.js": "0.15.1"
 		}
 	},
 	{
 		"date": "2025-11-01",
 		"framework": "astro",
-		"packageCount": 48,
-		"dependencies": 1330,
-		"thirdPartyDependencies": 1282,
+		"packageCount": 49,
+		"dependencies": 1333,
+		"thirdPartyDependencies": 1284,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 0,
@@ -396,7 +396,8 @@
 			"@astrojs/vue": "5.1.2",
 			"@astrojs/vue-language-integration": "0.1.1",
 			"@astrojs/yaml2ts": "0.2.2",
-			"astro": "5.15.3"
+			"astro": "5.15.3",
+			"create-astro": "4.13.2"
 		}
 	},
 	{
@@ -1916,7 +1917,7 @@
 	{
 		"date": "2025-11-01",
 		"framework": "next",
-		"packageCount": 21,
+		"packageCount": 23,
 		"unresolvedVendored": {
 			"next": [
 				"@next/font (@next/font@16.0.1)",
@@ -2074,8 +2075,8 @@
 				"zod-validation-error": "zod-validation-error@3.4.0"
 			}
 		},
-		"dependencies": 825,
-		"thirdPartyDependencies": 802,
+		"dependencies": 965,
+		"thirdPartyDependencies": 940,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 6,
@@ -2333,6 +2334,8 @@
 			"@next/swc-wasm-nodejs": "16.0.1",
 			"@next/swc-wasm-web": "16.0.1",
 			"@next/third-parties": "16.0.1",
+			"create-next-app": "16.0.1",
+			"eslint-config-next": "16.0.1",
 			"next": "16.0.1"
 		}
 	},
@@ -2397,9 +2400,9 @@
 	{
 		"date": "2025-11-01",
 		"framework": "svelte",
-		"packageCount": 29,
-		"dependencies": 554,
-		"thirdPartyDependencies": 523,
+		"packageCount": 38,
+		"dependencies": 597,
+		"thirdPartyDependencies": 554,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 2,
@@ -2492,16 +2495,25 @@
 			"@sveltejs/svelte-virtual-list": "3.0.1",
 			"@sveltejs/vite-plugin-svelte": "6.2.1",
 			"@sveltejs/vite-plugin-svelte-inspector": "5.0.1",
+			"eslint-plugin-svelte": "3.13.0",
+			"prettier-plugin-svelte": "3.4.0",
 			"sv": "0.9.11",
-			"svelte": "5.43.2"
+			"svelte": "5.43.2",
+			"svelte-check": "4.3.3",
+			"svelte-eslint-parser": "1.4.0",
+			"svelte-hmr": "0.16.0",
+			"svelte-language-server": "0.17.21",
+			"svelte-preprocess": "6.0.3",
+			"svelte2tsx": "0.7.45",
+			"typescript-svelte-plugin": "0.3.50"
 		}
 	},
 	{
 		"date": "2025-11-01",
 		"framework": "tanstack-start",
-		"packageCount": 65,
-		"dependencies": 835,
-		"thirdPartyDependencies": 756,
+		"packageCount": 69,
+		"dependencies": 1064,
+		"thirdPartyDependencies": 981,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 5,
@@ -2787,7 +2799,11 @@
 			"@tanstack/start-static-server-functions": "1.134.6",
 			"@tanstack/start-storage-context": "1.134.4",
 			"@tanstack/start-vite-plugin": "1.91.1",
-			"@tanstack/virtual-file-routes": "1.133.19"
+			"@tanstack/virtual-file-routes": "1.133.19",
+			"create-start-app": "0.34.15",
+			"create-tanstack": "0.34.15",
+			"create-tanstack-app": "1.12.1",
+			"create-tsrouter-app": "0.34.15"
 		}
 	},
 	{
@@ -3004,7 +3020,6 @@
 			"@angular/material-luxon-adapter": "21.0.1",
 			"@angular/material-moment-adapter": "21.0.1",
 			"@angular/platform-browser": "21.0.1",
-			"@angular/platform-browser-dynamic": "21.0.1",
 			"@angular/platform-server": "21.0.1",
 			"@angular/platform-webworker": "10.2.3",
 			"@angular/platform-webworker-dynamic": "10.2.3",
@@ -3018,15 +3033,16 @@
 			"@angular/upgrade": "21.0.1",
 			"@angular/youtube-player": "21.0.1",
 			"@schematics/angular": "21.0.1",
+			"angular-in-memory-web-api": "0.21.0",
 			"zone.js": "0.16.0"
 		}
 	},
 	{
 		"date": "2025-12-01",
 		"framework": "astro",
-		"packageCount": 48,
-		"dependencies": 1314,
-		"thirdPartyDependencies": 1266,
+		"packageCount": 49,
+		"dependencies": 1317,
+		"thirdPartyDependencies": 1268,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 0,
@@ -3187,7 +3203,8 @@
 			"@astrojs/vue": "5.1.3",
 			"@astrojs/vue-language-integration": "0.1.1",
 			"@astrojs/yaml2ts": "0.2.2",
-			"astro": "5.16.3"
+			"astro": "5.16.3",
+			"create-astro": "4.13.2"
 		}
 	},
 	{
@@ -4707,7 +4724,7 @@
 	{
 		"date": "2025-12-01",
 		"framework": "next",
-		"packageCount": 21,
+		"packageCount": 23,
 		"unresolvedVendored": {
 			"next": [
 				"@next/font (@next/font@16.0.6)",
@@ -4865,8 +4882,8 @@
 				"zod-validation-error": "zod-validation-error@3.4.0"
 			}
 		},
-		"dependencies": 825,
-		"thirdPartyDependencies": 802,
+		"dependencies": 964,
+		"thirdPartyDependencies": 939,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 6,
@@ -5124,6 +5141,8 @@
 			"@next/swc-wasm-nodejs": "16.0.6",
 			"@next/swc-wasm-web": "16.0.6",
 			"@next/third-parties": "16.0.6",
+			"create-next-app": "16.0.6",
+			"eslint-config-next": "16.0.6",
 			"next": "16.0.6"
 		}
 	},
@@ -5290,9 +5309,9 @@
 	{
 		"date": "2025-12-01",
 		"framework": "svelte",
-		"packageCount": 29,
-		"dependencies": 539,
-		"thirdPartyDependencies": 508,
+		"packageCount": 38,
+		"dependencies": 584,
+		"thirdPartyDependencies": 541,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 2,
@@ -5385,16 +5404,25 @@
 			"@sveltejs/svelte-virtual-list": "3.0.1",
 			"@sveltejs/vite-plugin-svelte": "6.2.1",
 			"@sveltejs/vite-plugin-svelte-inspector": "5.0.1",
+			"eslint-plugin-svelte": "3.13.0",
+			"prettier-plugin-svelte": "3.4.0",
 			"sv": "0.10.6",
-			"svelte": "5.45.2"
+			"svelte": "5.45.2",
+			"svelte-check": "4.3.4",
+			"svelte-eslint-parser": "1.4.0",
+			"svelte-hmr": "0.16.0",
+			"svelte-language-server": "0.17.22",
+			"svelte-preprocess": "6.0.3",
+			"svelte2tsx": "0.7.45",
+			"typescript-svelte-plugin": "0.3.50"
 		}
 	},
 	{
 		"date": "2025-12-01",
 		"framework": "tanstack-start",
-		"packageCount": 66,
-		"dependencies": 851,
-		"thirdPartyDependencies": 771,
+		"packageCount": 70,
+		"dependencies": 1083,
+		"thirdPartyDependencies": 999,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 5,
@@ -5753,7 +5781,11 @@
 			"@tanstack/start-static-server-functions": "1.139.12",
 			"@tanstack/start-storage-context": "1.139.12",
 			"@tanstack/start-vite-plugin": "1.91.1",
-			"@tanstack/virtual-file-routes": "1.139.0"
+			"@tanstack/virtual-file-routes": "1.139.0",
+			"create-start-app": "0.40.0",
+			"create-tanstack": "0.40.0",
+			"create-tanstack-app": "1.12.1",
+			"create-tsrouter-app": "0.40.0"
 		}
 	},
 	{
@@ -5973,7 +6005,6 @@
 			"@angular/material-luxon-adapter": "21.0.5",
 			"@angular/material-moment-adapter": "21.0.5",
 			"@angular/platform-browser": "21.0.6",
-			"@angular/platform-browser-dynamic": "21.0.6",
 			"@angular/platform-server": "21.0.6",
 			"@angular/platform-webworker": "10.2.3",
 			"@angular/platform-webworker-dynamic": "10.2.3",
@@ -5987,15 +6018,16 @@
 			"@angular/upgrade": "21.0.6",
 			"@angular/youtube-player": "21.0.5",
 			"@schematics/angular": "21.0.4",
+			"angular-in-memory-web-api": "0.21.0",
 			"zone.js": "0.16.0"
 		}
 	},
 	{
 		"date": "2026-01-01",
 		"framework": "astro",
-		"packageCount": 48,
-		"dependencies": 1315,
-		"thirdPartyDependencies": 1267,
+		"packageCount": 49,
+		"dependencies": 1318,
+		"thirdPartyDependencies": 1269,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 0,
@@ -6156,7 +6188,8 @@
 			"@astrojs/vue": "5.1.3",
 			"@astrojs/vue-language-integration": "0.1.1",
 			"@astrojs/yaml2ts": "0.2.2",
-			"astro": "5.16.6"
+			"astro": "5.16.6",
+			"create-astro": "4.13.2"
 		}
 	},
 	{
@@ -7676,7 +7709,7 @@
 	{
 		"date": "2026-01-01",
 		"framework": "next",
-		"packageCount": 21,
+		"packageCount": 23,
 		"unresolvedVendored": {
 			"next": [
 				"@next/font (@next/font@16.1.1)",
@@ -7835,8 +7868,8 @@
 				"zod-validation-error": "zod-validation-error@3.4.0"
 			}
 		},
-		"dependencies": 832,
-		"thirdPartyDependencies": 809,
+		"dependencies": 970,
+		"thirdPartyDependencies": 945,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 6,
@@ -8107,6 +8140,8 @@
 			"@next/swc-wasm-nodejs": "16.1.1",
 			"@next/swc-wasm-web": "16.1.1",
 			"@next/third-parties": "16.1.1",
+			"create-next-app": "16.1.1",
+			"eslint-config-next": "16.1.1",
 			"next": "16.1.1"
 		}
 	},
@@ -8273,9 +8308,9 @@
 	{
 		"date": "2026-01-01",
 		"framework": "svelte",
-		"packageCount": 29,
-		"dependencies": 539,
-		"thirdPartyDependencies": 508,
+		"packageCount": 38,
+		"dependencies": 584,
+		"thirdPartyDependencies": 541,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 2,
@@ -8368,16 +8403,25 @@
 			"@sveltejs/svelte-virtual-list": "3.0.1",
 			"@sveltejs/vite-plugin-svelte": "6.2.1",
 			"@sveltejs/vite-plugin-svelte-inspector": "5.0.1",
+			"eslint-plugin-svelte": "3.13.1",
+			"prettier-plugin-svelte": "3.4.1",
 			"sv": "0.11.2",
-			"svelte": "5.46.1"
+			"svelte": "5.46.1",
+			"svelte-check": "4.3.5",
+			"svelte-eslint-parser": "1.4.1",
+			"svelte-hmr": "0.16.0",
+			"svelte-language-server": "0.17.23",
+			"svelte-preprocess": "6.0.3",
+			"svelte2tsx": "0.7.46",
+			"typescript-svelte-plugin": "0.3.50"
 		}
 	},
 	{
 		"date": "2026-01-01",
 		"framework": "tanstack-start",
-		"packageCount": 73,
-		"dependencies": 855,
-		"thirdPartyDependencies": 767,
+		"packageCount": 77,
+		"dependencies": 1095,
+		"thirdPartyDependencies": 1003,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 5,
@@ -8755,7 +8799,11 @@
 			"@tanstack/vue-router-ssr-query": "1.144.0",
 			"@tanstack/vue-start": "1.145.3",
 			"@tanstack/vue-start-client": "1.145.0",
-			"@tanstack/vue-start-server": "1.145.3"
+			"@tanstack/vue-start-server": "1.145.3",
+			"create-start-app": "0.44.0",
+			"create-tanstack": "0.41.2",
+			"create-tanstack-app": "1.12.1",
+			"create-tsrouter-app": "0.41.2"
 		}
 	},
 	{
@@ -8975,7 +9023,6 @@
 			"@angular/material-luxon-adapter": "21.1.2",
 			"@angular/material-moment-adapter": "21.1.2",
 			"@angular/platform-browser": "21.1.2",
-			"@angular/platform-browser-dynamic": "21.1.2",
 			"@angular/platform-server": "21.1.2",
 			"@angular/platform-webworker": "10.2.3",
 			"@angular/platform-webworker-dynamic": "10.2.3",
@@ -8989,15 +9036,16 @@
 			"@angular/upgrade": "21.1.2",
 			"@angular/youtube-player": "21.1.2",
 			"@schematics/angular": "21.1.2",
+			"angular-in-memory-web-api": "0.21.0",
 			"zone.js": "0.16.0"
 		}
 	},
 	{
 		"date": "2026-02-01",
 		"framework": "astro",
-		"packageCount": 48,
-		"dependencies": 1310,
-		"thirdPartyDependencies": 1262,
+		"packageCount": 49,
+		"dependencies": 1313,
+		"thirdPartyDependencies": 1264,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 0,
@@ -9182,7 +9230,8 @@
 			"@astrojs/vue": "5.1.4",
 			"@astrojs/vue-language-integration": "0.1.1",
 			"@astrojs/yaml2ts": "0.2.2",
-			"astro": "5.17.1"
+			"astro": "5.17.1",
+			"create-astro": "4.13.2"
 		}
 	},
 	{
@@ -10702,7 +10751,7 @@
 	{
 		"date": "2026-02-01",
 		"framework": "next",
-		"packageCount": 21,
+		"packageCount": 23,
 		"unresolvedVendored": {
 			"next": [
 				"@next/font (@next/font@16.1.6)",
@@ -10861,8 +10910,8 @@
 				"zod-validation-error": "zod-validation-error@3.4.0"
 			}
 		},
-		"dependencies": 832,
-		"thirdPartyDependencies": 809,
+		"dependencies": 970,
+		"thirdPartyDependencies": 945,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 10,
@@ -11146,6 +11195,8 @@
 			"@next/swc-wasm-nodejs": "16.1.6",
 			"@next/swc-wasm-web": "16.1.6",
 			"@next/third-parties": "16.1.6",
+			"create-next-app": "16.1.6",
+			"eslint-config-next": "16.1.6",
 			"next": "16.1.6"
 		}
 	},
@@ -11313,9 +11364,9 @@
 	{
 		"date": "2026-02-01",
 		"framework": "svelte",
-		"packageCount": 30,
-		"dependencies": 542,
-		"thirdPartyDependencies": 510,
+		"packageCount": 39,
+		"dependencies": 587,
+		"thirdPartyDependencies": 543,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 2,
@@ -11409,31 +11460,40 @@
 			"@sveltejs/svelte-virtual-list": "3.0.1",
 			"@sveltejs/vite-plugin-svelte": "6.2.4",
 			"@sveltejs/vite-plugin-svelte-inspector": "5.0.2",
+			"eslint-plugin-svelte": "3.14.0",
+			"prettier-plugin-svelte": "3.4.1",
 			"sv": "0.11.4",
-			"svelte": "5.49.1"
+			"svelte": "5.49.1",
+			"svelte-check": "4.3.6",
+			"svelte-eslint-parser": "1.4.1",
+			"svelte-hmr": "0.16.0",
+			"svelte-language-server": "0.17.24",
+			"svelte-preprocess": "6.0.3",
+			"svelte2tsx": "0.7.47",
+			"typescript-svelte-plugin": "0.3.50"
 		}
 	},
 	{
 		"date": "2026-02-01",
 		"framework": "tanstack-start",
-		"packageCount": 73,
-		"dependencies": 864,
-		"thirdPartyDependencies": 776,
+		"packageCount": 77,
+		"dependencies": 1104,
+		"thirdPartyDependencies": 1012,
 		"vulnerabilities": {
 			"info": 0,
-			"low": 5,
+			"low": 10,
 			"moderate": 5,
 			"high": 35,
 			"critical": 0,
-			"total": 45
+			"total": 50
 		},
 		"advisories": {
 			"info": 0,
-			"low": 3,
+			"low": 4,
 			"moderate": 14,
 			"high": 5,
 			"critical": 0,
-			"total": 22
+			"total": 23
 		},
 		"vulnerablePackages": [
 			{
@@ -11747,6 +11807,42 @@
 					"critical": 0,
 					"total": 5
 				}
+			},
+			{
+				"name": "create-start-app",
+				"severity": "low",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 3,
+					"moderate": 0,
+					"high": 0,
+					"critical": 0,
+					"total": 3
+				}
+			},
+			{
+				"name": "create-tanstack",
+				"severity": "low",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 3,
+					"moderate": 0,
+					"high": 0,
+					"critical": 0,
+					"total": 3
+				}
+			},
+			{
+				"name": "create-tsrouter-app",
+				"severity": "low",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 3,
+					"moderate": 0,
+					"high": 0,
+					"critical": 0,
+					"total": 3
+				}
 			}
 		],
 		"core": {
@@ -11844,7 +11940,11 @@
 			"@tanstack/vue-router-ssr-query": "1.157.18",
 			"@tanstack/vue-start": "1.157.18",
 			"@tanstack/vue-start-client": "1.157.18",
-			"@tanstack/vue-start-server": "1.157.18"
+			"@tanstack/vue-start-server": "1.157.18",
+			"create-start-app": "0.48.10",
+			"create-tanstack": "0.43.8",
+			"create-tanstack-app": "1.12.1",
+			"create-tsrouter-app": "0.43.9"
 		}
 	},
 	{
@@ -12197,7 +12297,6 @@
 			"@angular/material-luxon-adapter": "21.2.0",
 			"@angular/material-moment-adapter": "21.2.0",
 			"@angular/platform-browser": "21.2.0",
-			"@angular/platform-browser-dynamic": "21.2.0",
 			"@angular/platform-server": "21.2.0",
 			"@angular/platform-webworker": "10.2.3",
 			"@angular/platform-webworker-dynamic": "10.2.3",
@@ -12211,15 +12310,16 @@
 			"@angular/upgrade": "21.2.0",
 			"@angular/youtube-player": "21.2.0",
 			"@schematics/angular": "21.2.0",
+			"angular-in-memory-web-api": "0.21.0",
 			"zone.js": "0.16.1"
 		}
 	},
 	{
 		"date": "2026-03-01",
 		"framework": "astro",
-		"packageCount": 50,
-		"dependencies": 1421,
-		"thirdPartyDependencies": 1370,
+		"packageCount": 51,
+		"dependencies": 1424,
+		"thirdPartyDependencies": 1372,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 0,
@@ -12514,7 +12614,8 @@
 			"@astrojs/vue": "5.1.4",
 			"@astrojs/vue-language-integration": "0.1.1",
 			"@astrojs/yaml2ts": "0.2.2",
-			"astro": "5.18.0"
+			"astro": "5.18.0",
+			"create-astro": "4.13.2"
 		}
 	},
 	{
@@ -14034,7 +14135,7 @@
 	{
 		"date": "2026-03-01",
 		"framework": "next",
-		"packageCount": 21,
+		"packageCount": 23,
 		"unresolvedVendored": {
 			"next": [
 				"@next/font (@next/font@16.1.6)",
@@ -14193,8 +14294,8 @@
 				"zod-validation-error": "zod-validation-error@3.4.0"
 			}
 		},
-		"dependencies": 833,
-		"thirdPartyDependencies": 810,
+		"dependencies": 973,
+		"thirdPartyDependencies": 948,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 11,
@@ -14504,6 +14605,8 @@
 			"@next/swc-wasm-nodejs": "16.1.6",
 			"@next/swc-wasm-web": "16.1.6",
 			"@next/third-parties": "16.1.6",
+			"create-next-app": "16.1.6",
+			"eslint-config-next": "16.1.6",
 			"next": "16.1.6"
 		}
 	},
@@ -14707,24 +14810,24 @@
 	{
 		"date": "2026-03-01",
 		"framework": "svelte",
-		"packageCount": 31,
-		"dependencies": 544,
-		"thirdPartyDependencies": 511,
+		"packageCount": 40,
+		"dependencies": 589,
+		"thirdPartyDependencies": 544,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 2,
-			"moderate": 8,
+			"moderate": 10,
 			"high": 7,
 			"critical": 0,
-			"total": 17
+			"total": 19
 		},
 		"advisories": {
 			"info": 0,
 			"low": 1,
-			"moderate": 2,
+			"moderate": 6,
 			"high": 5,
 			"critical": 0,
-			"total": 8
+			"total": 12
 		},
 		"vulnerablePackages": [
 			{
@@ -14737,6 +14840,30 @@
 					"high": 7,
 					"critical": 0,
 					"total": 15
+				}
+			},
+			{
+				"name": "svelte",
+				"severity": "moderate",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 1,
+					"high": 0,
+					"critical": 0,
+					"total": 1
+				}
+			},
+			{
+				"name": "svelte-language-server",
+				"severity": "moderate",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 2,
+					"high": 0,
+					"critical": 0,
+					"total": 2
 				}
 			},
 			{
@@ -14804,31 +14931,40 @@
 			"@sveltejs/svelte-virtual-list": "3.0.1",
 			"@sveltejs/vite-plugin-svelte": "7.0.0",
 			"@sveltejs/vite-plugin-svelte-inspector": "5.0.2",
+			"eslint-plugin-svelte": "3.15.0",
+			"prettier-plugin-svelte": "3.5.0",
 			"sv": "0.12.4",
-			"svelte": "5.53.6"
+			"svelte": "5.53.6",
+			"svelte-check": "4.4.4",
+			"svelte-eslint-parser": "1.5.1",
+			"svelte-hmr": "0.16.0",
+			"svelte-language-server": "0.17.29",
+			"svelte-preprocess": "6.0.3",
+			"svelte2tsx": "0.7.51",
+			"typescript-svelte-plugin": "0.3.50"
 		}
 	},
 	{
 		"date": "2026-03-01",
 		"framework": "tanstack-start",
-		"packageCount": 73,
-		"dependencies": 871,
-		"thirdPartyDependencies": 783,
+		"packageCount": 77,
+		"dependencies": 1001,
+		"thirdPartyDependencies": 909,
 		"vulnerabilities": {
 			"info": 0,
-			"low": 5,
+			"low": 10,
 			"moderate": 5,
 			"high": 37,
 			"critical": 0,
-			"total": 47
+			"total": 52
 		},
 		"advisories": {
 			"info": 0,
-			"low": 3,
+			"low": 4,
 			"moderate": 14,
 			"high": 7,
 			"critical": 0,
-			"total": 24
+			"total": 25
 		},
 		"vulnerablePackages": [
 			{
@@ -15142,6 +15278,42 @@
 					"critical": 0,
 					"total": 5
 				}
+			},
+			{
+				"name": "create-start-app",
+				"severity": "low",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 3,
+					"moderate": 0,
+					"high": 0,
+					"critical": 0,
+					"total": 3
+				}
+			},
+			{
+				"name": "create-tanstack",
+				"severity": "low",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 3,
+					"moderate": 0,
+					"high": 0,
+					"critical": 0,
+					"total": 3
+				}
+			},
+			{
+				"name": "create-tsrouter-app",
+				"severity": "low",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 3,
+					"moderate": 0,
+					"high": 0,
+					"critical": 0,
+					"total": 3
+				}
 			}
 		],
 		"core": {
@@ -15239,7 +15411,11 @@
 			"@tanstack/vue-router-ssr-query": "1.163.3",
 			"@tanstack/vue-start": "1.163.3",
 			"@tanstack/vue-start-client": "1.163.3",
-			"@tanstack/vue-start-server": "1.163.3"
+			"@tanstack/vue-start-server": "1.163.3",
+			"create-start-app": "0.59.10",
+			"create-tanstack": "0.54.10",
+			"create-tanstack-app": "1.12.1",
+			"create-tsrouter-app": "0.54.10"
 		}
 	},
 	{
@@ -15472,7 +15648,6 @@
 			"@angular/material-luxon-adapter": "21.2.4",
 			"@angular/material-moment-adapter": "21.2.4",
 			"@angular/platform-browser": "21.2.6",
-			"@angular/platform-browser-dynamic": "21.2.6",
 			"@angular/platform-server": "21.2.6",
 			"@angular/platform-webworker": "10.2.3",
 			"@angular/platform-webworker-dynamic": "10.2.3",
@@ -15486,15 +15661,16 @@
 			"@angular/upgrade": "21.2.6",
 			"@angular/youtube-player": "21.2.4",
 			"@schematics/angular": "21.2.5",
+			"angular-in-memory-web-api": "0.21.0",
 			"zone.js": "0.16.1"
 		}
 	},
 	{
 		"date": "2026-04-01",
 		"framework": "astro",
-		"packageCount": 50,
-		"dependencies": 1398,
-		"thirdPartyDependencies": 1346,
+		"packageCount": 51,
+		"dependencies": 1401,
+		"thirdPartyDependencies": 1348,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 0,
@@ -15729,7 +15905,8 @@
 			"@astrojs/vue": "6.0.1",
 			"@astrojs/vue-language-integration": "0.1.1",
 			"@astrojs/yaml2ts": "0.2.3",
-			"astro": "6.1.2"
+			"astro": "6.1.2",
+			"create-astro": "5.0.5"
 		}
 	},
 	{
@@ -17309,7 +17486,7 @@
 	{
 		"date": "2026-04-01",
 		"framework": "next",
-		"packageCount": 23,
+		"packageCount": 25,
 		"unresolvedVendored": {
 			"next": [
 				"@next/font (@next/font@16.2.1)",
@@ -17467,8 +17644,8 @@
 				"zod-validation-error": "zod-validation-error@3.4.0"
 			}
 		},
-		"dependencies": 838,
-		"thirdPartyDependencies": 813,
+		"dependencies": 978,
+		"thirdPartyDependencies": 951,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 12,
@@ -17793,6 +17970,8 @@
 			"@next/swc-wasm-nodejs": "16.2.1",
 			"@next/swc-wasm-web": "16.2.1",
 			"@next/third-parties": "16.2.1",
+			"create-next-app": "16.2.1",
+			"eslint-config-next": "16.2.1",
 			"next": "16.2.1"
 		}
 	},
@@ -17996,24 +18175,24 @@
 	{
 		"date": "2026-04-01",
 		"framework": "svelte",
-		"packageCount": 31,
-		"dependencies": 545,
-		"thirdPartyDependencies": 512,
+		"packageCount": 40,
+		"dependencies": 590,
+		"thirdPartyDependencies": 545,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 2,
-			"moderate": 8,
+			"moderate": 10,
 			"high": 7,
 			"critical": 0,
-			"total": 17
+			"total": 19
 		},
 		"advisories": {
 			"info": 0,
 			"low": 1,
-			"moderate": 2,
+			"moderate": 6,
 			"high": 7,
 			"critical": 0,
-			"total": 10
+			"total": 14
 		},
 		"vulnerablePackages": [
 			{
@@ -18026,6 +18205,30 @@
 					"high": 7,
 					"critical": 0,
 					"total": 15
+				}
+			},
+			{
+				"name": "svelte",
+				"severity": "moderate",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 1,
+					"high": 0,
+					"critical": 0,
+					"total": 1
+				}
+			},
+			{
+				"name": "svelte-language-server",
+				"severity": "moderate",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 2,
+					"high": 0,
+					"critical": 0,
+					"total": 2
 				}
 			},
 			{
@@ -18093,31 +18296,40 @@
 			"@sveltejs/svelte-virtual-list": "3.0.1",
 			"@sveltejs/vite-plugin-svelte": "7.0.0",
 			"@sveltejs/vite-plugin-svelte-inspector": "5.0.2",
+			"eslint-plugin-svelte": "3.16.0",
+			"prettier-plugin-svelte": "3.5.1",
 			"sv": "0.13.1",
-			"svelte": "5.55.1"
+			"svelte": "5.55.1",
+			"svelte-check": "4.4.6",
+			"svelte-eslint-parser": "1.6.0",
+			"svelte-hmr": "0.16.0",
+			"svelte-language-server": "0.17.30",
+			"svelte-preprocess": "6.0.3",
+			"svelte2tsx": "0.7.53",
+			"typescript-svelte-plugin": "0.3.51"
 		}
 	},
 	{
 		"date": "2026-04-01",
 		"framework": "tanstack-start",
-		"packageCount": 74,
-		"dependencies": 887,
-		"thirdPartyDependencies": 798,
+		"packageCount": 78,
+		"dependencies": 1017,
+		"thirdPartyDependencies": 924,
 		"vulnerabilities": {
 			"info": 0,
-			"low": 5,
+			"low": 10,
 			"moderate": 3,
 			"high": 38,
 			"critical": 0,
-			"total": 46
+			"total": 51
 		},
 		"advisories": {
 			"info": 0,
-			"low": 4,
+			"low": 5,
 			"moderate": 21,
 			"high": 12,
 			"critical": 0,
-			"total": 37
+			"total": 38
 		},
 		"vulnerablePackages": [
 			{
@@ -18419,6 +18631,42 @@
 					"critical": 0,
 					"total": 5
 				}
+			},
+			{
+				"name": "create-start-app",
+				"severity": "low",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 3,
+					"moderate": 0,
+					"high": 0,
+					"critical": 0,
+					"total": 3
+				}
+			},
+			{
+				"name": "create-tanstack",
+				"severity": "low",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 3,
+					"moderate": 0,
+					"high": 0,
+					"critical": 0,
+					"total": 3
+				}
+			},
+			{
+				"name": "create-tsrouter-app",
+				"severity": "low",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 3,
+					"moderate": 0,
+					"high": 0,
+					"critical": 0,
+					"total": 3
+				}
 			}
 		],
 		"core": {
@@ -18517,7 +18765,11 @@
 			"@tanstack/vue-router-ssr-query": "1.166.10",
 			"@tanstack/vue-start": "1.167.15",
 			"@tanstack/vue-start-client": "1.166.23",
-			"@tanstack/vue-start-server": "1.166.23"
+			"@tanstack/vue-start-server": "1.166.23",
+			"create-start-app": "0.59.18",
+			"create-tanstack": "0.54.18",
+			"create-tanstack-app": "1.12.1",
+			"create-tsrouter-app": "0.54.18"
 		}
 	},
 	{
@@ -18750,7 +19002,6 @@
 			"@angular/material-luxon-adapter": "21.2.9",
 			"@angular/material-moment-adapter": "21.2.9",
 			"@angular/platform-browser": "21.2.11",
-			"@angular/platform-browser-dynamic": "21.2.11",
 			"@angular/platform-server": "21.2.11",
 			"@angular/platform-webworker": "10.2.3",
 			"@angular/platform-webworker-dynamic": "10.2.3",
@@ -18764,15 +19015,16 @@
 			"@angular/upgrade": "21.2.11",
 			"@angular/youtube-player": "21.2.9",
 			"@schematics/angular": "21.2.9",
+			"angular-in-memory-web-api": "0.21.0",
 			"zone.js": "0.16.1"
 		}
 	},
 	{
 		"date": "2026-05-01",
 		"framework": "astro",
-		"packageCount": 50,
-		"dependencies": 1398,
-		"thirdPartyDependencies": 1346,
+		"packageCount": 51,
+		"dependencies": 1401,
+		"thirdPartyDependencies": 1348,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 0,
@@ -19007,7 +19259,8 @@
 			"@astrojs/vue": "6.0.1",
 			"@astrojs/vue-language-integration": "0.1.1",
 			"@astrojs/yaml2ts": "0.2.3",
-			"astro": "6.2.1"
+			"astro": "6.2.1",
+			"create-astro": "5.0.6"
 		}
 	},
 	{
@@ -20587,7 +20840,7 @@
 	{
 		"date": "2026-05-01",
 		"framework": "next",
-		"packageCount": 23,
+		"packageCount": 25,
 		"unresolvedVendored": {
 			"next": [
 				"@next/font (@next/font@16.2.4)",
@@ -20745,8 +20998,8 @@
 				"zod-validation-error": "zod-validation-error@3.4.0"
 			}
 		},
-		"dependencies": 833,
-		"thirdPartyDependencies": 808,
+		"dependencies": 972,
+		"thirdPartyDependencies": 945,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 12,
@@ -21071,6 +21324,8 @@
 			"@next/swc-wasm-nodejs": "16.2.4",
 			"@next/swc-wasm-web": "16.2.4",
 			"@next/third-parties": "16.2.4",
+			"create-next-app": "16.2.4",
+			"eslint-config-next": "16.2.4",
 			"next": "16.2.4"
 		}
 	},
@@ -21310,24 +21565,24 @@
 	{
 		"date": "2026-05-01",
 		"framework": "svelte",
-		"packageCount": 31,
-		"dependencies": 545,
-		"thirdPartyDependencies": 512,
+		"packageCount": 40,
+		"dependencies": 590,
+		"thirdPartyDependencies": 545,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 2,
-			"moderate": 8,
+			"moderate": 10,
 			"high": 7,
 			"critical": 0,
-			"total": 17
+			"total": 19
 		},
 		"advisories": {
 			"info": 0,
 			"low": 1,
-			"moderate": 3,
+			"moderate": 7,
 			"high": 7,
 			"critical": 0,
-			"total": 11
+			"total": 15
 		},
 		"vulnerablePackages": [
 			{
@@ -21340,6 +21595,30 @@
 					"high": 7,
 					"critical": 0,
 					"total": 15
+				}
+			},
+			{
+				"name": "svelte",
+				"severity": "moderate",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 1,
+					"high": 0,
+					"critical": 0,
+					"total": 1
+				}
+			},
+			{
+				"name": "svelte-language-server",
+				"severity": "moderate",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 2,
+					"high": 0,
+					"critical": 0,
+					"total": 2
 				}
 			},
 			{
@@ -21407,31 +21686,40 @@
 			"@sveltejs/svelte-virtual-list": "3.0.1",
 			"@sveltejs/vite-plugin-svelte": "7.0.0",
 			"@sveltejs/vite-plugin-svelte-inspector": "5.0.2",
+			"eslint-plugin-svelte": "3.17.1",
+			"prettier-plugin-svelte": "3.5.1",
 			"sv": "0.15.2",
-			"svelte": "5.55.5"
+			"svelte": "5.55.5",
+			"svelte-check": "4.4.6",
+			"svelte-eslint-parser": "1.6.0",
+			"svelte-hmr": "0.16.0",
+			"svelte-language-server": "0.17.30",
+			"svelte-preprocess": "6.0.3",
+			"svelte2tsx": "0.7.53",
+			"typescript-svelte-plugin": "0.3.51"
 		}
 	},
 	{
 		"date": "2026-05-01",
 		"framework": "tanstack-start",
-		"packageCount": 76,
-		"dependencies": 894,
-		"thirdPartyDependencies": 803,
+		"packageCount": 80,
+		"dependencies": 1024,
+		"thirdPartyDependencies": 929,
 		"vulnerabilities": {
 			"info": 0,
-			"low": 5,
+			"low": 10,
 			"moderate": 3,
 			"high": 40,
 			"critical": 0,
-			"total": 48
+			"total": 53
 		},
 		"advisories": {
 			"info": 0,
-			"low": 3,
+			"low": 4,
 			"moderate": 21,
 			"high": 13,
 			"critical": 0,
-			"total": 37
+			"total": 38
 		},
 		"vulnerablePackages": [
 			{
@@ -21757,6 +22045,42 @@
 					"critical": 0,
 					"total": 5
 				}
+			},
+			{
+				"name": "create-start-app",
+				"severity": "low",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 3,
+					"moderate": 0,
+					"high": 0,
+					"critical": 0,
+					"total": 3
+				}
+			},
+			{
+				"name": "create-tanstack",
+				"severity": "low",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 3,
+					"moderate": 0,
+					"high": 0,
+					"critical": 0,
+					"total": 3
+				}
+			},
+			{
+				"name": "create-tsrouter-app",
+				"severity": "low",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 3,
+					"moderate": 0,
+					"high": 0,
+					"critical": 0,
+					"total": 3
+				}
 			}
 		],
 		"core": {
@@ -21857,7 +22181,11 @@
 			"@tanstack/vue-router-ssr-query": "1.166.12",
 			"@tanstack/vue-start": "1.167.49",
 			"@tanstack/vue-start-client": "1.166.41",
-			"@tanstack/vue-start-server": "1.166.42"
+			"@tanstack/vue-start-server": "1.166.42",
+			"create-start-app": "0.59.27",
+			"create-tanstack": "0.54.27",
+			"create-tanstack-app": "1.12.1",
+			"create-tsrouter-app": "0.54.27"
 		}
 	},
 	{
@@ -22114,7 +22442,6 @@
 			"@angular/material-luxon-adapter": "21.2.13",
 			"@angular/material-moment-adapter": "21.2.13",
 			"@angular/platform-browser": "21.2.15",
-			"@angular/platform-browser-dynamic": "21.2.15",
 			"@angular/platform-server": "21.2.15",
 			"@angular/platform-webworker": "10.2.3",
 			"@angular/platform-webworker-dynamic": "10.2.3",
@@ -22128,15 +22455,16 @@
 			"@angular/upgrade": "21.2.15",
 			"@angular/youtube-player": "21.2.13",
 			"@schematics/angular": "21.2.13",
+			"angular-in-memory-web-api": "0.21.0",
 			"zone.js": "0.16.2"
 		}
 	},
 	{
 		"date": "2026-06-01",
 		"framework": "astro",
-		"packageCount": 51,
-		"dependencies": 1403,
-		"thirdPartyDependencies": 1347,
+		"packageCount": 52,
+		"dependencies": 1406,
+		"thirdPartyDependencies": 1349,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 1,
@@ -22372,7 +22700,8 @@
 			"@astrojs/vue": "6.0.1",
 			"@astrojs/vue-language-integration": "0.1.1",
 			"@astrojs/yaml2ts": "0.2.4",
-			"astro": "6.4.2"
+			"astro": "6.4.2",
+			"create-astro": "5.0.6"
 		}
 	},
 	{
@@ -23952,7 +24281,7 @@
 	{
 		"date": "2026-06-01",
 		"framework": "next",
-		"packageCount": 23,
+		"packageCount": 25,
 		"unresolvedVendored": {
 			"next": [
 				"@next/font (@next/font@16.2.6)",
@@ -24110,8 +24439,8 @@
 				"zod-validation-error": "zod-validation-error@3.4.0"
 			}
 		},
-		"dependencies": 834,
-		"thirdPartyDependencies": 809,
+		"dependencies": 973,
+		"thirdPartyDependencies": 946,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 12,
@@ -24436,6 +24765,8 @@
 			"@next/swc-wasm-nodejs": "16.2.6",
 			"@next/swc-wasm-web": "16.2.4",
 			"@next/third-parties": "16.2.6",
+			"create-next-app": "16.2.6",
+			"eslint-config-next": "16.2.6",
 			"next": "16.2.6"
 		}
 	},
@@ -24699,24 +25030,24 @@
 	{
 		"date": "2026-06-01",
 		"framework": "svelte",
-		"packageCount": 32,
-		"dependencies": 553,
-		"thirdPartyDependencies": 519,
+		"packageCount": 41,
+		"dependencies": 598,
+		"thirdPartyDependencies": 551,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 5,
-			"moderate": 8,
+			"moderate": 10,
 			"high": 7,
 			"critical": 0,
-			"total": 20
+			"total": 22
 		},
 		"advisories": {
 			"info": 0,
 			"low": 2,
-			"moderate": 3,
+			"moderate": 9,
 			"high": 7,
 			"critical": 0,
-			"total": 12
+			"total": 18
 		},
 		"vulnerablePackages": [
 			{
@@ -24729,6 +25060,18 @@
 					"high": 7,
 					"critical": 0,
 					"total": 15
+				}
+			},
+			{
+				"name": "svelte-language-server",
+				"severity": "moderate",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 2,
+					"high": 0,
+					"critical": 0,
+					"total": 2
 				}
 			},
 			{
@@ -24809,31 +25152,40 @@
 			"@sveltejs/svelte-virtual-list": "3.0.1",
 			"@sveltejs/vite-plugin-svelte": "7.1.2",
 			"@sveltejs/vite-plugin-svelte-inspector": "5.0.2",
+			"eslint-plugin-svelte": "3.19.0",
+			"prettier-plugin-svelte": "4.0.1",
 			"sv": "0.15.3",
-			"svelte": "5.56.0"
+			"svelte": "5.56.0",
+			"svelte-check": "4.4.8",
+			"svelte-eslint-parser": "1.7.0",
+			"svelte-hmr": "0.16.0",
+			"svelte-language-server": "0.18.0",
+			"svelte-preprocess": "6.0.5",
+			"svelte2tsx": "0.7.55",
+			"typescript-svelte-plugin": "0.3.52"
 		}
 	},
 	{
 		"date": "2026-06-01",
 		"framework": "tanstack-start",
-		"packageCount": 76,
-		"dependencies": 893,
-		"thirdPartyDependencies": 802,
+		"packageCount": 80,
+		"dependencies": 1023,
+		"thirdPartyDependencies": 928,
 		"vulnerabilities": {
 			"info": 0,
-			"low": 0,
+			"low": 5,
 			"moderate": 3,
 			"high": 45,
 			"critical": 0,
-			"total": 48
+			"total": 53
 		},
 		"advisories": {
 			"info": 0,
-			"low": 3,
+			"low": 4,
 			"moderate": 24,
 			"high": 14,
 			"critical": 0,
-			"total": 41
+			"total": 42
 		},
 		"vulnerablePackages": [
 			{
@@ -25159,6 +25511,42 @@
 					"critical": 0,
 					"total": 3
 				}
+			},
+			{
+				"name": "create-start-app",
+				"severity": "low",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 3,
+					"moderate": 0,
+					"high": 0,
+					"critical": 0,
+					"total": 3
+				}
+			},
+			{
+				"name": "create-tanstack",
+				"severity": "low",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 3,
+					"moderate": 0,
+					"high": 0,
+					"critical": 0,
+					"total": 3
+				}
+			},
+			{
+				"name": "create-tsrouter-app",
+				"severity": "low",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 3,
+					"moderate": 0,
+					"high": 0,
+					"critical": 0,
+					"total": 3
+				}
 			}
 		],
 		"core": {
@@ -25259,7 +25647,11 @@
 			"@tanstack/vue-router-ssr-query": "1.167.1",
 			"@tanstack/vue-start": "1.168.17",
 			"@tanstack/vue-start-client": "1.167.11",
-			"@tanstack/vue-start-server": "1.167.13"
+			"@tanstack/vue-start-server": "1.167.13",
+			"create-start-app": "0.59.32",
+			"create-tanstack": "0.54.32",
+			"create-tanstack-app": "1.12.1",
+			"create-tsrouter-app": "0.54.32"
 		}
 	},
 	{
@@ -25540,7 +25932,6 @@
 			"@angular/material-luxon-adapter": "22.0.2",
 			"@angular/material-moment-adapter": "22.0.2",
 			"@angular/platform-browser": "22.0.4",
-			"@angular/platform-browser-dynamic": "22.0.4",
 			"@angular/platform-server": "22.0.4",
 			"@angular/platform-webworker": "10.2.3",
 			"@angular/platform-webworker-dynamic": "10.2.3",
@@ -25554,15 +25945,16 @@
 			"@angular/upgrade": "22.0.4",
 			"@angular/youtube-player": "22.0.2",
 			"@schematics/angular": "22.0.4",
+			"angular-in-memory-web-api": "0.22.0",
 			"zone.js": "0.16.2"
 		}
 	},
 	{
 		"date": "2026-07-01",
 		"framework": "astro",
-		"packageCount": 51,
-		"dependencies": 1423,
-		"thirdPartyDependencies": 1370,
+		"packageCount": 52,
+		"dependencies": 1426,
+		"thirdPartyDependencies": 1372,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 0,
@@ -25738,7 +26130,8 @@
 			"@astrojs/vue": "7.0.0",
 			"@astrojs/vue-language-integration": "0.1.1",
 			"@astrojs/yaml2ts": "0.2.4",
-			"astro": "7.0.4"
+			"astro": "7.0.4",
+			"create-astro": "5.2.1"
 		}
 	},
 	{
@@ -27318,7 +27711,7 @@
 	{
 		"date": "2026-07-01",
 		"framework": "next",
-		"packageCount": 23,
+		"packageCount": 25,
 		"unresolvedVendored": {
 			"next": [
 				"@next/font (@next/font@16.2.9)",
@@ -27476,8 +27869,8 @@
 				"zod-validation-error": "zod-validation-error@3.4.0"
 			}
 		},
-		"dependencies": 829,
-		"thirdPartyDependencies": 804,
+		"dependencies": 969,
+		"thirdPartyDependencies": 942,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 12,
@@ -27853,6 +28246,8 @@
 			"@next/swc-wasm-nodejs": "16.2.9",
 			"@next/swc-wasm-web": "16.2.4",
 			"@next/third-parties": "16.2.9",
+			"create-next-app": "16.2.9",
+			"eslint-config-next": "16.2.9",
 			"next": "16.2.9"
 		}
 	},
@@ -28116,24 +28511,24 @@
 	{
 		"date": "2026-07-01",
 		"framework": "svelte",
-		"packageCount": 33,
-		"dependencies": 555,
-		"thirdPartyDependencies": 520,
+		"packageCount": 42,
+		"dependencies": 600,
+		"thirdPartyDependencies": 552,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 4,
-			"moderate": 8,
+			"moderate": 10,
 			"high": 7,
 			"critical": 0,
-			"total": 19
+			"total": 21
 		},
 		"advisories": {
 			"info": 0,
 			"low": 1,
-			"moderate": 4,
+			"moderate": 10,
 			"high": 7,
 			"critical": 0,
-			"total": 12
+			"total": 18
 		},
 		"vulnerablePackages": [
 			{
@@ -28146,6 +28541,18 @@
 					"high": 7,
 					"critical": 0,
 					"total": 15
+				}
+			},
+			{
+				"name": "svelte-language-server",
+				"severity": "moderate",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 2,
+					"high": 0,
+					"critical": 0,
+					"total": 2
 				}
 			},
 			{
@@ -28227,31 +28634,40 @@
 			"@sveltejs/svelte-virtual-list": "3.0.1",
 			"@sveltejs/vite-plugin-svelte": "7.1.2",
 			"@sveltejs/vite-plugin-svelte-inspector": "5.0.2",
+			"eslint-plugin-svelte": "3.20.0",
+			"prettier-plugin-svelte": "4.1.1",
 			"sv": "0.16.1",
-			"svelte": "5.56.4"
+			"svelte": "5.56.4",
+			"svelte-check": "4.7.1",
+			"svelte-eslint-parser": "1.8.0",
+			"svelte-hmr": "0.16.0",
+			"svelte-language-server": "0.18.3",
+			"svelte-preprocess": "6.0.5",
+			"svelte2tsx": "0.7.57",
+			"typescript-svelte-plugin": "0.3.52"
 		}
 	},
 	{
 		"date": "2026-07-01",
 		"framework": "tanstack-start",
-		"packageCount": 76,
-		"dependencies": 879,
-		"thirdPartyDependencies": 788,
+		"packageCount": 80,
+		"dependencies": 1008,
+		"thirdPartyDependencies": 913,
 		"vulnerabilities": {
 			"info": 0,
-			"low": 0,
+			"low": 5,
 			"moderate": 3,
 			"high": 45,
 			"critical": 0,
-			"total": 48
+			"total": 53
 		},
 		"advisories": {
 			"info": 0,
-			"low": 5,
+			"low": 6,
 			"moderate": 29,
 			"high": 16,
 			"critical": 0,
-			"total": 50
+			"total": 51
 		},
 		"vulnerablePackages": [
 			{
@@ -28577,6 +28993,42 @@
 					"critical": 0,
 					"total": 3
 				}
+			},
+			{
+				"name": "create-start-app",
+				"severity": "low",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 3,
+					"moderate": 0,
+					"high": 0,
+					"critical": 0,
+					"total": 3
+				}
+			},
+			{
+				"name": "create-tanstack",
+				"severity": "low",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 3,
+					"moderate": 0,
+					"high": 0,
+					"critical": 0,
+					"total": 3
+				}
+			},
+			{
+				"name": "create-tsrouter-app",
+				"severity": "low",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 3,
+					"moderate": 0,
+					"high": 0,
+					"critical": 0,
+					"total": 3
+				}
 			}
 		],
 		"core": {
@@ -28677,7 +29129,11 @@
 			"@tanstack/vue-router-ssr-query": "1.167.1",
 			"@tanstack/vue-start": "1.168.25",
 			"@tanstack/vue-start-client": "1.167.17",
-			"@tanstack/vue-start-server": "1.167.20"
+			"@tanstack/vue-start-server": "1.167.20",
+			"create-start-app": "0.59.38",
+			"create-tanstack": "0.54.38",
+			"create-tanstack-app": "1.12.1",
+			"create-tsrouter-app": "0.54.38"
 		}
 	},
 	{
@@ -28922,7 +29378,6 @@
 			"@angular/material-luxon-adapter": "22.1.0",
 			"@angular/material-moment-adapter": "22.1.0",
 			"@angular/platform-browser": "22.1.0",
-			"@angular/platform-browser-dynamic": "22.1.0",
 			"@angular/platform-server": "22.1.0",
 			"@angular/platform-webworker": "10.2.3",
 			"@angular/platform-webworker-dynamic": "10.2.3",
@@ -28936,15 +29391,16 @@
 			"@angular/upgrade": "22.1.0",
 			"@angular/youtube-player": "22.1.0",
 			"@schematics/angular": "22.1.2",
+			"angular-in-memory-web-api": "0.22.0",
 			"zone.js": "0.16.2"
 		}
 	},
 	{
 		"date": "2026-08-01",
 		"framework": "astro",
-		"packageCount": 51,
-		"dependencies": 1437,
-		"thirdPartyDependencies": 1384,
+		"packageCount": 52,
+		"dependencies": 1440,
+		"thirdPartyDependencies": 1386,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 0,
@@ -29108,7 +29564,8 @@
 			"@astrojs/vue": "7.0.1",
 			"@astrojs/vue-language-integration": "0.1.1",
 			"@astrojs/yaml2ts": "0.2.4",
-			"astro": "7.1.6"
+			"astro": "7.1.6",
+			"create-astro": "5.2.3"
 		}
 	},
 	{
@@ -30688,7 +31145,7 @@
 	{
 		"date": "2026-08-01",
 		"framework": "next",
-		"packageCount": 23,
+		"packageCount": 25,
 		"unresolvedVendored": {
 			"next": [
 				"@next/font (@next/font@16.2.12)",
@@ -30846,8 +31303,8 @@
 				"zod-validation-error": "zod-validation-error@3.4.0"
 			}
 		},
-		"dependencies": 829,
-		"thirdPartyDependencies": 804,
+		"dependencies": 969,
+		"thirdPartyDependencies": 942,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 12,
@@ -31236,6 +31693,8 @@
 			"@next/swc-wasm-nodejs": "16.2.12",
 			"@next/swc-wasm-web": "16.2.12",
 			"@next/third-parties": "16.2.12",
+			"create-next-app": "16.2.12",
+			"eslint-config-next": "16.2.12",
 			"next": "16.2.12"
 		}
 	},
@@ -31499,24 +31958,24 @@
 	{
 		"date": "2026-08-01",
 		"framework": "svelte",
-		"packageCount": 33,
-		"dependencies": 631,
-		"thirdPartyDependencies": 596,
+		"packageCount": 42,
+		"dependencies": 675,
+		"thirdPartyDependencies": 627,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 14,
-			"moderate": 1,
+			"moderate": 3,
 			"high": 13,
 			"critical": 5,
-			"total": 33
+			"total": 35
 		},
 		"advisories": {
 			"info": 0,
 			"low": 2,
-			"moderate": 6,
+			"moderate": 12,
 			"high": 13,
 			"critical": 1,
-			"total": 22
+			"total": 28
 		},
 		"vulnerablePackages": [
 			{
@@ -31541,6 +32000,18 @@
 					"high": 3,
 					"critical": 0,
 					"total": 3
+				}
+			},
+			{
+				"name": "svelte-language-server",
+				"severity": "moderate",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 2,
+					"high": 0,
+					"critical": 0,
+					"total": 2
 				}
 			},
 			{
@@ -31706,31 +32177,40 @@
 			"@sveltejs/svelte-virtual-list": "3.0.1",
 			"@sveltejs/vite-plugin-svelte": "7.2.0",
 			"@sveltejs/vite-plugin-svelte-inspector": "5.0.2",
+			"eslint-plugin-svelte": "3.22.0",
+			"prettier-plugin-svelte": "4.1.1",
 			"sv": "0.17.0",
-			"svelte": "5.56.8"
+			"svelte": "5.56.8",
+			"svelte-check": "4.7.4",
+			"svelte-eslint-parser": "1.8.0",
+			"svelte-hmr": "0.16.0",
+			"svelte-language-server": "0.18.3",
+			"svelte-preprocess": "6.0.5",
+			"svelte2tsx": "0.7.59",
+			"typescript-svelte-plugin": "0.3.52"
 		}
 	},
 	{
 		"date": "2026-08-01",
 		"framework": "tanstack-start",
-		"packageCount": 76,
-		"dependencies": 885,
-		"thirdPartyDependencies": 794,
+		"packageCount": 80,
+		"dependencies": 1014,
+		"thirdPartyDependencies": 919,
 		"vulnerabilities": {
 			"info": 0,
-			"low": 0,
+			"low": 5,
 			"moderate": 1,
 			"high": 21,
 			"critical": 27,
-			"total": 49
+			"total": 54
 		},
 		"advisories": {
 			"info": 0,
-			"low": 5,
+			"low": 6,
 			"moderate": 31,
 			"high": 20,
 			"critical": 1,
-			"total": 57
+			"total": 58
 		},
 		"vulnerablePackages": [
 			{
@@ -32056,6 +32536,42 @@
 					"critical": 0,
 					"total": 3
 				}
+			},
+			{
+				"name": "create-start-app",
+				"severity": "low",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 3,
+					"moderate": 0,
+					"high": 0,
+					"critical": 0,
+					"total": 3
+				}
+			},
+			{
+				"name": "create-tanstack",
+				"severity": "low",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 3,
+					"moderate": 0,
+					"high": 0,
+					"critical": 0,
+					"total": 3
+				}
+			},
+			{
+				"name": "create-tsrouter-app",
+				"severity": "low",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 3,
+					"moderate": 0,
+					"high": 0,
+					"critical": 0,
+					"total": 3
+				}
 			}
 		],
 		"core": {
@@ -32156,7 +32672,11 @@
 			"@tanstack/vue-router-ssr-query": "1.167.1",
 			"@tanstack/vue-start": "1.168.32",
 			"@tanstack/vue-start-client": "1.167.19",
-			"@tanstack/vue-start-server": "1.167.22"
+			"@tanstack/vue-start-server": "1.167.22",
+			"create-start-app": "0.59.41",
+			"create-tanstack": "0.54.41",
+			"create-tanstack-app": "1.12.1",
+			"create-tsrouter-app": "0.54.41"
 		}
 	},
 	{
@@ -32389,7 +32909,6 @@
 			"@angular/material-luxon-adapter": "22.1.4",
 			"@angular/material-moment-adapter": "22.1.4",
 			"@angular/platform-browser": "22.1.4",
-			"@angular/platform-browser-dynamic": "22.1.4",
 			"@angular/platform-server": "22.1.4",
 			"@angular/platform-webworker": "10.2.3",
 			"@angular/platform-webworker-dynamic": "10.2.3",
@@ -32403,15 +32922,16 @@
 			"@angular/upgrade": "22.1.4",
 			"@angular/youtube-player": "22.1.4",
 			"@schematics/angular": "22.1.6",
+			"angular-in-memory-web-api": "0.22.0",
 			"zone.js": "0.16.2"
 		}
 	},
 	{
 		"date": "2026-09-01",
 		"framework": "astro",
-		"packageCount": 51,
-		"dependencies": 1430,
-		"thirdPartyDependencies": 1373,
+		"packageCount": 52,
+		"dependencies": 1433,
+		"thirdPartyDependencies": 1375,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 0,
@@ -32575,7 +33095,8 @@
 			"@astrojs/vue": "7.0.2",
 			"@astrojs/vue-language-integration": "0.1.1",
 			"@astrojs/yaml2ts": "0.2.4",
-			"astro": "7.2.10"
+			"astro": "7.2.10",
+			"create-astro": "5.2.4"
 		}
 	},
 	{
@@ -34155,7 +34676,7 @@
 	{
 		"date": "2026-09-01",
 		"framework": "next",
-		"packageCount": 23,
+		"packageCount": 25,
 		"unresolvedVendored": {
 			"next": [
 				"@next/font (@next/font@16.3.4)",
@@ -34316,8 +34837,8 @@
 				"zod-validation-error": "zod-validation-error@3.4.0"
 			}
 		},
-		"dependencies": 836,
-		"thirdPartyDependencies": 811,
+		"dependencies": 970,
+		"thirdPartyDependencies": 943,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 12,
@@ -34718,6 +35239,8 @@
 			"@next/swc-wasm-nodejs": "16.3.4",
 			"@next/swc-wasm-web": "16.3.4",
 			"@next/third-parties": "16.3.4",
+			"create-next-app": "16.3.4",
+			"eslint-config-next": "16.3.4",
 			"next": "16.3.4"
 		}
 	},
@@ -34983,24 +35506,24 @@
 	{
 		"date": "2026-09-01",
 		"framework": "svelte",
-		"packageCount": 33,
-		"dependencies": 631,
-		"thirdPartyDependencies": 596,
+		"packageCount": 42,
+		"dependencies": 675,
+		"thirdPartyDependencies": 627,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 14,
-			"moderate": 1,
+			"moderate": 3,
 			"high": 12,
 			"critical": 5,
-			"total": 32
+			"total": 34
 		},
 		"advisories": {
 			"info": 0,
 			"low": 2,
-			"moderate": 7,
+			"moderate": 13,
 			"high": 12,
 			"critical": 1,
-			"total": 22
+			"total": 28
 		},
 		"vulnerablePackages": [
 			{
@@ -35025,6 +35548,18 @@
 					"high": 3,
 					"critical": 0,
 					"total": 3
+				}
+			},
+			{
+				"name": "svelte-language-server",
+				"severity": "moderate",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 2,
+					"high": 0,
+					"critical": 0,
+					"total": 2
 				}
 			},
 			{
@@ -35190,31 +35725,40 @@
 			"@sveltejs/svelte-virtual-list": "3.0.1",
 			"@sveltejs/vite-plugin-svelte": "7.3.0",
 			"@sveltejs/vite-plugin-svelte-inspector": "5.0.2",
+			"eslint-plugin-svelte": "3.23.0",
+			"prettier-plugin-svelte": "4.1.1",
 			"sv": "0.17.0",
-			"svelte": "5.57.0"
+			"svelte": "5.57.0",
+			"svelte-check": "4.7.6",
+			"svelte-eslint-parser": "1.8.1",
+			"svelte-hmr": "0.16.0",
+			"svelte-language-server": "0.18.4",
+			"svelte-preprocess": "6.0.5",
+			"svelte2tsx": "0.7.61",
+			"typescript-svelte-plugin": "0.3.52"
 		}
 	},
 	{
 		"date": "2026-09-01",
 		"framework": "tanstack-start",
-		"packageCount": 77,
-		"dependencies": 888,
-		"thirdPartyDependencies": 796,
+		"packageCount": 81,
+		"dependencies": 1017,
+		"thirdPartyDependencies": 921,
 		"vulnerabilities": {
 			"info": 0,
-			"low": 0,
+			"low": 5,
 			"moderate": 1,
 			"high": 20,
 			"critical": 27,
-			"total": 48
+			"total": 53
 		},
 		"advisories": {
 			"info": 0,
-			"low": 5,
+			"low": 6,
 			"moderate": 34,
 			"high": 20,
 			"critical": 1,
-			"total": 60
+			"total": 61
 		},
 		"vulnerablePackages": [
 			{
@@ -35540,6 +36084,42 @@
 					"critical": 0,
 					"total": 3
 				}
+			},
+			{
+				"name": "create-start-app",
+				"severity": "low",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 3,
+					"moderate": 0,
+					"high": 0,
+					"critical": 0,
+					"total": 3
+				}
+			},
+			{
+				"name": "create-tanstack",
+				"severity": "low",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 3,
+					"moderate": 0,
+					"high": 0,
+					"critical": 0,
+					"total": 3
+				}
+			},
+			{
+				"name": "create-tsrouter-app",
+				"severity": "low",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 3,
+					"moderate": 0,
+					"high": 0,
+					"critical": 0,
+					"total": 3
+				}
 			}
 		],
 		"core": {
@@ -35641,7 +36221,11 @@
 			"@tanstack/vue-router-ssr-query": "1.167.2",
 			"@tanstack/vue-start": "1.168.46",
 			"@tanstack/vue-start-client": "1.167.32",
-			"@tanstack/vue-start-server": "1.167.36"
+			"@tanstack/vue-start-server": "1.167.36",
+			"create-start-app": "0.59.42",
+			"create-tanstack": "0.54.42",
+			"create-tanstack-app": "1.12.1",
+			"create-tsrouter-app": "0.54.42"
 		}
 	},
 	{
@@ -35874,7 +36458,6 @@
 			"@angular/material-luxon-adapter": "22.2.1",
 			"@angular/material-moment-adapter": "22.2.1",
 			"@angular/platform-browser": "22.2.1",
-			"@angular/platform-browser-dynamic": "22.2.1",
 			"@angular/platform-server": "22.2.1",
 			"@angular/platform-webworker": "10.2.3",
 			"@angular/platform-webworker-dynamic": "10.2.3",
@@ -35888,15 +36471,16 @@
 			"@angular/upgrade": "22.2.1",
 			"@angular/youtube-player": "22.2.1",
 			"@schematics/angular": "22.2.0",
+			"angular-in-memory-web-api": "0.22.0",
 			"zone.js": "0.16.3"
 		}
 	},
 	{
 		"date": "2026-10-01",
 		"framework": "astro",
-		"packageCount": 53,
-		"dependencies": 1430,
-		"thirdPartyDependencies": 1375,
+		"packageCount": 54,
+		"dependencies": 1433,
+		"thirdPartyDependencies": 1377,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 2,
@@ -36062,7 +36646,8 @@
 			"@astrojs/vue": "7.0.3",
 			"@astrojs/vue-language-integration": "0.1.1",
 			"@astrojs/yaml2ts": "0.2.4",
-			"astro": "7.3.5"
+			"astro": "7.3.5",
+			"create-astro": "5.2.4"
 		}
 	},
 	{
@@ -37642,7 +38227,7 @@
 	{
 		"date": "2026-10-01",
 		"framework": "next",
-		"packageCount": 23,
+		"packageCount": 25,
 		"unresolvedVendored": {
 			"next": [
 				"@next/font (@next/font@16.3.8)",
@@ -37804,8 +38389,8 @@
 				"zod-validation-error": "zod-validation-error@3.4.0"
 			}
 		},
-		"dependencies": 836,
-		"thirdPartyDependencies": 811,
+		"dependencies": 970,
+		"thirdPartyDependencies": 943,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 12,
@@ -38219,6 +38804,8 @@
 			"@next/swc-wasm-nodejs": "16.3.8",
 			"@next/swc-wasm-web": "16.3.8",
 			"@next/third-parties": "16.3.8",
+			"create-next-app": "16.3.8",
+			"eslint-config-next": "16.3.8",
 			"next": "16.3.8"
 		}
 	},
@@ -38580,24 +39167,24 @@
 	{
 		"date": "2026-10-01",
 		"framework": "svelte",
-		"packageCount": 34,
-		"dependencies": 632,
-		"thirdPartyDependencies": 596,
+		"packageCount": 43,
+		"dependencies": 676,
+		"thirdPartyDependencies": 627,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 19,
-			"moderate": 1,
+			"moderate": 3,
 			"high": 12,
 			"critical": 5,
-			"total": 37
+			"total": 39
 		},
 		"advisories": {
 			"info": 0,
 			"low": 3,
-			"moderate": 7,
+			"moderate": 13,
 			"high": 13,
 			"critical": 1,
-			"total": 24
+			"total": 30
 		},
 		"vulnerablePackages": [
 			{
@@ -38622,6 +39209,18 @@
 					"high": 3,
 					"critical": 0,
 					"total": 5
+				}
+			},
+			{
+				"name": "svelte-language-server",
+				"severity": "moderate",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 2,
+					"high": 0,
+					"critical": 0,
+					"total": 2
 				}
 			},
 			{
@@ -38812,31 +39411,40 @@
 			"@sveltejs/svelte-virtual-list": "3.0.1",
 			"@sveltejs/vite-plugin-svelte": "7.3.1",
 			"@sveltejs/vite-plugin-svelte-inspector": "5.0.2",
+			"eslint-plugin-svelte": "3.23.0",
+			"prettier-plugin-svelte": "4.1.1",
 			"sv": "0.17.1",
-			"svelte": "5.57.1"
+			"svelte": "5.57.1",
+			"svelte-check": "4.7.6",
+			"svelte-eslint-parser": "1.8.1",
+			"svelte-hmr": "0.16.0",
+			"svelte-language-server": "0.18.4",
+			"svelte-preprocess": "6.0.5",
+			"svelte2tsx": "0.7.61",
+			"typescript-svelte-plugin": "0.3.52"
 		}
 	},
 	{
 		"date": "2026-10-01",
 		"framework": "tanstack-start",
-		"packageCount": 77,
-		"dependencies": 888,
-		"thirdPartyDependencies": 796,
+		"packageCount": 81,
+		"dependencies": 1017,
+		"thirdPartyDependencies": 921,
 		"vulnerabilities": {
 			"info": 0,
-			"low": 2,
+			"low": 7,
 			"moderate": 1,
 			"high": 18,
 			"critical": 23,
-			"total": 44
+			"total": 49
 		},
 		"advisories": {
 			"info": 0,
-			"low": 7,
+			"low": 8,
 			"moderate": 34,
 			"high": 22,
 			"critical": 1,
-			"total": 64
+			"total": 65
 		},
 		"vulnerablePackages": [
 			{
@@ -39054,6 +39662,42 @@
 					"critical": 0,
 					"total": 3
 				}
+			},
+			{
+				"name": "create-start-app",
+				"severity": "low",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 3,
+					"moderate": 0,
+					"high": 0,
+					"critical": 0,
+					"total": 3
+				}
+			},
+			{
+				"name": "create-tanstack",
+				"severity": "low",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 3,
+					"moderate": 0,
+					"high": 0,
+					"critical": 0,
+					"total": 3
+				}
+			},
+			{
+				"name": "create-tsrouter-app",
+				"severity": "low",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 3,
+					"moderate": 0,
+					"high": 0,
+					"critical": 0,
+					"total": 3
+				}
 			}
 		],
 		"core": {
@@ -39155,7 +39799,11 @@
 			"@tanstack/vue-router-ssr-query": "1.167.3",
 			"@tanstack/vue-start": "1.168.56",
 			"@tanstack/vue-start-client": "1.167.40",
-			"@tanstack/vue-start-server": "1.167.44"
+			"@tanstack/vue-start-server": "1.167.44",
+			"create-start-app": "0.59.44",
+			"create-tanstack": "0.54.44",
+			"create-tanstack-app": "1.12.1",
+			"create-tsrouter-app": "0.54.44"
 		}
 	},
 	{
@@ -39325,7 +39973,7 @@
 		],
 		"core": {
 			"name": "@angular/core",
-			"version": "22.2.3",
+			"version": "22.2.4",
 			"dependencies": 3,
 			"thirdPartyDependencies": 2,
 			"vulnerabilities": {
@@ -39360,47 +40008,47 @@
 			"@angular/cdk": "22.2.5",
 			"@angular/cdk-experimental": "22.2.5",
 			"@angular/cli": "22.2.5",
-			"@angular/common": "22.2.3",
-			"@angular/compiler": "22.2.3",
-			"@angular/compiler-cli": "22.2.3",
-			"@angular/core": "22.2.3",
+			"@angular/common": "22.2.4",
+			"@angular/compiler": "22.2.4",
+			"@angular/compiler-cli": "22.2.4",
+			"@angular/core": "22.2.4",
 			"@angular/create": "22.2.5",
-			"@angular/elements": "22.2.3",
+			"@angular/elements": "22.2.4",
 			"@angular/fire": "21.0.0",
-			"@angular/forms": "22.2.3",
+			"@angular/forms": "22.2.4",
 			"@angular/google-maps": "22.2.5",
-			"@angular/language-server": "22.2.3",
-			"@angular/language-service": "22.2.3",
-			"@angular/localize": "22.2.3",
+			"@angular/language-server": "22.2.4",
+			"@angular/language-service": "22.2.4",
+			"@angular/localize": "22.2.4",
 			"@angular/material": "22.2.5",
 			"@angular/material-date-fns-adapter": "22.2.5",
 			"@angular/material-experimental": "22.2.5",
 			"@angular/material-luxon-adapter": "22.2.5",
 			"@angular/material-moment-adapter": "22.2.5",
-			"@angular/platform-browser": "22.2.3",
-			"@angular/platform-browser-dynamic": "22.2.3",
-			"@angular/platform-server": "22.2.3",
+			"@angular/platform-browser": "22.2.4",
+			"@angular/platform-server": "22.2.4",
 			"@angular/platform-webworker": "10.2.3",
 			"@angular/platform-webworker-dynamic": "10.2.3",
 			"@angular/pwa": "22.2.5",
-			"@angular/router": "22.2.3",
+			"@angular/router": "22.2.4",
 			"@angular/router-deprecated": "2.0.0-rc.2",
-			"@angular/service-worker": "22.2.3",
+			"@angular/service-worker": "22.2.4",
 			"@angular/ssr": "22.2.5",
 			"@angular/tsc-wrapped": "4.4.6",
 			"@angular/typescript": "2.0.0-5d0e199",
-			"@angular/upgrade": "22.2.3",
+			"@angular/upgrade": "22.2.4",
 			"@angular/youtube-player": "22.2.5",
 			"@schematics/angular": "22.2.5",
+			"angular-in-memory-web-api": "0.22.0",
 			"zone.js": "0.16.3"
 		}
 	},
 	{
 		"date": "2026-10-29",
 		"framework": "astro",
-		"packageCount": 53,
-		"dependencies": 1403,
-		"thirdPartyDependencies": 1348,
+		"packageCount": 54,
+		"dependencies": 1406,
+		"thirdPartyDependencies": 1350,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 5,
@@ -39578,7 +40226,8 @@
 			"@astrojs/vue": "7.1.2",
 			"@astrojs/vue-language-integration": "0.1.1",
 			"@astrojs/yaml2ts": "0.2.4",
-			"astro": "7.4.4"
+			"astro": "7.4.4",
+			"create-astro": "5.3.1"
 		}
 	},
 	{
@@ -41158,7 +41807,7 @@
 	{
 		"date": "2026-10-29",
 		"framework": "next",
-		"packageCount": 23,
+		"packageCount": 25,
 		"unresolvedVendored": {
 			"next": [
 				"@next/font (@next/font@16.4.3)",
@@ -41320,15 +41969,15 @@
 				"zod-validation-error": "zod-validation-error@3.4.0"
 			}
 		},
-		"dependencies": 830,
-		"thirdPartyDependencies": 805,
+		"dependencies": 964,
+		"thirdPartyDependencies": 937,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 11,
 			"moderate": 4,
-			"high": 19,
+			"high": 18,
 			"critical": 4,
-			"total": 38
+			"total": 37
 		},
 		"advisories": {
 			"info": 0,
@@ -41358,9 +42007,9 @@
 					"info": 0,
 					"low": 10,
 					"moderate": 2,
-					"high": 17,
+					"high": 16,
 					"critical": 3,
-					"total": 32
+					"total": 31
 				}
 			},
 			{
@@ -41584,19 +42233,6 @@
 				"vendoredBy": "next"
 			},
 			{
-				"name": "zod-validation-error",
-				"severity": "high",
-				"vulnerabilities": {
-					"info": 0,
-					"low": 0,
-					"moderate": 0,
-					"high": 2,
-					"critical": 0,
-					"total": 2
-				},
-				"vendoredBy": "next"
-			},
-			{
 				"name": "@next/plugin-sentry",
 				"severity": "moderate",
 				"vulnerabilities": {
@@ -41761,6 +42397,8 @@
 			"@next/swc-wasm-nodejs": "16.4.3",
 			"@next/swc-wasm-web": "16.4.3",
 			"@next/third-parties": "16.4.3",
+			"create-next-app": "16.4.3",
+			"eslint-config-next": "16.4.3",
 			"next": "16.4.3"
 		}
 	},
@@ -42161,24 +42799,24 @@
 	{
 		"date": "2026-10-29",
 		"framework": "svelte",
-		"packageCount": 35,
-		"dependencies": 625,
-		"thirdPartyDependencies": 588,
+		"packageCount": 44,
+		"dependencies": 670,
+		"thirdPartyDependencies": 620,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 17,
-			"moderate": 1,
+			"moderate": 3,
 			"high": 9,
 			"critical": 10,
-			"total": 37
+			"total": 39
 		},
 		"advisories": {
 			"info": 0,
 			"low": 3,
-			"moderate": 8,
+			"moderate": 14,
 			"high": 15,
 			"critical": 2,
-			"total": 28
+			"total": 34
 		},
 		"vulnerablePackages": [
 			{
@@ -42203,6 +42841,18 @@
 					"high": 0,
 					"critical": 5,
 					"total": 6
+				}
+			},
+			{
+				"name": "svelte-language-server",
+				"severity": "moderate",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 2,
+					"high": 0,
+					"critical": 0,
+					"total": 2
 				}
 			},
 			{
@@ -42406,23 +43056,32 @@
 			"@sveltejs/svelte-virtual-list": "3.0.1",
 			"@sveltejs/vite-plugin-svelte": "7.3.1",
 			"@sveltejs/vite-plugin-svelte-inspector": "5.0.2",
+			"eslint-plugin-svelte": "3.23.1",
+			"prettier-plugin-svelte": "4.1.1",
 			"sv": "1.1.1",
-			"svelte": "5.57.3"
+			"svelte": "5.57.3",
+			"svelte-check": "4.7.7",
+			"svelte-eslint-parser": "1.10.0",
+			"svelte-hmr": "0.16.0",
+			"svelte-language-server": "0.18.5",
+			"svelte-preprocess": "6.0.5",
+			"svelte2tsx": "0.7.62",
+			"typescript-svelte-plugin": "0.3.52"
 		}
 	},
 	{
 		"date": "2026-10-29",
 		"framework": "tanstack-start",
-		"packageCount": 77,
-		"dependencies": 895,
+		"packageCount": 81,
+		"dependencies": 899,
 		"thirdPartyDependencies": 803,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 3,
 			"moderate": 1,
-			"high": 22,
+			"high": 26,
 			"critical": 22,
-			"total": 48
+			"total": 52
 		},
 		"advisories": {
 			"info": 0,
@@ -42648,6 +43307,54 @@
 					"critical": 0,
 					"total": 3
 				}
+			},
+			{
+				"name": "create-start-app",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 1,
+					"moderate": 0,
+					"high": 4,
+					"critical": 0,
+					"total": 5
+				}
+			},
+			{
+				"name": "create-tanstack",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 1,
+					"moderate": 0,
+					"high": 4,
+					"critical": 0,
+					"total": 5
+				}
+			},
+			{
+				"name": "create-tanstack-app",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 1,
+					"moderate": 0,
+					"high": 4,
+					"critical": 0,
+					"total": 5
+				}
+			},
+			{
+				"name": "create-tsrouter-app",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 1,
+					"moderate": 0,
+					"high": 4,
+					"critical": 0,
+					"total": 5
+				}
 			}
 		],
 		"core": {
@@ -42686,7 +43393,7 @@
 			"@tanstack/react-router-devtools": "1.167.2",
 			"@tanstack/react-router-server": "1.31.24",
 			"@tanstack/react-router-ssr-query": "1.167.3",
-			"@tanstack/react-router-with-db": "0.1.0",
+			"@tanstack/react-router-with-db": "1.0.0-rc.1",
 			"@tanstack/react-router-with-query": "1.130.17",
 			"@tanstack/react-start": "1.169.4",
 			"@tanstack/react-start-api-routes": "1.114.5",
@@ -42749,7 +43456,11 @@
 			"@tanstack/vue-router-ssr-query": "1.167.3",
 			"@tanstack/vue-start": "1.169.4",
 			"@tanstack/vue-start-client": "1.167.45",
-			"@tanstack/vue-start-server": "1.167.50"
+			"@tanstack/vue-start-server": "1.167.50",
+			"create-start-app": "0.59.45",
+			"create-tanstack": "0.54.45",
+			"create-tanstack-app": "0.54.45",
+			"create-tsrouter-app": "0.54.45"
 		}
 	}
 ]
