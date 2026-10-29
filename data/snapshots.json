@@ -39921,6 +39921,52 @@
 			"@11ty/posthtml-urls": "2.0.0",
 			"@11ty/recursive-copy": "5.1.0",
 			"@11ty/webc": "0.11.4"
+		},
+		"published": {
+			"@11ty/chokidar-with-glob-support": "2026-10-16",
+			"@11ty/client": "2025-07-30",
+			"@11ty/create": "2025-12-02",
+			"@11ty/dependency-tree": "2026-01-17",
+			"@11ty/dependency-tree-esm": "2025-12-19",
+			"@11ty/dependency-tree-typescript": "2025-12-19",
+			"@11ty/eleventy": "2026-10-15",
+			"@11ty/eleventy-activity-feed": "2024-12-13",
+			"@11ty/eleventy-dev-server": "2026-10-15",
+			"@11ty/eleventy-fetch": "2026-10-21",
+			"@11ty/eleventy-img": "2026-10-21",
+			"@11ty/eleventy-navigation": "2025-12-02",
+			"@11ty/eleventy-plugin-bundle": "2026-09-17",
+			"@11ty/eleventy-plugin-directory-output": "2025-08-26",
+			"@11ty/eleventy-plugin-ejs": "2024-09-26",
+			"@11ty/eleventy-plugin-haml": "2024-09-26",
+			"@11ty/eleventy-plugin-handlebars": "2024-09-26",
+			"@11ty/eleventy-plugin-inclusive-language": "2021-10-07",
+			"@11ty/eleventy-plugin-mustache": "2025-05-13",
+			"@11ty/eleventy-plugin-pug": "2024-09-26",
+			"@11ty/eleventy-plugin-rss": "2026-10-01",
+			"@11ty/eleventy-plugin-svelte": "2026-10-26",
+			"@11ty/eleventy-plugin-syntaxhighlight": "2025-08-01",
+			"@11ty/eleventy-plugin-vite": "2026-05-02",
+			"@11ty/eleventy-plugin-vue": "2026-10-26",
+			"@11ty/eleventy-plugin-webc": "2023-12-16",
+			"@11ty/eleventy-server-browsersync": "2026-08-08",
+			"@11ty/eleventy-upgrade-help": "2025-12-02",
+			"@11ty/eleventy-utils": "2026-10-13",
+			"@11ty/find-generator": "2026-09-01",
+			"@11ty/font-awesome": "2026-09-16",
+			"@11ty/gray-matter": "2026-07-29",
+			"@11ty/image-color": "2026-10-21",
+			"@11ty/import": "2026-08-17",
+			"@11ty/is-land": "2026-10-28",
+			"@11ty/lodash-custom": "2023-03-22",
+			"@11ty/logo": "2025-12-17",
+			"@11ty/node-version-check": "2025-12-10",
+			"@11ty/nunjucks": "2025-12-09",
+			"@11ty/package-bundler": "2026-06-03",
+			"@11ty/parse-date-strings": "2025-12-02",
+			"@11ty/posthtml-urls": "2026-10-01",
+			"@11ty/recursive-copy": "2026-10-16",
+			"@11ty/webc": "2023-04-26"
 		}
 	},
 	{
@@ -40041,6 +40087,55 @@
 			"@schematics/angular": "22.2.5",
 			"angular-in-memory-web-api": "0.22.0",
 			"zone.js": "0.16.3"
+		},
+		"published": {
+			"@angular-devkit/architect": "2026-10-28",
+			"@angular-devkit/build-ng-packagr": "2020-10-22",
+			"@angular-devkit/build-webpack": "2026-10-28",
+			"@angular-devkit/core": "2026-10-28",
+			"@angular-devkit/schematics": "2026-10-28",
+			"@angular-devkit/schematics-cli": "2026-10-28",
+			"@angular/animation": "2017-02-18",
+			"@angular/app-shell": "2016-09-23",
+			"@angular/aria": "2026-10-28",
+			"@angular/bazel": "2023-05-03",
+			"@angular/build": "2026-10-28",
+			"@angular/cdk": "2026-10-28",
+			"@angular/cdk-experimental": "2026-10-28",
+			"@angular/cli": "2026-10-28",
+			"@angular/common": "2026-10-29",
+			"@angular/compiler": "2026-10-29",
+			"@angular/compiler-cli": "2026-10-29",
+			"@angular/core": "2026-10-29",
+			"@angular/create": "2026-10-28",
+			"@angular/elements": "2026-10-29",
+			"@angular/fire": "2026-10-26",
+			"@angular/forms": "2026-10-29",
+			"@angular/google-maps": "2026-10-28",
+			"@angular/language-server": "2026-10-29",
+			"@angular/language-service": "2026-10-29",
+			"@angular/localize": "2026-10-29",
+			"@angular/material": "2026-10-28",
+			"@angular/material-date-fns-adapter": "2026-10-28",
+			"@angular/material-experimental": "2026-10-28",
+			"@angular/material-luxon-adapter": "2026-10-28",
+			"@angular/material-moment-adapter": "2026-10-28",
+			"@angular/platform-browser": "2026-10-29",
+			"@angular/platform-server": "2026-10-29",
+			"@angular/platform-webworker": "2020-11-09",
+			"@angular/platform-webworker-dynamic": "2020-11-09",
+			"@angular/pwa": "2026-10-28",
+			"@angular/router": "2026-10-29",
+			"@angular/router-deprecated": "2016-06-15",
+			"@angular/service-worker": "2026-10-29",
+			"@angular/ssr": "2026-10-28",
+			"@angular/tsc-wrapped": "2017-10-19",
+			"@angular/typescript": "2016-08-17",
+			"@angular/upgrade": "2026-10-29",
+			"@angular/youtube-player": "2026-10-28",
+			"@schematics/angular": "2026-10-28",
+			"angular-in-memory-web-api": "2026-06-03",
+			"zone.js": "2026-09-02"
 		}
 	},
 	{
@@ -40228,29 +40323,85 @@
 			"@astrojs/yaml2ts": "0.2.4",
 			"astro": "7.4.4",
 			"create-astro": "5.3.1"
+		},
+		"published": {
+			"@astrojs/alpinejs": "2026-06-22",
+			"@astrojs/astro2tsx": "2026-10-14",
+			"@astrojs/check": "2026-10-21",
+			"@astrojs/cli-kit": "2024-01-05",
+			"@astrojs/cloudflare": "2026-10-28",
+			"@astrojs/compiler": "2026-04-27",
+			"@astrojs/compiler-binding": "2026-10-14",
+			"@astrojs/compiler-rs": "2026-10-14",
+			"@astrojs/deno": "2023-09-25",
+			"@astrojs/internal-helpers": "2026-10-15",
+			"@astrojs/language-server": "2026-10-21",
+			"@astrojs/lit": "2024-06-17",
+			"@astrojs/markdoc": "2026-10-28",
+			"@astrojs/markdown-component": "2023-06-09",
+			"@astrojs/markdown-remark": "2026-10-28",
+			"@astrojs/markdown-satteri": "2026-10-28",
+			"@astrojs/markdown-support": "2021-09-09",
+			"@astrojs/mdx": "2026-10-28",
+			"@astrojs/micromark-extension-mdx-jsx": "2022-06-07",
+			"@astrojs/netlify": "2026-10-15",
+			"@astrojs/node": "2026-10-19",
+			"@astrojs/og": "2022-10-23",
+			"@astrojs/partytown": "2026-10-21",
+			"@astrojs/preact": "2026-10-21",
+			"@astrojs/prism": "2026-10-28",
+			"@astrojs/react": "2026-10-28",
+			"@astrojs/renderer-lit": "2022-02-18",
+			"@astrojs/renderer-preact": "2022-02-18",
+			"@astrojs/renderer-react": "2022-02-18",
+			"@astrojs/renderer-solid": "2022-04-11",
+			"@astrojs/renderer-svelte": "2022-03-16",
+			"@astrojs/renderer-vue": "2022-02-18",
+			"@astrojs/rss": "2026-06-30",
+			"@astrojs/sitemap": "2026-08-31",
+			"@astrojs/solid-js": "2026-10-28",
+			"@astrojs/starlight": "2026-10-23",
+			"@astrojs/starlight-docsearch": "2026-09-02",
+			"@astrojs/starlight-markdoc": "2026-06-23",
+			"@astrojs/starlight-tailwind": "2026-03-11",
+			"@astrojs/studio": "2025-04-30",
+			"@astrojs/svelte": "2026-10-28",
+			"@astrojs/svelte-language-integration": "2022-05-27",
+			"@astrojs/tailwind": "2025-03-26",
+			"@astrojs/telemetry": "2026-10-28",
+			"@astrojs/ts-content-mapper": "2026-09-22",
+			"@astrojs/ts-plugin": "2026-09-16",
+			"@astrojs/underscore-redirects": "2026-08-11",
+			"@astrojs/upgrade": "2026-10-21",
+			"@astrojs/vercel": "2026-10-28",
+			"@astrojs/vue": "2026-10-21",
+			"@astrojs/vue-language-integration": "2022-05-27",
+			"@astrojs/yaml2ts": "2026-05-18",
+			"astro": "2026-10-28",
+			"create-astro": "2026-10-21"
 		}
 	},
 	{
 		"date": "2026-10-29",
 		"framework": "gatsby",
 		"packageCount": 133,
-		"dependencies": 3354,
-		"thirdPartyDependencies": 3195,
+		"dependencies": 3358,
+		"thirdPartyDependencies": 3199,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 15,
-			"moderate": 34,
-			"high": 244,
-			"critical": 47,
-			"total": 340
+			"moderate": 29,
+			"high": 249,
+			"critical": 50,
+			"total": 343
 		},
 		"advisories": {
 			"info": 0,
 			"low": 15,
 			"moderate": 67,
-			"high": 81,
+			"high": 85,
 			"critical": 9,
-			"total": 172
+			"total": 176
 		},
 		"vulnerablePackages": [
 			{
@@ -40259,8 +40410,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 0,
-					"moderate": 5,
-					"high": 0,
+					"moderate": 3,
+					"high": 2,
 					"critical": 5,
 					"total": 10
 				}
@@ -40271,8 +40422,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 19,
-					"high": 50,
+					"moderate": 16,
+					"high": 53,
 					"critical": 14,
 					"total": 88
 				}
@@ -40295,8 +40446,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 19,
-					"high": 50,
+					"moderate": 16,
+					"high": 53,
 					"critical": 13,
 					"total": 87
 				}
@@ -40307,8 +40458,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 42,
+					"moderate": 9,
+					"high": 44,
 					"critical": 4,
 					"total": 62
 				}
@@ -40319,8 +40470,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 18,
-					"high": 49,
+					"moderate": 15,
+					"high": 52,
 					"critical": 12,
 					"total": 84
 				}
@@ -40331,8 +40482,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 15,
-					"high": 88,
+					"moderate": 12,
+					"high": 91,
 					"critical": 9,
 					"total": 117
 				}
@@ -40343,8 +40494,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 18,
-					"high": 52,
+					"moderate": 15,
+					"high": 55,
 					"critical": 13,
 					"total": 88
 				}
@@ -40355,8 +40506,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 19,
-					"high": 52,
+					"moderate": 16,
+					"high": 55,
 					"critical": 14,
 					"total": 90
 				}
@@ -40367,8 +40518,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 19,
-					"high": 50,
+					"moderate": 16,
+					"high": 53,
 					"critical": 14,
 					"total": 88
 				}
@@ -40379,8 +40530,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 19,
-					"high": 53,
+					"moderate": 16,
+					"high": 56,
 					"critical": 15,
 					"total": 92
 				}
@@ -40391,8 +40542,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 0,
-					"moderate": 5,
-					"high": 1,
+					"moderate": 3,
+					"high": 3,
 					"critical": 3,
 					"total": 9
 				}
@@ -40403,8 +40554,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 12,
-					"moderate": 19,
-					"high": 66,
+					"moderate": 16,
+					"high": 69,
 					"critical": 17,
 					"total": 114
 				}
@@ -40415,8 +40566,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 6,
-					"moderate": 19,
-					"high": 62,
+					"moderate": 16,
+					"high": 65,
 					"critical": 16,
 					"total": 103
 				}
@@ -40427,8 +40578,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 11,
-					"moderate": 19,
-					"high": 60,
+					"moderate": 16,
+					"high": 63,
 					"critical": 14,
 					"total": 104
 				}
@@ -40439,8 +40590,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 19,
-					"high": 56,
+					"moderate": 16,
+					"high": 59,
 					"critical": 16,
 					"total": 96
 				}
@@ -40451,10 +40602,22 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 6,
-					"moderate": 12,
-					"high": 37,
+					"moderate": 10,
+					"high": 39,
 					"critical": 5,
 					"total": 60
+				}
+			},
+			{
+				"name": "gatsby-transformer-pdf",
+				"severity": "critical",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 5,
+					"moderate": 9,
+					"high": 36,
+					"critical": 3,
+					"total": 53
 				}
 			},
 			{
@@ -40463,8 +40626,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 18,
-					"high": 49,
+					"moderate": 15,
+					"high": 52,
 					"critical": 13,
 					"total": 85
 				}
@@ -40475,8 +40638,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 19,
-					"high": 52,
+					"moderate": 16,
+					"high": 55,
 					"critical": 18,
 					"total": 94
 				}
@@ -40523,8 +40686,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 0,
-					"moderate": 3,
-					"high": 10,
+					"moderate": 0,
+					"high": 13,
 					"critical": 0,
 					"total": 13
 				}
@@ -40535,8 +40698,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 33,
+					"moderate": 9,
+					"high": 35,
 					"critical": 0,
 					"total": 49
 				}
@@ -40547,8 +40710,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 33,
+					"moderate": 9,
+					"high": 35,
 					"critical": 0,
 					"total": 49
 				}
@@ -40559,8 +40722,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 6,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 51
 				}
@@ -40595,8 +40758,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -40607,8 +40770,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -40619,8 +40782,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -40631,8 +40794,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -40643,8 +40806,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -40655,8 +40818,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -40667,8 +40830,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -40679,8 +40842,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -40691,8 +40854,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -40703,8 +40866,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -40715,8 +40878,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -40727,8 +40890,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -40739,8 +40902,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -40751,8 +40914,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -40763,8 +40926,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -40775,8 +40938,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -40787,8 +40950,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -40799,8 +40962,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -40811,8 +40974,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -40823,8 +40986,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -40835,8 +40998,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 13,
-					"high": 46,
+					"moderate": 10,
+					"high": 49,
 					"critical": 0,
 					"total": 64
 				}
@@ -40847,8 +41010,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -40859,8 +41022,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -40871,8 +41034,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 38,
+					"moderate": 9,
+					"high": 40,
 					"critical": 0,
 					"total": 54
 				}
@@ -40883,8 +41046,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 33,
+					"moderate": 9,
+					"high": 35,
 					"critical": 0,
 					"total": 49
 				}
@@ -40895,8 +41058,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -40907,8 +41070,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -40919,8 +41082,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 39,
+					"moderate": 9,
+					"high": 41,
 					"critical": 0,
 					"total": 55
 				}
@@ -40931,8 +41094,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -40943,8 +41106,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 36,
+					"moderate": 9,
+					"high": 38,
 					"critical": 0,
 					"total": 52
 				}
@@ -40955,8 +41118,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -40967,8 +41130,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -40979,8 +41142,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -40991,8 +41154,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -41003,8 +41166,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -41015,8 +41178,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -41027,8 +41190,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -41039,8 +41202,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 33,
+					"moderate": 9,
+					"high": 35,
 					"critical": 0,
 					"total": 49
 				}
@@ -41051,8 +41214,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -41063,8 +41226,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 33,
+					"moderate": 9,
+					"high": 35,
 					"critical": 0,
 					"total": 49
 				}
@@ -41075,8 +41238,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -41087,8 +41250,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -41099,8 +41262,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 38,
+					"moderate": 9,
+					"high": 40,
 					"critical": 0,
 					"total": 54
 				}
@@ -41111,8 +41274,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -41123,8 +41286,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 35,
+					"moderate": 9,
+					"high": 37,
 					"critical": 0,
 					"total": 51
 				}
@@ -41135,8 +41298,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 38,
+					"moderate": 9,
+					"high": 40,
 					"critical": 0,
 					"total": 54
 				}
@@ -41147,8 +41310,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 38,
+					"moderate": 9,
+					"high": 40,
 					"critical": 0,
 					"total": 54
 				}
@@ -41159,8 +41322,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 14,
-					"high": 34,
+					"moderate": 12,
+					"high": 36,
 					"critical": 0,
 					"total": 53
 				}
@@ -41171,8 +41334,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -41183,8 +41346,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 38,
+					"moderate": 9,
+					"high": 40,
 					"critical": 0,
 					"total": 54
 				}
@@ -41195,8 +41358,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -41219,8 +41382,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 13,
-					"high": 38,
+					"moderate": 10,
+					"high": 41,
 					"critical": 0,
 					"total": 56
 				}
@@ -41231,8 +41394,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -41243,8 +41406,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 13,
-					"high": 37,
+					"moderate": 10,
+					"high": 40,
 					"critical": 0,
 					"total": 55
 				}
@@ -41255,8 +41418,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 39,
+					"moderate": 9,
+					"high": 41,
 					"critical": 0,
 					"total": 55
 				}
@@ -41267,8 +41430,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -41279,8 +41442,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -41291,8 +41454,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -41303,8 +41466,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -41315,8 +41478,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -41327,8 +41490,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -41339,8 +41502,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -41351,8 +41514,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 35,
+					"moderate": 9,
+					"high": 37,
 					"critical": 0,
 					"total": 51
 				}
@@ -41363,8 +41526,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -41375,8 +41538,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -41387,8 +41550,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -41399,8 +41562,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 12,
-					"moderate": 13,
-					"high": 50,
+					"moderate": 10,
+					"high": 53,
 					"critical": 0,
 					"total": 75
 				}
@@ -41411,8 +41574,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -41423,8 +41586,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -41435,8 +41598,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 35,
+					"moderate": 9,
+					"high": 37,
 					"critical": 0,
 					"total": 51
 				}
@@ -41447,8 +41610,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -41459,8 +41622,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 13,
-					"high": 38,
+					"moderate": 10,
+					"high": 41,
 					"critical": 0,
 					"total": 56
 				}
@@ -41471,8 +41634,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -41483,20 +41646,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
-					"critical": 0,
-					"total": 50
-				}
-			},
-			{
-				"name": "gatsby-transformer-pdf",
-				"severity": "high",
-				"vulnerabilities": {
-					"info": 0,
-					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -41507,8 +41658,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -41519,8 +41670,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 36,
+					"moderate": 9,
+					"high": 38,
 					"critical": 0,
 					"total": 52
 				}
@@ -41531,8 +41682,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -41543,8 +41694,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 35,
+					"moderate": 9,
+					"high": 37,
 					"critical": 0,
 					"total": 51
 				}
@@ -41555,8 +41706,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -41567,8 +41718,8 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 5,
-					"moderate": 11,
-					"high": 34,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
 					"total": 50
 				}
@@ -41654,8 +41805,8 @@
 			"vulnerabilities": {
 				"info": 0,
 				"low": 5,
-				"moderate": 11,
-				"high": 33,
+				"moderate": 9,
+				"high": 35,
 				"critical": 0,
 				"total": 49
 			},
@@ -41663,9 +41814,9 @@
 				"info": 0,
 				"low": 6,
 				"moderate": 6,
-				"high": 12,
+				"high": 13,
 				"critical": 0,
-				"total": 24
+				"total": 25
 			}
 		},
 		"packages": {
@@ -41802,6 +41953,141 @@
 			"gatsby-transformer-yaml": "5.16.0",
 			"gatsby-worker": "2.16.0",
 			"graphql-skip-limit": "2.3.1"
+		},
+		"published": {
+			"@gatsbyjs/devcert": "2025-08-06",
+			"@gatsbyjs/gatsby-source-datocms": "2020-04-06",
+			"@gatsbyjs/gatsby-source-shopify": "2021-03-23",
+			"@gatsbyjs/parcel-namer-relative-to-cwd": "2026-01-26",
+			"@gatsbyjs/potrace": "2022-11-25",
+			"@gatsbyjs/reach-router": "2023-01-27",
+			"@gatsbyjs/react-refresh-webpack-plugin": "2021-02-24",
+			"@gatsbyjs/relay-compiler": "2019-08-23",
+			"@gatsbyjs/sharp": "2021-01-13",
+			"@gatsbyjs/update-notifier": "2019-04-29",
+			"@gatsbyjs/webpack-hot-middleware": "2022-03-29",
+			"babel-plugin-remove-graphql-queries": "2026-01-26",
+			"babel-preset-gatsby": "2026-01-26",
+			"babel-preset-gatsby-package": "2026-01-26",
+			"create-gatsby": "2026-01-26",
+			"gatsby": "2026-02-10",
+			"gatsby-adapter-netlify": "2026-01-26",
+			"gatsby-cli": "2026-01-26",
+			"gatsby-codemods": "2026-01-26",
+			"gatsby-core-utils": "2026-01-26",
+			"gatsby-cypress": "2026-01-26",
+			"gatsby-design-tokens": "2026-01-26",
+			"gatsby-dev-cli": "2026-01-26",
+			"gatsby-graphiql-explorer": "2026-01-26",
+			"gatsby-graphql-source-toolkit": "2023-03-14",
+			"gatsby-interface": "2022-11-18",
+			"gatsby-legacy-polyfills": "2026-01-26",
+			"gatsby-link": "2026-01-26",
+			"gatsby-page-utils": "2026-01-26",
+			"gatsby-parcel-config": "2026-01-26",
+			"gatsby-plugin-benchmark-reporting": "2026-01-26",
+			"gatsby-plugin-canonical-urls": "2026-01-26",
+			"gatsby-plugin-catch-links": "2026-01-26",
+			"gatsby-plugin-coffeescript": "2026-01-26",
+			"gatsby-plugin-cxs": "2026-01-26",
+			"gatsby-plugin-emotion": "2026-01-26",
+			"gatsby-plugin-facebook-analytics": "2026-01-26",
+			"gatsby-plugin-feed": "2026-01-26",
+			"gatsby-plugin-flow": "2026-01-26",
+			"gatsby-plugin-fullstory": "2026-01-26",
+			"gatsby-plugin-gatsby-cloud": "2024-11-06",
+			"gatsby-plugin-google-analytics": "2026-01-26",
+			"gatsby-plugin-google-gtag": "2026-01-26",
+			"gatsby-plugin-google-tagmanager": "2026-01-26",
+			"gatsby-plugin-image": "2026-01-26",
+			"gatsby-plugin-jss": "2026-01-26",
+			"gatsby-plugin-layout": "2026-01-26",
+			"gatsby-plugin-less": "2026-01-26",
+			"gatsby-plugin-lodash": "2026-01-26",
+			"gatsby-plugin-manifest": "2026-01-26",
+			"gatsby-plugin-mdx": "2026-01-26",
+			"gatsby-plugin-no-sourcemaps": "2026-01-26",
+			"gatsby-plugin-nprogress": "2026-01-26",
+			"gatsby-plugin-offline": "2026-01-26",
+			"gatsby-plugin-page-creator": "2026-01-26",
+			"gatsby-plugin-postcss": "2026-01-26",
+			"gatsby-plugin-preact": "2026-01-26",
+			"gatsby-plugin-preload-fonts": "2026-01-26",
+			"gatsby-plugin-react-css-modules": "2026-01-26",
+			"gatsby-plugin-react-helmet": "2026-01-26",
+			"gatsby-plugin-sass": "2026-01-26",
+			"gatsby-plugin-schema-snapshot": "2026-01-26",
+			"gatsby-plugin-sharp": "2026-01-26",
+			"gatsby-plugin-sitemap": "2026-01-26",
+			"gatsby-plugin-styled-components": "2026-01-26",
+			"gatsby-plugin-styled-jsx": "2026-01-26",
+			"gatsby-plugin-styletron": "2026-01-26",
+			"gatsby-plugin-stylus": "2026-01-26",
+			"gatsby-plugin-subfont": "2026-01-26",
+			"gatsby-plugin-twitter": "2026-01-26",
+			"gatsby-plugin-typescript": "2026-01-26",
+			"gatsby-plugin-typography": "2026-01-26",
+			"gatsby-plugin-utils": "2026-01-26",
+			"gatsby-react-router-scroll": "2026-01-26",
+			"gatsby-remark-autolink-headers": "2026-01-26",
+			"gatsby-remark-code-repls": "2026-01-26",
+			"gatsby-remark-copy-linked-files": "2026-01-26",
+			"gatsby-remark-custom-blocks": "2026-01-26",
+			"gatsby-remark-embed-snippet": "2026-01-26",
+			"gatsby-remark-graphviz": "2026-01-26",
+			"gatsby-remark-images": "2026-01-26",
+			"gatsby-remark-images-contentful": "2026-01-26",
+			"gatsby-remark-katex": "2026-01-26",
+			"gatsby-remark-prismjs": "2026-01-26",
+			"gatsby-remark-responsive-iframe": "2026-01-26",
+			"gatsby-remark-smartypants": "2026-01-26",
+			"gatsby-script": "2026-01-26",
+			"gatsby-seo": "2019-07-01",
+			"gatsby-sharp": "2026-01-26",
+			"gatsby-source-contentful": "2026-01-26",
+			"gatsby-source-drupal": "2026-01-26",
+			"gatsby-source-faker": "2026-01-26",
+			"gatsby-source-filesystem": "2026-01-26",
+			"gatsby-source-graphql": "2026-01-26",
+			"gatsby-source-hacker-news": "2026-01-26",
+			"gatsby-source-lever": "2026-01-26",
+			"gatsby-source-medium": "2026-01-26",
+			"gatsby-source-mongodb": "2026-01-26",
+			"gatsby-source-npm-package-search": "2026-01-26",
+			"gatsby-source-shopify": "2026-01-26",
+			"gatsby-source-wikipedia": "2026-01-26",
+			"gatsby-source-wordpress": "2026-01-26",
+			"gatsby-telemetry": "2024-11-06",
+			"gatsby-theme-blog": "2021-12-03",
+			"gatsby-theme-blog-core": "2021-12-03",
+			"gatsby-theme-blog-darkmode": "2021-12-03",
+			"gatsby-theme-course": "2020-05-26",
+			"gatsby-theme-i18n": "2021-12-03",
+			"gatsby-theme-i18n-lingui": "2021-12-03",
+			"gatsby-theme-i18n-react-i18next": "2021-12-03",
+			"gatsby-theme-i18n-react-intl": "2021-12-03",
+			"gatsby-theme-landing-page": "2021-12-17",
+			"gatsby-theme-notes": "2021-12-03",
+			"gatsby-theme-ui-preset": "2021-12-03",
+			"gatsby-transformer-asciidoc": "2026-01-26",
+			"gatsby-transformer-csv": "2026-01-26",
+			"gatsby-transformer-documentationjs": "2026-01-26",
+			"gatsby-transformer-excel": "2026-01-26",
+			"gatsby-transformer-hjson": "2026-01-26",
+			"gatsby-transformer-javascript-frontmatter": "2026-01-26",
+			"gatsby-transformer-javascript-static-exports": "2024-11-06",
+			"gatsby-transformer-json": "2026-01-26",
+			"gatsby-transformer-pdf": "2026-01-26",
+			"gatsby-transformer-react-docgen": "2026-01-26",
+			"gatsby-transformer-remark": "2026-01-26",
+			"gatsby-transformer-screenshot": "2026-01-26",
+			"gatsby-transformer-sharp": "2026-01-26",
+			"gatsby-transformer-sqip": "2026-01-26",
+			"gatsby-transformer-toml": "2026-01-26",
+			"gatsby-transformer-xml": "2026-01-26",
+			"gatsby-transformer-yaml": "2026-01-26",
+			"gatsby-worker": "2026-01-26",
+			"graphql-skip-limit": "2020-05-05"
 		}
 	},
 	{
@@ -42400,19 +42686,46 @@
 			"create-next-app": "16.4.3",
 			"eslint-config-next": "16.4.3",
 			"next": "16.4.3"
+		},
+		"published": {
+			"@next/bundle-analyzer": "2026-10-23",
+			"@next/codemod": "2026-10-23",
+			"@next/env": "2026-10-23",
+			"@next/eslint-plugin-next": "2026-10-23",
+			"@next/font": "2024-10-08",
+			"@next/mdx": "2026-10-23",
+			"@next/playwright": "2026-10-23",
+			"@next/plugin-google-analytics": "2021-04-02",
+			"@next/plugin-material-ui": "2020-05-28",
+			"@next/plugin-sentry": "2021-04-02",
+			"@next/plugin-storybook": "2026-10-23",
+			"@next/polyfill-module": "2026-10-23",
+			"@next/polyfill-nomodule": "2026-10-23",
+			"@next/react-dev-overlay": "2024-03-20",
+			"@next/react-refresh-utils": "2026-10-23",
+			"@next/routing": "2026-10-23",
+			"@next/rspack-binding": "2026-06-05",
+			"@next/rspack-core": "2026-06-05",
+			"@next/sanity": "2020-10-20",
+			"@next/swc-wasm-nodejs": "2026-10-23",
+			"@next/swc-wasm-web": "2026-10-23",
+			"@next/third-parties": "2026-10-23",
+			"create-next-app": "2026-10-23",
+			"eslint-config-next": "2026-10-23",
+			"next": "2026-10-23"
 		}
 	},
 	{
 		"date": "2026-10-29",
 		"framework": "nuxt",
 		"packageCount": 57,
-		"dependencies": 2345,
-		"thirdPartyDependencies": 2271,
+		"dependencies": 2353,
+		"thirdPartyDependencies": 2279,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 20,
-			"moderate": 12,
-			"high": 63,
+			"moderate": 10,
+			"high": 65,
 			"critical": 9,
 			"total": 104
 		},
@@ -42420,9 +42733,9 @@
 			"info": 0,
 			"low": 9,
 			"moderate": 39,
-			"high": 44,
+			"high": 45,
 			"critical": 4,
-			"total": 96
+			"total": 97
 		},
 		"vulnerablePackages": [
 			{
@@ -42717,8 +43030,8 @@
 		"core": {
 			"name": "nuxt",
 			"version": "4.6.3",
-			"dependencies": 521,
-			"thirdPartyDependencies": 509,
+			"dependencies": 522,
+			"thirdPartyDependencies": 510,
 			"vulnerabilities": {
 				"info": 0,
 				"low": 7,
@@ -42769,7 +43082,7 @@
 			"@nuxt/kit": "4.6.3",
 			"@nuxt/markdown": "0.0.21",
 			"@nuxt/module-builder": "1.0.3",
-			"@nuxt/modules": "0.6.0-2a4b30",
+			"@nuxt/modules": "0.6.0-ebb432",
 			"@nuxt/nitro-server": "4.6.3",
 			"@nuxt/opencollective": "0.4.1",
 			"@nuxt/pages": "0.3.0",
@@ -42794,6 +43107,65 @@
 			"nuxi": "4.0.1",
 			"nuxt": "4.6.3",
 			"nuxt-now": "0.0.1"
+		},
+		"published": {
+			"@nuxt/a11y": "2026-01-07",
+			"@nuxt/app": "2021-06-24",
+			"@nuxt/bridge": "2025-08-15",
+			"@nuxt/bridge-schema": "2025-08-15",
+			"@nuxt/cli": "2026-10-09",
+			"@nuxt/common": "2018-11-26",
+			"@nuxt/component-discovery": "2021-06-24",
+			"@nuxt/content": "2026-10-12",
+			"@nuxt/content-theme-docs": "2021-11-17",
+			"@nuxt/design": "2021-11-10",
+			"@nuxt/devalue": "2023-05-02",
+			"@nuxt/devtools": "2026-10-27",
+			"@nuxt/devtools-assets": "2026-10-27",
+			"@nuxt/devtools-kit": "2026-10-27",
+			"@nuxt/devtools-onboard": "2026-10-27",
+			"@nuxt/devtools-wizard": "2026-10-19",
+			"@nuxt/docs": "2026-10-27",
+			"@nuxt/eslint": "2026-08-06",
+			"@nuxt/eslint-config": "2026-08-06",
+			"@nuxt/eslint-plugin": "2026-08-06",
+			"@nuxt/examples-ui": "2023-12-19",
+			"@nuxt/experiment-auto-plugins": "2019-04-28",
+			"@nuxt/fonts": "2026-10-25",
+			"@nuxt/friendly-errors-webpack-plugin": "2023-11-23",
+			"@nuxt/h2": "2020-12-15",
+			"@nuxt/hints": "2026-10-11",
+			"@nuxt/icon": "2026-10-28",
+			"@nuxt/image": "2026-10-19",
+			"@nuxt/integrations": "2020-09-17",
+			"@nuxt/kit": "2026-10-27",
+			"@nuxt/markdown": "2019-08-27",
+			"@nuxt/module-builder": "2026-07-23",
+			"@nuxt/modules": "2026-10-29",
+			"@nuxt/nitro-server": "2026-10-27",
+			"@nuxt/opencollective": "2024-12-12",
+			"@nuxt/pages": "2021-06-24",
+			"@nuxt/press": "2019-08-19",
+			"@nuxt/rspack-builder": "2026-10-27",
+			"@nuxt/schema": "2026-10-27",
+			"@nuxt/scripts": "2026-10-03",
+			"@nuxt/scripts-cli": "2026-08-18",
+			"@nuxt/scripts-devtools": "2026-10-12",
+			"@nuxt/serverless": "2020-11-15",
+			"@nuxt/telemetry": "2026-08-31",
+			"@nuxt/test-utils": "2026-10-16",
+			"@nuxt/theme": "2020-11-18",
+			"@nuxt/ui": "2026-10-15",
+			"@nuxt/un": "2021-02-08",
+			"@nuxt/vite-builder": "2026-10-27",
+			"@nuxt/vite-server": "2026-10-27",
+			"@nuxt/webpack-builder": "2026-10-27",
+			"cna-template": "2022-10-02",
+			"create-nuxt": "2026-10-09",
+			"create-nuxt-app": "2025-02-19",
+			"nuxi": "2026-10-09",
+			"nuxt": "2026-10-27",
+			"nuxt-now": "2023-07-20"
 		}
 	},
 	{
@@ -43067,14 +43439,60 @@
 			"svelte-preprocess": "6.0.5",
 			"svelte2tsx": "0.7.62",
 			"typescript-svelte-plugin": "0.3.52"
+		},
+		"published": {
+			"@sveltejs/acorn-typescript": "2026-08-13",
+			"@sveltejs/adapter-auto": "2026-10-01",
+			"@sveltejs/adapter-bun": "2026-10-01",
+			"@sveltejs/adapter-cloudflare": "2026-10-14",
+			"@sveltejs/adapter-netlify": "2026-10-06",
+			"@sveltejs/adapter-node": "2026-10-01",
+			"@sveltejs/adapter-static": "2026-10-01",
+			"@sveltejs/adapter-vercel": "2026-10-14",
+			"@sveltejs/app": "2020-10-14",
+			"@sveltejs/app-utils": "2020-12-02",
+			"@sveltejs/enhanced-img": "2026-10-01",
+			"@sveltejs/eslint-config": "2026-08-07",
+			"@sveltejs/gateau": "2019-09-24",
+			"@sveltejs/gestures": "2019-03-05",
+			"@sveltejs/gl": "2020-02-18",
+			"@sveltejs/kit": "2026-10-14",
+			"@sveltejs/load-config": "2026-08-11",
+			"@sveltejs/mcp": "2026-10-26",
+			"@sveltejs/message-box": "2026-09-24",
+			"@sveltejs/opencode": "2026-10-19",
+			"@sveltejs/package": "2026-10-14",
+			"@sveltejs/pancake": "2021-08-12",
+			"@sveltejs/repl": "2023-08-22",
+			"@sveltejs/snowpack-config": "2020-12-02",
+			"@sveltejs/sv-utils": "2026-10-06",
+			"@sveltejs/svelte-json-tree": "2024-12-10",
+			"@sveltejs/svelte-preview-install": "2026-05-20",
+			"@sveltejs/svelte-repl": "2021-12-02",
+			"@sveltejs/svelte-scroller": "2021-06-10",
+			"@sveltejs/svelte-subdivide": "2018-06-14",
+			"@sveltejs/svelte-virtual-list": "2019-08-22",
+			"@sveltejs/vite-plugin-svelte": "2026-09-23",
+			"@sveltejs/vite-plugin-svelte-inspector": "2026-01-06",
+			"eslint-plugin-svelte": "2026-10-09",
+			"prettier-plugin-svelte": "2026-06-15",
+			"sv": "2026-10-06",
+			"svelte": "2026-10-26",
+			"svelte-check": "2026-10-16",
+			"svelte-eslint-parser": "2026-10-23",
+			"svelte-hmr": "2024-02-16",
+			"svelte-language-server": "2026-10-16",
+			"svelte-preprocess": "2026-05-25",
+			"svelte2tsx": "2026-10-16",
+			"typescript-svelte-plugin": "2026-05-01"
 		}
 	},
 	{
 		"date": "2026-10-29",
 		"framework": "tanstack-start",
 		"packageCount": 81,
-		"dependencies": 899,
-		"thirdPartyDependencies": 803,
+		"dependencies": 900,
+		"thirdPartyDependencies": 804,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 3,
@@ -43461,6 +43879,89 @@
 			"create-tanstack": "0.54.45",
 			"create-tanstack-app": "0.54.45",
 			"create-tsrouter-app": "0.54.45"
+		},
+		"published": {
+			"@tanstack/create-router": "2025-04-25",
+			"@tanstack/create-start": "2026-10-16",
+			"@tanstack/directive-functions-plugin": "2025-12-20",
+			"@tanstack/eslint-plugin-router": "2026-05-15",
+			"@tanstack/eslint-plugin-start": "2026-05-15",
+			"@tanstack/history": "2026-10-10",
+			"@tanstack/nitro-v2-vite-plugin": "2026-09-09",
+			"@tanstack/react-form-start": "2026-08-11",
+			"@tanstack/react-native-router": "2026-03-03",
+			"@tanstack/react-router": "2026-10-22",
+			"@tanstack/react-router-devtools": "2026-09-13",
+			"@tanstack/react-router-server": "2024-05-08",
+			"@tanstack/react-router-ssr-query": "2026-09-16",
+			"@tanstack/react-router-with-db": "2026-10-29",
+			"@tanstack/react-router-with-query": "2025-08-08",
+			"@tanstack/react-start": "2026-10-22",
+			"@tanstack/react-start-api-routes": "2025-03-10",
+			"@tanstack/react-start-client": "2026-10-22",
+			"@tanstack/react-start-config": "2025-06-08",
+			"@tanstack/react-start-plugin": "2025-09-22",
+			"@tanstack/react-start-router-manifest": "2025-06-08",
+			"@tanstack/react-start-rsc": "2026-10-22",
+			"@tanstack/react-start-server": "2026-10-22",
+			"@tanstack/react-start-server-functions-client": "2025-03-10",
+			"@tanstack/react-start-server-functions-fetcher": "2025-03-10",
+			"@tanstack/react-start-server-functions-handler": "2025-03-10",
+			"@tanstack/react-start-server-functions-ssr": "2025-03-10",
+			"@tanstack/router": "2023-01-23",
+			"@tanstack/router-arktype-adapter": "2024-11-13",
+			"@tanstack/router-cli": "2026-10-22",
+			"@tanstack/router-core": "2026-10-22",
+			"@tanstack/router-devtools": "2026-09-13",
+			"@tanstack/router-devtools-core": "2026-09-13",
+			"@tanstack/router-generator": "2026-10-22",
+			"@tanstack/router-plugin": "2026-10-22",
+			"@tanstack/router-rank-routes": "2022-10-17",
+			"@tanstack/router-ssr-query-core": "2026-09-16",
+			"@tanstack/router-utils": "2026-10-14",
+			"@tanstack/router-valibot-adapter": "2024-11-13",
+			"@tanstack/router-vite-plugin": "2026-10-22",
+			"@tanstack/router-zod-adapter": "2024-11-13",
+			"@tanstack/server-functions-plugin": "2025-12-20",
+			"@tanstack/solid-router": "2026-10-22",
+			"@tanstack/solid-router-devtools": "2026-09-13",
+			"@tanstack/solid-router-ssr-query": "2026-09-16",
+			"@tanstack/solid-start": "2026-10-22",
+			"@tanstack/solid-start-client": "2026-10-22",
+			"@tanstack/solid-start-config": "2025-06-08",
+			"@tanstack/solid-start-plugin": "2025-09-22",
+			"@tanstack/solid-start-router-manifest": "2025-06-08",
+			"@tanstack/solid-start-server": "2026-10-22",
+			"@tanstack/start": "2025-06-08",
+			"@tanstack/start-api-routes": "2025-06-08",
+			"@tanstack/start-client": "2025-02-25",
+			"@tanstack/start-client-core": "2026-10-22",
+			"@tanstack/start-config": "2025-06-08",
+			"@tanstack/start-fn-stubs": "2026-05-15",
+			"@tanstack/start-plugin": "2025-02-23",
+			"@tanstack/start-plugin-core": "2026-10-22",
+			"@tanstack/start-router-manifest": "2025-02-24",
+			"@tanstack/start-server": "2025-02-25",
+			"@tanstack/start-server-core": "2026-10-22",
+			"@tanstack/start-server-functions-client": "2025-09-22",
+			"@tanstack/start-server-functions-fetcher": "2025-09-22",
+			"@tanstack/start-server-functions-handler": "2025-06-08",
+			"@tanstack/start-server-functions-server": "2025-08-08",
+			"@tanstack/start-server-functions-ssr": "2025-06-08",
+			"@tanstack/start-static-server-functions": "2026-10-22",
+			"@tanstack/start-storage-context": "2026-10-22",
+			"@tanstack/start-vite-plugin": "2024-12-17",
+			"@tanstack/virtual-file-routes": "2026-05-15",
+			"@tanstack/vue-router": "2026-10-22",
+			"@tanstack/vue-router-devtools": "2026-09-13",
+			"@tanstack/vue-router-ssr-query": "2026-09-16",
+			"@tanstack/vue-start": "2026-10-22",
+			"@tanstack/vue-start-client": "2026-10-22",
+			"@tanstack/vue-start-server": "2026-10-22",
+			"create-start-app": "2026-10-16",
+			"create-tanstack": "2026-10-16",
+			"create-tanstack-app": "2026-10-16",
+			"create-tsrouter-app": "2026-10-16"
 		}
 	}
 ]
