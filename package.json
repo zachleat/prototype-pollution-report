@@ -1,0 +1,14 @@
+{
+	"name": "framework-ecosystem-scoreboard",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"collect": "node collect.js",
+		"render": "node render.js"
+	},
+	"dependencies": {
+		"@fortawesome/free-brands-svg-icons": "^7.3.1",
+		"@fortawesome/free-regular-svg-icons": "^7.3.1",
+		"@fortawesome/free-solid-svg-icons": "^7.3.1"
+	}
+}
