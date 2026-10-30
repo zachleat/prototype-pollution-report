@@ -422,7 +422,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<th>Framework</th>
 		<th class="n">Vulnerabilities<br><span class="third-party">(Raw npm audit)</span></th>
 		<th class="n">GitHub<br>Advisories</th>
-		<th class="n">Packages</th>
+		<th class="n">Packages<br><span class="third-party">(Affected)</span></th>
 		<th class="n">Dependencies<br><span class="third-party">(Third-party)</span></th>
 		<th>Severity<br><span class="badge critical key">critical</span> <span class="badge high key">high</span> <span class="badge moderate key">moderate</span> <span class="badge low key">low</span></th>
 	</tr></thead>
@@ -431,7 +431,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-1)"><use href="#icon-11ty"/></svg>Build Awesome (11ty)</th>
 		<td class="n strong">3<span class="delta down" title="Down 21 since Oct 1, 2026"><svg class="trend" aria-hidden="true"><use href="#trend-down"/></svg>21</span></td>
 		<td class="n">4</td>
-		<td class="n">44</td>
+		<td class="n">44<br><span class="third-party">(2)</span></td>
 		<td class="n">613<br><span class="third-party">(557)</span></td>
 		<td class="sev"> <span class="badge high">high<span class="count">3</span></span></td>
 	</tr><tr>
@@ -439,7 +439,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-7)"><use href="#icon-angular"/></svg>Angular</th>
 		<td class="n strong">9<span class="delta down" title="Down 4 since Oct 1, 2026"><svg class="trend" aria-hidden="true"><use href="#trend-down"/></svg>4</span></td>
 		<td class="n">3</td>
-		<td class="n">47</td>
+		<td class="n">47<br><span class="third-party">(2)</span></td>
 		<td class="n">507<br><span class="third-party">(454)</span></td>
 		<td class="sev"> <span class="badge high">high<span class="count">5</span></span> <span class="badge moderate" title="4 moderate">4</span></td>
 	</tr><tr>
@@ -447,7 +447,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-2)"><use href="#icon-svelte"/></svg>Svelte</th>
 		<td class="n strong"><svg class="support warn" role="img" aria-label="Code runs on request (by default)"><title>Code runs on request (by default)</title><use href="#support-warn"/></svg>41<span class="delta down" title="Down 1 since Oct 1, 2026"><svg class="trend" aria-hidden="true"><use href="#trend-down"/></svg>1</span><br><span class="third-party">(39)</span></td>
 		<td class="n">34</td>
-		<td class="n">44</td>
+		<td class="n">44<br><span class="third-party">(15)</span></td>
 		<td class="n">748<br><span class="third-party">(698)</span></td>
 		<td class="sev"> <span class="badge critical">critical<span class="count">10</span></span> <span class="badge high" title="24 high">24</span> <span class="badge moderate" title="3 moderate">3</span> <span class="badge low" title="4 low">4</span></td>
 	</tr><tr>
@@ -455,7 +455,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-4)"><use href="#icon-next"/></svg>Next.js</th>
 		<td class="n strong"><svg class="support warn" role="img" aria-label="Code runs on request (by default)"><title>Code runs on request (by default)</title><use href="#support-warn"/></svg>41<span class="delta up" title="Up 5 since Oct 1, 2026"><svg class="trend" aria-hidden="true"><use href="#trend-up"/></svg>5</span><br><span class="third-party">(8)</span></td>
 		<td class="n">62</td>
-		<td class="n">25</td>
+		<td class="n">25<br><span class="third-party">(8)</span></td>
 		<td class="n">967<br><span class="third-party">(940)</span></td>
 		<td class="sev"> <span class="badge critical">critical<span class="count">9</span></span> <span class="badge high" title="18 high">18</span> <span class="badge moderate" title="3 moderate">3</span> <span class="badge low" title="11 low">11</span></td>
 	</tr><tr>
@@ -463,7 +463,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-5)"><use href="#icon-astro"/></svg>Astro</th>
 		<td class="n strong">41<span class="delta down" title="Down 2 since Oct 1, 2026"><svg class="trend" aria-hidden="true"><use href="#trend-down"/></svg>2</span><br><span class="third-party">(26)</span></td>
 		<td class="n">74</td>
-		<td class="n">54</td>
+		<td class="n">54<br><span class="third-party">(7)</span></td>
 		<td class="n">1,559<br><span class="third-party">(1,503)</span></td>
 		<td class="sev"> <span class="badge critical">critical<span class="count">3</span></span> <span class="badge high" title="19 high">19</span> <span class="badge moderate" title="14 moderate">14</span> <span class="badge low" title="5 low">5</span></td>
 	</tr><tr>
@@ -471,7 +471,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-8)"><use href="#icon-tanstack-start"/></svg>TanStack Start</th>
 		<td class="n strong"><svg class="support warn" role="img" aria-label="Code runs on request (by default)"><title>Code runs on request (by default)</title><use href="#support-warn"/></svg>65<span class="delta up" title="Up 5 since Oct 1, 2026"><svg class="trend" aria-hidden="true"><use href="#trend-up"/></svg>5</span><br><span class="third-party">(52)</span></td>
 		<td class="n">106</td>
-		<td class="n">81</td>
+		<td class="n">81<br><span class="third-party">(22)</span></td>
 		<td class="n">1,093<br><span class="third-party">(997)</span></td>
 		<td class="sev"> <span class="badge critical">critical<span class="count">25</span></span> <span class="badge high" title="33 high">33</span> <span class="badge moderate" title="4 moderate">4</span> <span class="badge low" title="3 low">3</span></td>
 	</tr><tr>
@@ -479,7 +479,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-3)"><use href="#icon-nuxt"/></svg>Nuxt</th>
 		<td class="n strong"><svg class="support warn" role="img" aria-label="Code runs on request (by default)"><title>Code runs on request (by default)</title><use href="#support-warn"/></svg>108<span class="delta up" title="Up 4 since Oct 1, 2026"><svg class="trend" aria-hidden="true"><use href="#trend-up"/></svg>4</span><br><span class="third-party">(104)</span></td>
 		<td class="n">103</td>
-		<td class="n">57</td>
+		<td class="n">57<br><span class="third-party">(24)</span></td>
 		<td class="n">2,421<br><span class="third-party">(2,347)</span></td>
 		<td class="sev"> <span class="badge critical">critical<span class="count">12</span></span> <span class="badge high" title="65 high">65</span> <span class="badge moderate" title="11 moderate">11</span> <span class="badge low" title="20 low">20</span></td>
 	</tr><tr>
@@ -487,7 +487,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-6)"><use href="#icon-gatsby"/></svg>Gatsby</th>
 		<td class="n strong">340<span class="delta up" title="Up 13 since Oct 1, 2026"><svg class="trend" aria-hidden="true"><use href="#trend-up"/></svg>13</span></td>
 		<td class="n">173</td>
-		<td class="n">133</td>
+		<td class="n">133<br><span class="third-party">(116)</span></td>
 		<td class="n">3,357<br><span class="third-party">(3,198)</span></td>
 		<td class="sev"> <span class="badge critical">critical<span class="count">47</span></span> <span class="badge high" title="249 high">249</span> <span class="badge moderate" title="29 moderate">29</span> <span class="badge low" title="15 low">15</span></td>
 	</tr></tbody>

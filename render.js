@@ -133,6 +133,18 @@ const flows = `<div class="flows">
 // Only the most severe pill is labeled; the rest show counts, with the severity in the tooltip.
 const pills = counts => SEVERITIES.filter(sev => counts[sev]).map((sev, i) => i ? ` <span class="badge ${sev}" title="${num(counts[sev])} ${sev}">${num(counts[sev])}</span>` : ` <span class="badge ${sev}">${sev}<span class="count">${num(counts[sev])}</span></span>`).join("");
 const packagePills = p => p.vulnerabilities ? pills(p.vulnerabilities) : ` <span class="badge ${p.severity}">${p.severity}</span>`;
+// Bundled copies per bundler version, sorted by bundler then version; older snapshots key by bundler name and only know which names were vulnerable.
+const bundles = s => Object.entries(s.vendored || {}).map(([key, deps]) => {
+	let at = key.lastIndexOf("@");
+	let parent = at > 0 ? key.slice(0, at) : key;
+	let specs = Object.values(deps);
+	let affected = s.vendoredAffected?.[key] ?? specs.filter(spec => s.vulnerablePackages.some(p => p.vendoredBy === parent && spec.startsWith(`${p.name}@`)));
+	return { parent, version: at > 0 ? key.slice(at + 1) : "", specs, affected };
+}).sort((a, b) => a.parent.localeCompare(b.parent) || a.version.localeCompare(b.version, undefined, { numeric: true }));
+
+// Bundled packages count once per unique version across bundlers.
+const bundledCount = (s, field) => new Set(bundles(s).flatMap(b => b[field])).size;
+const officialAffected = s => s.vulnerablePackages.filter(p => !p.vendoredBy && s.packages[p.name]).length;
 // The raw npm audit count (no vendored packages), shown only where it differs.
 const rawAudit = s => s.nonVendoredVulnerabilities && s.nonVendoredVulnerabilities.total !== s.vulnerabilities.total ? `<br><span class="third-party">(${num(s.nonVendoredVulnerabilities.total)})</span>` : "";
 
@@ -288,7 +300,7 @@ let scoreboard = `<div class="scroll"><table class="scoreboard">
 		<th>Framework</th>
 		<th class="n">Vulnerabilities<br><span class="third-party">(Raw npm audit)</span></th>
 		<th class="n">GitHub<br>Advisories</th>
-		<th class="n">Packages</th>
+		<th class="n">Packages<br><span class="third-party">(Affected)</span></th>
 		<th class="n">Dependencies<br><span class="third-party">(Third-party)</span></th>
 		<th>Severity<br>${SEVERITIES.map(sev => `<span class="badge ${sev} key">${sev}</span>`).join(" ")}</th>
 	</tr></thead>
@@ -297,7 +309,7 @@ let scoreboard = `<div class="scroll"><table class="scoreboard">
 		<th scope="row">${icon(f)}${esc(f.name)}</th>
 		<td class="n strong">${requestTimeCaution(f, s.vulnerabilities.total)}${num(s.vulnerabilities.total)}${delta(s.vulnerabilities.total, get(baseline, f.id)?.vulnerabilities?.total)}${rawAudit(s)}</td>
 		<td class="n">${num(s.advisories.total)}</td>
-		<td class="n">${num(s.packageCount)}</td>
+		<td class="n">${num(s.packageCount)}<br><span class="third-party">(${num(officialAffected(s))})</span></td>
 		<td class="n">${num(s.dependencies)}<br><span class="third-party">(${num(s.thirdPartyDependencies)})</span></td>
 		<td class="sev">${pills(s.vulnerabilities) || `<span class="muted">—</span>`}</td>
 	</tr>`).join("")}</tbody>
@@ -323,21 +335,12 @@ let coreScoreboard = `<div class="scroll"><table class="scoreboard">
 </table></div>`;
 
 
-// Bundled copies per bundler version, sorted by bundler then version; older snapshots key by bundler name and only know which names were vulnerable.
-const bundles = s => Object.entries(s.vendored || {}).map(([key, deps]) => {
-	let at = key.lastIndexOf("@");
-	let parent = at > 0 ? key.slice(0, at) : key;
-	let specs = Object.values(deps);
-	let affected = s.vendoredAffected?.[key] ?? specs.filter(spec => s.vulnerablePackages.some(p => p.vendoredBy === parent && spec.startsWith(`${p.name}@`)));
-	return { parent, version: at > 0 ? key.slice(at + 1) : "", specs, affected };
-}).sort((a, b) => a.parent.localeCompare(b.parent) || a.version.localeCompare(b.version, undefined, { numeric: true }));
-
 let details = latest.map(({ f, s }) => `<details class="ecosystem">
 	<summary>${icon(f)}${esc(f.name)}: ${((affected, bundled, bundledAffected) => {
 		let official = `${num(affected)} of ${num(s.packageCount)} official`;
 		let percent = `(${Math.round(affected / s.packageCount * 100)}%)`;
 		return bundledAffected ? `${official} ${percent} and ${num(bundledAffected)} of ${num(bundled)} bundled (${Math.round(bundledAffected / bundled * 100)}%) packages affected` : `${official} packages ${percent} affected`;
-	})(s.vulnerablePackages.filter(p => !p.vendoredBy && s.packages[p.name]).length, new Set(bundles(s).flatMap(b => b.specs)).size, new Set(bundles(s).flatMap(b => b.affected)).size)}</summary>
+	})(officialAffected(s), bundledCount(s, "specs"), bundledCount(s, "affected"))}</summary>
 	<ul class="packages">${Object.entries(s.packages).sort(([a], [b]) => (s.published?.[a] || "9999").localeCompare(s.published?.[b] || "9999")).map(([name, version]) => {
 		let vuln = s.vulnerablePackages.find(p => p.name === name && !p.vendoredBy);
 		let bundling = Object.entries(s.vendoredUsers || {}).filter(([, users]) => users[name]).map(([parent, users]) => ` <span class="badge bundling" title="${parent === name ? "Bundles its dependencies" : `Installs ${esc(parent)}, which bundles its dependencies`}"><svg class="bundle" aria-hidden="true"><use href="#bundle"/></svg>${esc(parent)}${parent === name ? "" : ` ${users[name].map(esc).join(", ")}`}</span>`).join("");
