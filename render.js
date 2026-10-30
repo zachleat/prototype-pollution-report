@@ -597,6 +597,7 @@ ${sprite}
 <section class="card">
 	<div class="stack">
 		${renderingTable}
+		<p class="footnote">Forecasts count every package equally and could be improved by weighting each one by its download count.</p>
 		<p class="footnote">In a static build, server dependencies are limited to the build machine. A ReDoS in a Markdown parser might slow down a build, but visitors can’t trigger it. ${cautionIcon(REQUEST_TIME_WARNING)}Request-time code runs on a live server, where anyone loading a page can reach it. Note that client dependencies ship to the browser either way, so their vulnerabilities can affect both Build-time and Request-time projects.</p>
 		${flows}
 	</div>
