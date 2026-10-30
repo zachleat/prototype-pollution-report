@@ -10,6 +10,7 @@ const REGISTRY = "https://registry.npmjs.org";
 const OSV = "https://api.osv.dev/v1/vulns";
 const JSDELIVR = "https://data.jsdelivr.com/v1/packages/npm";
 const CDN = "https://cdn.jsdelivr.net/npm";
+const GITHUB = "https://raw.githubusercontent.com";
 const DATA_FILE = new URL("./data/snapshots.json", import.meta.url);
 const ADVISORIES_FILE = new URL("./data/advisories.json", import.meta.url);
 const SEVERITIES = ["info", "low", "moderate", "high", "critical"];
@@ -39,11 +40,11 @@ dates = [...new Set(dates)].sort();
 
 let selected = flags.only ? frameworks.filter(f => flags.only.split(",").includes(f.id)) : frameworks;
 
-async function getJson(url) {
+async function request(url) {
 	for (let attempt = 1; ; attempt++) {
 		let res = await fetch(url);
 		if (res.ok) {
-			return res.json();
+			return res;
 		}
 		if (res.status === 404 || attempt === 3) {
 			throw new Error(`${res.status} ${url}`);
@@ -53,6 +54,9 @@ async function getJson(url) {
 		}
 	}
 }
+
+const getJson = async url => (await request(url)).json();
+const getText = async url => (await request(url)).text();
 
 async function mapLimit(items, limit, fn) {
 	let results = new Array(items.length);
@@ -127,44 +131,233 @@ async function getEcosystem(framework) {
 	return { owned: names, packuments: packuments.filter(isEligible) };
 }
 
+// Parses the block-style YAML in pnpm lockfiles into nested objects, keeping flow values as strings and skipping list items.
+function parseLockfile(text) {
+	let root = {};
+	let stack = [{ indent: -1, obj: root }];
+	let unquote = s => s.replace(/^(['"])(.*)\1$/, "$2");
+	for (let line of text.split("\n")) {
+		let [, indent, key, value] = line.match(/^( *)([^\s#-].*?):(?: (.*))?$/) || [];
+		if (key === undefined) {
+			continue;
+		}
+		while (stack.at(-1).indent >= indent.length) {
+			stack.pop();
+		}
+		let parent = stack.at(-1).obj;
+		if (value) {
+			parent[unquote(key)] = unquote(value);
+		} else {
+			parent[unquote(key)] = {};
+			stack.push({ indent: indent.length, obj: parent[unquote(key)] });
+		}
+	}
+	return root;
+}
+
+// Packages that bundle dependencies npm audit can't see, each resolving a version to its bundled `{ dir, name, version }` list.
+const VENDORED = {
+	// Next.js precompiles them into dist/compiled; published manifests strip devDependencies, so versions come from the source repo's package.json files.
+	next: async version => {
+		let specs = {};
+		for (let path of ["", "packages/next/"]) {
+			let pkg = await getJson(`${GITHUB}/vercel/next.js/v${version}/${path}package.json`);
+			Object.assign(specs, pkg.dependencies, pkg.devDependencies);
+		}
+		let prefix = "/dist/compiled/";
+		let { files } = await getJson(`${JSDELIVR}/next@${version}?structure=flat`);
+		let dirs = new Set(files
+			.filter(f => f.name.startsWith(prefix))
+			.map(f => f.name.slice(prefix.length).match(/^(@[^/]+\/)?[^/]+(?=\/)/)?.[0])
+			.filter(Boolean));
+
+		return mapLimit([...dirs].sort(), 6, async d => {
+			let compiled = await getJson(`${CDN}/next@${version}${prefix}${d}/package.json`).catch(() => ({}));
+			let id = compiled.name || d;
+			// Prefer an `npm:` alias keyed by folder (`loader-utils2`), then the compiled name (`react-builtin`), then the folder.
+			let spec = [specs[d]].find(s => s?.startsWith("npm:")) || specs[id] || specs[d] || compiled.version;
+			let [, alias, aliasVersion] = spec?.match(/^npm:(@?[^@]+)@(.+)$/) || [];
+			// Next.js names React channel copies `<name>(-experimental)-builtin`; the version already encodes the channel.
+			return { dir: d, name: alias || id.replace(/(-experimental)?-builtin$/, ""), version: aliasVersion || spec };
+		});
+	},
+	// Vite bundles them into dist/node and lists them in LICENSE.md; devDependencies are ranges and miss transitive deps, so versions come from the release tag's lockfile.
+	vite: async version => {
+		let license = await getText(`${CDN}/vite@${version}/LICENSE.md`);
+		let bundled = new Set([...license.matchAll(/^## (.+)$/gm)].flatMap(m => m[1].split(", ")));
+		let text = await getText(`${GITHUB}/vitejs/vite/v${version}/pnpm-lock.yaml`).catch(() => "");
+		// Newer pnpm writes its own environment as an extra document first.
+		let lock = text.split(/^---$/m).map(parseLockfile).find(doc => doc.importers?.["packages/vite"]);
+		let nodes = { ...lock?.packages, ...lock?.snapshots };
+		// Importers nest `version`, dependencies of locked packages don't; values can carry peer or patch suffixes, or alias another package.
+		let refs = deps => Object.entries(deps || {}).map(([name, ref]) => {
+			ref = ref.version ?? ref;
+			let [, alias, aliasRef] = ref.match(/^\/?((?:@[^/]+\/)?[^@/]+)@(.+)$/) || [];
+			return alias && !/^\d/.test(ref) ? [alias, aliasRef] : [name, ref];
+		});
+
+		// Walks only bundled packages, since a bundled package's dependencies are bundled too.
+		let found = new Map();
+		let seen = new Set();
+		for (let stack = refs(lock?.importers["packages/vite"].devDependencies); stack.length;) {
+			let [name, ref] = stack.pop();
+			if (!bundled.has(name) || seen.has(`${name}@${ref}`)) {
+				continue;
+			}
+			seen.add(`${name}@${ref}`);
+			// Lockfile v5 keys are `/name/version` with `_peer@version` suffixes; v6 adds `@` and parenthesized suffixes; v9 drops the slash.
+			found.set(name, (found.get(name) || new Set()).add(ref.replace(/[(_].*$/, "")));
+			let node = nodes[`${name}@${ref}`] || nodes[`/${name}@${ref}`] || nodes[`/${name}/${ref}`];
+			stack.push(...refs(node?.dependencies), ...refs(node?.optionalDependencies));
+		}
+		return [...bundled].sort().flatMap(name => {
+			let versions = [...(found.get(name) || [])];
+			return versions.length ? versions.map(version => ({ dir: `${name}@${version}`, name, version })) : [{ dir: name, name }];
+		});
+	},
+};
+
+const packumentCache = new Map();
+const getPackument = name => {
+	if (!packumentCache.has(name)) {
+		packumentCache.set(name, getJson(`${REGISTRY}/${name.replace("/", "%2f")}`));
+	}
+	return packumentCache.get(name);
+};
+
 const vendoredCache = new Map();
 
-// Published manifests strip devDependencies, so vendored versions come from the source repo's package.json files.
-async function getVendored(name, version, { dir, manifests }) {
+async function getVendored(name, version) {
 	let key = `${name}@${version}`;
 	if (!vendoredCache.has(key)) {
 		vendoredCache.set(key, (async () => {
-			let specs = {};
-			for (let url of manifests(version)) {
-				let pkg = await getJson(url);
-				Object.assign(specs, pkg.dependencies, pkg.devDependencies);
-			}
-			let prefix = `/${dir}/`;
-			let { files } = await getJson(`${JSDELIVR}/${key}?structure=flat`);
-			let dirs = new Set(files
-				.filter(f => f.name.startsWith(prefix))
-				.map(f => f.name.slice(prefix.length).match(/^(@[^/]+\/)?[^/]+(?=\/)/)?.[0])
-				.filter(Boolean));
-
-			let vendored = await mapLimit([...dirs].sort(), 6, async d => {
-				let compiled = await getJson(`${CDN}/${key}/${dir}/${d}/package.json`).catch(() => ({}));
-				let id = compiled.name || d;
-				// Prefer an `npm:` alias keyed by folder (`loader-utils2`), then the compiled name (`react-builtin`), then the folder.
-				let spec = [specs[d]].find(s => s?.startsWith("npm:")) || specs[id] || specs[d] || compiled.version;
-				let [, alias, aliasVersion] = spec?.match(/^npm:(@?[^@]+)@(.+)$/) || [];
-				// Next.js names React channel copies `<name>(-experimental)-builtin`; the version already encodes the channel.
-				let resolved = { dir: d, name: alias || id.replace(/(-experimental)?-builtin$/, ""), version: aliasVersion || spec };
-				resolved.published = await isPublished(resolved.name, resolved.version);
-				return resolved;
-			});
+			let bundled = await VENDORED[name](version);
+			let published = await mapLimit(bundled, 6, v => isPublished(v.name, v.version));
+			let spec = v => v.version && `${v.name}@${v.version}`;
 			return {
-				vendored: vendored.filter(v => v.published),
+				vendored: bundled.filter((v, i) => published[i]),
 				// Workspace, git and file specs, and repo versions of workspace packages, have nothing on npm to audit.
-				unresolved: vendored.filter(v => !v.published).map(v => `${v.dir}${v.version ? ` (${v.name}@${v.version})` : ""}`),
+				unresolved: bundled.filter((v, i) => !published[i]).map(v => spec(v) && spec(v) !== v.dir ? `${v.dir} (${spec(v)})` : v.dir),
 			};
 		})());
 	}
 	return vendoredCache.get(key);
+}
+
+// Finds packages in an audited tree that bundle dependencies, and aliases that install those dependencies for a second audit.
+async function getBundled(report, roots = report.direct) {
+	let aliases = new Map();
+	let vendoredBy = new Map();
+	let vendoredUnder = new Map();
+	let vendored = {};
+	let aliasOf = new Map();
+	let unresolved = {};
+	let found = false;
+	for (let [key, name] of report.installed) {
+		if (!Object.hasOwn(VENDORED, name) || !key.startsWith(`${name}@`)) {
+			continue;
+		}
+		found = true;
+		let result = await getVendored(name, key.slice(name.length + 1));
+		if (result.unresolved.length) {
+			unresolved[name] = [...new Set([...(unresolved[name] || []), ...result.unresolved])];
+		}
+		for (let v of result.vendored) {
+			let spec = `${v.name}@${v.version}`;
+			let alias = `${name}-vendored-${spec.toLowerCase().replace(/[^a-z0-9.-]+/g, "-").replace(/^[-.]+/, "")}`;
+			aliases.set(alias, `npm:${spec}`);
+			aliasOf.set(spec, alias);
+			vendoredBy.set(v.name, name);
+			vendoredUnder.set(name, (vendoredUnder.get(name) || new Set()).add(v.name));
+			vendored[key] = { ...vendored[key], [v.dir]: spec };
+		}
+	}
+	return { aliases: [...aliases], aliasOf, vendoredBy, vendoredUnder, vendored, unresolved, users: found ? getBundlingUsers(report, roots) : {} };
+}
+
+// Enough of npm's range syntax for peer ranges: `||` alternatives of space-separated comparators, with `^`, `~` and `x` wildcards; prereleases compare by their release.
+function satisfies(version, range) {
+	if (!version) {
+		return false;
+	}
+	let v = parseVersion(version).nums;
+	let cmp = (a, b) => a[0] - b[0] || a[1] - b[1] || a[2] - b[2];
+	return range.replace(/(>=|<=|>|<|=|\^|~)\s+/g, "$1").split("||").some(alt => alt.trim().split(/\s+/).every(comparator => {
+		let [, op = "", rest] = comparator.match(/^(\^|~|>=|<=|>|<|=)?v?(.*)$/);
+		let parts = rest.split("-")[0].split(".").filter(part => /^\d+$/.test(part)).map(Number);
+		if (!parts.length) {
+			return true;
+		}
+		let [major, minor = 0, patch = 0] = parts;
+		let d = cmp(v, [major, minor, patch]);
+		if (op === ">=" || op === ">" || op === "<=" || op === "<") {
+			return { ">=": d >= 0, ">": d > 0, "<=": d <= 0, "<": d < 0 }[op];
+		}
+		let upper;
+		if (op === "^") {
+			upper = major || parts.length === 1 ? [major + 1, 0, 0] : minor || parts.length === 2 ? [0, minor + 1, 0] : [0, 0, patch + 1];
+		} else if (op === "~") {
+			upper = parts.length === 1 ? [major + 1, 0, 0] : [major, minor + 1, 0];
+		} else if (parts.length < 3) {
+			upper = parts.length === 1 ? [major + 1, 0, 0] : [major, minor + 1, 0];
+		} else {
+			return d === 0;
+		}
+		return d >= 0 && cmp(v, upper) < 0;
+	}));
+}
+
+// Resolved dependency paths of a lockfile entry; peers only count when required and satisfied, since `--legacy-peer-deps` can hoist an unrelated version into their place.
+function resolveEdges(lock, path) {
+	let p = lock[path];
+	let deps = Object.keys({ ...p.dependencies, ...p.optionalDependencies }).map(dep => resolvePath(lock, path, dep));
+	let peers = Object.entries(p.peerDependencies || {})
+		.filter(([dep]) => !p.peerDependenciesMeta?.[dep]?.optional)
+		.map(([dep, range]) => [resolvePath(lock, path, dep), range])
+		.filter(([child, range]) => child && satisfies(lock[child].version, range))
+		.map(([child]) => child);
+	return [...deps, ...peers].filter(Boolean);
+}
+
+const lockName = (lock, path) => lock[path].name || path.split("node_modules/").pop();
+
+// Node's lookup: the nearest `node_modules` folder up from the dependent's path.
+function resolvePath(lock, from, name) {
+	for (let path = from; ; path = path.replace(/\/?node_modules\/(@[^/]+\/)?[^/]+$/, "")) {
+		let candidate = `${path ? `${path}/` : ""}node_modules/${name}`;
+		if (lock[candidate]) {
+			return candidate;
+		}
+		if (!path) {
+			return;
+		}
+	}
+}
+
+// The versions of bundling packages each root (official packages, or the core alone) pulls in, leaving packages reached through another root to that one.
+function getBundlingUsers(report, roots) {
+	let users = {};
+	for (let root of roots) {
+		let start = `node_modules/${root}`;
+		for (let stack = [start], seen = new Set(); stack.length;) {
+			let path = stack.pop();
+			if (!path || seen.has(path) || !report.lock[path]) {
+				continue;
+			}
+			seen.add(path);
+			let p = report.lock[path];
+			let name = lockName(report.lock, path);
+			if (path !== start && path === `node_modules/${name}` && roots.has(name)) {
+				continue;
+			}
+			if (Object.hasOwn(VENDORED, name)) {
+				users[name] ??= {};
+				users[name][root] = [...new Set([...(users[name][root] || []), p.version])].sort(compareVersions);
+			}
+			stack.push(...resolveEdges(report.lock, path));
+		}
+	}
+	return users;
 }
 
 const publishedVersions = new Map();
@@ -228,6 +421,17 @@ async function audit(packages, date, { peers = false, force = false } = {}) {
 			let parent = (p.os || p.cpu) && platformParent.get(p.name);
 			return [parent ? `platform builds of ${parent}` : `${p.name}@${p.version}`, p.name];
 		}));
+
+		// Reverse dependency edges, for linking vendored vulnerabilities up to direct dependencies; required peers count when satisfied.
+		report.lock = lock.packages;
+		report.direct = new Set(Object.keys(lock.packages[""].dependencies || {}));
+		report.dependents = new Map();
+		for (let path of Object.keys(lock.packages).filter(Boolean)) {
+			for (let child of resolveEdges(lock.packages, path)) {
+				let dep = lockName(lock.packages, child);
+				report.dependents.set(dep, (report.dependents.get(dep) || new Set()).add(lockName(lock.packages, path)));
+			}
+		}
 		return report;
 	} finally {
 		await rm(cwd, { recursive: true, force: true });
@@ -290,11 +494,20 @@ function summarize(report, date, owned, vendoredUnder = new Map()) {
 		return !when || new Date(when).getTime() < cutoff;
 	};
 	let vulns = { ...report.vulnerabilities };
-	// Vendored copies install beside their parent, so link them back as if they were regular dependencies.
+	// Vendored copies install beside their parent, so link them back, and up through the parent's dependents, as if they were regular dependencies.
+	let link = (name, via) => {
+		let existing = vulns[name];
+		vulns[name] = { name, isDirect: report.direct.has(name), ...existing, via: [...(existing?.via || []), ...via] };
+		if (!existing) {
+			for (let dependent of report.dependents.get(name) || []) {
+				link(dependent, [name]);
+			}
+		}
+	};
 	for (let [parent, names] of vendoredUnder) {
 		let via = [...names].filter(name => vulns[name]);
 		if (via.length) {
-			vulns[parent] = { name: parent, isDirect: true, ...vulns[parent], via: [...(vulns[parent]?.via || []), ...via] };
+			link(parent, via);
 		}
 	}
 	let rank = new Map();
@@ -363,25 +576,51 @@ for (let framework of selected) {
 
 		let snapshot = { date, collectedAt: new Date().toISOString(), framework: framework.id, packageCount: packages.length };
 		try {
-			let aliases = new Map();
-			let vendoredBy = new Map();
-			let vendoredUnder = new Map();
-			for (let [name, version] of packages) {
-				if (framework.vendored?.[name]) {
-					let { vendored, unresolved } = await getVendored(name, version, framework.vendored[name]);
-					if (unresolved.length) {
-						snapshot.unresolvedVendored = { ...snapshot.unresolvedVendored, [name]: unresolved };
-					}
-					aliases.set(name, vendored.map(v => [`${name}-vendored-${v.dir.replace("@", "").replace("/", "-")}`, `npm:${v.name}@${v.version}`]));
-					for (let v of vendored) {
-						vendoredBy.set(v.name, name);
-						vendoredUnder.set(name, (vendoredUnder.get(name) || new Set()).add(v.name));
-						snapshot.vendored = { ...snapshot.vendored, [name]: { ...snapshot.vendored?.[name], [v.dir]: `${v.name}@${v.version}` } };
-					}
+			let bundlers = [];
+			let core = packages.find(([name]) => name === framework.core);
+			if (core) {
+				let { report: plainCore, peersSkipped } = await auditCore([core], date);
+				// The core's own bundler versions install directly, so they take the top of the ecosystem tree instead of whichever stale version npm places first.
+				bundlers = Object.keys(VENDORED)
+					.filter(name => plainCore.lock[`node_modules/${name}`] && !packages.some(([official]) => official === name))
+					.map(name => [name, plainCore.lock[`node_modules/${name}`].version]);
+				let bundled = await getBundled(plainCore);
+				let coreReport = plainCore;
+				if (bundled.aliases.length) {
+					({ report: coreReport, peersSkipped } = await auditCore([core, ...bundled.aliases], date));
+				}
+				await fetchPublishedDates(coreReport);
+				let { dependencies, thirdPartyDependencies, vulnerabilities, advisories } = summarize(coreReport, date, owned, bundled.vendoredUnder);
+				snapshot.core = { name: core[0], version: core[1], dependencies, thirdPartyDependencies, vulnerabilities, advisories, ...(peersSkipped && { peersSkipped }) };
+				if (bundled.aliases.length) {
+					await fetchPublishedDates(plainCore);
+					snapshot.core.nonVendoredVulnerabilities = summarize(plainCore, date, owned).vulnerabilities;
 				}
 			}
 
-			let report = await audit([...packages, ...[...aliases.values()].flat()], date);
+			// Without a core version, the latest bundler as of the date stands in when any official package depends on it.
+			for (let name of Object.keys(VENDORED)) {
+				let official = ([pkg, version]) => pkg === name || ["dependencies", "optionalDependencies", "peerDependencies"].some(field => ecosystem.find(p => p.name === pkg).versions[version]?.[field]?.[name]);
+				if (!bundlers.some(([bundler]) => bundler === name) && !packages.some(([pkg]) => pkg === name) && packages.some(official)) {
+					bundlers.push([name, versionAt(await getPackument(name), date)]);
+				}
+			}
+
+			// The core's required peers install alongside, since every project using it has them; `--legacy-peer-deps` skips all other peers.
+			let coreManifest = ecosystem.find(p => p.name === framework.core)?.versions[packages.find(([name]) => name === framework.core)?.[1]];
+			let peers = Object.entries(coreManifest?.peerDependencies || {})
+				.filter(([name]) => !coreManifest.peerDependenciesMeta?.[name]?.optional && !packages.some(([official]) => official === name) && !bundlers.some(([bundler]) => bundler === name));
+			if (peers.length) {
+				snapshot.peers = Object.fromEntries(peers);
+			}
+			if (bundlers.length) {
+				snapshot.bundlers = Object.fromEntries(bundlers);
+			}
+
+			// The plain audit finds bundling packages anywhere in the tree, then a second audit adds what they bundle.
+			let plain = await audit([...packages, ...peers, ...bundlers], date);
+			let { aliases, aliasOf, vendoredBy, vendoredUnder, vendored, unresolved, users } = await getBundled(plain, new Set(packages.map(([name]) => name)));
+			let report = aliases.length ? await audit([...packages, ...peers, ...bundlers, ...aliases], date) : plain;
 			await fetchPublishedDates(report);
 			Object.assign(snapshot, summarize(report, date, owned, vendoredUnder));
 			for (let p of snapshot.vulnerablePackages) {
@@ -389,26 +628,22 @@ for (let framework of selected) {
 					p.vendoredBy = vendoredBy.get(p.name);
 				}
 			}
-			// A second audit without vendored packages, for comparison.
-			if (aliases.size) {
-				let plain = await audit(packages, date);
+			if (aliases.length) {
 				await fetchPublishedDates(plain);
 				snapshot.nonVendoredVulnerabilities = summarize(plain, date, owned).vulnerabilities;
+				snapshot.vendored = vendored;
+				snapshot.vendoredUsers = users;
+				// Bundled copies npm audit flagged by install path, since a package can be vulnerable in one bundled version but not another.
+				let flagged = new Set(snapshot.vulnerablePackages.map(p => p.name));
+				snapshot.vendoredAffected = Object.fromEntries(Object.entries(vendored).map(([key, deps]) => [key, Object.values(deps).filter(spec => {
+					let name = spec.slice(0, spec.lastIndexOf("@"));
+					return flagged.has(name) && report.vulnerabilities[name]?.nodes?.includes(`node_modules/${aliasOf.get(spec)}`);
+				})]));
+			}
+			if (Object.keys(unresolved).length) {
+				snapshot.unresolvedVendored = unresolved;
 			}
 
-			let core = packages.find(([name]) => name === framework.core);
-			if (core) {
-				let coreAliases = aliases.get(framework.core) || [];
-				let { report: coreReport, peersSkipped } = await auditCore([core, ...coreAliases], date);
-				await fetchPublishedDates(coreReport);
-				let { dependencies, thirdPartyDependencies, vulnerabilities, advisories } = summarize(coreReport, date, owned, vendoredUnder);
-				snapshot.core = { name: core[0], version: core[1], dependencies, thirdPartyDependencies, vulnerabilities, advisories, ...(peersSkipped && { peersSkipped }) };
-				if (coreAliases.length) {
-					let { report: plain } = await auditCore([core], date);
-					await fetchPublishedDates(plain);
-					snapshot.core.nonVendoredVulnerabilities = summarize(plain, date, owned).vulnerabilities;
-				}
-			}
 			console.log(`  ${date}: ${packages.length} packages, ${snapshot.vulnerabilities.total} vulnerabilities (core: ${snapshot.core?.vulnerabilities.total ?? "—"})`);
 		} catch (e) {
 			snapshot.error = String(e.stderr || e.message).trim().split("\n").slice(-5).join("\n");

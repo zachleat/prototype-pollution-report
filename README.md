@@ -12,7 +12,7 @@ Past dates are point-in-time: packages resolve with `npm install --before`, and 
 
 Ecosystem installs use `--legacy-peer-deps` because official packages' peer ranges conflict; core packages are also audited alone with their required peers installed.
 
-Next.js's precompiled `dist/compiled` packages are audited as regular dependencies, with versions read from the release tag's `package.json` files on GitHub.
+Next.js's precompiled `dist/compiled` packages are audited as regular dependencies, with versions read from the release tag's `package.json` files on GitHub. Vite's bundled packages, listed in its `LICENSE.md`, are audited the same way wherever Vite appears in the install tree, with versions read from the release tag's `pnpm-lock.yaml`.
 
 Icons:
 

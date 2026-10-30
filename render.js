@@ -1,6 +1,6 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { faCircleCheck as faCircleCheckRegular, faCircleXmark } from "@fortawesome/free-regular-svg-icons";
-import { faArrowDown, faArrowUp, faBug, faCircleCheck, faCircleInfo, faCloud, faCloudBolt, faCloudRain, faCloudShowersHeavy, faCloudSun, faFileCode, faServer, faSun, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faArrowDown, faArrowUp, faBoxOpen, faBug, faCircleCheck, faCircleInfo, faCloud, faCloudBolt, faCloudRain, faCloudShowersHeavy, faCloudSun, faFileCode, faServer, faSun, faUser } from "@fortawesome/free-solid-svg-icons";
 import { faWordpressSimple } from "@fortawesome/free-brands-svg-icons";
 import frameworks from "./frameworks.js";
 
@@ -37,14 +37,14 @@ const forecast = counts => {
 };
 const forecastLegend = `<ul class="keys legend">${FORECAST.map(({ label }, i) => `<li>${rankPill(i)}${label}</li>`).join("")}</ul>`;
 
-// Change since the previous snapshot: red up arrow for more, green down arrow for fewer.
+// Change since the snapshot closest to three weeks before the latest: red up arrow for more, green down arrow for fewer.
 const delta = (total, previous) => {
 	let change = previous == null ? 0 : total - previous;
 	if (!change) {
 		return "";
 	}
 	let direction = change > 0 ? "up" : "down";
-	return `<span class="delta ${direction}" title="${change > 0 ? "Up" : "Down"} ${num(Math.abs(change))} since ${formatDate(dates.at(-2))}"><svg class="trend" aria-hidden="true"><use href="#trend-${direction}"/></svg>${num(Math.abs(change))}</span>`;
+	return `<span class="delta ${direction}" title="${change > 0 ? "Up" : "Down"} ${num(Math.abs(change))} since ${formatDate(baseline)}"><svg class="trend" aria-hidden="true"><use href="#trend-${direction}"/></svg>${num(Math.abs(change))}</span>`;
 };
 
 // Age of a published version as of the latest snapshot.
@@ -53,7 +53,7 @@ const age = published => {
 		return "";
 	}
 	let days = Math.round((time(latestDate) - time(published)) / 864e5);
-	let label = days < 60 ? `${days}d` : days < 730 ? `${Math.round(days / 30.44)}mo` : `${Math.round(days / 365.25)}y`;
+	let label = days <= 30 ? `${days}d` : Math.round(days / 30.44) <= 12 ? `${Math.round(days / 30.44)}mo` : `${Math.round(days / 365.25 * 2) / 2}y`;
 	return ` <span class="badge age" title="Published ${formatDate(published)}">${label}</span>`;
 };
 
@@ -83,6 +83,8 @@ const formatDate = (d, opts = { month: "short", day: "numeric", year: "numeric" 
 
 const dates = [...new Set(snapshots.map(s => s.date))].sort();
 const latestDate = dates.at(-1);
+const distance = d => Math.abs(time(d) - (time(latestDate) - 21 * 864e5));
+const baseline = dates.slice(0, -1).reduce((best, d) => distance(d) < distance(best) ? d : best, dates[0]);
 const collectedAt = snapshots.filter(s => s.date === latestDate && s.collectedAt).map(s => s.collectedAt).sort().at(-1);
 const lastUpdated = collectedAt
 	? new Intl.DateTimeFormat("en-US", { timeZone: "UTC", dateStyle: "medium", timeStyle: "short" }).format(new Date(collectedAt)) + " UTC"
@@ -104,6 +106,7 @@ const sprite = `<svg class="sprite" aria-hidden="true">${[
 	...FORECAST.map(({ id, icon }) => symbol(`weather-${id}`, icon)),
 	symbol("trend-up", faArrowUp),
 	symbol("trend-down", faArrowDown),
+	symbol("bundle", faBoxOpen),
 ].join("")}</svg>`;
 const icon = f => `<svg class="icon" aria-hidden="true" style="fill:${f.slot ? `var(--series-${f.slot})` : f.color}"><use href="#icon-${f.id}"/></svg>`;
 
@@ -127,7 +130,8 @@ const flows = `<div class="flows">
 	${flow({ kind: "static", title: "Build-time", label: "Visitor requests stop at prebuilt HTML files. The vulnerable dependency only ran on the build machine.", middle: { id: "html", label: "HTML files" } })}
 	${flow({ kind: "request-time", title: `Request-time${cautionIcon(REQUEST_TIME_WARNING)}`, label: "Visitor requests pass through the server to the vulnerable dependency on every page load.", middle: { id: "server", label: "Server" } })}
 </div>`;
-const pills = counts => SEVERITIES.map(sev => counts[sev] ? ` <span class="badge ${sev}">${sev}<span class="count">${num(counts[sev])}</span></span>` : "").join("");
+// Only the most severe pill is labeled; the rest show counts, with the severity in the tooltip.
+const pills = counts => SEVERITIES.filter(sev => counts[sev]).map((sev, i) => i ? ` <span class="badge ${sev}" title="${num(counts[sev])} ${sev}">${num(counts[sev])}</span>` : ` <span class="badge ${sev}">${sev}<span class="count">${num(counts[sev])}</span></span>`).join("");
 const packagePills = p => p.vulnerabilities ? pills(p.vulnerabilities) : ` <span class="badge ${p.severity}">${p.severity}</span>`;
 // The raw npm audit count (no vendored packages), shown only where it differs.
 const rawAudit = s => s.nonVendoredVulnerabilities && s.nonVendoredVulnerabilities.total !== s.vulnerabilities.total ? `<br><span class="third-party">(${num(s.nonVendoredVulnerabilities.total)})</span>` : "";
@@ -254,27 +258,27 @@ let renderingTable = `<div class="scroll"><table class="scoreboard compact">
 	<thead>
 		<tr>
 			<th rowspan="2">Framework</th>
+			<th colspan="2" class="group">Forecast</th>
 			<th colspan="2" class="group">Rendering</th>
 			<th colspan="2" class="group">Navigation</th>
-			<th colspan="2" class="group">Forecast</th>
 		</tr>
 		<tr>
+			<th>Ecosystem</th>
+			<th>Core</th>
 			<th>Build-time (static)</th>
 			<th>Request-time</th>
 			<th>MPA</th>
 			<th>SPA</th>
-			<th>Ecosystem</th>
-			<th>Core</th>
 		</tr>
 	</thead>
 	<tbody>${[...series, ...renderingOnly].toSorted((a, b) => coreTotal(a) - coreTotal(b) || ecosystemTotal(a) - ecosystemTotal(b) || a.name.localeCompare(b.name)).map(f => `<tr>
 		<th scope="row">${icon(f)}${esc(f.name)}</th>
+		${(s => s ? forecast(s.vulnerabilities) : "<td></td>")(latestOf(f))}
+		${(core => core ? forecast(core.vulnerabilities) : "<td></td>")(latestOf(f)?.core)}
 		${support(f.static)}
 		${support(f.requestTime, { warn: REQUEST_TIME_WARNING })}
 		${support(f.mpa)}
 		${support(f.spa)}
-		${(s => s ? forecast(s.vulnerabilities) : "<td></td>")(latestOf(f))}
-		${(core => core ? forecast(core.vulnerabilities) : "<td></td>")(latestOf(f)?.core)}
 	</tr>`).join("")}</tbody>
 </table></div>`;
 
@@ -286,12 +290,12 @@ let scoreboard = `<div class="scroll"><table class="scoreboard">
 		<th class="n">GitHub<br>Advisories</th>
 		<th class="n">Packages</th>
 		<th class="n">Dependencies<br><span class="third-party">(Third-party)</span></th>
-		<th>Severity</th>
+		<th>Severity<br>${SEVERITIES.map(sev => `<span class="badge ${sev} key">${sev}</span>`).join(" ")}</th>
 	</tr></thead>
 	<tbody>${latest.map(({ f, s }) => `<tr>
 		${forecast(s.vulnerabilities)}
 		<th scope="row">${icon(f)}${esc(f.name)}</th>
-		<td class="n strong">${requestTimeCaution(f, s.vulnerabilities.total)}${num(s.vulnerabilities.total)}${delta(s.vulnerabilities.total, get(dates.at(-2), f.id)?.vulnerabilities?.total)}${rawAudit(s)}</td>
+		<td class="n strong">${requestTimeCaution(f, s.vulnerabilities.total)}${num(s.vulnerabilities.total)}${delta(s.vulnerabilities.total, get(baseline, f.id)?.vulnerabilities?.total)}${rawAudit(s)}</td>
 		<td class="n">${num(s.advisories.total)}</td>
 		<td class="n">${num(s.packageCount)}</td>
 		<td class="n">${num(s.dependencies)}<br><span class="third-party">(${num(s.thirdPartyDependencies)})</span></td>
@@ -306,12 +310,12 @@ let coreScoreboard = `<div class="scroll"><table class="scoreboard">
 		<th class="n">Vulnerabilities<br><span class="third-party">(Raw npm audit)</span></th>
 		<th class="n">GitHub<br>Advisories</th>
 		<th class="n">Dependencies<br><span class="third-party">(Third-party)</span></th>
-		<th>Severity</th>
+		<th>Severity<br>${SEVERITIES.map(sev => `<span class="badge ${sev} key">${sev}</span>`).join(" ")}</th>
 	</tr></thead>
 	<tbody>${latestCore.map(({ f, s: { core, published } }) => `<tr>
 		${forecast(core.vulnerabilities)}
 		<th scope="row">${icon(f)}<a href="https://www.npmjs.com/package/${esc(core.name)}/v/${esc(core.version)}">${esc(core.name)}</a> <span class="muted">${esc(core.version)}</span>${age(published?.[core.name])}</th>
-		<td class="n strong">${requestTimeCaution(f, core.vulnerabilities.total)}${num(core.vulnerabilities.total)}${delta(core.vulnerabilities.total, get(dates.at(-2), f.id)?.core?.vulnerabilities.total)}${rawAudit(core)}</td>
+		<td class="n strong">${requestTimeCaution(f, core.vulnerabilities.total)}${num(core.vulnerabilities.total)}${delta(core.vulnerabilities.total, get(baseline, f.id)?.core?.vulnerabilities.total)}${rawAudit(core)}</td>
 		<td class="n">${num(core.advisories.total)}</td>
 		<td class="n">${num(core.dependencies)}<br><span class="third-party">(${num(core.thirdPartyDependencies)})</span></td>
 		<td class="sev">${pills(core.vulnerabilities) || `<span class="muted">—</span>`}</td>
@@ -319,23 +323,35 @@ let coreScoreboard = `<div class="scroll"><table class="scoreboard">
 </table></div>`;
 
 
+// Bundled copies per bundler version, sorted by bundler then version; older snapshots key by bundler name and only know which names were vulnerable.
+const bundles = s => Object.entries(s.vendored || {}).map(([key, deps]) => {
+	let at = key.lastIndexOf("@");
+	let parent = at > 0 ? key.slice(0, at) : key;
+	let specs = Object.values(deps);
+	let affected = s.vendoredAffected?.[key] ?? specs.filter(spec => s.vulnerablePackages.some(p => p.vendoredBy === parent && spec.startsWith(`${p.name}@`)));
+	return { parent, version: at > 0 ? key.slice(at + 1) : "", specs, affected };
+}).sort((a, b) => a.parent.localeCompare(b.parent) || a.version.localeCompare(b.version, undefined, { numeric: true }));
+
 let details = latest.map(({ f, s }) => `<details class="ecosystem">
-	<summary>${icon(f)}${esc(f.name)}: ${(affected => `${num(affected)} of ${num(s.packageCount)} official packages (${Math.round(affected / s.packageCount * 100)}%) affected`)(s.vulnerablePackages.filter(p => !p.vendoredBy).length)}</summary>
-	<ul class="packages">${Object.entries(s.packages).map(([name, version]) => {
+	<summary>${icon(f)}${esc(f.name)}: ${((affected, bundled, bundledAffected) => {
+		let official = `${num(affected)} of ${num(s.packageCount)} official`;
+		let percent = `(${Math.round(affected / s.packageCount * 100)}%)`;
+		return bundledAffected ? `${official} ${percent} and ${num(bundledAffected)} of ${num(bundled)} bundled (${Math.round(bundledAffected / bundled * 100)}%) packages affected` : `${official} packages ${percent} affected`;
+	})(s.vulnerablePackages.filter(p => !p.vendoredBy && s.packages[p.name]).length, new Set(bundles(s).flatMap(b => b.specs)).size, new Set(bundles(s).flatMap(b => b.affected)).size)}</summary>
+	<ul class="packages">${Object.entries(s.packages).sort(([a], [b]) => (s.published?.[a] || "9999").localeCompare(s.published?.[b] || "9999")).map(([name, version]) => {
 		let vuln = s.vulnerablePackages.find(p => p.name === name && !p.vendoredBy);
-		return `<li><a href="https://www.npmjs.com/package/${esc(name)}/v/${esc(version)}">${esc(name)}</a> <span class="muted">${esc(version)}</span>${age(s.published?.[name])}${vuln ? packagePills(vuln) : ""}</li>`;
+		let bundling = Object.entries(s.vendoredUsers || {}).filter(([, users]) => users[name]).map(([parent, users]) => ` <span class="badge bundling" title="${parent === name ? "Bundles its dependencies" : `Installs ${esc(parent)}, which bundles its dependencies`}"><svg class="bundle" aria-hidden="true"><use href="#bundle"/></svg>${esc(parent)}${parent === name ? "" : ` ${users[name].map(esc).join(", ")}`}</span>`).join("");
+		let published = age(s.published?.[name]).trim();
+		return `<li>${published ? `${published} ` : ""}${vuln ? `${packagePills(vuln).trim()} ` : ""}<a href="https://www.npmjs.com/package/${esc(name)}/v/${esc(version)}">${esc(name)}</a> <span class="muted">${esc(version)}</span>${bundling}</li>`;
+	}).join("")}${bundles(s).map(({ parent, version, specs, affected }) => {
+		let clean = specs.length - affected.length;
+		return `<li class="bundled-heading">Bundled by <span class="badge bundling"><svg class="bundle" aria-hidden="true"><use href="#bundle"/></svg>${esc(parent)}${version && !s.packages[parent] ? ` ${esc(version)}` : ""}</span></li>` + affected.map(spec => {
+			let name = spec.slice(0, spec.lastIndexOf("@"));
+			let p = s.vulnerablePackages.find(p => p.name === name);
+			return `<li class="bundled">${p ? `${packagePills(p).trim()} ` : ""}<a href="https://www.npmjs.com/package/${esc(name)}/v/${esc(spec.slice(name.length + 1))}">${esc(name)}</a> <span class="muted">${esc(spec.slice(name.length + 1))}</span></li>`;
+		}).join("") + (clean ? `<li class="bundled"><em><code>${esc(parent)}</code> bundled ${num(clean)} more deps without vulnerabilities, not shown here.</em></li>` : "");
 	}).join("")}</ul>
-	${Object.entries(s.vendored || {}).map(([parent, deps]) => {
-		let specs = Object.values(deps);
-		let vulnerable = s.vulnerablePackages.filter(p => p.vendoredBy === parent);
-		let unresolved = s.unresolvedVendored?.[parent] || [];
-		return `<p class="note"><code>${esc(parent)}</code> bundles ${num(specs.length)} packages in <code>dist/compiled</code>. ${num(vulnerable.length)} have vulnerabilities:</p>
-	<ul class="packages">${vulnerable.map(p => {
-		let spec = specs.find(v => v.startsWith(`${p.name}@`)) || p.name;
-		return `<li>${esc(spec)}${packagePills(p)}</li>`;
-	}).join("")}</ul>
-	${unresolved.length ? `<p class="note">Not published to npm, so not checked: ${unresolved.map(esc).join(", ")}.</p>` : ""}`;
-	}).join("")}
+	${Object.values(s.unresolvedVendored || {}).map(unresolved => `<!-- <p class="note">Not published to npm, so not checked: ${unresolved.map(esc).join(", ")}.</p> -->`).join("")}
 </details>`).join("");
 
 let failures = snapshots.filter(s => s.error);
@@ -427,7 +443,8 @@ figure { margin: 0; display: flex; flex-direction: column; gap: 1.25em; }
 .stack { display: flex; flex-direction: column; gap: 0.75em; }
 .footnotes, .footnote { color: var(--text-2); font-size: 0.8125em; max-width: 46em; margin: 0; }
 .footnotes { padding-inline-start: 1.25em; }
-.footnotes li + li { margin-block-start: 0.25em; }
+.footnotes, .footnotes ul { display: flex; flex-direction: column; gap: 0.25em; }
+.footnotes ul { margin-block-start: 0.25em; }
 .sprite { position: absolute; width: 0; height: 0; }
 .delta { font-size: 0.8125em; font-weight: 500; margin-inline-start: 0.375em; white-space: nowrap; }
 .delta.up { color: var(--critical); }
@@ -506,8 +523,10 @@ tbody th { font-weight: 500; }
 .third-party { color: var(--muted); font-size: 0.8125em; font-weight: 400; }
 summary { cursor: pointer; color: var(--text-2); font-size: 0.875em; }
 .ecosystem summary { color: var(--text); font-size: 0.9375em; }
-.packages { columns: 18em; list-style: none; padding: 0; margin: 0.75em 0 0; font-size: 0.8125em; }
-.packages li { break-inside: avoid; padding-block: 0.1em; }
+.packages { columns: 18em; list-style: disc; padding: 0; margin: 0.75em 0 0; font-size: 0.8125em; }
+/* Each item gets its own margin, not padding on the list, so markers stay inside every column. */
+.packages li { break-inside: avoid; padding-block: 0.1em; margin-inline-start: 1.25em; }
+.packages .bundled-heading { list-style: none; margin-inline-start: 0; font-weight: 600; padding-block-start: 0.5em; break-after: avoid; }
 /* Severity pills wrap between pills, never inside one. */
 td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 /* A fixed line height keeps severity and forecast pills the same height wherever they sit. */
@@ -520,11 +539,16 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 /* An inset shadow outlines the pill without changing its height. */
 /* A translucent tint stays subtle on both light and dark surfaces. */
 .badge.none { background: rgb(255 214 10 / 0.12); color: var(--text); box-shadow: inset 0 0 0 1px var(--sun); }
-.badge.age { color: var(--text-2); font-weight: 500; box-shadow: inset 0 0 0 1px var(--axis); }
+.badge.age, .badge.bundling { color: var(--text-2); font-weight: 500; box-shadow: inset 0 0 0 1px var(--axis); }
+/* A translucent purple stays subtle in both modes. */
+/* Header pills are a key, not data, so they sit back. */
+.badge.key { opacity: 0.65; }
+.badge.bundling { background: rgb(100 108 255 / 0.14); }
 .badge.rank { gap: 0.3em; font-weight: 600; }
 /* The divider runs the full pill height since pills have no block padding. */
 .badge .count { font-weight: 600; padding-inline-start: 0.4em; margin-inline-start: 0.4em; border-inline-start: 1px solid color-mix(in srgb, currentColor 40%, transparent); }
 .badge.rank .weather { fill: currentColor; }
+.bundle { width: 1em; height: 1em; vertical-align: -0.125em; margin-inline-end: 0.3em; fill: currentColor; }
 .badge.rank.none .weather { fill: var(--sun); }
 .flows { display: grid; grid-template-columns: repeat(auto-fit, minmax(16em, 1fr)); gap: 1em 2em; max-width: 46em; }
 .flow { display: block; width: 100%; max-width: 340px; overflow: visible; }
@@ -597,7 +621,6 @@ ${sprite}
 <section class="card">
 	<div class="stack">
 		${renderingTable}
-		<p class="footnote">Forecasts count every package equally and could be improved by weighting each one by its download count.</p>
 		<p class="footnote">In a static build, server dependencies are limited to the build machine. A ReDoS in a Markdown parser might slow down a build, but visitors can’t trigger it. ${cautionIcon(REQUEST_TIME_WARNING)}Request-time code runs on a live server, where anyone loading a page can reach it. Note that client dependencies ship to the browser either way, so their vulnerabilities can affect both Build-time and Request-time projects.</p>
 		${flows}
 	</div>
@@ -611,11 +634,14 @@ ${sprite}
 	<div class="stack">
 		${scoreboard}
 		<ul class="footnotes">
-			<li>Vulnerabilities are affected packages in the install tree, as reported by <code>npm audit</code>. Next.js bundles many dependencies into <code>dist/compiled</code>, and those are checked too. Raw npm audit leaves them out.</li>
+			<li>Vulnerabilities are affected packages in the install tree, as reported by <code>npm audit</code>. Next.js and Vite bundle many dependencies into their published code, and those are checked too wherever they appear in the install tree. Raw npm audit leaves them out.</li>
+			<li>Note that Vite’s bundled dependencies run in its dev server and at build time, not when serving production requests.</li>
 			<li>Advisories are distinct GitHub security advisories matched anywhere in the install tree. One advisory can flag every package that depends on the affected one, and one package can have several advisories, so this can be higher or lower than Vulnerabilities.</li>
 			<li>Dependencies are unique <code>name@version</code> pairs across the whole ecosystem, installed together in one tree. Shared dependencies count once per version. Platform-specific builds of a native package (one per OS and CPU) count once. Third-party means not published by the framework’s npm organization.</li>
 			<li>Past dates only count advisories published by that date.</li>
 			<li>Snapshots are fresh installs, which pick up the newest patch releases each package allows.</li>
+			<li>Each ecosystem also installs its core package’s required peer dependencies, like Vite for SvelteKit or React for Next.js, and its core package’s version of Vite (or the latest Vite, if the core doesn’t use it), so older versions from stale packages don’t displace it. Peer dependencies of other official packages aren’t installed.</li>
+			<li>Forecasts count every package equally and are not currently weighted by download count.</li>
 		</ul>
 	</div>
 	${smallMultiples({ id: "vulnerabilities", title: "Vulnerabilities over time (all official packages)", order: latest.map(({ f }) => f.id), measures: [{ label: "Vulnerabilities", value: s => s.vulnerabilities.total }, { label: "Dependencies", value: s => s.dependencies }, { label: "Raw npm audit", value: s => s.nonVendoredVulnerabilities?.total ?? s.vulnerabilities.total }] })}
@@ -635,6 +661,8 @@ ${sprite}
 		${coreScoreboard}
 		<ul class="footnotes">
 			<li>Includes required peer dependencies, like Vite and Svelte for SvelteKit.</li>
+			<li>Note that Vite’s bundled dependencies run in its dev server and at build time, not when serving production requests.</li>
+			<li>Forecasts count every package equally and are not currently weighted by download count.</li>
 		</ul>
 	</div>
 	${smallMultiples({ id: "core-vulnerabilities", title: "Vulnerabilities over time (core package only)", order: latestCore.map(({ f }) => f.id), measures: [{ label: "Vulnerabilities", value: s => s.core?.vulnerabilities.total }, { label: "Dependencies", value: s => s.core?.dependencies }, { label: "Raw npm audit", value: s => s.core?.nonVendoredVulnerabilities?.total ?? s.core?.vulnerabilities.total }], nameOf: f => f.coreName ?? f.name, versionOf: s => s.core?.version })}
