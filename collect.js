@@ -2,6 +2,7 @@ import { execFile } from "node:child_process";
 import { mkdtemp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { setTimeout as sleep } from "node:timers/promises";
 import { parseArgs, promisify } from "node:util";
 import frameworks from "./frameworks.js";
 
@@ -46,6 +47,9 @@ async function getJson(url) {
 		}
 		if (res.status === 404 || attempt === 3) {
 			throw new Error(`${res.status} ${url}`);
+		}
+		if (res.status === 429) {
+			await sleep(2 ** attempt * 1000);
 		}
 	}
 }
