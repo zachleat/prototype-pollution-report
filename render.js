@@ -87,7 +87,7 @@ const distance = d => Math.abs(time(d) - (time(latestDate) - 21 * 864e5));
 const baseline = dates.slice(0, -1).reduce((best, d) => distance(d) < distance(best) ? d : best, dates[0]);
 const collectedAt = snapshots.filter(s => s.date === latestDate && s.collectedAt).map(s => s.collectedAt).sort().at(-1);
 const lastUpdated = collectedAt
-	? new Intl.DateTimeFormat("en-US", { timeZone: "UTC", dateStyle: "medium", timeStyle: "short" }).format(new Date(collectedAt)) + " UTC"
+	? `<time datetime="${collectedAt}" data-since>${new Intl.DateTimeFormat("en-US", { timeZone: "UTC", dateStyle: "medium", timeStyle: "short" }).format(new Date(collectedAt))} UTC</time>`
 	: formatDate(latestDate);
 const byKey = new Map(snapshots.map(s => [`${s.date}|${s.framework}`, s]));
 const get = (date, id) => byKey.get(`${date}|${id}`);
@@ -220,7 +220,8 @@ function smallMultiples({ id, title, description, measures, nameOf = f => f.name
 			return (c.first ? "" : `<line class="version-mark" x1="${c.x.toFixed(1)}" x2="${c.x.toFixed(1)}" y1="${SM.top}" y2="${SH - SM.bottom}"/>`)
 				+ (fits ? `<text class="tick version" x="${(c.x + 3).toFixed(1)}" y="${SM.top - 4}">${esc(c.label)}</text>` : "");
 		}).join("");
-		let labels = [{ name: primary.label, color }, { name: alt?.label, color, style: "dashed" }, { name: secondary.label, color, style: "dotted" }];
+		// Tooltips use a measure's shorter `tooltip` label when it has one.
+		let labels = [{ name: primary.label, color }, { name: alt?.tooltip ?? alt?.label, color, style: "dashed" }, { name: secondary.label, color, style: "dotted" }];
 		return `<div class="panel">
 			<h3>${icon(f)}${esc(nameOf(f))}${requestTimeCaution(f, present.at(-1)?.values[i])}</h3>
 			<div class="plot">
@@ -647,7 +648,7 @@ ${sprite}
 			<li>Forecasts count every package equally and are not currently weighted by download count.</li>
 		</ul>
 	</div>
-	${smallMultiples({ id: "vulnerabilities", title: "Vulnerabilities over time (all official packages)", order: latest.map(({ f }) => f.id), measures: [{ label: "Vulnerabilities", value: s => s.vulnerabilities.total }, { label: "Dependencies", value: s => s.dependencies }, { label: "Raw npm audit", value: s => s.nonVendoredVulnerabilities?.total ?? s.vulnerabilities.total }] })}
+	${smallMultiples({ id: "vulnerabilities", title: "Vulnerabilities over time (all official packages)", order: latest.map(({ f }) => f.id), measures: [{ label: "Vulnerabilities", value: s => s.vulnerabilities.total }, { label: "Dependencies", value: s => s.dependencies }, { label: "Raw npm audit (bundled dependencies not counted)", tooltip: "Raw npm audit", value: s => s.nonVendoredVulnerabilities?.total ?? s.vulnerabilities.total }] })}
 	${failures.length ? `<p class="note">Missing data, where the install failed: ${failures.map(s => `${esc(series.find(f => f.id === s.framework)?.name ?? s.framework)} on ${formatDate(s.date)}`).join(", ")}.</p>` : ""}
 	<div class="stack">
 		<h3>Package Lists</h3>
@@ -668,10 +669,16 @@ ${sprite}
 			<li>Forecasts count every package equally and are not currently weighted by download count.</li>
 		</ul>
 	</div>
-	${smallMultiples({ id: "core-vulnerabilities", title: "Vulnerabilities over time (core package only)", order: latestCore.map(({ f }) => f.id), measures: [{ label: "Vulnerabilities", value: s => s.core?.vulnerabilities.total }, { label: "Dependencies", value: s => s.core?.dependencies }, { label: "Raw npm audit", value: s => s.core?.nonVendoredVulnerabilities?.total ?? s.core?.vulnerabilities.total }], nameOf: f => f.coreName ?? f.name, versionOf: s => s.core?.version })}
+	${smallMultiples({ id: "core-vulnerabilities", title: "Vulnerabilities over time (core package only)", order: latestCore.map(({ f }) => f.id), measures: [{ label: "Vulnerabilities", value: s => s.core?.vulnerabilities.total }, { label: "Dependencies", value: s => s.core?.dependencies }, { label: "Raw npm audit (bundled dependencies not counted)", tooltip: "Raw npm audit", value: s => s.core?.nonVendoredVulnerabilities?.total ?? s.core?.vulnerabilities.total }], nameOf: f => f.coreName ?? f.name, versionOf: s => s.core?.version })}
 </section>
 </main>
 <script type="module">
+// Hours since the last update, relative to the viewer's clock.
+for (const time of document.querySelectorAll("time[data-since]")) {
+	const hours = Math.round((Date.now() - new Date(time.dateTime)) / 36e5);
+	time.after(" (" + (hours < 1 ? "less than an hour ago" : new Intl.RelativeTimeFormat("en-US").format(-hours, "hour")) + ")");
+}
+
 for (const svg of document.querySelectorAll("svg[data-points]")) {
 	const points = JSON.parse(svg.dataset.points);
 	const labels = JSON.parse(svg.dataset.labels);
