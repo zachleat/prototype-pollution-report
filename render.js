@@ -264,7 +264,7 @@ let latestCore = latest
 	.toSorted((a, b) => a.s.core.vulnerabilities.total - b.s.core.vulnerabilities.total);
 
 let latestOf = f => latest.find(l => l.f === f)?.s;
-// Fewest core vulnerabilities first, then fewest ecosystem vulnerabilities; missing data sorts last.
+// Fewest ecosystem vulnerabilities first, then fewest core vulnerabilities; missing data sorts last.
 let coreTotal = f => latestOf(f)?.core?.vulnerabilities.total ?? Infinity;
 let ecosystemTotal = f => latestOf(f)?.vulnerabilities.total ?? Infinity;
 let renderingTable = `<div class="scroll"><table class="scoreboard compact">
@@ -284,7 +284,7 @@ let renderingTable = `<div class="scroll"><table class="scoreboard compact">
 			<th>SPA</th>
 		</tr>
 	</thead>
-	<tbody>${[...series, ...renderingOnly].toSorted((a, b) => coreTotal(a) - coreTotal(b) || ecosystemTotal(a) - ecosystemTotal(b) || a.name.localeCompare(b.name)).map(f => `<tr>
+	<tbody>${[...series, ...renderingOnly].toSorted((a, b) => ecosystemTotal(a) - ecosystemTotal(b) || coreTotal(a) - coreTotal(b) || a.name.localeCompare(b.name)).map(f => `<tr>
 		<th scope="row">${icon(f)}${esc(f.name)}</th>
 		${(s => s ? forecast(s.vulnerabilities) : "<td></td>")(latestOf(f))}
 		${(core => core ? forecast(core.vulnerabilities) : "<td></td>")(latestOf(f)?.core)}

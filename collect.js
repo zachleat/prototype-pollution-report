@@ -86,7 +86,7 @@ function compareVersions(a, b) {
 	return 0;
 }
 
-// Skips deprecated, placeholder, prerelease-channel and platform-binary packages (binaries ride along as optional deps).
+// Skips deprecated, placeholder, prerelease-channel, platform-binary (binaries ride along as optional deps) and uninstallable packages.
 function isEligible(packument) {
 	let latest = packument.versions?.[packument["dist-tags"]?.latest];
 	return Boolean(latest)
@@ -94,7 +94,9 @@ function isEligible(packument) {
 		&& !latest.os
 		&& !latest.cpu
 		&& !latest.version.startsWith("0.0.0")
-		&& !/-(edge|nightly|canary)$/.test(packument.name);
+		&& !/-(edge|nightly|canary)$/.test(packument.name)
+		// Publishing without pnpm can leave `catalog:` and `workspace:` specs that npm can't resolve.
+		&& !Object.values({ ...latest.dependencies, ...latest.optionalDependencies, ...latest.peerDependencies }).some(spec => /^(catalog|workspace):/.test(spec));
 }
 
 // Current `latest` if it existed on that date, otherwise the highest stable version published by then.
@@ -565,9 +567,16 @@ function summarize(report, date, owned, vendoredUnder = new Map()) {
 	};
 }
 
+// Fetches every framework's metadata before collecting, so a failed fetch exits before any snapshots are written.
+let ecosystems = new Map();
 for (let framework of selected) {
 	console.log(`${framework.name}: fetching package metadata`);
-	let { owned, packuments: ecosystem } = await getEcosystem(framework);
+	ecosystems.set(framework, await getEcosystem(framework));
+}
+
+for (let framework of selected) {
+	console.log(`${framework.name}: collecting`);
+	let { owned, packuments: ecosystem } = ecosystems.get(framework);
 
 	for (let date of dates) {
 		let packages = ecosystem
