@@ -76240,7 +76240,7 @@
 	},
 	{
 		"date": "2026-10-31",
-		"collectedAt": "2026-10-31T13:10:13.195Z",
+		"collectedAt": "2026-10-31T13:59:49.141Z",
 		"framework": "11ty",
 		"packageCount": 44,
 		"core": {
@@ -76616,7 +76616,7 @@
 	},
 	{
 		"date": "2026-10-31",
-		"collectedAt": "2026-10-31T13:20:09.912Z",
+		"collectedAt": "2026-10-31T14:10:35.264Z",
 		"framework": "angular",
 		"packageCount": 47,
 		"core": {
@@ -76953,7 +76953,7 @@
 	},
 	{
 		"date": "2026-10-31",
-		"collectedAt": "2026-10-31T13:15:25.087Z",
+		"collectedAt": "2026-10-31T14:05:26.767Z",
 		"framework": "astro",
 		"packageCount": 54,
 		"core": {
@@ -77737,7 +77737,7 @@
 	},
 	{
 		"date": "2026-10-31",
-		"collectedAt": "2026-10-31T13:16:52.908Z",
+		"collectedAt": "2026-10-31T14:06:43.226Z",
 		"framework": "gatsby",
 		"packageCount": 133,
 		"core": {
@@ -79463,7 +79463,7 @@
 	},
 	{
 		"date": "2026-10-31",
-		"collectedAt": "2026-10-31T13:14:13.410Z",
+		"collectedAt": "2026-10-31T14:04:07.524Z",
 		"framework": "next",
 		"packageCount": 27,
 		"core": {
@@ -80219,7 +80219,7 @@
 	},
 	{
 		"date": "2026-10-31",
-		"collectedAt": "2026-10-31T13:11:16.072Z",
+		"collectedAt": "2026-10-31T14:00:48.930Z",
 		"framework": "nuxt",
 		"packageCount": 57,
 		"core": {
@@ -81159,7 +81159,7 @@
 	},
 	{
 		"date": "2026-10-31",
-		"collectedAt": "2026-10-31T13:10:52.152Z",
+		"collectedAt": "2026-10-31T14:00:24.469Z",
 		"framework": "svelte",
 		"packageCount": 45,
 		"core": {
@@ -81195,7 +81195,7 @@
 		"bundlers": {
 			"vite": "8.3.5"
 		},
-		"error": "npm error A complete log of this run can be found in: /home/runner/.npm/_logs/2026-10-31T13_11_04_362Z-debug-0.log",
+		"error": "npm error A complete log of this run can be found in: /home/runner/.npm/_logs/2026-10-31T14_00_37_219Z-debug-0.log",
 		"packages": {
 			"@sveltejs/acorn-typescript": "1.0.13",
 			"@sveltejs/adapter-auto": "8.0.0",
@@ -81293,7 +81293,7 @@
 	},
 	{
 		"date": "2026-10-31",
-		"collectedAt": "2026-10-31T13:21:04.473Z",
+		"collectedAt": "2026-10-31T14:11:30.915Z",
 		"framework": "tanstack-start",
 		"packageCount": 81,
 		"core": {
