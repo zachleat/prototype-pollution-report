@@ -76240,7 +76240,7 @@
 	},
 	{
 		"date": "2026-10-31",
-		"collectedAt": "2026-10-31T13:59:49.141Z",
+		"collectedAt": "2026-10-31T14:37:01.797Z",
 		"framework": "11ty",
 		"packageCount": 44,
 		"core": {
@@ -76616,7 +76616,7 @@
 	},
 	{
 		"date": "2026-10-31",
-		"collectedAt": "2026-10-31T14:10:35.264Z",
+		"collectedAt": "2026-10-31T14:48:13.714Z",
 		"framework": "angular",
 		"packageCount": 47,
 		"core": {
@@ -76953,7 +76953,7 @@
 	},
 	{
 		"date": "2026-10-31",
-		"collectedAt": "2026-10-31T14:05:26.767Z",
+		"collectedAt": "2026-10-31T14:43:04.091Z",
 		"framework": "astro",
 		"packageCount": 54,
 		"core": {
@@ -77737,7 +77737,7 @@
 	},
 	{
 		"date": "2026-10-31",
-		"collectedAt": "2026-10-31T14:06:43.226Z",
+		"collectedAt": "2026-10-31T14:44:38.728Z",
 		"framework": "gatsby",
 		"packageCount": 133,
 		"core": {
@@ -79463,7 +79463,7 @@
 	},
 	{
 		"date": "2026-10-31",
-		"collectedAt": "2026-10-31T14:04:07.524Z",
+		"collectedAt": "2026-10-31T14:41:42.235Z",
 		"framework": "next",
 		"packageCount": 27,
 		"core": {
@@ -80219,7 +80219,7 @@
 	},
 	{
 		"date": "2026-10-31",
-		"collectedAt": "2026-10-31T14:00:48.930Z",
+		"collectedAt": "2026-10-31T14:38:34.908Z",
 		"framework": "nuxt",
 		"packageCount": 57,
 		"core": {
@@ -81159,9 +81159,9 @@
 	},
 	{
 		"date": "2026-10-31",
-		"collectedAt": "2026-10-31T14:00:24.469Z",
+		"collectedAt": "2026-10-31T14:37:41.170Z",
 		"framework": "svelte",
-		"packageCount": 45,
+		"packageCount": 44,
 		"core": {
 			"name": "@sveltejs/kit",
 			"version": "3.1.1",
@@ -81195,7 +81195,397 @@
 		"bundlers": {
 			"vite": "8.3.5"
 		},
-		"error": "npm error A complete log of this run can be found in: /home/runner/.npm/_logs/2026-10-31T14_00_37_219Z-debug-0.log",
+		"dependencies": 748,
+		"thirdPartyDependencies": 698,
+		"vulnerabilities": {
+			"info": 0,
+			"low": 3,
+			"moderate": 21,
+			"high": 25,
+			"critical": 10,
+			"total": 59
+		},
+		"advisories": {
+			"info": 0,
+			"low": 3,
+			"moderate": 16,
+			"high": 16,
+			"critical": 2,
+			"total": 37
+		},
+		"vulnerablePackages": [
+			{
+				"name": "@sveltejs/app",
+				"severity": "critical",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 2,
+					"moderate": 6,
+					"high": 9,
+					"critical": 5,
+					"total": 22
+				}
+			},
+			{
+				"name": "@sveltejs/opencode",
+				"severity": "critical",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 1,
+					"moderate": 3,
+					"high": 0,
+					"critical": 5,
+					"total": 9
+				}
+			},
+			{
+				"name": "@sveltejs/adapter-auto",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 1,
+					"moderate": 0,
+					"high": 12,
+					"critical": 0,
+					"total": 13
+				}
+			},
+			{
+				"name": "@sveltejs/adapter-bun",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 1,
+					"moderate": 0,
+					"high": 12,
+					"critical": 0,
+					"total": 13
+				}
+			},
+			{
+				"name": "@sveltejs/adapter-cloudflare",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 1,
+					"moderate": 0,
+					"high": 12,
+					"critical": 0,
+					"total": 13
+				}
+			},
+			{
+				"name": "@sveltejs/adapter-netlify",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 1,
+					"moderate": 0,
+					"high": 12,
+					"critical": 0,
+					"total": 13
+				}
+			},
+			{
+				"name": "@sveltejs/adapter-node",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 1,
+					"moderate": 0,
+					"high": 12,
+					"critical": 0,
+					"total": 13
+				}
+			},
+			{
+				"name": "@sveltejs/adapter-static",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 1,
+					"moderate": 0,
+					"high": 12,
+					"critical": 0,
+					"total": 13
+				}
+			},
+			{
+				"name": "@sveltejs/adapter-vercel",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 1,
+					"moderate": 3,
+					"high": 12,
+					"critical": 0,
+					"total": 16
+				}
+			},
+			{
+				"name": "@sveltejs/enhanced-img",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 1,
+					"moderate": 0,
+					"high": 12,
+					"critical": 0,
+					"total": 13
+				}
+			},
+			{
+				"name": "@sveltejs/kit",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 1,
+					"moderate": 0,
+					"high": 11,
+					"critical": 0,
+					"total": 12
+				}
+			},
+			{
+				"name": "@sveltejs/repl",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 1,
+					"moderate": 0,
+					"high": 13,
+					"critical": 0,
+					"total": 14
+				}
+			},
+			{
+				"name": "@sveltejs/vite-plugin-svelte",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 1,
+					"moderate": 0,
+					"high": 10,
+					"critical": 0,
+					"total": 11
+				}
+			},
+			{
+				"name": "@sveltejs/vite-plugin-svelte-inspector",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 1,
+					"moderate": 0,
+					"high": 11,
+					"critical": 0,
+					"total": 12
+				}
+			},
+			{
+				"name": "follow-redirects",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 0,
+					"high": 1,
+					"critical": 0,
+					"total": 1
+				},
+				"vendoredBy": "vite"
+			},
+			{
+				"name": "vite",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 0,
+					"high": 9,
+					"critical": 0,
+					"total": 9
+				}
+			},
+			{
+				"name": "@sveltejs/eslint-config",
+				"severity": "moderate",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 7,
+					"high": 0,
+					"critical": 0,
+					"total": 7
+				}
+			},
+			{
+				"name": "@sveltejs/mcp",
+				"severity": "moderate",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 6,
+					"high": 0,
+					"critical": 0,
+					"total": 6
+				}
+			},
+			{
+				"name": "eslint-plugin-svelte",
+				"severity": "moderate",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 6,
+					"high": 0,
+					"critical": 0,
+					"total": 6
+				}
+			},
+			{
+				"name": "svelte-language-server",
+				"severity": "moderate",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 2,
+					"high": 0,
+					"critical": 0,
+					"total": 2
+				}
+			}
+		],
+		"nonVendoredVulnerabilities": {
+			"info": 0,
+			"low": 15,
+			"moderate": 22,
+			"high": 9,
+			"critical": 10,
+			"total": 56
+		},
+		"vendored": {
+			"vite@8.3.5": {
+				"@jridgewell/gen-mapping@0.3.13": "@jridgewell/gen-mapping@0.3.13",
+				"@jridgewell/remapping@2.3.5": "@jridgewell/remapping@2.3.5",
+				"@jridgewell/resolve-uri@3.1.2": "@jridgewell/resolve-uri@3.1.2",
+				"@jridgewell/sourcemap-codec@1.6.0": "@jridgewell/sourcemap-codec@1.6.0",
+				"@jridgewell/trace-mapping@0.3.31": "@jridgewell/trace-mapping@0.3.31",
+				"@polka/compression@1.0.0-next.25": "@polka/compression@1.0.0-next.25",
+				"@polka/url@1.0.0-next.29": "@polka/url@1.0.0-next.29",
+				"@rollup/plugin-alias@6.0.0": "@rollup/plugin-alias@6.0.0",
+				"@rollup/plugin-dynamic-import-vars@2.1.4": "@rollup/plugin-dynamic-import-vars@2.1.4",
+				"@rollup/pluginutils@5.4.0": "@rollup/pluginutils@5.4.0",
+				"@vitest/utils@4.1.12": "@vitest/utils@4.1.12",
+				"@voidzero-dev/vite-task-client@0.2.0": "@voidzero-dev/vite-task-client@0.2.0",
+				"anymatch@3.1.3": "anymatch@3.1.3",
+				"artichokie@0.4.5": "artichokie@0.4.5",
+				"binary-extensions@2.3.0": "binary-extensions@2.3.0",
+				"braces@3.0.3": "braces@3.0.3",
+				"bundle-name@4.1.1": "bundle-name@4.1.1",
+				"cac@7.1.0": "cac@7.1.0",
+				"chokidar@3.6.0": "chokidar@3.6.0",
+				"connect@3.7.0": "connect@3.7.0",
+				"convert-source-map@2.0.0": "convert-source-map@2.0.0",
+				"cors@2.8.6": "cors@2.8.6",
+				"cssesc@3.0.0": "cssesc@3.0.0",
+				"default-browser@5.5.1": "default-browser@5.5.1",
+				"default-browser-id@5.0.1": "default-browser-id@5.0.1",
+				"define-lazy-prop@3.0.0": "define-lazy-prop@3.0.0",
+				"dotenv-expand@13.0.0": "dotenv-expand@13.0.0",
+				"ee-first@1.1.1": "ee-first@1.1.1",
+				"encodeurl@1.0.2": "encodeurl@1.0.2",
+				"entities@8.1.0": "entities@8.1.0",
+				"es-module-lexer@2.3.2": "es-module-lexer@2.3.2",
+				"escape-html@1.0.3": "escape-html@1.0.3",
+				"estree-walker@3.0.3": "estree-walker@3.0.3",
+				"estree-walker@2.0.2": "estree-walker@2.0.2",
+				"etag@1.8.1": "etag@1.8.1",
+				"fill-range@7.1.1": "fill-range@7.1.1",
+				"finalhandler@1.1.2": "finalhandler@1.1.2",
+				"follow-redirects@1.16.1": "follow-redirects@1.16.1",
+				"fresh-import@0.2.1": "fresh-import@0.2.1",
+				"generic-names@4.0.0": "generic-names@4.0.0",
+				"glob-parent@5.1.2": "glob-parent@5.1.2",
+				"host-validation-middleware@0.1.4": "host-validation-middleware@0.1.4",
+				"http-proxy-3@1.23.3": "http-proxy-3@1.23.3",
+				"icss-utils@5.1.0": "icss-utils@5.1.0",
+				"is-binary-path@2.1.0": "is-binary-path@2.1.0",
+				"is-docker@3.0.0": "is-docker@3.0.0",
+				"is-extglob@2.1.1": "is-extglob@2.1.1",
+				"is-glob@4.0.3": "is-glob@4.0.3",
+				"is-inside-container@1.0.0": "is-inside-container@1.0.0",
+				"is-number@7.0.0": "is-number@7.0.0",
+				"is-reference@3.0.3": "is-reference@3.0.3",
+				"is-wsl@3.1.1": "is-wsl@3.1.1",
+				"js-tokens@10.0.0": "js-tokens@10.0.0",
+				"launch-editor@2.14.2": "launch-editor@2.14.2",
+				"launch-editor-middleware@2.14.2": "launch-editor-middleware@2.14.2",
+				"lilconfig@3.1.4": "lilconfig@3.1.4",
+				"loader-utils@3.3.1": "loader-utils@3.3.1",
+				"lodash.camelcase@4.3.0": "lodash.camelcase@4.3.0",
+				"magic-string@1.4.3": "magic-string@1.4.3",
+				"magic-string@0.30.21": "magic-string@0.30.21",
+				"mlly@1.8.2": "mlly@1.8.2",
+				"mrmime@2.0.1": "mrmime@2.0.1",
+				"normalize-path@3.0.0": "normalize-path@3.0.0",
+				"object-assign@4.1.1": "object-assign@4.1.1",
+				"obug@1.0.2": "obug@1.0.2",
+				"on-finished@2.3.0": "on-finished@2.3.0",
+				"open@10.2.0": "open@10.2.0",
+				"parse5@8.0.1": "parse5@8.0.1",
+				"parseurl@1.3.3": "parseurl@1.3.3",
+				"periscopic@4.0.3": "periscopic@4.0.3",
+				"picocolors@1.1.1": "picocolors@1.1.1",
+				"postcss-import@16.2.0": "postcss-import@16.2.0",
+				"postcss-load-config@6.0.1": "postcss-load-config@6.0.1",
+				"postcss-modules@9.0.1": "postcss-modules@9.0.1",
+				"postcss-modules-extract-imports@3.1.0": "postcss-modules-extract-imports@3.1.0",
+				"postcss-modules-local-by-default@4.2.0": "postcss-modules-local-by-default@4.2.0",
+				"postcss-modules-scope@3.2.1": "postcss-modules-scope@3.2.1",
+				"postcss-modules-values@4.0.0": "postcss-modules-values@4.0.0",
+				"postcss-selector-parser@7.1.6": "postcss-selector-parser@7.1.6",
+				"postcss-value-parser@4.2.0": "postcss-value-parser@4.2.0",
+				"readdirp@3.6.0": "readdirp@3.6.0",
+				"resolve.exports@2.0.4": "resolve.exports@2.0.4",
+				"run-applescript@7.1.0": "run-applescript@7.1.0",
+				"shell-quote@1.12.0": "shell-quote@1.12.0",
+				"sirv@3.0.2": "sirv@3.0.2",
+				"statuses@1.5.0": "statuses@1.5.0",
+				"std-env@4.3.0": "std-env@4.3.0",
+				"string-hash@1.1.3": "string-hash@1.1.3",
+				"strip-literal@4.0.0": "strip-literal@4.0.0",
+				"tinyexec@1.3.1": "tinyexec@1.3.1",
+				"to-regex-range@5.0.1": "to-regex-range@5.0.1",
+				"totalist@3.0.1": "totalist@3.0.1",
+				"ufo@1.6.4": "ufo@1.6.4",
+				"unpipe@1.0.0": "unpipe@1.0.0",
+				"util-deprecate@1.0.2": "util-deprecate@1.0.2",
+				"utils-merge@1.0.1": "utils-merge@1.0.1",
+				"vary@1.1.2": "vary@1.1.2",
+				"ws@8.22.0": "ws@8.22.0",
+				"wsl-utils@0.1.0": "wsl-utils@0.1.0",
+				"zimmerframe@1.1.5": "zimmerframe@1.1.5"
+			}
+		},
+		"vendoredUsers": {
+			"vite": {
+				"@sveltejs/enhanced-img": [
+					"8.3.5"
+				],
+				"@sveltejs/kit": [
+					"8.3.5"
+				],
+				"@sveltejs/vite-plugin-svelte": [
+					"8.3.5"
+				]
+			}
+		},
+		"vendoredAffected": {
+			"vite@8.3.5": [
+				"follow-redirects@1.16.1"
+			]
+		},
 		"packages": {
 			"@sveltejs/acorn-typescript": "1.0.13",
 			"@sveltejs/adapter-auto": "8.0.0",
@@ -81219,7 +81609,6 @@
 			"@sveltejs/opencode": "0.1.17",
 			"@sveltejs/package": "3.0.2",
 			"@sveltejs/pancake": "0.0.18",
-			"@sveltejs/pi": "0.0.1",
 			"@sveltejs/repl": "0.6.0",
 			"@sveltejs/snowpack-config": "1.0.0-next.0",
 			"@sveltejs/sv-utils": "1.1.0",
@@ -81266,7 +81655,6 @@
 			"@sveltejs/opencode": "2026-10-19",
 			"@sveltejs/package": "2026-10-29",
 			"@sveltejs/pancake": "2021-08-12",
-			"@sveltejs/pi": "2026-10-30",
 			"@sveltejs/repl": "2023-08-22",
 			"@sveltejs/snowpack-config": "2020-12-02",
 			"@sveltejs/sv-utils": "2026-10-31",
@@ -81293,7 +81681,7 @@
 	},
 	{
 		"date": "2026-10-31",
-		"collectedAt": "2026-10-31T14:11:30.915Z",
+		"collectedAt": "2026-10-31T14:49:10.283Z",
 		"framework": "tanstack-start",
 		"packageCount": 81,
 		"core": {
