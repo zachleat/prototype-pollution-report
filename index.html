@@ -72,6 +72,8 @@
 		--series-8: #cdbf8f;
 	--caution: #c7a560;
 }
+/* Registered so it inherits as a computed length, keeping table cells (smaller font) aligned with page padding. */
+@property --page-pad-inline { syntax: "<length>"; inherits: true; initial-value: 0px; }
 * { box-sizing: border-box; }
 body {
 	margin: 0;
@@ -80,7 +82,7 @@ body {
 	font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
 	line-height: 1.5;
 }
-main { max-width: 64em; margin-inline: auto; padding: 2em 1em 4em; }
+main { --page-pad-inline: 1em; max-width: 64em; margin-inline: auto; padding: 2em var(--page-pad-inline) 4em; }
 h1 { font-size: 1.75em; line-height: 1.2; margin: 0; }
 h2 { font-size: 1.125em; margin: 0; }
 h3 { font-size: 1em; margin: 0; }
@@ -97,10 +99,14 @@ section { margin: 0 0 2em; }
 	background: var(--surface);
 	border: 1px solid var(--border);
 	border-radius: 12px;
-	padding: 1.5em;
+	padding: 1.5em var(--page-pad-inline);
 	display: flex;
 	flex-direction: column;
 	gap: 2em;
+}
+/* Bleed past main's inline padding to the viewport edge on small screens. */
+@media (width < 40em) {
+	.card { margin-inline: calc(-1 * var(--page-pad-inline)); border-inline: 0; border-radius: 0; }
 }
 figure { margin: 0; display: flex; flex-direction: column; gap: 1.25em; }
 .stack { display: flex; flex-direction: column; gap: 0.75em; }
@@ -170,6 +176,10 @@ td.n > .support.warn:first-child { margin-inline: 0 0.375em; }
 .tooltip b { font-variant-numeric: tabular-nums; min-width: 2.5em; }
 .tooltip span { color: var(--text-2); }
 .scroll { overflow-x: auto; }
+/* Tables run to the card edge, with outer cells padded to match the page. */
+.card .scroll { margin-inline: calc(-1 * var(--page-pad-inline)); }
+.card .scroll :is(th, td):first-child { padding-inline-start: var(--page-pad-inline); }
+.card .scroll :is(th, td):last-child { padding-inline-end: var(--page-pad-inline); }
 table { border-collapse: collapse; width: 100%; font-size: 0.875em; }
 table.compact { width: auto; }
 /* Each column group starts with extra space, and its header underline stops short so groups read apart. */
