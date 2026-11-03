@@ -6,7 +6,7 @@ import frameworks from "./frameworks.js";
 
 // Shown in the rendering table only, since it isn't audited.
 const renderingOnly = [
-	{ id: "wordpress", mpa: "default", spa: "no", static: "no", requestTime: "default", name: "WordPress", icon: faWordpressSimple, color: "light-dark(#21759b, #4f94d4)" },
+	{ id: "wordpress", createAudit: { label: "—" }, mpa: "default", spa: "no", static: "no", requestTime: "default", name: "WordPress", icon: faWordpressSimple, color: "light-dark(#21759b, #4f94d4)" },
 ];
 
 const snapshots = JSON.parse(await readFile(new URL("./data/snapshots.json", import.meta.url), "utf8"));
@@ -72,6 +72,28 @@ const requestTimeCaution = (f, total) => f.requestTime === "default" && total !=
 const support = (value, { warn } = {}) => {
 	let caution = warn && value === "default" ? cautionIcon(warn) : "";
 	return `<td><svg class="icon support ${value}" aria-hidden="true"><use href="#support-${value}"/></svg>${SUPPORT[value].label}${caution}</td>`;
+};
+
+const CREATE_AUDIT = {
+	shown: { icon: "default", label: "Shown" },
+	partial: { icon: "warn", label: "Hidden" },
+	hidden: { icon: "no", label: "Hidden", extra: " hidden" },
+};
+const createAudit = audit => {
+	if (!audit) {
+		return "<td></td>";
+	}
+	if (audit.label) {
+		return `<td class="muted">${esc(audit.label)}</td>`;
+	}
+	let { icon, label, extra = "" } = CREATE_AUDIT[audit.status];
+	let tool = "";
+	if (audit.tool) {
+		let at = audit.tool.lastIndexOf("@");
+		let [name, version] = [audit.tool.slice(0, at), audit.tool.slice(at + 1)];
+		tool = `<span class="third-party sub"><a href="https://www.npmjs.com/package/${esc(name)}/v/${esc(version)}">${esc(audit.tool)}</a></span>`;
+	}
+	return `<td title="${esc(audit.how)}"><svg class="icon support ${icon}${extra}" aria-hidden="true"><use href="#support-${icon}"/></svg>${label}${tool}${audit.manual ? `<span class="third-party sub">${esc(audit.manual)}</span>` : ""}</td>`;
 };
 
 const esc = s => String(s).replace(/[&<>"']/g, c => `&#${c.charCodeAt(0)};`);
@@ -272,6 +294,7 @@ let renderingTable = `<div class="scroll"><table class="scoreboard compact">
 		<tr>
 			<th rowspan="2">Framework</th>
 			<th colspan="2" class="group">Forecast</th>
+			<th rowspan="2" class="audit">Shows npm audit</th>
 			<th colspan="2" class="group">Rendering</th>
 			<th colspan="2" class="group">Navigation</th>
 		</tr>
@@ -288,6 +311,7 @@ let renderingTable = `<div class="scroll"><table class="scoreboard compact">
 		<th scope="row">${icon(f)}${esc(f.name)}</th>
 		${(s => s ? forecast(s.vulnerabilities) : "<td></td>")(latestOf(f))}
 		${(core => core ? forecast(core.vulnerabilities) : "<td></td>")(latestOf(f)?.core)}
+		${createAudit(f.createAudit)}
 		${support(f.static)}
 		${support(f.requestTime, { warn: REQUEST_TIME_WARNING })}
 		${support(f.mpa)}
@@ -464,9 +488,11 @@ figure { margin: 0; display: flex; flex-direction: column; gap: 1.25em; }
 .weather { width: 1.125em; height: 1.125em; vertical-align: -0.2em; }
 .support { width: 1em; height: 1em; vertical-align: -0.125em; fill: var(--good); }
 .support.no { fill: var(--muted); }
+.support.no.hidden { fill: var(--critical); }
 .support.warn { fill: var(--caution); margin-inline-start: 0.375em; }
 .footnote .support.warn { margin-inline: 0 0.25em; }
 td.n > .support.warn:first-child { margin-inline: 0 0.375em; }
+.icon.support.warn { margin-inline-start: 0; }
 .icon { width: 1.375em; height: 1.375em; vertical-align: -0.3em; margin-inline-end: 0.5em; overflow: visible; }
 .plot { position: relative; anchor-scope: --point; }
 /* Script moves this to the hovered point; the fixed tooltip anchors beside it and flips sides at the viewport edge, since it is wider than the plot. */
@@ -524,9 +550,9 @@ td.n > .support.warn:first-child { margin-inline: 0 0.375em; }
 table { border-collapse: collapse; width: 100%; font-size: 0.875em; }
 table.compact { width: auto; }
 /* Each column group starts with extra space, and its header underline stops short so groups read apart. */
-table.compact tbody > tr > :is(:nth-child(2), :nth-child(4), :nth-child(6)),
+table.compact tbody > tr > :is(:nth-child(2), :nth-child(4), :nth-child(5), :nth-child(7)),
 table.compact thead > tr:last-child > :is(:nth-child(1), :nth-child(3), :nth-child(5)),
-th.group { padding-inline-start: 2em; }
+th.group, th.audit { padding-inline-start: 2em; }
 th.group { text-align: center; border-block-end: 0; background: linear-gradient(var(--axis), var(--axis)) right bottom / calc(100% - 2em) 1px no-repeat; }
 thead th[rowspan] { vertical-align: bottom; }
 th, td { padding: 0.4em 0.6em; text-align: start; border-block-end: 1px solid var(--grid); white-space: nowrap; }
@@ -535,6 +561,8 @@ tbody th { font-weight: 500; }
 .n { text-align: end; font-variant-numeric: tabular-nums; }
 .strong { font-weight: 600; }
 .third-party { color: var(--muted); font-size: 0.8125em; font-weight: 400; }
+/* Block so its own line height applies instead of the cell's. */
+.sub { display: block; line-height: 1.1; margin-block-start: 0.25em; }
 summary { cursor: pointer; color: var(--text-2); font-size: 0.875em; }
 .ecosystem summary { color: var(--text); font-size: 0.9375em; }
 .packages { columns: 18em; list-style: disc; padding: 0; margin: 0.75em 0 0; font-size: 0.8125em; }
@@ -636,6 +664,7 @@ ${sprite}
 	<div class="stack">
 		${renderingTable}
 		<p class="footnote">In a static build, server dependencies are limited to the build machine. A ReDoS in a Markdown parser might slow down a build, but visitors can’t trigger it. ${cautionIcon(REQUEST_TIME_WARNING)}Request-time code runs on a live server, where anyone loading a page can reach it. Note that client dependencies ship to the browser either way, so their vulnerabilities can affect both Build-time and Request-time projects.</p>
+		<p class="footnote">npm audit on create is whether the framework’s official create tool shows <code>npm audit</code> results, including high severity vulnerabilities, after it installs dependencies. Hover a cell to see how it’s hidden.</p>
 		${flows}
 	</div>
 </section>

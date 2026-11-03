@@ -123,9 +123,11 @@ figure { margin: 0; display: flex; flex-direction: column; gap: 1.25em; }
 .weather { width: 1.125em; height: 1.125em; vertical-align: -0.2em; }
 .support { width: 1em; height: 1em; vertical-align: -0.125em; fill: var(--good); }
 .support.no { fill: var(--muted); }
+.support.no.hidden { fill: var(--critical); }
 .support.warn { fill: var(--caution); margin-inline-start: 0.375em; }
 .footnote .support.warn { margin-inline: 0 0.25em; }
 td.n > .support.warn:first-child { margin-inline: 0 0.375em; }
+.icon.support.warn { margin-inline-start: 0; }
 .icon { width: 1.375em; height: 1.375em; vertical-align: -0.3em; margin-inline-end: 0.5em; overflow: visible; }
 .plot { position: relative; anchor-scope: --point; }
 /* Script moves this to the hovered point; the fixed tooltip anchors beside it and flips sides at the viewport edge, since it is wider than the plot. */
@@ -183,9 +185,9 @@ td.n > .support.warn:first-child { margin-inline: 0 0.375em; }
 table { border-collapse: collapse; width: 100%; font-size: 0.875em; }
 table.compact { width: auto; }
 /* Each column group starts with extra space, and its header underline stops short so groups read apart. */
-table.compact tbody > tr > :is(:nth-child(2), :nth-child(4), :nth-child(6)),
+table.compact tbody > tr > :is(:nth-child(2), :nth-child(4), :nth-child(5), :nth-child(7)),
 table.compact thead > tr:last-child > :is(:nth-child(1), :nth-child(3), :nth-child(5)),
-th.group { padding-inline-start: 2em; }
+th.group, th.audit { padding-inline-start: 2em; }
 th.group { text-align: center; border-block-end: 0; background: linear-gradient(var(--axis), var(--axis)) right bottom / calc(100% - 2em) 1px no-repeat; }
 thead th[rowspan] { vertical-align: bottom; }
 th, td { padding: 0.4em 0.6em; text-align: start; border-block-end: 1px solid var(--grid); white-space: nowrap; }
@@ -194,6 +196,8 @@ tbody th { font-weight: 500; }
 .n { text-align: end; font-variant-numeric: tabular-nums; }
 .strong { font-weight: 600; }
 .third-party { color: var(--muted); font-size: 0.8125em; font-weight: 400; }
+/* Block so its own line height applies instead of the cell's. */
+.sub { display: block; line-height: 1.1; margin-block-start: 0.25em; }
 summary { cursor: pointer; color: var(--text-2); font-size: 0.875em; }
 .ecosystem summary { color: var(--text); font-size: 0.9375em; }
 .packages { columns: 18em; list-style: disc; padding: 0; margin: 0.75em 0 0; font-size: 0.8125em; }
@@ -298,6 +302,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<tr>
 			<th rowspan="2">Framework</th>
 			<th colspan="2" class="group">Forecast</th>
+			<th rowspan="2" class="audit">Shows npm audit</th>
 			<th colspan="2" class="group">Rendering</th>
 			<th colspan="2" class="group">Navigation</th>
 		</tr>
@@ -314,6 +319,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-1)"><use href="#icon-11ty"/></svg>Build Awesome (11ty)</th>
 		<td class="forecast" title="Cloudy"><span class="badge rank moderate"><svg class="weather" role="img" aria-label="Cloudy"><use href="#weather-cloudy"/></svg>2</span></td>
 		<td class="forecast" title="Clear"><span class="badge rank none"><svg class="weather" role="img" aria-label="Clear"><use href="#weather-clear"/></svg>0</span></td>
+		<td title="No create tool; your own npm install shows its audit"><svg class="icon support default" aria-hidden="true"><use href="#support-default"/></svg>Shown<span class="third-party sub">Manual install</span></td>
 		<td><svg class="icon support default" aria-hidden="true"><use href="#support-default"/></svg>Default</td>
 		<td><svg class="icon support no" aria-hidden="true"><use href="#support-no"/></svg>No</td>
 		<td><svg class="icon support default" aria-hidden="true"><use href="#support-default"/></svg>Default</td>
@@ -322,6 +328,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-7)"><use href="#icon-angular"/></svg>Angular</th>
 		<td class="forecast" title="Cloudy"><span class="badge rank moderate"><svg class="weather" role="img" aria-label="Cloudy"><use href="#weather-cloudy"/></svg>2</span></td>
 		<td class="forecast" title="Clear"><span class="badge rank none"><svg class="weather" role="img" aria-label="Clear"><use href="#weather-clear"/></svg>0</span></td>
+		<td title="ng new prints install output only on failure"><svg class="icon support no hidden" aria-hidden="true"><use href="#support-no"/></svg>Hidden<span class="third-party sub"><a href="https://www.npmjs.com/package/@angular/cli/v/22.2.5">@angular/cli@22.2.5</a></span></td>
 		<td><svg class="icon support default" aria-hidden="true"><use href="#support-default"/></svg>Default</td>
 		<td><svg class="icon support yes" aria-hidden="true"><use href="#support-yes"/></svg>Optional</td>
 		<td><svg class="icon support no" aria-hidden="true"><use href="#support-no"/></svg>No</td>
@@ -330,6 +337,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-5)"><use href="#icon-astro"/></svg>Astro</th>
 		<td class="forecast" title="Heavy rain"><span class="badge rank severe"><svg class="weather" role="img" aria-label="Heavy rain"><use href="#weather-heavy-rain"/></svg>4</span></td>
 		<td class="forecast" title="Partly cloudy"><span class="badge rank low"><svg class="weather" role="img" aria-label="Partly cloudy"><use href="#weather-partly-cloudy"/></svg>1</span></td>
+		<td title="create-astro discards install output"><svg class="icon support no hidden" aria-hidden="true"><use href="#support-no"/></svg>Hidden<span class="third-party sub"><a href="https://www.npmjs.com/package/create-astro/v/5.3.1">create-astro@5.3.1</a></span></td>
 		<td><svg class="icon support default" aria-hidden="true"><use href="#support-default"/></svg>Default</td>
 		<td><svg class="icon support yes" aria-hidden="true"><use href="#support-yes"/></svg>Optional</td>
 		<td><svg class="icon support default" aria-hidden="true"><use href="#support-default"/></svg>Default</td>
@@ -338,6 +346,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-4)"><use href="#icon-next"/></svg>Next.js</th>
 		<td class="forecast" title="Heavy rain"><span class="badge rank severe"><svg class="weather" role="img" aria-label="Heavy rain"><use href="#weather-heavy-rain"/></svg>4</span></td>
 		<td class="forecast" title="Rain"><span class="badge rank high"><svg class="weather" role="img" aria-label="Rain"><use href="#weather-rain"/></svg>3</span></td>
+		<td title="create-next-app shows install output, but next bundles most of its dependencies where npm audit can’t see them"><svg class="icon support warn" aria-hidden="true"><use href="#support-warn"/></svg>Hidden<span class="third-party sub"><a href="https://www.npmjs.com/package/create-next-app/v/16.4.5">create-next-app@16.4.5</a></span></td>
 		<td><svg class="icon support yes" aria-hidden="true"><use href="#support-yes"/></svg>Optional</td>
 		<td><svg class="icon support default" aria-hidden="true"><use href="#support-default"/></svg>Default<svg class="support warn" role="img" aria-label="Code runs on request (by default)"><title>Code runs on request (by default)</title><use href="#support-warn"/></svg></td>
 		<td><svg class="icon support no" aria-hidden="true"><use href="#support-no"/></svg>No</td>
@@ -346,6 +355,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-2)"><use href="#icon-svelte"/></svg>Svelte</th>
 		<td class="forecast" title="Heavy rain"><span class="badge rank severe"><svg class="weather" role="img" aria-label="Heavy rain"><use href="#weather-heavy-rain"/></svg>4</span></td>
 		<td class="forecast" title="Cloudy"><span class="badge rank moderate"><svg class="weather" role="img" aria-label="Cloudy"><use href="#weather-cloudy"/></svg>2</span></td>
+		<td title="sv create clears the install log on success"><svg class="icon support no hidden" aria-hidden="true"><use href="#support-no"/></svg>Hidden<span class="third-party sub"><a href="https://www.npmjs.com/package/sv/v/1.2.0">sv@1.2.0</a></span></td>
 		<td><svg class="icon support yes" aria-hidden="true"><use href="#support-yes"/></svg>Optional</td>
 		<td><svg class="icon support default" aria-hidden="true"><use href="#support-default"/></svg>Default<svg class="support warn" role="img" aria-label="Code runs on request (by default)"><title>Code runs on request (by default)</title><use href="#support-warn"/></svg></td>
 		<td><svg class="icon support yes" aria-hidden="true"><use href="#support-yes"/></svg>Optional</td>
@@ -354,6 +364,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-3)"><use href="#icon-nuxt"/></svg>Nuxt</th>
 		<td class="forecast" title="Storms"><span class="badge rank critical"><svg class="weather" role="img" aria-label="Storms"><use href="#weather-storms"/></svg>5</span></td>
 		<td class="forecast" title="Cloudy"><span class="badge rank moderate"><svg class="weather" role="img" aria-label="Cloudy"><use href="#weather-cloudy"/></svg>2</span></td>
+		<td title="create-nuxt prints install output only on failure or with --logLevel verbose"><svg class="icon support no hidden" aria-hidden="true"><use href="#support-no"/></svg>Hidden<span class="third-party sub"><a href="https://www.npmjs.com/package/create-nuxt/v/4.0.3">create-nuxt@4.0.3</a></span></td>
 		<td><svg class="icon support yes" aria-hidden="true"><use href="#support-yes"/></svg>Optional</td>
 		<td><svg class="icon support default" aria-hidden="true"><use href="#support-default"/></svg>Default<svg class="support warn" role="img" aria-label="Code runs on request (by default)"><title>Code runs on request (by default)</title><use href="#support-warn"/></svg></td>
 		<td><svg class="icon support yes" aria-hidden="true"><use href="#support-yes"/></svg>Optional</td>
@@ -362,6 +373,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-6)"><use href="#icon-gatsby"/></svg>Gatsby</th>
 		<td class="forecast" title="Storms"><span class="badge rank critical"><svg class="weather" role="img" aria-label="Storms"><use href="#weather-storms"/></svg>5</span></td>
 		<td class="forecast" title="Heavy rain"><span class="badge rank severe"><svg class="weather" role="img" aria-label="Heavy rain"><use href="#weather-heavy-rain"/></svg>4</span></td>
+		<td title="create-gatsby installs with --no-audit"><svg class="icon support no hidden" aria-hidden="true"><use href="#support-no"/></svg>Hidden<span class="third-party sub"><a href="https://www.npmjs.com/package/create-gatsby/v/3.16.0">create-gatsby@3.16.0</a></span></td>
 		<td><svg class="icon support default" aria-hidden="true"><use href="#support-default"/></svg>Default</td>
 		<td><svg class="icon support yes" aria-hidden="true"><use href="#support-yes"/></svg>Optional</td>
 		<td><svg class="icon support no" aria-hidden="true"><use href="#support-no"/></svg>No</td>
@@ -370,6 +382,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-8)"><use href="#icon-tanstack-start"/></svg>TanStack Start</th>
 		<td></td>
 		<td></td>
+		<td title="The TanStack create tool captures and discards install output"><svg class="icon support no hidden" aria-hidden="true"><use href="#support-no"/></svg>Hidden<span class="third-party sub"><a href="https://www.npmjs.com/package/@tanstack/cli/v/0.72.15">@tanstack/cli@0.72.15</a></span></td>
 		<td><svg class="icon support yes" aria-hidden="true"><use href="#support-yes"/></svg>Optional</td>
 		<td><svg class="icon support default" aria-hidden="true"><use href="#support-default"/></svg>Default<svg class="support warn" role="img" aria-label="Code runs on request (by default)"><title>Code runs on request (by default)</title><use href="#support-warn"/></svg></td>
 		<td><svg class="icon support no" aria-hidden="true"><use href="#support-no"/></svg>No</td>
@@ -378,6 +391,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:light-dark(#21759b, #4f94d4)"><use href="#icon-wordpress"/></svg>WordPress</th>
 		<td></td>
 		<td></td>
+		<td class="muted">—</td>
 		<td><svg class="icon support no" aria-hidden="true"><use href="#support-no"/></svg>No</td>
 		<td><svg class="icon support default" aria-hidden="true"><use href="#support-default"/></svg>Default<svg class="support warn" role="img" aria-label="Code runs on request (by default)"><title>Code runs on request (by default)</title><use href="#support-warn"/></svg></td>
 		<td><svg class="icon support default" aria-hidden="true"><use href="#support-default"/></svg>Default</td>
@@ -385,6 +399,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 	</tr></tbody>
 </table></div>
 		<p class="footnote">In a static build, server dependencies are limited to the build machine. A ReDoS in a Markdown parser might slow down a build, but visitors can’t trigger it. <svg class="support warn" role="img" aria-label="Code runs on request (by default)"><title>Code runs on request (by default)</title><use href="#support-warn"/></svg>Request-time code runs on a live server, where anyone loading a page can reach it. Note that client dependencies ship to the browser either way, so their vulnerabilities can affect both Build-time and Request-time projects.</p>
+		<p class="footnote">npm audit on create is whether the framework’s official create tool shows <code>npm audit</code> results, including high severity vulnerabilities, after it installs dependencies. Hover a cell to see how it’s hidden.</p>
 		<div class="flows">
 	<div class="panel">
 	<h3>Build-time</h3>
