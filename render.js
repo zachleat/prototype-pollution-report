@@ -57,8 +57,9 @@ const age = published => {
 	return ` <span class="badge age" title="Published ${formatDate(published)}">${label}</span>`;
 };
 
-// Marks a row whose data predates the latest collection, because that framework's install failed.
-const stale = date => !date || date === latestDate ? "" : ` <span class="badge stale" title="Collection failed on ${formatDate(latestDate)}; showing data from ${formatDate(date)}">outdated</span>`;
+// Fallback data only gets the outdated treatment once it's more than three days older than the latest collection.
+const isOutdated = date => date && time(latestDate) - time(date) > 3 * 864e5;
+const stale = date => !isOutdated(date) ? "" : ` <span class="badge stale" title="Collection failed on ${formatDate(latestDate)}; showing data from ${formatDate(date)}">outdated</span>`;
 
 const SUPPORT = {
 	default: { label: "Default", icon: faCircleCheck },
@@ -291,8 +292,8 @@ let latestCore = latest
 	.toSorted((a, b) => a.s.core.vulnerabilities.total - b.s.core.vulnerabilities.total);
 
 let latestOf = f => latest.find(l => l.f === f)?.s;
-let staleDateOf = f => (d => d && d !== latestDate ? d : undefined)(latest.find(l => l.f === f)?.date);
-let staleRow = date => date && date !== latestDate ? ` class="outdated"` : "";
+let staleDateOf = f => latest.find(l => l.f === f)?.date;
+let staleRow = date => isOutdated(date) ? ` class="outdated"` : "";
 // Fewest ecosystem vulnerabilities first, then fewest core vulnerabilities; missing data sorts last.
 let coreTotal = f => latestOf(f)?.core?.vulnerabilities.total ?? Infinity;
 let ecosystemTotal = f => latestOf(f)?.vulnerabilities.total ?? Infinity;
