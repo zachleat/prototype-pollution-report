@@ -96373,7 +96373,7 @@
 	},
 	{
 		"date": "2026-11-03",
-		"collectedAt": "2026-11-03T12:05:09.496Z",
+		"collectedAt": "2026-11-03T14:17:28.257Z",
 		"framework": "11ty",
 		"packageCount": 44,
 		"core": {
@@ -96725,7 +96725,7 @@
 	},
 	{
 		"date": "2026-11-03",
-		"collectedAt": "2026-11-03T12:17:42.150Z",
+		"collectedAt": "2026-11-03T14:27:52.899Z",
 		"framework": "angular",
 		"packageCount": 47,
 		"core": {
@@ -97062,7 +97062,7 @@
 	},
 	{
 		"date": "2026-11-03",
-		"collectedAt": "2026-11-03T12:11:00.024Z",
+		"collectedAt": "2026-11-03T14:23:01.576Z",
 		"framework": "astro",
 		"packageCount": 54,
 		"core": {
@@ -97846,7 +97846,7 @@
 	},
 	{
 		"date": "2026-11-03",
-		"collectedAt": "2026-11-03T12:13:30.514Z",
+		"collectedAt": "2026-11-03T14:24:22.674Z",
 		"framework": "gatsby",
 		"packageCount": 133,
 		"core": {
@@ -99572,7 +99572,7 @@
 	},
 	{
 		"date": "2026-11-03",
-		"collectedAt": "2026-11-03T12:09:30.539Z",
+		"collectedAt": "2026-11-03T14:21:49.929Z",
 		"framework": "next",
 		"packageCount": 27,
 		"core": {
@@ -100328,7 +100328,7 @@
 	},
 	{
 		"date": "2026-11-03",
-		"collectedAt": "2026-11-03T12:06:28.683Z",
+		"collectedAt": "2026-11-03T14:18:50.180Z",
 		"framework": "nuxt",
 		"packageCount": 57,
 		"core": {
@@ -101268,7 +101268,7 @@
 	},
 	{
 		"date": "2026-11-03",
-		"collectedAt": "2026-11-03T12:05:44.290Z",
+		"collectedAt": "2026-11-03T14:18:06.351Z",
 		"framework": "svelte",
 		"packageCount": 44,
 		"core": {
@@ -101713,7 +101713,7 @@
 			"@sveltejs/gl": "0.0.37",
 			"@sveltejs/kit": "3.1.1",
 			"@sveltejs/load-config": "0.2.3",
-			"@sveltejs/mcp": "0.1.28",
+			"@sveltejs/mcp": "0.1.29",
 			"@sveltejs/message-box": "1.1.3",
 			"@sveltejs/opencode": "0.1.17",
 			"@sveltejs/package": "3.0.2",
@@ -101759,7 +101759,7 @@
 			"@sveltejs/gl": "2020-02-18",
 			"@sveltejs/kit": "2026-10-29",
 			"@sveltejs/load-config": "2026-08-11",
-			"@sveltejs/mcp": "2026-10-26",
+			"@sveltejs/mcp": "2026-11-03",
 			"@sveltejs/message-box": "2026-09-24",
 			"@sveltejs/opencode": "2026-10-19",
 			"@sveltejs/package": "2026-10-29",
@@ -101790,7 +101790,7 @@
 	},
 	{
 		"date": "2026-11-03",
-		"collectedAt": "2026-11-03T12:18:35.468Z",
+		"collectedAt": "2026-11-03T14:28:41.427Z",
 		"framework": "tanstack-start",
 		"packageCount": 81,
 		"core": {
@@ -101822,8 +101822,8 @@
 		"bundlers": {
 			"vite": "8.3.5"
 		},
-		"dependencies": 1086,
-		"thirdPartyDependencies": 990,
+		"dependencies": 1081,
+		"thirdPartyDependencies": 985,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 3,
@@ -102893,7 +102893,7 @@
 		},
 		"packages": {
 			"@tanstack/create-router": "1.117.2",
-			"@tanstack/create-start": "0.59.58",
+			"@tanstack/create-start": "0.59.59",
 			"@tanstack/directive-functions-plugin": "1.142.1",
 			"@tanstack/eslint-plugin-router": "1.162.0",
 			"@tanstack/eslint-plugin-start": "0.1.0",
@@ -102969,10 +102969,10 @@
 			"@tanstack/vue-start": "1.169.4",
 			"@tanstack/vue-start-client": "1.167.45",
 			"@tanstack/vue-start-server": "1.167.50",
-			"create-start-app": "0.59.58",
-			"create-tanstack": "0.54.58",
-			"create-tanstack-app": "0.54.58",
-			"create-tsrouter-app": "0.54.58"
+			"create-start-app": "0.59.59",
+			"create-tanstack": "0.54.59",
+			"create-tanstack-app": "0.54.59",
+			"create-tsrouter-app": "0.54.59"
 		},
 		"published": {
 			"@tanstack/create-router": "2025-04-25",
