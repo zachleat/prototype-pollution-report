@@ -101792,7 +101792,7 @@
 	},
 	{
 		"date": "2026-11-03",
-		"collectedAt": "2026-11-03T16:55:58.731Z",
+		"collectedAt": "2026-11-03T22:00:08.742Z",
 		"framework": "tanstack-start",
 		"packageCount": 81,
 		"core": {
@@ -101824,7 +101824,1075 @@
 		"bundlers": {
 			"vite": "8.3.5"
 		},
-		"error": "npm error code ETARGET\nnpm error notarget No matching version found for @tanstack/create@0.71.14.\nnpm error notarget In most cases you or one of your dependencies are requesting a package version that doesn't exist.\nnpm error A complete log of this run can be found in: /home/runner/.npm/_logs/2026-11-03T16_56_05_950Z-debug-0.log",
+		"dependencies": 1085,
+		"thirdPartyDependencies": 989,
+		"vulnerabilities": {
+			"info": 0,
+			"low": 3,
+			"moderate": 3,
+			"high": 49,
+			"critical": 25,
+			"total": 80
+		},
+		"advisories": {
+			"info": 0,
+			"low": 12,
+			"moderate": 51,
+			"high": 44,
+			"critical": 2,
+			"total": 109
+		},
+		"vulnerablePackages": [
+			{
+				"name": "@tanstack/nitro-v2-vite-plugin",
+				"severity": "critical",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 2,
+					"moderate": 1,
+					"high": 13,
+					"critical": 5,
+					"total": 21
+				}
+			},
+			{
+				"name": "@tanstack/react-router-server",
+				"severity": "critical",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 2,
+					"moderate": 3,
+					"high": 24,
+					"critical": 8,
+					"total": 37
+				}
+			},
+			{
+				"name": "@tanstack/react-start-api-routes",
+				"severity": "critical",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 2,
+					"moderate": 3,
+					"high": 24,
+					"critical": 8,
+					"total": 37
+				}
+			},
+			{
+				"name": "@tanstack/react-start-config",
+				"severity": "critical",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 2,
+					"moderate": 3,
+					"high": 24,
+					"critical": 8,
+					"total": 37
+				}
+			},
+			{
+				"name": "@tanstack/react-start-plugin",
+				"severity": "critical",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 2,
+					"moderate": 1,
+					"high": 20,
+					"critical": 6,
+					"total": 29
+				}
+			},
+			{
+				"name": "@tanstack/react-start-router-manifest",
+				"severity": "critical",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 2,
+					"moderate": 3,
+					"high": 24,
+					"critical": 8,
+					"total": 37
+				}
+			},
+			{
+				"name": "@tanstack/solid-start-config",
+				"severity": "critical",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 2,
+					"moderate": 3,
+					"high": 24,
+					"critical": 8,
+					"total": 37
+				}
+			},
+			{
+				"name": "@tanstack/solid-start-plugin",
+				"severity": "critical",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 2,
+					"moderate": 1,
+					"high": 20,
+					"critical": 6,
+					"total": 29
+				}
+			},
+			{
+				"name": "@tanstack/solid-start-router-manifest",
+				"severity": "critical",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 2,
+					"moderate": 3,
+					"high": 24,
+					"critical": 8,
+					"total": 37
+				}
+			},
+			{
+				"name": "@tanstack/start",
+				"severity": "critical",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 2,
+					"moderate": 3,
+					"high": 24,
+					"critical": 11,
+					"total": 40
+				}
+			},
+			{
+				"name": "@tanstack/start-api-routes",
+				"severity": "critical",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 2,
+					"moderate": 3,
+					"high": 24,
+					"critical": 8,
+					"total": 37
+				}
+			},
+			{
+				"name": "@tanstack/start-client",
+				"severity": "critical",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 2,
+					"moderate": 3,
+					"high": 24,
+					"critical": 8,
+					"total": 37
+				}
+			},
+			{
+				"name": "@tanstack/start-config",
+				"severity": "critical",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 2,
+					"moderate": 3,
+					"high": 24,
+					"critical": 8,
+					"total": 37
+				}
+			},
+			{
+				"name": "@tanstack/start-plugin",
+				"severity": "critical",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 3,
+					"high": 12,
+					"critical": 3,
+					"total": 18
+				}
+			},
+			{
+				"name": "@tanstack/start-router-manifest",
+				"severity": "critical",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 2,
+					"moderate": 3,
+					"high": 24,
+					"critical": 8,
+					"total": 37
+				}
+			},
+			{
+				"name": "@tanstack/start-server",
+				"severity": "critical",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 2,
+					"moderate": 3,
+					"high": 24,
+					"critical": 9,
+					"total": 38
+				}
+			},
+			{
+				"name": "shell-quote",
+				"severity": "critical",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 0,
+					"high": 0,
+					"critical": 1,
+					"total": 1
+				},
+				"vendoredBy": "vite"
+			},
+			{
+				"name": "@rollup/plugin-commonjs",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 0,
+					"high": 3,
+					"critical": 0,
+					"total": 3
+				},
+				"vendoredBy": "vite"
+			},
+			{
+				"name": "@tanstack/create-router",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 0,
+					"high": 5,
+					"critical": 0,
+					"total": 5
+				}
+			},
+			{
+				"name": "@tanstack/create-start",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 1,
+					"moderate": 0,
+					"high": 8,
+					"critical": 0,
+					"total": 9
+				}
+			},
+			{
+				"name": "@tanstack/eslint-plugin-router",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 0,
+					"high": 4,
+					"critical": 0,
+					"total": 4
+				}
+			},
+			{
+				"name": "@tanstack/eslint-plugin-start",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 0,
+					"high": 4,
+					"critical": 0,
+					"total": 4
+				}
+			},
+			{
+				"name": "brace-expansion",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 0,
+					"high": 1,
+					"critical": 0,
+					"total": 1
+				},
+				"vendoredBy": "vite"
+			},
+			{
+				"name": "braces",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 0,
+					"high": 1,
+					"critical": 0,
+					"total": 1
+				},
+				"vendoredBy": "vite"
+			},
+			{
+				"name": "create-start-app",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 1,
+					"moderate": 0,
+					"high": 8,
+					"critical": 0,
+					"total": 9
+				}
+			},
+			{
+				"name": "create-tanstack",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 1,
+					"moderate": 0,
+					"high": 8,
+					"critical": 0,
+					"total": 9
+				}
+			},
+			{
+				"name": "create-tanstack-app",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 1,
+					"moderate": 0,
+					"high": 8,
+					"critical": 0,
+					"total": 9
+				}
+			},
+			{
+				"name": "create-tsrouter-app",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 1,
+					"moderate": 0,
+					"high": 8,
+					"critical": 0,
+					"total": 9
+				}
+			},
+			{
+				"name": "cross-spawn",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 0,
+					"high": 1,
+					"critical": 0,
+					"total": 1
+				},
+				"vendoredBy": "vite"
+			},
+			{
+				"name": "follow-redirects",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 0,
+					"high": 1,
+					"critical": 0,
+					"total": 1
+				},
+				"vendoredBy": "vite"
+			},
+			{
+				"name": "glob",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 0,
+					"high": 2,
+					"critical": 0,
+					"total": 2
+				},
+				"vendoredBy": "vite"
+			},
+			{
+				"name": "launch-editor",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 0,
+					"high": 1,
+					"critical": 0,
+					"total": 1
+				},
+				"vendoredBy": "vite"
+			},
+			{
+				"name": "loader-utils",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 0,
+					"high": 1,
+					"critical": 0,
+					"total": 1
+				},
+				"vendoredBy": "vite"
+			},
+			{
+				"name": "minimatch",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 0,
+					"high": 1,
+					"critical": 0,
+					"total": 1
+				},
+				"vendoredBy": "vite"
+			},
+			{
+				"name": "picomatch",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 0,
+					"high": 1,
+					"critical": 0,
+					"total": 1
+				},
+				"vendoredBy": "vite"
+			},
+			{
+				"name": "ws",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 0,
+					"high": 1,
+					"critical": 0,
+					"total": 1
+				},
+				"vendoredBy": "vite"
+			},
+			{
+				"name": "yaml",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 0,
+					"high": 1,
+					"critical": 0,
+					"total": 1
+				},
+				"vendoredBy": "vite"
+			},
+			{
+				"name": "micromatch",
+				"severity": "moderate",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 1,
+					"high": 0,
+					"critical": 0,
+					"total": 1
+				},
+				"vendoredBy": "vite"
+			},
+			{
+				"name": "postcss-selector-parser",
+				"severity": "moderate",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 1,
+					"high": 0,
+					"critical": 0,
+					"total": 1
+				},
+				"vendoredBy": "vite"
+			}
+		],
+		"nonVendoredVulnerabilities": {
+			"info": 0,
+			"low": 3,
+			"moderate": 17,
+			"high": 26,
+			"critical": 22,
+			"total": 68
+		},
+		"vendored": {
+			"vite@6.4.5": {
+				"@ampproject/remapping@2.3.0": "@ampproject/remapping@2.3.0",
+				"@jridgewell/gen-mapping@0.3.8": "@jridgewell/gen-mapping@0.3.8",
+				"@jridgewell/resolve-uri@3.1.2": "@jridgewell/resolve-uri@3.1.2",
+				"@jridgewell/set-array@1.2.1": "@jridgewell/set-array@1.2.1",
+				"@jridgewell/sourcemap-codec@1.5.0": "@jridgewell/sourcemap-codec@1.5.0",
+				"@jridgewell/trace-mapping@0.3.25": "@jridgewell/trace-mapping@0.3.25",
+				"@polka/compression@1.0.0-next.25": "@polka/compression@1.0.0-next.25",
+				"@polka/url@1.0.0-next.28": "@polka/url@1.0.0-next.28",
+				"@rollup/plugin-alias@5.1.1": "@rollup/plugin-alias@5.1.1",
+				"@rollup/plugin-commonjs@28.0.3": "@rollup/plugin-commonjs@28.0.3",
+				"@rollup/plugin-dynamic-import-vars@2.1.4": "@rollup/plugin-dynamic-import-vars@2.1.4",
+				"@rollup/pluginutils@5.1.4": "@rollup/pluginutils@5.1.4",
+				"anymatch@3.1.3": "anymatch@3.1.3",
+				"artichokie@0.3.1": "artichokie@0.3.1",
+				"binary-extensions@2.3.0": "binary-extensions@2.3.0",
+				"braces@3.0.3": "braces@3.0.3",
+				"bundle-name@4.1.0": "bundle-name@4.1.0",
+				"cac@6.7.14": "cac@6.7.14",
+				"chokidar@3.6.0": "chokidar@3.6.0",
+				"commondir@1.0.1": "commondir@1.0.1",
+				"connect@3.7.0": "connect@3.7.0",
+				"convert-source-map@2.0.0": "convert-source-map@2.0.0",
+				"cors@2.8.5": "cors@2.8.5",
+				"cross-spawn@7.0.6": "cross-spawn@7.0.6",
+				"cssesc@3.0.0": "cssesc@3.0.0",
+				"debug@4.4.0": "debug@4.4.0",
+				"debug@2.6.9": "debug@2.6.9",
+				"default-browser@5.2.1": "default-browser@5.2.1",
+				"default-browser-id@5.0.0": "default-browser-id@5.0.0",
+				"define-lazy-prop@3.0.0": "define-lazy-prop@3.0.0",
+				"dotenv@16.5.0": "dotenv@16.5.0",
+				"dotenv-expand@12.0.2": "dotenv-expand@12.0.2",
+				"ee-first@1.1.1": "ee-first@1.1.1",
+				"encodeurl@1.0.2": "encodeurl@1.0.2",
+				"entities@4.5.0": "entities@4.5.0",
+				"es-module-lexer@1.6.0": "es-module-lexer@1.6.0",
+				"escape-html@1.0.3": "escape-html@1.0.3",
+				"estree-walker@3.0.3": "estree-walker@3.0.3",
+				"estree-walker@2.0.2": "estree-walker@2.0.2",
+				"etag@1.8.1": "etag@1.8.1",
+				"eventemitter3@4.0.7": "eventemitter3@4.0.7",
+				"fill-range@7.1.1": "fill-range@7.1.1",
+				"finalhandler@1.1.2": "finalhandler@1.1.2",
+				"follow-redirects@1.15.9": "follow-redirects@1.15.9",
+				"generic-names@4.0.0": "generic-names@4.0.0",
+				"glob-parent@5.1.2": "glob-parent@5.1.2",
+				"http-proxy@1.18.1": "http-proxy@1.18.1",
+				"icss-utils@5.1.0": "icss-utils@5.1.0",
+				"is-binary-path@2.1.0": "is-binary-path@2.1.0",
+				"is-docker@3.0.0": "is-docker@3.0.0",
+				"is-extglob@2.1.1": "is-extglob@2.1.1",
+				"is-glob@4.0.3": "is-glob@4.0.3",
+				"is-inside-container@1.0.0": "is-inside-container@1.0.0",
+				"is-number@7.0.0": "is-number@7.0.0",
+				"is-reference@3.0.3": "is-reference@3.0.3",
+				"is-reference@1.2.1": "is-reference@1.2.1",
+				"is-wsl@3.1.0": "is-wsl@3.1.0",
+				"isexe@2.0.0": "isexe@2.0.0",
+				"js-tokens@9.0.1": "js-tokens@9.0.1",
+				"launch-editor@2.14.2": "launch-editor@2.14.2",
+				"launch-editor-middleware@2.14.2": "launch-editor-middleware@2.14.2",
+				"lilconfig@3.1.3": "lilconfig@3.1.3",
+				"loader-utils@3.3.1": "loader-utils@3.3.1",
+				"lodash.camelcase@4.3.0": "lodash.camelcase@4.3.0",
+				"magic-string@0.30.17": "magic-string@0.30.17",
+				"mlly@1.7.4": "mlly@1.7.4",
+				"mrmime@2.0.1": "mrmime@2.0.1",
+				"ms@2.1.3": "ms@2.1.3",
+				"ms@2.0.0": "ms@2.0.0",
+				"normalize-path@3.0.0": "normalize-path@3.0.0",
+				"object-assign@4.1.1": "object-assign@4.1.1",
+				"on-finished@2.3.0": "on-finished@2.3.0",
+				"open@10.1.1": "open@10.1.1",
+				"parse5@7.2.1": "parse5@7.2.1",
+				"parseurl@1.3.3": "parseurl@1.3.3",
+				"path-key@3.1.1": "path-key@3.1.1",
+				"periscopic@4.0.2": "periscopic@4.0.2",
+				"picocolors@1.1.1": "picocolors@1.1.1",
+				"postcss-import@16.1.0": "postcss-import@16.1.0",
+				"postcss-load-config@6.0.1": "postcss-load-config@6.0.1",
+				"postcss-modules@6.0.1": "postcss-modules@6.0.1",
+				"postcss-modules-extract-imports@3.1.0": "postcss-modules-extract-imports@3.1.0",
+				"postcss-modules-local-by-default@4.2.0": "postcss-modules-local-by-default@4.2.0",
+				"postcss-modules-scope@3.2.1": "postcss-modules-scope@3.2.1",
+				"postcss-modules-values@4.0.0": "postcss-modules-values@4.0.0",
+				"postcss-selector-parser@7.1.0": "postcss-selector-parser@7.1.0",
+				"postcss-value-parser@4.2.0": "postcss-value-parser@4.2.0",
+				"readdirp@3.6.0": "readdirp@3.6.0",
+				"requires-port@1.0.0": "requires-port@1.0.0",
+				"resolve.exports@2.0.3": "resolve.exports@2.0.3",
+				"run-applescript@7.0.0": "run-applescript@7.0.0",
+				"shebang-command@2.0.0": "shebang-command@2.0.0",
+				"shebang-regex@3.0.0": "shebang-regex@3.0.0",
+				"shell-quote@1.12.0": "shell-quote@1.12.0",
+				"sirv@3.0.2": "sirv@3.0.2",
+				"statuses@1.5.0": "statuses@1.5.0",
+				"string-hash@1.1.3": "string-hash@1.1.3",
+				"strip-literal@3.0.0": "strip-literal@3.0.0",
+				"to-regex-range@5.0.1": "to-regex-range@5.0.1",
+				"totalist@3.0.1": "totalist@3.0.1",
+				"tsconfck@3.1.5": "tsconfck@3.1.5",
+				"ufo@1.6.1": "ufo@1.6.1",
+				"unpipe@1.0.0": "unpipe@1.0.0",
+				"util-deprecate@1.0.2": "util-deprecate@1.0.2",
+				"utils-merge@1.0.1": "utils-merge@1.0.1",
+				"vary@1.1.2": "vary@1.1.2",
+				"which@2.0.2": "which@2.0.2",
+				"ws@8.18.1": "ws@8.18.1"
+			},
+			"vite@6.1.0": {
+				"@ampproject/remapping@2.3.0": "@ampproject/remapping@2.3.0",
+				"@jridgewell/gen-mapping@0.3.5": "@jridgewell/gen-mapping@0.3.5",
+				"@jridgewell/resolve-uri@3.1.2": "@jridgewell/resolve-uri@3.1.2",
+				"@jridgewell/set-array@1.2.1": "@jridgewell/set-array@1.2.1",
+				"@jridgewell/sourcemap-codec@1.5.0": "@jridgewell/sourcemap-codec@1.5.0",
+				"@jridgewell/trace-mapping@0.3.25": "@jridgewell/trace-mapping@0.3.25",
+				"@polka/compression@1.0.0-next.25": "@polka/compression@1.0.0-next.25",
+				"@polka/url@1.0.0-next.28": "@polka/url@1.0.0-next.28",
+				"@rollup/plugin-alias@5.1.1": "@rollup/plugin-alias@5.1.1",
+				"@rollup/plugin-commonjs@28.0.2": "@rollup/plugin-commonjs@28.0.2",
+				"@rollup/plugin-dynamic-import-vars@2.1.4": "@rollup/plugin-dynamic-import-vars@2.1.4",
+				"@rollup/pluginutils@5.1.4": "@rollup/pluginutils@5.1.4",
+				"anymatch@3.1.3": "anymatch@3.1.3",
+				"artichokie@0.3.1": "artichokie@0.3.1",
+				"binary-extensions@2.3.0": "binary-extensions@2.3.0",
+				"braces@3.0.3": "braces@3.0.3",
+				"bundle-name@4.1.0": "bundle-name@4.1.0",
+				"cac@6.7.14": "cac@6.7.14",
+				"chokidar@3.6.0": "chokidar@3.6.0",
+				"commondir@1.0.1": "commondir@1.0.1",
+				"connect@3.7.0": "connect@3.7.0",
+				"convert-source-map@2.0.0": "convert-source-map@2.0.0",
+				"cors@2.8.5": "cors@2.8.5",
+				"cross-spawn@7.0.6": "cross-spawn@7.0.6",
+				"cssesc@3.0.0": "cssesc@3.0.0",
+				"debug@4.4.0": "debug@4.4.0",
+				"debug@2.6.9": "debug@2.6.9",
+				"default-browser@5.2.1": "default-browser@5.2.1",
+				"default-browser-id@5.0.0": "default-browser-id@5.0.0",
+				"define-lazy-prop@3.0.0": "define-lazy-prop@3.0.0",
+				"dotenv@16.4.7": "dotenv@16.4.7",
+				"dotenv-expand@12.0.1": "dotenv-expand@12.0.1",
+				"ee-first@1.1.1": "ee-first@1.1.1",
+				"encodeurl@1.0.2": "encodeurl@1.0.2",
+				"entities@4.5.0": "entities@4.5.0",
+				"es-module-lexer@1.6.0": "es-module-lexer@1.6.0",
+				"escape-html@1.0.3": "escape-html@1.0.3",
+				"estree-walker@3.0.3": "estree-walker@3.0.3",
+				"estree-walker@2.0.2": "estree-walker@2.0.2",
+				"etag@1.8.1": "etag@1.8.1",
+				"eventemitter3@4.0.7": "eventemitter3@4.0.7",
+				"fdir@6.4.2": "fdir@6.4.2",
+				"fill-range@7.1.1": "fill-range@7.1.1",
+				"finalhandler@1.1.2": "finalhandler@1.1.2",
+				"follow-redirects@1.15.9": "follow-redirects@1.15.9",
+				"generic-names@4.0.0": "generic-names@4.0.0",
+				"glob-parent@5.1.2": "glob-parent@5.1.2",
+				"http-proxy@1.18.1": "http-proxy@1.18.1",
+				"icss-utils@5.1.0": "icss-utils@5.1.0",
+				"is-binary-path@2.1.0": "is-binary-path@2.1.0",
+				"is-docker@3.0.0": "is-docker@3.0.0",
+				"is-extglob@2.1.1": "is-extglob@2.1.1",
+				"is-glob@4.0.3": "is-glob@4.0.3",
+				"is-inside-container@1.0.0": "is-inside-container@1.0.0",
+				"is-number@7.0.0": "is-number@7.0.0",
+				"is-reference@3.0.2": "is-reference@3.0.2",
+				"is-reference@1.2.1": "is-reference@1.2.1",
+				"is-wsl@3.1.0": "is-wsl@3.1.0",
+				"isexe@2.0.0": "isexe@2.0.0",
+				"js-tokens@9.0.1": "js-tokens@9.0.1",
+				"launch-editor@2.9.1": "launch-editor@2.9.1",
+				"launch-editor-middleware@2.9.1": "launch-editor-middleware@2.9.1",
+				"lilconfig@3.1.3": "lilconfig@3.1.3",
+				"loader-utils@3.3.1": "loader-utils@3.3.1",
+				"lodash.camelcase@4.3.0": "lodash.camelcase@4.3.0",
+				"magic-string@0.30.17": "magic-string@0.30.17",
+				"mlly@1.7.4": "mlly@1.7.4",
+				"mrmime@2.0.0": "mrmime@2.0.0",
+				"ms@2.1.3": "ms@2.1.3",
+				"ms@2.0.0": "ms@2.0.0",
+				"normalize-path@3.0.0": "normalize-path@3.0.0",
+				"object-assign@4.1.1": "object-assign@4.1.1",
+				"on-finished@2.3.0": "on-finished@2.3.0",
+				"open@10.1.0": "open@10.1.0",
+				"parse5@7.2.1": "parse5@7.2.1",
+				"parseurl@1.3.3": "parseurl@1.3.3",
+				"path-key@3.1.1": "path-key@3.1.1",
+				"periscopic@4.0.2": "periscopic@4.0.2",
+				"picocolors@1.1.1": "picocolors@1.1.1",
+				"picomatch@4.0.2": "picomatch@4.0.2",
+				"picomatch@2.3.1": "picomatch@2.3.1",
+				"postcss-import@16.1.0": "postcss-import@16.1.0",
+				"postcss-load-config@6.0.1": "postcss-load-config@6.0.1",
+				"postcss-modules@6.0.1": "postcss-modules@6.0.1",
+				"postcss-modules-extract-imports@3.1.0": "postcss-modules-extract-imports@3.1.0",
+				"postcss-modules-local-by-default@4.0.5": "postcss-modules-local-by-default@4.0.5",
+				"postcss-modules-scope@3.2.0": "postcss-modules-scope@3.2.0",
+				"postcss-modules-values@4.0.0": "postcss-modules-values@4.0.0",
+				"postcss-selector-parser@6.1.2": "postcss-selector-parser@6.1.2",
+				"postcss-value-parser@4.2.0": "postcss-value-parser@4.2.0",
+				"readdirp@3.6.0": "readdirp@3.6.0",
+				"requires-port@1.0.0": "requires-port@1.0.0",
+				"resolve.exports@2.0.3": "resolve.exports@2.0.3",
+				"run-applescript@7.0.0": "run-applescript@7.0.0",
+				"shebang-command@2.0.0": "shebang-command@2.0.0",
+				"shebang-regex@3.0.0": "shebang-regex@3.0.0",
+				"shell-quote@1.8.1": "shell-quote@1.8.1",
+				"sirv@3.0.0": "sirv@3.0.0",
+				"statuses@1.5.0": "statuses@1.5.0",
+				"string-hash@1.1.3": "string-hash@1.1.3",
+				"strip-literal@3.0.0": "strip-literal@3.0.0",
+				"tinyglobby@0.2.10": "tinyglobby@0.2.10",
+				"to-regex-range@5.0.1": "to-regex-range@5.0.1",
+				"totalist@3.0.1": "totalist@3.0.1",
+				"tsconfck@3.1.4": "tsconfck@3.1.4",
+				"ufo@1.5.4": "ufo@1.5.4",
+				"unpipe@1.0.0": "unpipe@1.0.0",
+				"util-deprecate@1.0.2": "util-deprecate@1.0.2",
+				"utils-merge@1.0.1": "utils-merge@1.0.1",
+				"vary@1.1.2": "vary@1.1.2",
+				"which@2.0.2": "which@2.0.2",
+				"ws@8.18.0": "ws@8.18.0"
+			},
+			"vite@4.5.0": {
+				"@ampproject/remapping@2.2.1": "@ampproject/remapping@2.2.1",
+				"@jridgewell/gen-mapping@0.3.2": "@jridgewell/gen-mapping@0.3.2",
+				"@jridgewell/resolve-uri@3.1.0": "@jridgewell/resolve-uri@3.1.0",
+				"@jridgewell/set-array@1.1.1": "@jridgewell/set-array@1.1.1",
+				"@jridgewell/sourcemap-codec@1.4.15": "@jridgewell/sourcemap-codec@1.4.15",
+				"@jridgewell/sourcemap-codec@1.4.14": "@jridgewell/sourcemap-codec@1.4.14",
+				"@jridgewell/trace-mapping@0.3.18": "@jridgewell/trace-mapping@0.3.18",
+				"@nodelib/fs.scandir@2.1.5": "@nodelib/fs.scandir@2.1.5",
+				"@nodelib/fs.stat@2.0.5": "@nodelib/fs.stat@2.0.5",
+				"@nodelib/fs.walk@1.2.8": "@nodelib/fs.walk@1.2.8",
+				"@polka/url@1.0.0-next.21": "@polka/url@1.0.0-next.21",
+				"@rollup/plugin-alias@4.0.4": "@rollup/plugin-alias@4.0.4",
+				"@rollup/plugin-commonjs@25.0.3": "@rollup/plugin-commonjs@25.0.3",
+				"@rollup/plugin-dynamic-import-vars@2.0.4": "@rollup/plugin-dynamic-import-vars@2.0.4",
+				"@rollup/pluginutils@5.0.2": "@rollup/pluginutils@5.0.2",
+				"acorn@8.10.0": "acorn@8.10.0",
+				"acorn-walk@8.2.0": "acorn-walk@8.2.0",
+				"ansi-regex@6.0.1": "ansi-regex@6.0.1",
+				"anymatch@3.1.2": "anymatch@3.1.2",
+				"balanced-match@1.0.2": "balanced-match@1.0.2",
+				"binary-extensions@2.2.0": "binary-extensions@2.2.0",
+				"brace-expansion@2.0.1": "brace-expansion@2.0.1",
+				"braces@3.0.2": "braces@3.0.2",
+				"cac@6.7.14": "cac@6.7.14",
+				"chokidar@3.5.3": "chokidar@3.5.3",
+				"commondir@1.0.1": "commondir@1.0.1",
+				"connect@3.7.0": "connect@3.7.0",
+				"connect-history-api-fallback@2.0.0": "connect-history-api-fallback@2.0.0",
+				"convert-source-map@2.0.0": "convert-source-map@2.0.0",
+				"cors@2.8.5": "cors@2.8.5",
+				"cross-spawn@7.0.3": "cross-spawn@7.0.3",
+				"cssesc@3.0.0": "cssesc@3.0.0",
+				"debug@4.3.4": "debug@4.3.4",
+				"debug@2.6.9": "debug@2.6.9",
+				"define-lazy-prop@2.0.0": "define-lazy-prop@2.0.0",
+				"dotenv@16.3.1": "dotenv@16.3.1",
+				"dotenv-expand@9.0.0": "dotenv-expand@9.0.0",
+				"ee-first@1.1.1": "ee-first@1.1.1",
+				"encodeurl@1.0.2": "encodeurl@1.0.2",
+				"entities@4.4.0": "entities@4.4.0",
+				"es-module-lexer@1.3.0": "es-module-lexer@1.3.0",
+				"escape-html@1.0.3": "escape-html@1.0.3",
+				"estree-walker@3.0.3": "estree-walker@3.0.3",
+				"estree-walker@2.0.2": "estree-walker@2.0.2",
+				"etag@1.8.1": "etag@1.8.1",
+				"eventemitter3@4.0.7": "eventemitter3@4.0.7",
+				"fast-glob@3.3.1": "fast-glob@3.3.1",
+				"fastq@1.13.0": "fastq@1.13.0",
+				"fill-range@7.0.1": "fill-range@7.0.1",
+				"finalhandler@1.1.2": "finalhandler@1.1.2",
+				"follow-redirects@1.15.0": "follow-redirects@1.15.0",
+				"fs.realpath@1.0.0": "fs.realpath@1.0.0",
+				"generic-names@4.0.0": "generic-names@4.0.0",
+				"glob@8.0.3": "glob@8.0.3",
+				"glob-parent@5.1.2": "glob-parent@5.1.2",
+				"http-proxy@1.18.1": "http-proxy@1.18.1",
+				"icss-utils@5.1.0": "icss-utils@5.1.0",
+				"inflight@1.0.6": "inflight@1.0.6",
+				"inherits@2.0.4": "inherits@2.0.4",
+				"is-binary-path@2.1.0": "is-binary-path@2.1.0",
+				"is-docker@2.2.1": "is-docker@2.2.1",
+				"is-extglob@2.1.1": "is-extglob@2.1.1",
+				"is-glob@4.0.3": "is-glob@4.0.3",
+				"is-number@7.0.0": "is-number@7.0.0",
+				"is-reference@3.0.0": "is-reference@3.0.0",
+				"is-reference@1.2.1": "is-reference@1.2.1",
+				"is-wsl@2.2.0": "is-wsl@2.2.0",
+				"isexe@2.0.0": "isexe@2.0.0",
+				"json-stable-stringify@1.0.2": "json-stable-stringify@1.0.2",
+				"launch-editor@2.6.0": "launch-editor@2.6.0",
+				"launch-editor-middleware@2.6.0": "launch-editor-middleware@2.6.0",
+				"lilconfig@2.0.5": "lilconfig@2.0.5",
+				"loader-utils@3.2.0": "loader-utils@3.2.0",
+				"lodash.camelcase@4.3.0": "lodash.camelcase@4.3.0",
+				"magic-string@0.30.2": "magic-string@0.30.2",
+				"magic-string@0.27.0": "magic-string@0.27.0",
+				"merge2@1.4.1": "merge2@1.4.1",
+				"micromatch@4.0.5": "micromatch@4.0.5",
+				"minimatch@5.1.0": "minimatch@5.1.0",
+				"mlly@1.4.0": "mlly@1.4.0",
+				"mrmime@1.0.1": "mrmime@1.0.1",
+				"ms@2.1.2": "ms@2.1.2",
+				"ms@2.0.0": "ms@2.0.0",
+				"normalize-path@3.0.0": "normalize-path@3.0.0",
+				"object-assign@4.1.1": "object-assign@4.1.1",
+				"okie@1.0.1": "okie@1.0.1",
+				"on-finished@2.3.0": "on-finished@2.3.0",
+				"once@1.4.0": "once@1.4.0",
+				"open@8.4.2": "open@8.4.2",
+				"parse5@7.1.2": "parse5@7.1.2",
+				"parseurl@1.3.3": "parseurl@1.3.3",
+				"path-key@3.1.1": "path-key@3.1.1",
+				"periscopic@3.1.0": "periscopic@3.1.0",
+				"picocolors@1.0.0": "picocolors@1.0.0",
+				"picomatch@2.3.1": "picomatch@2.3.1",
+				"pify@2.3.0": "pify@2.3.0",
+				"postcss-import@15.1.0": "postcss-import@15.1.0",
+				"postcss-load-config@4.0.1": "postcss-load-config@4.0.1",
+				"postcss-modules@6.0.0": "postcss-modules@6.0.0",
+				"postcss-modules-extract-imports@3.0.0": "postcss-modules-extract-imports@3.0.0",
+				"postcss-modules-local-by-default@4.0.0": "postcss-modules-local-by-default@4.0.0",
+				"postcss-modules-scope@3.0.0": "postcss-modules-scope@3.0.0",
+				"postcss-modules-values@4.0.0": "postcss-modules-values@4.0.0",
+				"postcss-selector-parser@6.0.11": "postcss-selector-parser@6.0.11",
+				"postcss-value-parser@4.2.0": "postcss-value-parser@4.2.0",
+				"queue-microtask@1.2.3": "queue-microtask@1.2.3",
+				"read-cache@1.0.0": "read-cache@1.0.0",
+				"readdirp@3.6.0": "readdirp@3.6.0",
+				"requires-port@1.0.0": "requires-port@1.0.0",
+				"resolve.exports@2.0.2": "resolve.exports@2.0.2",
+				"reusify@1.0.4": "reusify@1.0.4",
+				"run-parallel@1.2.0": "run-parallel@1.2.0",
+				"shebang-command@2.0.0": "shebang-command@2.0.0",
+				"shebang-regex@3.0.0": "shebang-regex@3.0.0",
+				"shell-quote@1.7.3": "shell-quote@1.7.3",
+				"sirv@2.0.3": "sirv@2.0.3",
+				"statuses@1.5.0": "statuses@1.5.0",
+				"string-hash@1.1.3": "string-hash@1.1.3",
+				"strip-ansi@7.1.0": "strip-ansi@7.1.0",
+				"strip-literal@1.3.0": "strip-literal@1.3.0",
+				"to-regex-range@5.0.1": "to-regex-range@5.0.1",
+				"totalist@3.0.0": "totalist@3.0.0",
+				"tsconfck@2.1.2": "tsconfck@2.1.2",
+				"ufo@1.2.0": "ufo@1.2.0",
+				"unpipe@1.0.0": "unpipe@1.0.0",
+				"util-deprecate@1.0.2": "util-deprecate@1.0.2",
+				"utils-merge@1.0.1": "utils-merge@1.0.1",
+				"vary@1.1.2": "vary@1.1.2",
+				"which@2.0.2": "which@2.0.2",
+				"wrappy@1.0.2": "wrappy@1.0.2",
+				"ws@8.13.0": "ws@8.13.0",
+				"yaml@2.1.1": "yaml@2.1.1"
+			},
+			"vite@8.3.5": {
+				"@jridgewell/gen-mapping@0.3.13": "@jridgewell/gen-mapping@0.3.13",
+				"@jridgewell/remapping@2.3.5": "@jridgewell/remapping@2.3.5",
+				"@jridgewell/resolve-uri@3.1.2": "@jridgewell/resolve-uri@3.1.2",
+				"@jridgewell/sourcemap-codec@1.6.0": "@jridgewell/sourcemap-codec@1.6.0",
+				"@jridgewell/trace-mapping@0.3.31": "@jridgewell/trace-mapping@0.3.31",
+				"@polka/compression@1.0.0-next.25": "@polka/compression@1.0.0-next.25",
+				"@polka/url@1.0.0-next.29": "@polka/url@1.0.0-next.29",
+				"@rollup/plugin-alias@6.0.0": "@rollup/plugin-alias@6.0.0",
+				"@rollup/plugin-dynamic-import-vars@2.1.4": "@rollup/plugin-dynamic-import-vars@2.1.4",
+				"@rollup/pluginutils@5.4.0": "@rollup/pluginutils@5.4.0",
+				"@vitest/utils@4.1.12": "@vitest/utils@4.1.12",
+				"@voidzero-dev/vite-task-client@0.2.0": "@voidzero-dev/vite-task-client@0.2.0",
+				"anymatch@3.1.3": "anymatch@3.1.3",
+				"artichokie@0.4.5": "artichokie@0.4.5",
+				"binary-extensions@2.3.0": "binary-extensions@2.3.0",
+				"braces@3.0.3": "braces@3.0.3",
+				"bundle-name@4.1.1": "bundle-name@4.1.1",
+				"cac@7.1.0": "cac@7.1.0",
+				"chokidar@3.6.0": "chokidar@3.6.0",
+				"connect@3.7.0": "connect@3.7.0",
+				"convert-source-map@2.0.0": "convert-source-map@2.0.0",
+				"cors@2.8.6": "cors@2.8.6",
+				"cssesc@3.0.0": "cssesc@3.0.0",
+				"default-browser@5.5.1": "default-browser@5.5.1",
+				"default-browser-id@5.0.1": "default-browser-id@5.0.1",
+				"define-lazy-prop@3.0.0": "define-lazy-prop@3.0.0",
+				"dotenv-expand@13.0.0": "dotenv-expand@13.0.0",
+				"ee-first@1.1.1": "ee-first@1.1.1",
+				"encodeurl@1.0.2": "encodeurl@1.0.2",
+				"entities@8.1.0": "entities@8.1.0",
+				"es-module-lexer@2.3.2": "es-module-lexer@2.3.2",
+				"escape-html@1.0.3": "escape-html@1.0.3",
+				"estree-walker@3.0.3": "estree-walker@3.0.3",
+				"estree-walker@2.0.2": "estree-walker@2.0.2",
+				"etag@1.8.1": "etag@1.8.1",
+				"fill-range@7.1.1": "fill-range@7.1.1",
+				"finalhandler@1.1.2": "finalhandler@1.1.2",
+				"follow-redirects@1.16.1": "follow-redirects@1.16.1",
+				"fresh-import@0.2.1": "fresh-import@0.2.1",
+				"generic-names@4.0.0": "generic-names@4.0.0",
+				"glob-parent@5.1.2": "glob-parent@5.1.2",
+				"host-validation-middleware@0.1.4": "host-validation-middleware@0.1.4",
+				"http-proxy-3@1.23.3": "http-proxy-3@1.23.3",
+				"icss-utils@5.1.0": "icss-utils@5.1.0",
+				"is-binary-path@2.1.0": "is-binary-path@2.1.0",
+				"is-docker@3.0.0": "is-docker@3.0.0",
+				"is-extglob@2.1.1": "is-extglob@2.1.1",
+				"is-glob@4.0.3": "is-glob@4.0.3",
+				"is-inside-container@1.0.0": "is-inside-container@1.0.0",
+				"is-number@7.0.0": "is-number@7.0.0",
+				"is-reference@3.0.3": "is-reference@3.0.3",
+				"is-wsl@3.1.1": "is-wsl@3.1.1",
+				"js-tokens@10.0.0": "js-tokens@10.0.0",
+				"launch-editor@2.14.2": "launch-editor@2.14.2",
+				"launch-editor-middleware@2.14.2": "launch-editor-middleware@2.14.2",
+				"lilconfig@3.1.4": "lilconfig@3.1.4",
+				"loader-utils@3.3.1": "loader-utils@3.3.1",
+				"lodash.camelcase@4.3.0": "lodash.camelcase@4.3.0",
+				"magic-string@1.4.3": "magic-string@1.4.3",
+				"magic-string@0.30.21": "magic-string@0.30.21",
+				"mlly@1.8.2": "mlly@1.8.2",
+				"mrmime@2.0.1": "mrmime@2.0.1",
+				"normalize-path@3.0.0": "normalize-path@3.0.0",
+				"object-assign@4.1.1": "object-assign@4.1.1",
+				"obug@1.0.2": "obug@1.0.2",
+				"on-finished@2.3.0": "on-finished@2.3.0",
+				"open@10.2.0": "open@10.2.0",
+				"parse5@8.0.1": "parse5@8.0.1",
+				"parseurl@1.3.3": "parseurl@1.3.3",
+				"periscopic@4.0.3": "periscopic@4.0.3",
+				"picocolors@1.1.1": "picocolors@1.1.1",
+				"postcss-import@16.2.0": "postcss-import@16.2.0",
+				"postcss-load-config@6.0.1": "postcss-load-config@6.0.1",
+				"postcss-modules@9.0.1": "postcss-modules@9.0.1",
+				"postcss-modules-extract-imports@3.1.0": "postcss-modules-extract-imports@3.1.0",
+				"postcss-modules-local-by-default@4.2.0": "postcss-modules-local-by-default@4.2.0",
+				"postcss-modules-scope@3.2.1": "postcss-modules-scope@3.2.1",
+				"postcss-modules-values@4.0.0": "postcss-modules-values@4.0.0",
+				"postcss-selector-parser@7.1.6": "postcss-selector-parser@7.1.6",
+				"postcss-value-parser@4.2.0": "postcss-value-parser@4.2.0",
+				"readdirp@3.6.0": "readdirp@3.6.0",
+				"resolve.exports@2.0.4": "resolve.exports@2.0.4",
+				"run-applescript@7.1.0": "run-applescript@7.1.0",
+				"shell-quote@1.12.0": "shell-quote@1.12.0",
+				"sirv@3.0.2": "sirv@3.0.2",
+				"statuses@1.5.0": "statuses@1.5.0",
+				"std-env@4.3.0": "std-env@4.3.0",
+				"string-hash@1.1.3": "string-hash@1.1.3",
+				"strip-literal@4.0.0": "strip-literal@4.0.0",
+				"tinyexec@1.3.1": "tinyexec@1.3.1",
+				"to-regex-range@5.0.1": "to-regex-range@5.0.1",
+				"totalist@3.0.1": "totalist@3.0.1",
+				"ufo@1.6.4": "ufo@1.6.4",
+				"unpipe@1.0.0": "unpipe@1.0.0",
+				"util-deprecate@1.0.2": "util-deprecate@1.0.2",
+				"utils-merge@1.0.1": "utils-merge@1.0.1",
+				"vary@1.1.2": "vary@1.1.2",
+				"ws@8.22.0": "ws@8.22.0",
+				"wsl-utils@0.1.0": "wsl-utils@0.1.0",
+				"zimmerframe@1.1.5": "zimmerframe@1.1.5"
+			}
+		},
+		"vendoredUsers": {
+			"vite": {
+				"@tanstack/directive-functions-plugin": [
+					"8.3.5"
+				],
+				"@tanstack/nitro-v2-vite-plugin": [
+					"8.3.5"
+				],
+				"@tanstack/react-router-server": [
+					"4.5.0",
+					"8.3.5"
+				],
+				"@tanstack/react-start-api-routes": [
+					"6.4.5"
+				],
+				"@tanstack/react-start-config": [
+					"6.4.5"
+				],
+				"@tanstack/react-start-plugin": [
+					"8.3.5"
+				],
+				"@tanstack/react-start-router-manifest": [
+					"6.4.5"
+				],
+				"@tanstack/solid-start-config": [
+					"6.4.5",
+					"8.3.5"
+				],
+				"@tanstack/solid-start-plugin": [
+					"8.3.5"
+				],
+				"@tanstack/solid-start-router-manifest": [
+					"6.4.5"
+				],
+				"@tanstack/start-api-routes": [
+					"6.4.5"
+				],
+				"@tanstack/start-client": [
+					"6.4.5"
+				],
+				"@tanstack/start-config": [
+					"6.4.5"
+				],
+				"@tanstack/start-plugin": [
+					"6.1.0"
+				],
+				"@tanstack/start-router-manifest": [
+					"6.4.5"
+				],
+				"@tanstack/start-server-functions-client": [
+					"8.3.5"
+				],
+				"@tanstack/start-server-functions-server": [
+					"8.3.5"
+				],
+				"@tanstack/vue-router-devtools": [
+					"8.3.5"
+				]
+			}
+		},
+		"vendoredAffected": {
+			"vite@6.4.5": [
+				"follow-redirects@1.15.9",
+				"postcss-selector-parser@7.1.0",
+				"ws@8.18.1"
+			],
+			"vite@6.1.0": [
+				"follow-redirects@1.15.9",
+				"launch-editor@2.9.1",
+				"picomatch@4.0.2",
+				"picomatch@2.3.1",
+				"postcss-selector-parser@6.1.2",
+				"shell-quote@1.8.1",
+				"ws@8.18.0"
+			],
+			"vite@4.5.0": [
+				"@rollup/plugin-commonjs@25.0.3",
+				"brace-expansion@2.0.1",
+				"braces@3.0.2",
+				"cross-spawn@7.0.3",
+				"follow-redirects@1.15.0",
+				"glob@8.0.3",
+				"launch-editor@2.6.0",
+				"loader-utils@3.2.0",
+				"micromatch@4.0.5",
+				"minimatch@5.1.0",
+				"picomatch@2.3.1",
+				"postcss-selector-parser@6.0.11",
+				"shell-quote@1.7.3",
+				"ws@8.13.0",
+				"yaml@2.1.1"
+			],
+			"vite@8.3.5": [
+				"follow-redirects@1.16.1"
+			]
+		},
 		"packages": {
 			"@tanstack/create-router": "1.117.2",
 			"@tanstack/create-start": "0.59.60",
