@@ -57,6 +57,9 @@ const age = published => {
 	return ` <span class="badge age" title="Published ${formatDate(published)}">${label}</span>`;
 };
 
+// Marks a row whose data predates the latest collection, because that framework's install failed.
+const stale = date => !date || date === latestDate ? "" : ` <span class="badge stale" title="Collection failed on ${formatDate(latestDate)}; showing data from ${formatDate(date)}">outdated</span>`;
+
 const SUPPORT = {
 	default: { label: "Default", icon: faCircleCheck },
 	yes: { label: "Optional", icon: faCircleCheckRegular },
@@ -277,15 +280,19 @@ function smallMultiples({ id, title, description, measures, nameOf = f => f.name
 </figure>`;
 }
 
+// A framework whose latest collection failed falls back to its most recent successful snapshot, flagged as outdated.
 let latest = series
-	.map(f => ({ f, s: get(latestDate, f.id) }))
-	.filter(({ s }) => s && !s.error)
+	.map(f => ({ f, date: dates.findLast(d => get(d, f.id) && !get(d, f.id).error) }))
+	.filter(({ date }) => date)
+	.map(({ f, date }) => ({ f, date, s: get(date, f.id) }))
 	.sort((a, b) => a.s.vulnerabilities.total - b.s.vulnerabilities.total);
 let latestCore = latest
 	.filter(({ s }) => s.core)
 	.toSorted((a, b) => a.s.core.vulnerabilities.total - b.s.core.vulnerabilities.total);
 
 let latestOf = f => latest.find(l => l.f === f)?.s;
+let staleDateOf = f => (d => d && d !== latestDate ? d : undefined)(latest.find(l => l.f === f)?.date);
+let staleRow = date => date && date !== latestDate ? ` class="outdated"` : "";
 // Fewest ecosystem vulnerabilities first, then fewest core vulnerabilities; missing data sorts last.
 let coreTotal = f => latestOf(f)?.core?.vulnerabilities.total ?? Infinity;
 let ecosystemTotal = f => latestOf(f)?.vulnerabilities.total ?? Infinity;
@@ -307,8 +314,8 @@ let renderingTable = `<div class="scroll"><table class="scoreboard compact">
 			<th>SPA</th>
 		</tr>
 	</thead>
-	<tbody>${[...series, ...renderingOnly].toSorted((a, b) => ecosystemTotal(a) - ecosystemTotal(b) || coreTotal(a) - coreTotal(b) || a.name.localeCompare(b.name)).map(f => `<tr>
-		<th scope="row">${icon(f)}${esc(f.name)}</th>
+	<tbody>${[...series, ...renderingOnly].toSorted((a, b) => ecosystemTotal(a) - ecosystemTotal(b) || coreTotal(a) - coreTotal(b) || a.name.localeCompare(b.name)).map(f => `<tr${staleRow(staleDateOf(f))}>
+		<th scope="row">${icon(f)}${esc(f.name)}${stale(staleDateOf(f))}</th>
 		${(s => s ? forecast(s.vulnerabilities) : "<td></td>")(latestOf(f))}
 		${(core => core ? forecast(core.vulnerabilities) : "<td></td>")(latestOf(f)?.core)}
 		${createAudit(f.createAudit)}
@@ -329,9 +336,9 @@ let scoreboard = `<div class="scroll"><table class="scoreboard">
 		<th class="n">Dependencies<br><span class="third-party">(Third-party)</span></th>
 		<th>Severity<br>${SEVERITIES.map(sev => `<span class="badge ${sev} key">${sev}</span>`).join(" ")}</th>
 	</tr></thead>
-	<tbody>${latest.map(({ f, s }) => `<tr>
+	<tbody>${latest.map(({ f, s, date }) => `<tr${staleRow(date)}>
 		${forecast(s.vulnerabilities)}
-		<th scope="row">${icon(f)}${esc(f.name)}</th>
+		<th scope="row">${icon(f)}${esc(f.name)}${stale(date)}</th>
 		<td class="n strong">${requestTimeCaution(f, s.vulnerabilities.total)}${num(s.vulnerabilities.total)}${delta(s.vulnerabilities.total, get(baseline, f.id)?.vulnerabilities?.total)}${rawAudit(s)}</td>
 		<td class="n">${num(s.advisories.total)}</td>
 		<td class="n">${num(s.packageCount)}<br><span class="third-party">(${num(officialAffected(s))})</span></td>
@@ -349,9 +356,9 @@ let coreScoreboard = `<div class="scroll"><table class="scoreboard">
 		<th class="n">Dependencies<br><span class="third-party">(Third-party)</span></th>
 		<th>Severity<br>${SEVERITIES.map(sev => `<span class="badge ${sev} key">${sev}</span>`).join(" ")}</th>
 	</tr></thead>
-	<tbody>${latestCore.map(({ f, s: { core, published } }) => `<tr>
+	<tbody>${latestCore.map(({ f, date, s: { core, published } }) => `<tr${staleRow(date)}>
 		${forecast(core.vulnerabilities)}
-		<th scope="row">${icon(f)}<a href="https://www.npmjs.com/package/${esc(core.name)}/v/${esc(core.version)}">${esc(core.name)}</a> <span class="muted">${esc(core.version)}</span>${age(published?.[core.name])}</th>
+		<th scope="row">${icon(f)}<a href="https://www.npmjs.com/package/${esc(core.name)}/v/${esc(core.version)}">${esc(core.name)}</a> <span class="muted">${esc(core.version)}</span>${age(published?.[core.name])}${stale(date)}</th>
 		<td class="n strong">${requestTimeCaution(f, core.vulnerabilities.total)}${num(core.vulnerabilities.total)}${delta(core.vulnerabilities.total, get(baseline, f.id)?.core?.vulnerabilities.total)}${rawAudit(core)}</td>
 		<td class="n">${num(core.advisories.total)}</td>
 		<td class="n">${num(core.dependencies)}<br><span class="third-party">(${num(core.thirdPartyDependencies)})</span></td>
@@ -360,8 +367,8 @@ let coreScoreboard = `<div class="scroll"><table class="scoreboard">
 </table></div>`;
 
 
-let details = latest.map(({ f, s }) => `<details class="ecosystem">
-	<summary>${icon(f)}${esc(f.name)}: ${((affected, bundled, bundledAffected) => {
+let details = latest.map(({ f, s, date }) => `<details class="ecosystem">
+	<summary>${icon(f)}${esc(f.name)}${stale(date)}: ${((affected, bundled, bundledAffected) => {
 		let official = `${num(affected)} of ${num(s.packageCount)} official`;
 		let percent = `(${Math.round(affected / s.packageCount * 100)}%)`;
 		return bundledAffected ? `${official} ${percent} and ${num(bundledAffected)} of ${num(bundled)} bundled (${Math.round(bundledAffected / bundled * 100)}%) packages affected` : `${official} packages ${percent} affected`;
@@ -558,6 +565,8 @@ thead th[rowspan] { vertical-align: bottom; }
 th, td { padding: 0.4em 0.6em; text-align: start; border-block-end: 1px solid var(--grid); white-space: nowrap; }
 thead th { color: var(--text-2); font-weight: 500; }
 tbody th { font-weight: 500; }
+tbody tr.outdated { opacity: 0.6; }
+tbody tr.outdated > :is(th, td) { background: light-dark(rgb(227 184 94 / 0.08), rgb(199 165 96 / 0.1)); }
 .n { text-align: end; font-variant-numeric: tabular-nums; }
 .strong { font-weight: 600; }
 .third-party { color: var(--muted); font-size: 0.8125em; font-weight: 400; }
@@ -584,6 +593,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 .badge.age, .badge.bundling { color: var(--text-2); font-weight: 500; box-shadow: inset 0 0 0 1px var(--axis); }
 /* A translucent purple stays subtle in both modes. */
 /* Header pills are a key, not data, so they sit back. */
+.badge.stale { background: var(--caution); color: #0b0b0b; font-weight: 600; }
 .badge.key { opacity: 0.65; }
 .badge.bundling { background: rgb(100 108 255 / 0.14); }
 .badge.rank { gap: 0.3em; font-weight: 600; }
