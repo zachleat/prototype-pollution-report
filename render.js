@@ -1,6 +1,6 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { faCircleCheck as faCircleCheckRegular, faCircleXmark } from "@fortawesome/free-regular-svg-icons";
-import { faArrowDown, faArrowUp, faBoxOpen, faCircleCheck, faCircleInfo, faCloud, faCloudBolt, faCloudRain, faCloudShowersHeavy, faCloudSun, faSun } from "@fortawesome/free-solid-svg-icons";
+import { faArrowDown, faArrowUp, faArrowUpRightFromSquare, faBook, faBoxOpen, faCircleCheck, faCircleInfo, faCloud, faCloudBolt, faCloudRain, faCloudShowersHeavy, faCloudSun, faSun } from "@fortawesome/free-solid-svg-icons";
 import { faWordpressSimple } from "@fortawesome/free-brands-svg-icons";
 import frameworks from "./frameworks.js";
 
@@ -97,7 +97,7 @@ const createAudit = audit => {
 		let [name, version] = [audit.tool.slice(0, at), audit.tool.slice(at + 1)];
 		tool = `<span class="third-party sub"><a href="https://www.npmjs.com/package/${esc(name)}/v/${esc(version)}">${esc(audit.tool)}</a></span>`;
 	}
-	return `<td title="${esc(audit.how)}"><svg class="icon support ${icon}${extra}" aria-hidden="true"><use href="#support-${icon}"/></svg>${label}${tool}${audit.manual ? `<span class="third-party sub">${esc(audit.manual)}</span>` : ""}</td>`;
+	return `<td title="${esc(audit.how)}"><svg class="icon support ${icon}${extra}" aria-hidden="true"><use href="#support-${icon}"/></svg>${label}${tool}${audit.manual ? `<span class="third-party sub">${audit.manualUrl ? `<a href="${esc(audit.manualUrl)}"><svg class="docs" aria-hidden="true"><use href="#docs"/></svg>${esc(audit.manual)}<svg class="external" aria-hidden="true"><use href="#external"/></svg></a>` : esc(audit.manual)}</span>` : ""}</td>`;
 };
 
 const esc = s => String(s).replace(/[&<>"']/g, c => `&#${c.charCodeAt(0)};`);
@@ -129,6 +129,8 @@ const sprite = `<svg class="sprite" aria-hidden="true">${[
 	symbol("trend-up", faArrowUp),
 	symbol("trend-down", faArrowDown),
 	symbol("bundle", faBoxOpen),
+	symbol("docs", faBook),
+	symbol("external", faArrowUpRightFromSquare),
 ].join("")}</svg>`;
 const icon = f => `<svg class="icon" aria-hidden="true" style="fill:${f.slot ? `var(--series-${f.slot})` : f.color}"><use href="#icon-${f.id}"/></svg>`;
 
@@ -579,7 +581,8 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 /* The divider runs the full pill height since pills have no block padding. */
 .badge .count { font-weight: 600; padding-inline-start: 0.4em; margin-inline-start: 0.4em; border-inline-start: 1px solid color-mix(in srgb, currentColor 40%, transparent); }
 .badge.rank .weather { fill: currentColor; }
-.bundle { width: 1em; height: 1em; vertical-align: -0.125em; margin-inline-end: 0.3em; fill: currentColor; }
+.bundle, .docs { width: 1em; height: 1em; vertical-align: -0.125em; margin-inline-end: 0.3em; fill: currentColor; }
+.external { width: 0.75em; height: 0.75em; margin-inline-start: 0.3em; fill: currentColor; }
 .badge.rank.none .weather { fill: var(--sun); }
 </style>
 </head>
