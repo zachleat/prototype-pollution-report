@@ -1,6 +1,6 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { faCircleCheck as faCircleCheckRegular, faCircleXmark } from "@fortawesome/free-regular-svg-icons";
-import { faArrowDown, faArrowUp, faBoxOpen, faBug, faCircleCheck, faCircleInfo, faCloud, faCloudBolt, faCloudRain, faCloudShowersHeavy, faCloudSun, faFileCode, faServer, faSun, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faArrowDown, faArrowUp, faBoxOpen, faCircleCheck, faCircleInfo, faCloud, faCloudBolt, faCloudRain, faCloudShowersHeavy, faCloudSun, faSun } from "@fortawesome/free-solid-svg-icons";
 import { faWordpressSimple } from "@fortawesome/free-brands-svg-icons";
 import frameworks from "./frameworks.js";
 
@@ -30,9 +30,9 @@ const rankPill = index => {
 	let { id, label, severity } = FORECAST[index];
 	return `<span class="badge rank ${severity}"><svg class="weather" role="img" aria-label="${label}"><use href="#weather-${id}"/></svg>${index}</span>`;
 };
+const forecastRank = counts => FORECAST.findIndex(f => forecastScore(counts) <= f.max);
 const forecast = counts => {
-	let score = forecastScore(counts);
-	let index = FORECAST.findIndex(f => score <= f.max);
+	let index = forecastRank(counts);
 	return `<td class="forecast" title="${FORECAST[index].label}">${rankPill(index)}</td>`;
 };
 const forecastLegend = `<ul class="keys legend">${FORECAST.map(({ label }, i) => `<li>${rankPill(i)}${label}</li>`).join("")}</ul>`;
@@ -123,10 +123,6 @@ const seriesVars = mode => series.map(f => `--series-${f.slot}: ${f.color[mode]}
 const symbol = (id, { icon: [w, h, , , d] }) => `<symbol id="${id}" viewBox="0 0 ${w} ${h}"><path d="${d}"/></symbol>`;
 const sprite = `<svg class="sprite" aria-hidden="true">${[
 	...[...series, ...renderingOnly].map(f => symbol(`icon-${f.id}`, f.icon)),
-	symbol("flow-user", faUser),
-	symbol("flow-html", faFileCode),
-	symbol("flow-server", faServer),
-	symbol("flow-bug", faBug),
 	...Object.entries(SUPPORT).map(([key, { icon }]) => symbol(`support-${key}`, icon)),
 	symbol("support-warn", faCircleInfo),
 	...FORECAST.map(({ id, icon }) => symbol(`weather-${id}`, icon)),
@@ -136,26 +132,6 @@ const sprite = `<svg class="sprite" aria-hidden="true">${[
 ].join("")}</svg>`;
 const icon = f => `<svg class="icon" aria-hidden="true" style="fill:${f.slot ? `var(--series-${f.slot})` : f.color}"><use href="#icon-${f.id}"/></svg>`;
 
-// A request travels from a visitor toward the vulnerable dependency: static output stops it at the HTML, request-time code carries it through.
-const flow = ({ kind, title, label, middle }) => `<div class="panel">
-	<h3>${title}</h3>
-	<svg class="flow ${kind}" viewBox="0 0 340 56" role="img" aria-label="${esc(label)}">
-		<line class="flow-track" x1="40" x2="150" y1="20" y2="20"/>
-		<line class="flow-track${kind === "static" ? " dashed" : ""}" x1="190" x2="300" y1="20" y2="20"/>
-		${kind === "static" ? `<text class="tick flow-note" x="245" y="10" text-anchor="middle">once, at build</text>` : ""}
-		<circle class="flow-dot" cx="40" cy="20" r="4"/>
-		<use class="flow-icon" href="#flow-user" x="8" y="8" width="24" height="24"/>
-		<use class="flow-icon flow-middle" href="#flow-${middle.id}" x="158" y="8" width="24" height="24"/>
-		<use class="flow-bug" href="#flow-bug" x="308" y="8" width="24" height="24"/>
-		<text class="tick" x="8" y="50">Visitor</text>
-		<text class="tick" x="170" y="50" text-anchor="middle">${middle.label}</text>
-		<text class="tick" x="332" y="50" text-anchor="end">Vulnerable dependency</text>
-	</svg>
-</div>`;
-const flows = `<div class="flows">
-	${flow({ kind: "static", title: "Build-time", label: "Visitor requests stop at prebuilt HTML files. The vulnerable dependency only ran on the build machine.", middle: { id: "html", label: "HTML files" } })}
-	${flow({ kind: "request-time", title: `Request-time${cautionIcon(REQUEST_TIME_WARNING)}`, label: "Visitor requests pass through the server to the vulnerable dependency on every page load.", middle: { id: "server", label: "Server" } })}
-</div>`;
 // Only the most severe pill is labeled; the rest show counts, with the severity in the tooltip.
 const pills = counts => SEVERITIES.filter(sev => counts[sev]).map((sev, i) => i ? ` <span class="badge ${sev}" title="${num(counts[sev])} ${sev}">${num(counts[sev])}</span>` : ` <span class="badge ${sev}">${sev}<span class="count">${num(counts[sev])}</span></span>`).join("");
 const packagePills = p => p.vulnerabilities ? pills(p.vulnerabilities) : ` <span class="badge ${p.severity}">${p.severity}</span>`;
@@ -294,7 +270,9 @@ let latestCore = latest
 let latestOf = f => latest.find(l => l.f === f)?.s;
 let staleDateOf = f => latest.find(l => l.f === f)?.date;
 let staleRow = date => isOutdated(date) ? ` class="outdated"` : "";
-// Fewest ecosystem vulnerabilities first, then fewest core vulnerabilities; missing data sorts last.
+// Best ecosystem then core forecast first, with ecosystem then core vulnerability counts as tiebreakers; missing data sorts last.
+let ecosystemRank = f => (s => s ? forecastRank(s.vulnerabilities) : Infinity)(latestOf(f));
+let coreRank = f => (core => core ? forecastRank(core.vulnerabilities) : Infinity)(latestOf(f)?.core);
 let coreTotal = f => latestOf(f)?.core?.vulnerabilities.total ?? Infinity;
 let ecosystemTotal = f => latestOf(f)?.vulnerabilities.total ?? Infinity;
 let renderingTable = `<div class="scroll"><table class="scoreboard compact">
@@ -315,7 +293,7 @@ let renderingTable = `<div class="scroll"><table class="scoreboard compact">
 			<th>SPA</th>
 		</tr>
 	</thead>
-	<tbody>${[...series, ...renderingOnly].toSorted((a, b) => ecosystemTotal(a) - ecosystemTotal(b) || coreTotal(a) - coreTotal(b) || a.name.localeCompare(b.name)).map(f => `<tr${staleRow(staleDateOf(f))}>
+	<tbody>${[...series, ...renderingOnly].toSorted((a, b) => ecosystemRank(a) - ecosystemRank(b) || coreRank(a) - coreRank(b) || ecosystemTotal(a) - ecosystemTotal(b) || coreTotal(a) - coreTotal(b) || a.name.localeCompare(b.name)).map(f => `<tr${staleRow(staleDateOf(f))}>
 		<th scope="row">${icon(f)}${esc(f.name)}${stale(staleDateOf(f))}</th>
 		${(s => s ? forecast(s.vulnerabilities) : "<td></td>")(latestOf(f))}
 		${(core => core ? forecast(core.vulnerabilities) : "<td></td>")(latestOf(f)?.core)}
@@ -603,43 +581,6 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 .badge.rank .weather { fill: currentColor; }
 .bundle { width: 1em; height: 1em; vertical-align: -0.125em; margin-inline-end: 0.3em; fill: currentColor; }
 .badge.rank.none .weather { fill: var(--sun); }
-.flows { display: grid; grid-template-columns: repeat(auto-fit, minmax(16em, 1fr)); gap: 1em 2em; max-width: 46em; }
-.flow { display: block; width: 100%; max-width: 340px; overflow: visible; }
-.flow-track { stroke: var(--axis); stroke-width: 2; }
-.flow-track.dashed { stroke-dasharray: 4 4; }
-.tick.flow-note { font-size: 9px; }
-.flow-icon { fill: var(--text-2); }
-.flow-bug { fill: var(--critical); transform-box: fill-box; transform-origin: center; }
-.flow-dot { fill: var(--text); opacity: 0; }
-/* Both lanes share a duration and speed, so the static request turns back at the HTML while the other reaches the bug. */
-.flow .flow-dot, .flow .flow-middle, .flow .flow-bug { animation: 3.2s linear infinite; }
-.static .flow-dot { animation-name: flow-bounce; }
-.static .flow-middle { animation-name: flow-served; }
-.request-time .flow-dot { animation-name: flow-through; }
-.request-time .flow-bug { animation-name: flow-hit; }
-@keyframes flow-bounce {
-	0% { transform: translateX(0); opacity: 0; }
-	5% { opacity: 1; }
-	33% { transform: translateX(110px); }
-	62% { opacity: 1; }
-	66%, 100% { transform: translateX(0); opacity: 0; }
-}
-@keyframes flow-through {
-	0% { transform: translateX(0); opacity: 0; }
-	5%, 78% { opacity: 1; }
-	80%, 100% { transform: translateX(260px); opacity: 0; }
-}
-@keyframes flow-served {
-	0%, 30%, 50%, 100% { fill: var(--text-2); }
-	34% { fill: var(--good); }
-}
-@keyframes flow-hit {
-	0%, 77%, 95%, 100% { scale: 1; }
-	83% { scale: 1.35; }
-}
-@media (prefers-reduced-motion: reduce) {
-	.flow .flow-dot, .flow .flow-middle, .flow .flow-bug { animation: none; }
-}
 </style>
 </head>
 <body>
@@ -675,8 +616,7 @@ ${sprite}
 	<div class="stack">
 		${renderingTable}
 		<p class="footnote">In a static build, server dependencies are limited to the build machine. A ReDoS in a Markdown parser might slow down a build, but visitors can’t trigger it. ${cautionIcon(REQUEST_TIME_WARNING)}Request-time code runs on a live server, where anyone loading a page can reach it. Note that client dependencies ship to the browser either way, so their vulnerabilities can affect both Build-time and Request-time projects.</p>
-		<p class="footnote">npm audit on create is whether the framework’s official create tool shows <code>npm audit</code> results, including high severity vulnerabilities, after it installs dependencies. Hover a cell to see how it’s hidden.</p>
-		${flows}
+		<p class="footnote">Shows npm audit is whether the framework’s official create tool shows <code>npm audit</code> results, including high severity vulnerabilities, after it installs dependencies. Hover a cell to see how it’s hidden.</p>
 	</div>
 </section>
 
