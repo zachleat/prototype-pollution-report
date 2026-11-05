@@ -1,5 +1,5 @@
 import { faAngular, faBuildAwesome, faSvelte } from "@fortawesome/free-brands-svg-icons";
-import { faAstro, faGatsby, faNextjs, faNuxt, faTanstack } from "./logos.js";
+import { faAstro, faGatsby, faNextjs, faNuxt, faRemix, faSolid, faTanstack } from "./logos.js";
 
 // Each ecosystem is every package owned by its npm orgs (narrowed by `match`), plus `include`, minus `exclude`; `core` is also audited alone, labeled `coreName` when set.
 // `static` and `requestTime` say whether a framework can build static output or run code per request ("no", "yes" or "default").
@@ -17,4 +17,7 @@ export default [
 	{ id: "angular", createAudit: { status: "hidden", tool: "@angular/cli@22.2.5", how: "ng new prints install output only on failure" }, mpa: "no", spa: "default", static: "default", requestTime: "yes", name: "Angular", orgs: ["angular"], match: /^(@angular\/|@angular-devkit\/|@schematics\/angular$|zone\.js$|angular-in-memory-web-api$)/, core: "@angular/core", icon: faAngular, color: { light: "#dd0031", dark: "#dd0031" } },
 	// The tanstack org also owns Query, Table, AI and other libraries.
 	{ id: "tanstack-start", createAudit: { status: "hidden", tool: "@tanstack/cli@0.72.15", manual: "Manual install", manualUrl: "https://tanstack.com/start/latest/docs/framework/react/build-from-scratch", how: "The TanStack create tool captures and discards install output" }, mpa: "no", spa: "default", static: "yes", requestTime: "default", name: "TanStack Start", orgs: ["tanstack"], match: /^@tanstack\/(.*\b(start|router)\b.*|history|virtual-file-routes|directive-functions-plugin|server-functions-plugin|nitro-v2-vite-plugin)$/, include: ["create-start-app", "create-tsrouter-app", "create-tanstack", "create-tanstack-app"], core: "@tanstack/react-start", icon: faTanstack, color: { light: "#7a6a45", dark: "#cdbf8f" } },
+	{ id: "solid", createAudit: { status: "shown", tool: "create-solid@0.12.0", how: "create-solid doesn’t install; your own npm install shows its audit" }, mpa: "no", spa: "default", static: "yes", requestTime: "default", name: "Solid", orgs: ["solidjs"], core: "@solidjs/start", coreName: "SolidStart", include: ["solid-js", "create-solid", "vite-plugin-solid", "babel-preset-solid", "babel-plugin-jsx-dom-expressions", "dom-expressions", "solid-refresh"], icon: faSolid, color: { light: "#2c4f7c", dark: "#76b3e1" } },
+	// Remix 2 merged into React Router, and Remix 3 is a new framework under the old name, so all three lineages count as one ecosystem.
+	{ id: "remix", createAudit: { status: "shown", tool: "remix@3.2.0", how: "remix new doesn’t install; your own npm install shows its audit" }, mpa: "yes", spa: "default", static: "no", requestTime: "default", name: "Remix", orgs: ["remix-run", "react-router"], include: ["remix", "create-remix", "react-router", "react-router-dom", "create-react-router"], core: "remix", icon: faRemix, color: { light: "#1a6fe0", dark: "#3992ff" } },
 ];

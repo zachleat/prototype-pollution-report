@@ -17,4 +17,4 @@ Next.js's precompiled `dist/compiled` packages are audited as regular dependenci
 Icons:
 
 - [Font Awesome](https://fontawesome.com/)
-- [Simple Icons](https://simpleicons.org/) (CC0): Nuxt, Next.js, Astro, Gatsby and TanStack logos in `logos.js`
+- [Simple Icons](https://simpleicons.org/) (CC0): Nuxt, Next.js, Astro, Gatsby, TanStack, Solid and Remix logos in `logos.js`
