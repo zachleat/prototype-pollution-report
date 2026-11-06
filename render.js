@@ -181,6 +181,22 @@ const dataTable = (rows, label, nameOf, alt) => `<details>
 		</table></div>
 	</details>`;
 
+// A framework's value over time, on a scale shared by every framework for that value, with gaps where collection failed.
+const sparkline = (f, value) => {
+	// Zero sits just above the bottom edge so its stroke isn't clipped; the fill still runs to the edge, hidden under the stroke and outline at 0.
+	let [w, h, pad, base] = [60, 16, 1.5, 0.5];
+	let valuesOf = f => dates.map(d => (s => s && !s.error ? value(s) ?? null : null)(get(d, f.id)));
+	let values = valuesOf(f);
+	let max = Math.max(1, ...series.flatMap(valuesOf).filter(v => v != null));
+	let span = time(latestDate) - time(dates[0]) || 1;
+	let points = values.map((v, j) => v == null ? null : [((time(dates[j]) - time(dates[0])) / span * w).toFixed(1), (h - base - v / max * (h - pad - base)).toFixed(1)]);
+	let segments = points.reduce((all, p, j) => (p && (points[j - 1] ? all.at(-1).push(p) : all.push([p])), all), []);
+	let line = segments.map(s => s.map(([x, y], k) => `${k ? "L" : "M"}${x},${y}`).join("")).join("");
+	let area = segments.map(s => `M${s[0][0]},${h}${s.map(([x, y]) => `L${x},${y}`).join("")}L${s.at(-1)[0]},${h}Z`).join("");
+	let color = `var(--series-${f.slot})`;
+	return `<svg class="sparkline" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true"><path d="${area}" class="area" style="fill:${color}"/><path d="${line}" vector-effect="non-scaling-stroke" style="stroke:${color}"/></svg>`;
+};
+
 const SW = 240;
 const SH = 150;
 const SM = { top: 12, right: 40, bottom: 24, left: 40 };
@@ -269,7 +285,6 @@ let latestCore = latest
 	.filter(({ s }) => s.core)
 	.toSorted((a, b) => a.s.core.vulnerabilities.total - b.s.core.vulnerabilities.total);
 
-let perDependency = (vulnerabilities, dependencies) => dependencies ? (vulnerabilities / dependencies).toFixed(3) : null;
 // Pearson correlation coefficient.
 let pearson = pairs => {
 	let n = pairs.length;
@@ -325,7 +340,7 @@ let scoreboard = `<div class="scroll"><table class="scoreboard">
 		<th>Forecast</th>
 		<th>Framework</th>
 		<th class="n">Vulnerabilities<br><span class="third-party">(Raw npm audit)</span></th>
-		<th class="n">Vulnerabilities<br>per Dependency</th>
+		<th>Over Time</th>
 		<th class="n">GitHub<br>Advisories</th>
 		<th class="n">Packages<br><span class="third-party">(Affected)</span></th>
 		<th class="n">Dependencies<br><span class="third-party">(Third-party)</span></th>
@@ -335,7 +350,7 @@ let scoreboard = `<div class="scroll"><table class="scoreboard">
 		${forecast(s.vulnerabilities)}
 		<th scope="row">${icon(f)}${esc(f.name)}${stale(date)}</th>
 		<td class="n strong">${requestTimeCaution(f, s.vulnerabilities.total)}${num(s.vulnerabilities.total)}${delta(s.vulnerabilities.total, get(baseline, f.id)?.vulnerabilities?.total)}${rawAudit(s)}</td>
-		<td class="n">${num(perDependency(s.vulnerabilities.total, s.dependencies))}</td>
+		<td class="spark">${sparkline(f, s => s.vulnerabilities.total)}</td>
 		<td class="n">${num(s.advisories.total)}</td>
 		<td class="n">${num(s.packageCount)}<br><span class="third-party">(${num(officialAffected(s))})</span></td>
 		<td class="n">${num(s.dependencies)}<br><span class="third-party">(${num(s.thirdPartyDependencies)})</span></td>
@@ -348,7 +363,7 @@ let coreScoreboard = `<div class="scroll"><table class="scoreboard">
 		<th>Forecast</th>
 		<th>Package</th>
 		<th class="n">Vulnerabilities<br><span class="third-party">(Raw npm audit)</span></th>
-		<th class="n">Vulnerabilities<br>per Dependency</th>
+		<th>Over Time</th>
 		<th class="n">GitHub<br>Advisories</th>
 		<th class="n">Dependencies<br><span class="third-party">(Third-party)</span></th>
 		<th>Severity<br>${SEVERITIES.map(sev => `<span class="badge ${sev} key">${sev}</span>`).join(" ")}</th>
@@ -357,7 +372,7 @@ let coreScoreboard = `<div class="scroll"><table class="scoreboard">
 		${forecast(core.vulnerabilities)}
 		<th scope="row">${icon(f)}<a href="https://www.npmjs.com/package/${esc(core.name)}/v/${esc(core.version)}">${esc(core.name)}</a> <span class="muted">${esc(core.version)}</span>${age(published?.[core.name])}${stale(date)}</th>
 		<td class="n strong">${requestTimeCaution(f, core.vulnerabilities.total)}${num(core.vulnerabilities.total)}${delta(core.vulnerabilities.total, get(baseline, f.id)?.core?.vulnerabilities.total)}${rawAudit(core)}</td>
-		<td class="n">${num(perDependency(core.vulnerabilities.total, core.dependencies))}</td>
+		<td class="spark">${sparkline(f, s => s.core?.vulnerabilities.total)}</td>
 		<td class="n">${num(core.advisories.total)}</td>
 		<td class="n">${num(core.dependencies)}<br><span class="third-party">(${num(core.thirdPartyDependencies)})</span></td>
 		<td class="sev">${pills(core.vulnerabilities) || `<span class="muted">—</span>`}</td>
@@ -497,6 +512,9 @@ figure { margin: 0; display: flex; flex-direction: column; gap: 1.25em; }
 .support.warn { fill: var(--caution); margin-inline-start: 0.375em; }
 .footnote .support.warn { margin-inline: 0 0.25em; }
 td.n > .support.warn:first-child { margin-inline: 0 0.375em; }
+/* Positioned so the sparkline fills the row's height inside the cell's block padding. */
+td.spark { position: relative; width: 5.2em; padding-inline: 0; }
+.sparkline { position: absolute; inset-block-start: 0.4em; inset-inline-start: 0; width: 100%; height: calc(100% - 0.8em); outline: 1px solid var(--border); outline-offset: -1px; border-radius: 4px; fill: none; stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
 .icon.support.warn { margin-inline-start: 0; }
 .icon { width: 1.375em; height: 1.375em; vertical-align: -0.3em; margin-inline-end: 0.5em; overflow: visible; }
 .plot { position: relative; anchor-scope: --point; }

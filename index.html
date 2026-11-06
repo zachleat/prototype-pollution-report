@@ -133,6 +133,9 @@ figure { margin: 0; display: flex; flex-direction: column; gap: 1.25em; }
 .support.warn { fill: var(--caution); margin-inline-start: 0.375em; }
 .footnote .support.warn { margin-inline: 0 0.25em; }
 td.n > .support.warn:first-child { margin-inline: 0 0.375em; }
+/* Positioned so the sparkline fills the row's height inside the cell's block padding. */
+td.spark { position: relative; width: 5.2em; padding-inline: 0; }
+.sparkline { position: absolute; inset-block-start: 0.4em; inset-inline-start: 0; width: 100%; height: calc(100% - 0.8em); outline: 1px solid var(--border); outline-offset: -1px; border-radius: 4px; fill: none; stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
 .icon.support.warn { margin-inline-start: 0; }
 .icon { width: 1.375em; height: 1.375em; vertical-align: -0.3em; margin-inline-end: 0.5em; overflow: visible; }
 .plot { position: relative; anchor-scope: --point; }
@@ -405,7 +408,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<th>Forecast</th>
 		<th>Framework</th>
 		<th class="n">Vulnerabilities<br><span class="third-party">(Raw npm audit)</span></th>
-		<th class="n">Vulnerabilities<br>per Dependency</th>
+		<th>Over Time</th>
 		<th class="n">GitHub<br>Advisories</th>
 		<th class="n">Packages<br><span class="third-party">(Affected)</span></th>
 		<th class="n">Dependencies<br><span class="third-party">(Third-party)</span></th>
@@ -415,7 +418,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="forecast" title="Partly cloudy"><span class="badge rank low"><svg class="weather" role="img" aria-label="Partly cloudy"><use href="#weather-partly-cloudy"/></svg>1</span></td>
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-1)"><use href="#icon-11ty"/></svg>Build Awesome (11ty)</th>
 		<td class="n strong">3</td>
-		<td class="n">0.005</td>
+		<td class="spark"><svg class="sparkline" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0,16L0.0,14.6L4.9,14.6L9.9,14.6L14.9,14.6L19.5,14.6L24.5,14.6L29.4,14.6L34.4,14.5L39.2,14.4L44.3,14.3L49.3,14.5L54.2,14.6L58.9,15.4L59.0,14.9L59.2,14.9L59.4,14.9L59.5,15.0L59.7,15.0L59.8,15.4L60.0,15.4L60.0,16Z" class="area" style="fill:var(--series-1)"/><path d="M0.0,14.6L4.9,14.6L9.9,14.6L14.9,14.6L19.5,14.6L24.5,14.6L29.4,14.6L34.4,14.5L39.2,14.4L44.3,14.3L49.3,14.5L54.2,14.6L58.9,15.4L59.0,14.9L59.2,14.9L59.4,14.9L59.5,15.0L59.7,15.0L59.8,15.4L60.0,15.4" vector-effect="non-scaling-stroke" style="stroke:var(--series-1)"/></svg></td>
 		<td class="n">4</td>
 		<td class="n">44<br><span class="third-party">(2)</span></td>
 		<td class="n">613<br><span class="third-party">(557)</span></td>
@@ -424,7 +427,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="forecast" title="Cloudy"><span class="badge rank moderate"><svg class="weather" role="img" aria-label="Cloudy"><use href="#weather-cloudy"/></svg>2</span></td>
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-9)"><use href="#icon-solid"/></svg>Solid</th>
 		<td class="n strong"><svg class="support warn" role="img" aria-label="Code runs on request (by default)"><title>Code runs on request (by default)</title><use href="#support-warn"/></svg>11<span class="delta up" title="Up 5 since Oct 30, 2026"><svg class="trend" aria-hidden="true"><use href="#trend-up"/></svg>5</span></td>
-		<td class="n">0.020</td>
+		<td class="spark"><svg class="sparkline" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4.9,16L4.9,15.5L9.9,15.5L14.9,15.3L19.5,15.2L24.5,15.3L29.4,15.2L34.4,15.2L39.2,15.2L44.3,15.1L49.3,15.4L54.2,15.2L58.9,15.3L59.0,14.9L59.2,14.9L59.4,14.9L59.5,14.9L59.7,14.9L59.8,15.1L60.0,15.1L60.0,16Z" class="area" style="fill:var(--series-9)"/><path d="M4.9,15.5L9.9,15.5L14.9,15.3L19.5,15.2L24.5,15.3L29.4,15.2L34.4,15.2L39.2,15.2L44.3,15.1L49.3,15.4L54.2,15.2L58.9,15.3L59.0,14.9L59.2,14.9L59.4,14.9L59.5,14.9L59.7,14.9L59.8,15.1L60.0,15.1" vector-effect="non-scaling-stroke" style="stroke:var(--series-9)"/></svg></td>
 		<td class="n">9</td>
 		<td class="n">26<br><span class="third-party">(2)</span></td>
 		<td class="n">546<br><span class="third-party">(514)</span></td>
@@ -433,7 +436,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="forecast" title="Cloudy"><span class="badge rank moderate"><svg class="weather" role="img" aria-label="Cloudy"><use href="#weather-cloudy"/></svg>2</span></td>
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-7)"><use href="#icon-angular"/></svg>Angular</th>
 		<td class="n strong">15<span class="delta up" title="Up 6 since Oct 30, 2026"><svg class="trend" aria-hidden="true"><use href="#trend-up"/></svg>6</span><br><span class="third-party">(11)</span></td>
-		<td class="n">0.029</td>
+		<td class="spark"><svg class="sparkline" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0,16L0.0,15.5L4.9,15.5L9.9,15.5L14.9,15.5L19.5,15.0L24.5,15.4L29.4,15.2L34.4,15.1L39.2,15.1L44.3,15.2L49.3,15.2L54.2,15.0L58.9,15.2L59.0,15.0L59.2,15.0L59.4,15.0L59.5,15.0L59.7,15.0L59.8,15.0L60.0,15.0L60.0,16Z" class="area" style="fill:var(--series-7)"/><path d="M0.0,15.5L4.9,15.5L9.9,15.5L14.9,15.5L19.5,15.0L24.5,15.4L29.4,15.2L34.4,15.1L39.2,15.1L44.3,15.2L49.3,15.2L54.2,15.0L58.9,15.2L59.0,15.0L59.2,15.0L59.4,15.0L59.5,15.0L59.7,15.0L59.8,15.0L60.0,15.0" vector-effect="non-scaling-stroke" style="stroke:var(--series-7)"/></svg></td>
 		<td class="n">5</td>
 		<td class="n">47<br><span class="third-party">(3)</span></td>
 		<td class="n">514<br><span class="third-party">(461)</span></td>
@@ -442,7 +445,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="forecast" title="Heavy rain"><span class="badge rank severe"><svg class="weather" role="img" aria-label="Heavy rain"><use href="#weather-heavy-rain"/></svg>4</span></td>
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-2)"><use href="#icon-svelte"/></svg>Svelte</th>
 		<td class="n strong"><svg class="support warn" role="img" aria-label="Code runs on request (by default)"><title>Code runs on request (by default)</title><use href="#support-warn"/></svg>45<span class="delta up" title="Up 4 since Oct 30, 2026"><svg class="trend" aria-hidden="true"><use href="#trend-up"/></svg>4</span><br><span class="third-party">(43)</span></td>
-		<td class="n">0.060</td>
+		<td class="spark"><svg class="sparkline" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0,16L0.0,15.0L4.9,15.0L9.9,15.0L14.9,14.9L19.5,14.7L24.5,14.8L29.4,14.7L34.4,14.6L39.2,14.7L44.3,14.1L49.3,14.2L54.2,14.0L58.9,14.0L59.0,13.3L59.2,13.3L59.4,13.3L59.5,13.3L59.7,13.3L59.8,13.9L60.0,13.9L60.0,16Z" class="area" style="fill:var(--series-2)"/><path d="M0.0,15.0L4.9,15.0L9.9,15.0L14.9,14.9L19.5,14.7L24.5,14.8L29.4,14.7L34.4,14.6L39.2,14.7L44.3,14.1L49.3,14.2L54.2,14.0L58.9,14.0L59.0,13.3L59.2,13.3L59.4,13.3L59.5,13.3L59.7,13.3L59.8,13.9L60.0,13.9" vector-effect="non-scaling-stroke" style="stroke:var(--series-2)"/></svg></td>
 		<td class="n">36</td>
 		<td class="n">45<br><span class="third-party">(15)</span></td>
 		<td class="n">754<br><span class="third-party">(703)</span></td>
@@ -451,7 +454,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="forecast" title="Rain"><span class="badge rank high"><svg class="weather" role="img" aria-label="Rain"><use href="#weather-rain"/></svg>3</span></td>
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-5)"><use href="#icon-astro"/></svg>Astro</th>
 		<td class="n strong">47<span class="delta up" title="Up 6 since Oct 30, 2026"><svg class="trend" aria-hidden="true"><use href="#trend-up"/></svg>6</span><br><span class="third-party">(33)</span></td>
-		<td class="n">0.030</td>
+		<td class="spark"><svg class="sparkline" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0,16L0.0,14.4L4.9,14.4L9.9,14.4L14.9,14.2L19.5,13.9L24.5,13.8L29.4,13.8L34.4,13.8L39.2,13.8L44.3,13.9L49.3,14.0L54.2,13.9L58.9,14.0L59.0,13.5L59.2,13.5L59.4,13.5L59.5,13.6L59.7,13.6L59.8,13.8L60.0,13.8L60.0,16Z" class="area" style="fill:var(--series-5)"/><path d="M0.0,14.4L4.9,14.4L9.9,14.4L14.9,14.2L19.5,13.9L24.5,13.8L29.4,13.8L34.4,13.8L39.2,13.8L44.3,13.9L49.3,14.0L54.2,13.9L58.9,14.0L59.0,13.5L59.2,13.5L59.4,13.5L59.5,13.6L59.7,13.6L59.8,13.8L60.0,13.8" vector-effect="non-scaling-stroke" style="stroke:var(--series-5)"/></svg></td>
 		<td class="n">86</td>
 		<td class="n">54<br><span class="third-party">(7)</span></td>
 		<td class="n">1,563<br><span class="third-party">(1,507)</span></td>
@@ -460,7 +463,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="forecast" title="Heavy rain"><span class="badge rank severe"><svg class="weather" role="img" aria-label="Heavy rain"><use href="#weather-heavy-rain"/></svg>4</span></td>
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-10)"><use href="#icon-remix"/></svg>Remix</th>
 		<td class="n strong"><svg class="support warn" role="img" aria-label="Code runs on request (by default)"><title>Code runs on request (by default)</title><use href="#support-warn"/></svg>47<br><span class="third-party">(37)</span></td>
-		<td class="n">0.042</td>
+		<td class="spark"><svg class="sparkline" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4.9,16L4.9,14.4L9.9,14.4L14.9,14.2L19.5,14.0L24.5,14.0L29.4,13.9L34.4,13.9L39.2,13.9L44.3,13.8L49.3,13.8L54.2,13.7L58.9,13.8L59.0,13.8L59.2,13.8L59.4,13.8L59.5,13.8L59.7,13.8L59.8,13.8L60.0,13.8L60.0,16Z" class="area" style="fill:var(--series-10)"/><path d="M4.9,14.4L9.9,14.4L14.9,14.2L19.5,14.0L24.5,14.0L29.4,13.9L34.4,13.9L39.2,13.9L44.3,13.8L49.3,13.8L54.2,13.7L58.9,13.8L59.0,13.8L59.2,13.8L59.4,13.8L59.5,13.8L59.7,13.8L59.8,13.8L60.0,13.8" vector-effect="non-scaling-stroke" style="stroke:var(--series-10)"/></svg></td>
 		<td class="n">62</td>
 		<td class="n">95<br><span class="third-party">(19)</span></td>
 		<td class="n">1,115<br><span class="third-party">(1,011)</span></td>
@@ -469,7 +472,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="forecast" title="Heavy rain"><span class="badge rank severe"><svg class="weather" role="img" aria-label="Heavy rain"><use href="#weather-heavy-rain"/></svg>4</span></td>
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-4)"><use href="#icon-next"/></svg>Next.js</th>
 		<td class="n strong"><svg class="support warn" role="img" aria-label="Code runs on request (by default)"><title>Code runs on request (by default)</title><use href="#support-warn"/></svg>50<span class="delta up" title="Up 9 since Oct 30, 2026"><svg class="trend" aria-hidden="true"><use href="#trend-up"/></svg>9</span><br><span class="third-party">(16)</span></td>
-		<td class="n">0.051</td>
+		<td class="spark"><svg class="sparkline" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0,16L0.0,14.8L4.9,14.8L9.9,14.8L14.9,14.6L19.5,14.4L24.5,14.4L29.4,14.4L34.4,14.4L39.2,14.3L44.3,14.2L49.3,14.2L54.2,14.2L58.9,14.0L59.0,13.4L59.2,13.4L59.4,13.4L59.5,13.4L59.7,13.4L59.8,13.7L60.0,13.7L60.0,16Z" class="area" style="fill:var(--series-4)"/><path d="M0.0,14.8L4.9,14.8L9.9,14.8L14.9,14.6L19.5,14.4L24.5,14.4L29.4,14.4L34.4,14.4L39.2,14.3L44.3,14.2L49.3,14.2L54.2,14.2L58.9,14.0L59.0,13.4L59.2,13.4L59.4,13.4L59.5,13.4L59.7,13.4L59.8,13.7L60.0,13.7" vector-effect="non-scaling-stroke" style="stroke:var(--series-4)"/></svg></td>
 		<td class="n">64</td>
 		<td class="n">27<br><span class="third-party">(9)</span></td>
 		<td class="n">972<br><span class="third-party">(942)</span></td>
@@ -478,7 +481,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="forecast" title="Heavy rain"><span class="badge rank severe"><svg class="weather" role="img" aria-label="Heavy rain"><use href="#weather-heavy-rain"/></svg>4</span></td>
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-8)"><use href="#icon-tanstack-start"/></svg>TanStack Start</th>
 		<td class="n strong"><svg class="support warn" role="img" aria-label="Code runs on request (by default)"><title>Code runs on request (by default)</title><use href="#support-warn"/></svg>73<span class="delta up" title="Up 8 since Oct 30, 2026"><svg class="trend" aria-hidden="true"><use href="#trend-up"/></svg>8</span><br><span class="third-party">(61)</span></td>
-		<td class="n">0.068</td>
+		<td class="spark"><svg class="sparkline" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0,16L0.0,14.4L4.9,14.1L9.9,14.0L14.9,13.5L19.5,13.3L24.5,13.3L29.4,13.3L34.4,13.2L39.2,13.2L44.3,13.1L49.3,13.2L54.2,13.3L58.9,13.1L59.0,12.6L59.2,12.6L59.4,12.6L59.5,12.6L59.7,12.6L59.8,12.8L60.0,12.8L60.0,16Z" class="area" style="fill:var(--series-8)"/><path d="M0.0,14.4L4.9,14.1L9.9,14.0L14.9,13.5L19.5,13.3L24.5,13.3L29.4,13.3L34.4,13.2L39.2,13.2L44.3,13.1L49.3,13.2L54.2,13.3L58.9,13.1L59.0,12.6L59.2,12.6L59.4,12.6L59.5,12.6L59.7,12.6L59.8,12.8L60.0,12.8" vector-effect="non-scaling-stroke" style="stroke:var(--series-8)"/></svg></td>
 		<td class="n">108</td>
 		<td class="n">81<br><span class="third-party">(24)</span></td>
 		<td class="n">1,081<br><span class="third-party">(985)</span></td>
@@ -487,7 +490,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="forecast" title="Storms"><span class="badge rank critical"><svg class="weather" role="img" aria-label="Storms"><use href="#weather-storms"/></svg>5</span></td>
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-3)"><use href="#icon-nuxt"/></svg>Nuxt</th>
 		<td class="n strong"><svg class="support warn" role="img" aria-label="Code runs on request (by default)"><title>Code runs on request (by default)</title><use href="#support-warn"/></svg>120<span class="delta up" title="Up 12 since Oct 30, 2026"><svg class="trend" aria-hidden="true"><use href="#trend-up"/></svg>12</span><br><span class="third-party">(116)</span></td>
-		<td class="n">0.050</td>
+		<td class="spark"><svg class="sparkline" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4.9,16L4.9,13.4L9.9,13.3L14.9,13.3L19.5,12.8L24.5,12.9L29.4,12.7L34.4,12.5L39.2,12.4L44.3,12.4L49.3,12.3L54.2,11.7L58.9,11.6L59.0,10.8L59.2,10.8L59.4,10.8L59.5,10.9L59.7,10.9L59.8,11.1L60.0,11.1L60.0,16Z" class="area" style="fill:var(--series-3)"/><path d="M4.9,13.4L9.9,13.3L14.9,13.3L19.5,12.8L24.5,12.9L29.4,12.7L34.4,12.5L39.2,12.4L44.3,12.4L49.3,12.3L54.2,11.7L58.9,11.6L59.0,10.8L59.2,10.8L59.4,10.8L59.5,10.9L59.7,10.9L59.8,11.1L60.0,11.1" vector-effect="non-scaling-stroke" style="stroke:var(--series-3)"/></svg></td>
 		<td class="n">105</td>
 		<td class="n">57<br><span class="third-party">(25)</span></td>
 		<td class="n">2,412<br><span class="third-party">(2,338)</span></td>
@@ -496,7 +499,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="forecast" title="Storms"><span class="badge rank critical"><svg class="weather" role="img" aria-label="Storms"><use href="#weather-storms"/></svg>5</span></td>
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-6)"><use href="#icon-gatsby"/></svg>Gatsby</th>
 		<td class="n strong">342<span class="delta up" title="Up 2 since Oct 30, 2026"><svg class="trend" aria-hidden="true"><use href="#trend-up"/></svg>2</span></td>
-		<td class="n">0.102</td>
+		<td class="spark"><svg class="sparkline" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0,16L0.0,5.8L4.9,5.8L9.9,5.7L14.9,5.1L19.5,4.8L24.5,4.5L29.4,4.5L34.4,4.4L39.2,4.2L44.3,4.2L49.3,4.1L54.2,3.6L58.9,3.1L59.0,1.5L59.2,1.5L59.4,1.5L59.5,1.5L59.7,1.5L59.8,3.0L60.0,3.0L60.0,16Z" class="area" style="fill:var(--series-6)"/><path d="M0.0,5.8L4.9,5.8L9.9,5.7L14.9,5.1L19.5,4.8L24.5,4.5L29.4,4.5L34.4,4.4L39.2,4.2L44.3,4.2L49.3,4.1L54.2,3.6L58.9,3.1L59.0,1.5L59.2,1.5L59.4,1.5L59.5,1.5L59.7,1.5L59.8,3.0L60.0,3.0" vector-effect="non-scaling-stroke" style="stroke:var(--series-6)"/></svg></td>
 		<td class="n">176</td>
 		<td class="n">133<br><span class="third-party">(116)</span></td>
 		<td class="n">3,361<br><span class="third-party">(3,202)</span></td>
@@ -786,7 +789,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<th>Forecast</th>
 		<th>Package</th>
 		<th class="n">Vulnerabilities<br><span class="third-party">(Raw npm audit)</span></th>
-		<th class="n">Vulnerabilities<br>per Dependency</th>
+		<th>Over Time</th>
 		<th class="n">GitHub<br>Advisories</th>
 		<th class="n">Dependencies<br><span class="third-party">(Third-party)</span></th>
 		<th>Severity<br><span class="badge critical key">critical</span> <span class="badge high key">high</span> <span class="badge moderate key">moderate</span> <span class="badge low key">low</span></th>
@@ -795,7 +798,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="forecast" title="Clear"><span class="badge rank none"><svg class="weather" role="img" aria-label="Clear"><use href="#weather-clear"/></svg>0</span></td>
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-1)"><use href="#icon-11ty"/></svg><a href="https://www.npmjs.com/package/@11ty/eleventy/v/3.1.8">@11ty/eleventy</a> <span class="muted">3.1.8</span> <span class="badge age" title="Published Nov 3, 2026">3d</span></th>
 		<td class="n strong">0</td>
-		<td class="n">0.000</td>
+		<td class="spark"><svg class="sparkline" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0,16L0.0,15.5L4.9,15.5L9.9,15.5L14.9,15.5L19.5,15.5L24.5,15.5L29.4,15.5L34.4,15.5L39.2,15.5L44.3,15.5L49.3,15.5L54.2,15.5L58.9,15.5L59.0,14.9L59.2,14.9L59.4,14.9L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5L60.0,16Z" class="area" style="fill:var(--series-1)"/><path d="M0.0,15.5L4.9,15.5L9.9,15.5L14.9,15.5L19.5,15.5L24.5,15.5L29.4,15.5L34.4,15.5L39.2,15.5L44.3,15.5L49.3,15.5L54.2,15.5L58.9,15.5L59.0,14.9L59.2,14.9L59.4,14.9L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5" vector-effect="non-scaling-stroke" style="stroke:var(--series-1)"/></svg></td>
 		<td class="n">0</td>
 		<td class="n">127<br><span class="third-party">(116)</span></td>
 		<td class="sev"><span class="muted">—</span></td>
@@ -803,7 +806,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="forecast" title="Clear"><span class="badge rank none"><svg class="weather" role="img" aria-label="Clear"><use href="#weather-clear"/></svg>0</span></td>
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-9)"><use href="#icon-solid"/></svg><a href="https://www.npmjs.com/package/@solidjs/start/v/2.2.1">@solidjs/start</a> <span class="muted">2.2.1</span> <span class="badge age" title="Published Nov 3, 2026">3d</span></th>
 		<td class="n strong">0</td>
-		<td class="n">0.000</td>
+		<td class="spark"><svg class="sparkline" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4.9,16L4.9,15.5L9.9,15.5L14.9,14.6L19.5,14.0L24.5,14.6L29.4,14.2L34.4,13.8L39.2,13.8L44.3,13.4L49.3,14.9L54.2,14.9L58.9,15.5L59.0,14.7L59.2,14.7L59.4,14.7L59.5,14.7L59.7,14.7L59.8,15.5L60.0,15.5L60.0,16Z" class="area" style="fill:var(--series-9)"/><path d="M4.9,15.5L9.9,15.5L14.9,14.6L19.5,14.0L24.5,14.6L29.4,14.2L34.4,13.8L39.2,13.8L44.3,13.4L49.3,14.9L54.2,14.9L58.9,15.5L59.0,14.7L59.2,14.7L59.4,14.7L59.5,14.7L59.7,14.7L59.8,15.5L60.0,15.5" vector-effect="non-scaling-stroke" style="stroke:var(--series-9)"/></svg></td>
 		<td class="n">0</td>
 		<td class="n">271<br><span class="third-party">(264)</span></td>
 		<td class="sev"><span class="muted">—</span></td>
@@ -811,7 +814,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="forecast" title="Clear"><span class="badge rank none"><svg class="weather" role="img" aria-label="Clear"><use href="#weather-clear"/></svg>0</span></td>
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-7)"><use href="#icon-angular"/></svg><a href="https://www.npmjs.com/package/@angular/core/v/22.2.4">@angular/core</a> <span class="muted">22.2.4</span> <span class="badge age" title="Published Oct 29, 2026">8d</span></th>
 		<td class="n strong">0</td>
-		<td class="n">0.000</td>
+		<td class="spark"><svg class="sparkline" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0,16L0.0,15.5L4.9,15.5L9.9,15.5L14.9,15.5L19.5,15.5L24.5,15.5L29.4,15.5L34.4,15.5L39.2,15.5L44.3,15.5L49.3,15.5L54.2,15.5L58.9,15.5L59.0,15.5L59.2,15.5L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5L60.0,16Z" class="area" style="fill:var(--series-7)"/><path d="M0.0,15.5L4.9,15.5L9.9,15.5L14.9,15.5L19.5,15.5L24.5,15.5L29.4,15.5L34.4,15.5L39.2,15.5L44.3,15.5L49.3,15.5L54.2,15.5L58.9,15.5L59.0,15.5L59.2,15.5L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5" vector-effect="non-scaling-stroke" style="stroke:var(--series-7)"/></svg></td>
 		<td class="n">0</td>
 		<td class="n">3<br><span class="third-party">(2)</span></td>
 		<td class="sev"><span class="muted">—</span></td>
@@ -819,7 +822,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="forecast" title="Clear"><span class="badge rank none"><svg class="weather" role="img" aria-label="Clear"><use href="#weather-clear"/></svg>0</span></td>
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-5)"><use href="#icon-astro"/></svg><a href="https://www.npmjs.com/package/astro/v/7.4.7">astro</a> <span class="muted">7.4.7</span> <span class="badge age" title="Published Nov 5, 2026">1d</span></th>
 		<td class="n strong">0</td>
-		<td class="n">0.000</td>
+		<td class="spark"><svg class="sparkline" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0,16L0.0,15.5L4.9,15.5L9.9,15.5L14.9,15.5L19.5,15.5L24.5,15.5L29.4,15.1L34.4,14.7L39.2,15.1L44.3,14.7L49.3,14.9L54.2,14.9L58.9,15.5L59.0,14.9L59.2,14.9L59.4,14.9L59.5,14.9L59.7,14.9L59.8,15.5L60.0,15.5L60.0,16Z" class="area" style="fill:var(--series-5)"/><path d="M0.0,15.5L4.9,15.5L9.9,15.5L14.9,15.5L19.5,15.5L24.5,15.5L29.4,15.1L34.4,14.7L39.2,15.1L44.3,14.7L49.3,14.9L54.2,14.9L58.9,15.5L59.0,14.9L59.2,14.9L59.4,14.9L59.5,14.9L59.7,14.9L59.8,15.5L60.0,15.5" vector-effect="non-scaling-stroke" style="stroke:var(--series-5)"/></svg></td>
 		<td class="n">0</td>
 		<td class="n">322<br><span class="third-party">(314)</span></td>
 		<td class="sev"><span class="muted">—</span></td>
@@ -827,7 +830,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="forecast" title="Clear"><span class="badge rank none"><svg class="weather" role="img" aria-label="Clear"><use href="#weather-clear"/></svg>0</span></td>
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-8)"><use href="#icon-tanstack-start"/></svg><a href="https://www.npmjs.com/package/@tanstack/react-start/v/1.169.4">@tanstack/react-start</a> <span class="muted">1.169.4</span> <span class="badge age" title="Published Oct 22, 2026">15d</span></th>
 		<td class="n strong">0</td>
-		<td class="n">0.000</td>
+		<td class="spark"><svg class="sparkline" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0,16L0.0,15.5L4.9,15.5L9.9,15.5L14.9,15.5L19.5,15.5L24.5,14.6L29.4,15.5L34.4,15.5L39.2,15.5L44.3,15.5L49.3,15.5L54.2,15.5L58.9,15.5L59.0,15.5L59.2,15.5L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5L60.0,16Z" class="area" style="fill:var(--series-8)"/><path d="M0.0,15.5L4.9,15.5L9.9,15.5L14.9,15.5L19.5,15.5L24.5,14.6L29.4,15.5L34.4,15.5L39.2,15.5L44.3,15.5L49.3,15.5L54.2,15.5L58.9,15.5L59.0,15.5L59.2,15.5L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5" vector-effect="non-scaling-stroke" style="stroke:var(--series-8)"/></svg></td>
 		<td class="n">0</td>
 		<td class="n">97<br><span class="third-party">(81)</span></td>
 		<td class="sev"><span class="muted">—</span></td>
@@ -835,7 +838,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="forecast" title="Partly cloudy"><span class="badge rank low"><svg class="weather" role="img" aria-label="Partly cloudy"><use href="#weather-partly-cloudy"/></svg>1</span></td>
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-10)"><use href="#icon-remix"/></svg><a href="https://www.npmjs.com/package/remix/v/3.2.0">remix</a> <span class="muted">3.2.0</span> <span class="badge age" title="Published Nov 4, 2026">2d</span></th>
 		<td class="n strong"><svg class="support warn" role="img" aria-label="Code runs on request (by default)"><title>Code runs on request (by default)</title><use href="#support-warn"/></svg>1</td>
-		<td class="n">0.010</td>
+		<td class="spark"><svg class="sparkline" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4.9,16L4.9,15.5L9.9,15.5L14.9,15.5L19.5,15.5L24.5,15.5L29.4,15.5L34.4,15.5L39.2,15.5L44.3,15.5L49.3,15.5L54.2,15.5L58.9,15.3L59.0,15.3L59.2,15.3L59.4,15.3L59.5,15.3L59.7,15.3L59.8,15.3L60.0,15.3L60.0,16Z" class="area" style="fill:var(--series-10)"/><path d="M4.9,15.5L9.9,15.5L14.9,15.5L19.5,15.5L24.5,15.5L29.4,15.5L34.4,15.5L39.2,15.5L44.3,15.5L49.3,15.5L54.2,15.5L58.9,15.3L59.0,15.3L59.2,15.3L59.4,15.3L59.5,15.3L59.7,15.3L59.8,15.3L60.0,15.3" vector-effect="non-scaling-stroke" style="stroke:var(--series-10)"/></svg></td>
 		<td class="n">1</td>
 		<td class="n">100<br><span class="third-party">(50)</span></td>
 		<td class="sev"> <span class="badge low">low<span class="count">1</span></span></td>
@@ -843,7 +846,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="forecast" title="Partly cloudy"><span class="badge rank low"><svg class="weather" role="img" aria-label="Partly cloudy"><use href="#weather-partly-cloudy"/></svg>1</span></td>
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-2)"><use href="#icon-svelte"/></svg><a href="https://www.npmjs.com/package/@sveltejs/kit/v/3.1.1">@sveltejs/kit</a> <span class="muted">3.1.1</span> <span class="badge age" title="Published Oct 29, 2026">8d</span></th>
 		<td class="n strong"><svg class="support warn" role="img" aria-label="Code runs on request (by default)"><title>Code runs on request (by default)</title><use href="#support-warn"/></svg>3</td>
-		<td class="n">0.019</td>
+		<td class="spark"><svg class="sparkline" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0,16L0.0,15.1L4.9,15.1L9.9,15.1L14.9,15.1L19.5,15.1L24.5,15.1L29.4,14.7L34.4,14.6L39.2,14.7L44.3,14.4L49.3,14.6L54.2,14.2L58.9,14.9L59.0,14.6L59.2,14.6L59.4,14.6L59.5,14.6L59.7,14.6L59.8,14.9L60.0,14.9L60.0,16Z" class="area" style="fill:var(--series-2)"/><path d="M0.0,15.1L4.9,15.1L9.9,15.1L14.9,15.1L19.5,15.1L24.5,15.1L29.4,14.7L34.4,14.6L39.2,14.7L44.3,14.4L49.3,14.6L54.2,14.2L58.9,14.9L59.0,14.6L59.2,14.6L59.4,14.6L59.5,14.6L59.7,14.6L59.8,14.9L60.0,14.9" vector-effect="non-scaling-stroke" style="stroke:var(--series-2)"/></svg></td>
 		<td class="n">1</td>
 		<td class="n">154<br><span class="third-party">(150)</span></td>
 		<td class="sev"> <span class="badge low">low<span class="count">3</span></span></td>
@@ -851,7 +854,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="forecast" title="Cloudy"><span class="badge rank moderate"><svg class="weather" role="img" aria-label="Cloudy"><use href="#weather-cloudy"/></svg>2</span></td>
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-3)"><use href="#icon-nuxt"/></svg><a href="https://www.npmjs.com/package/nuxt/v/4.6.4">nuxt</a> <span class="muted">4.6.4</span> <span class="badge age" title="Published Nov 2, 2026">4d</span></th>
 		<td class="n strong"><svg class="support warn" role="img" aria-label="Code runs on request (by default)"><title>Code runs on request (by default)</title><use href="#support-warn"/></svg>12<span class="delta up" title="Up 5 since Oct 30, 2026"><svg class="trend" aria-hidden="true"><use href="#trend-up"/></svg>5</span></td>
-		<td class="n">0.022</td>
+		<td class="spark"><svg class="sparkline" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4.9,16L4.9,15.5L9.9,15.5L14.9,15.5L19.5,14.9L24.5,15.5L29.4,15.1L34.4,14.7L39.2,14.7L44.3,14.7L49.3,14.9L54.2,13.6L58.9,14.2L59.0,10.6L59.2,10.6L59.4,10.6L59.5,11.0L59.7,11.0L59.8,13.2L60.0,13.2L60.0,16Z" class="area" style="fill:var(--series-3)"/><path d="M4.9,15.5L9.9,15.5L14.9,15.5L19.5,14.9L24.5,15.5L29.4,15.1L34.4,14.7L39.2,14.7L44.3,14.7L49.3,14.9L54.2,13.6L58.9,14.2L59.0,10.6L59.2,10.6L59.4,10.6L59.5,11.0L59.7,11.0L59.8,13.2L60.0,13.2" vector-effect="non-scaling-stroke" style="stroke:var(--series-3)"/></svg></td>
 		<td class="n">3</td>
 		<td class="n">551<br><span class="third-party">(539)</span></td>
 		<td class="sev"> <span class="badge moderate">moderate<span class="count">10</span></span> <span class="badge low" title="2 low">2</span></td>
@@ -859,7 +862,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="forecast" title="Rain"><span class="badge rank high"><svg class="weather" role="img" aria-label="Rain"><use href="#weather-rain"/></svg>3</span></td>
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-4)"><use href="#icon-next"/></svg><a href="https://www.npmjs.com/package/next/v/16.4.5">next</a> <span class="muted">16.4.5</span> <span class="badge age" title="Published Nov 3, 2026">3d</span></th>
 		<td class="n strong"><svg class="support warn" role="img" aria-label="Code runs on request (by default)"><title>Code runs on request (by default)</title><use href="#support-warn"/></svg>34<span class="delta up" title="Up 2 since Oct 30, 2026"><svg class="trend" aria-hidden="true"><use href="#trend-up"/></svg>2</span><br><span class="third-party">(0)</span></td>
-		<td class="n">0.051</td>
+		<td class="spark"><svg class="sparkline" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0,16L0.0,12.5L4.9,12.5L9.9,12.3L14.9,11.5L19.5,10.6L24.5,10.6L29.4,10.4L34.4,10.4L39.2,10.0L44.3,9.6L49.3,10.0L54.2,9.8L58.9,9.4L59.0,9.1L59.2,9.1L59.4,9.1L59.5,9.1L59.7,9.1L59.8,9.1L60.0,9.1L60.0,16Z" class="area" style="fill:var(--series-4)"/><path d="M0.0,12.5L4.9,12.5L9.9,12.3L14.9,11.5L19.5,10.6L24.5,10.6L29.4,10.4L34.4,10.4L39.2,10.0L44.3,9.6L49.3,10.0L54.2,9.8L58.9,9.4L59.0,9.1L59.2,9.1L59.4,9.1L59.5,9.1L59.7,9.1L59.8,9.1L60.0,9.1" vector-effect="non-scaling-stroke" style="stroke:var(--series-4)"/></svg></td>
 		<td class="n">60</td>
 		<td class="n">667<br><span class="third-party">(663)</span></td>
 		<td class="sev"> <span class="badge critical">critical<span class="count">3</span></span> <span class="badge high" title="19 high">19</span> <span class="badge moderate" title="2 moderate">2</span> <span class="badge low" title="10 low">10</span></td>
@@ -867,7 +870,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="forecast" title="Rain"><span class="badge rank high"><svg class="weather" role="img" aria-label="Rain"><use href="#weather-rain"/></svg>3</span></td>
 		<th scope="row"><svg class="icon" aria-hidden="true" style="fill:var(--series-6)"><use href="#icon-gatsby"/></svg><a href="https://www.npmjs.com/package/gatsby/v/5.16.1">gatsby</a> <span class="muted">5.16.1</span> <span class="badge age" title="Published Feb 10, 2026">9mo</span></th>
 		<td class="n strong">49</td>
-		<td class="n">0.039</td>
+		<td class="spark"><svg class="sparkline" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0,16L0.0,13.8L4.9,13.8L9.9,13.2L14.9,13.0L19.5,12.3L24.5,10.0L29.4,8.9L34.4,8.7L39.2,8.9L44.3,8.3L49.3,8.1L54.2,7.4L58.9,6.2L59.0,1.5L59.2,1.5L59.4,1.5L59.5,1.5L59.7,1.5L59.8,6.2L60.0,6.2L60.0,16Z" class="area" style="fill:var(--series-6)"/><path d="M0.0,13.8L4.9,13.8L9.9,13.2L14.9,13.0L19.5,12.3L24.5,10.0L29.4,8.9L34.4,8.7L39.2,8.9L44.3,8.3L49.3,8.1L54.2,7.4L58.9,6.2L59.0,1.5L59.2,1.5L59.4,1.5L59.5,1.5L59.7,1.5L59.8,6.2L60.0,6.2" vector-effect="non-scaling-stroke" style="stroke:var(--series-6)"/></svg></td>
 		<td class="n">25</td>
 		<td class="n">1,253<br><span class="third-party">(1,232)</span></td>
 		<td class="sev"> <span class="badge high">high<span class="count">35</span></span> <span class="badge moderate" title="9 moderate">9</span> <span class="badge low" title="5 low">5</span></td>
