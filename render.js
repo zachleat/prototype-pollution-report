@@ -269,7 +269,20 @@ let latestCore = latest
 	.filter(({ s }) => s.core)
 	.toSorted((a, b) => a.s.core.vulnerabilities.total - b.s.core.vulnerabilities.total);
 
-let latestOf = f => latest.find(l => l.f === f)?.s;
+let perDependency = (vulnerabilities, dependencies) => dependencies ? (vulnerabilities / dependencies).toFixed(3) : null;
+// Pearson correlation coefficient.
+let pearson = pairs => {
+	let n = pairs.length;
+	let [mx, my] = [0, 1].map(k => pairs.reduce((sum, p) => sum + p[k], 0) / n);
+	let [sxy, sxx, syy] = pairs.reduce(([a, b, c], [x, y]) => [a + (x - mx) * (y - my), b + (x - mx) ** 2, c + (y - my) ** 2], [0, 0, 0]);
+	return sxx && syy ? sxy / Math.sqrt(sxx * syy) : null;
+};
+let correlation = pairs => {
+	let r = pearson(pairs);
+	return r == null ? "" : `<li>Across these ${pairs.length} frameworks, dependencies and vulnerabilities correlate at r = ${r.toFixed(2)}.</li>`;
+};
+
+let latestOf = f =>latest.find(l => l.f === f)?.s;
 let staleDateOf = f => latest.find(l => l.f === f)?.date;
 let staleRow = date => isOutdated(date) ? ` class="outdated"` : "";
 // Best ecosystem then core forecast first, with ecosystem then core vulnerability counts as tiebreakers; missing data sorts last.
@@ -312,6 +325,7 @@ let scoreboard = `<div class="scroll"><table class="scoreboard">
 		<th>Forecast</th>
 		<th>Framework</th>
 		<th class="n">Vulnerabilities<br><span class="third-party">(Raw npm audit)</span></th>
+		<th class="n">Vulnerabilities<br>per Dependency</th>
 		<th class="n">GitHub<br>Advisories</th>
 		<th class="n">Packages<br><span class="third-party">(Affected)</span></th>
 		<th class="n">Dependencies<br><span class="third-party">(Third-party)</span></th>
@@ -321,6 +335,7 @@ let scoreboard = `<div class="scroll"><table class="scoreboard">
 		${forecast(s.vulnerabilities)}
 		<th scope="row">${icon(f)}${esc(f.name)}${stale(date)}</th>
 		<td class="n strong">${requestTimeCaution(f, s.vulnerabilities.total)}${num(s.vulnerabilities.total)}${delta(s.vulnerabilities.total, get(baseline, f.id)?.vulnerabilities?.total)}${rawAudit(s)}</td>
+		<td class="n">${num(perDependency(s.vulnerabilities.total, s.dependencies))}</td>
 		<td class="n">${num(s.advisories.total)}</td>
 		<td class="n">${num(s.packageCount)}<br><span class="third-party">(${num(officialAffected(s))})</span></td>
 		<td class="n">${num(s.dependencies)}<br><span class="third-party">(${num(s.thirdPartyDependencies)})</span></td>
@@ -333,6 +348,7 @@ let coreScoreboard = `<div class="scroll"><table class="scoreboard">
 		<th>Forecast</th>
 		<th>Package</th>
 		<th class="n">Vulnerabilities<br><span class="third-party">(Raw npm audit)</span></th>
+		<th class="n">Vulnerabilities<br>per Dependency</th>
 		<th class="n">GitHub<br>Advisories</th>
 		<th class="n">Dependencies<br><span class="third-party">(Third-party)</span></th>
 		<th>Severity<br>${SEVERITIES.map(sev => `<span class="badge ${sev} key">${sev}</span>`).join(" ")}</th>
@@ -341,6 +357,7 @@ let coreScoreboard = `<div class="scroll"><table class="scoreboard">
 		${forecast(core.vulnerabilities)}
 		<th scope="row">${icon(f)}<a href="https://www.npmjs.com/package/${esc(core.name)}/v/${esc(core.version)}">${esc(core.name)}</a> <span class="muted">${esc(core.version)}</span>${age(published?.[core.name])}${stale(date)}</th>
 		<td class="n strong">${requestTimeCaution(f, core.vulnerabilities.total)}${num(core.vulnerabilities.total)}${delta(core.vulnerabilities.total, get(baseline, f.id)?.core?.vulnerabilities.total)}${rawAudit(core)}</td>
+		<td class="n">${num(perDependency(core.vulnerabilities.total, core.dependencies))}</td>
 		<td class="n">${num(core.advisories.total)}</td>
 		<td class="n">${num(core.dependencies)}<br><span class="third-party">(${num(core.thirdPartyDependencies)})</span></td>
 		<td class="sev">${pills(core.vulnerabilities) || `<span class="muted">—</span>`}</td>
@@ -631,6 +648,7 @@ ${sprite}
 	<div class="stack">
 		${scoreboard}
 		<ul class="footnotes">
+			${correlation(latest.map(({ s }) => [s.dependencies, s.vulnerabilities.total]))}
 			<li>Vulnerabilities are affected packages in the install tree, as reported by <code>npm audit</code>. Next.js and Vite bundle many dependencies into their published code, and those are checked too wherever they appear in the install tree. Raw npm audit leaves them out.</li>
 			<li>Note that Vite’s bundled dependencies run in its dev server and at build time, not when serving production requests.</li>
 			<li>Advisories are distinct GitHub security advisories matched anywhere in the install tree. One advisory can flag every package that depends on the affected one, and one package can have several advisories, so this can be higher or lower than Vulnerabilities.</li>
@@ -657,6 +675,7 @@ ${sprite}
 	<div class="stack">
 		${coreScoreboard}
 		<ul class="footnotes">
+			${correlation(latestCore.map(({ s: { core } }) => [core.dependencies, core.vulnerabilities.total]))}
 			<li>Includes required peer dependencies, like Vite and Svelte for SvelteKit.</li>
 			<li>Note that Vite’s bundled dependencies run in its dev server and at build time, not when serving production requests.</li>
 			<li>Forecasts count every package equally and are not currently weighted by download count.</li>
