@@ -161,11 +161,18 @@ function linearScale(max, count = 5) {
 	return { ticks: Array.from({ length: top / step + 1 }, (_, i) => i * step), ratio: v => v / top };
 }
 
+// Charts and sparklines render at both scales, and the outlier checkbox picks which one shows.
+const OUTLIER = "gatsby";
+const outlierName = frameworks.find(f => f.id === OUTLIER)?.name;
+const outlierToggle = outlierName ? `<label class="toggle"><input type="checkbox" class="exclude-outlier"> Ignore ${esc(outlierName)} for y-axis scale.</label>` : "";
+const scales = [{ id: "all" }, ...(outlierName ? [{ id: "trimmed", skip: OUTLIER }] : [])];
+
 const chartRows = value => dates.map(date => ({ date, values: series.map(f => {
 	let s = get(date, f.id);
 	return s && !s.error ? value(s) ?? null : null;
 }) }));
-const rowsMax = rows => Math.max(...rows.flatMap(r => r.values.filter(v => v != null)));
+// `skip` leaves a framework's values out of the scale, so its chart overflows.
+const rowsMax = (rows, skip) => Math.max(...rows.flatMap(r => r.values.filter((v, i) => v != null && series[i].id !== skip)));
 const timeX = (left, right) => d => left + (time(latestDate) === time(dates[0]) ? 0.5 : (time(d) - time(dates[0])) / (time(latestDate) - time(dates[0]))) * right;
 
 // `alt` rows show beneath the main value, muted, only where they differ.
@@ -182,19 +189,22 @@ const dataTable = (rows, label, nameOf, alt) => `<details>
 	</details>`;
 
 // A framework's value over time, on a scale shared by every framework for that value, with gaps where collection failed.
-const sparkline = (f, value) => {
+const sparkline = (f, value) => scales.map(({ id, skip }) => sparklineAt(f, value, skip, id)).join("");
+const sparklineAt = (f, value, skip, scale) => {
 	// Zero sits just above the bottom edge so its stroke isn't clipped; the fill still runs to the edge, hidden under the stroke and outline at 0.
 	let [w, h, pad, base] = [60, 16, 1.5, 0.5];
 	let valuesOf = f => dates.map(d => (s => s && !s.error ? value(s) ?? null : null)(get(d, f.id)));
 	let values = valuesOf(f);
-	let max = Math.max(1, ...series.flatMap(valuesOf).filter(v => v != null));
+	let max = Math.max(1, ...series.filter(f => f.id !== skip).flatMap(valuesOf).filter(v => v != null));
 	let span = time(latestDate) - time(dates[0]) || 1;
 	let points = values.map((v, j) => v == null ? null : [((time(dates[j]) - time(dates[0])) / span * w).toFixed(1), (h - base - v / max * (h - pad - base)).toFixed(1)]);
 	let segments = points.reduce((all, p, j) => (p && (points[j - 1] ? all.at(-1).push(p) : all.push([p])), all), []);
 	let line = segments.map(s => s.map(([x, y], k) => `${k ? "L" : "M"}${x},${y}`).join("")).join("");
 	let area = segments.map(s => `M${s[0][0]},${h}${s.map(([x, y]) => `L${x},${y}`).join("")}L${s.at(-1)[0]},${h}Z`).join("");
 	let color = `var(--series-${f.slot})`;
-	return `<svg class="sparkline" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true"><path d="${area}" class="area" style="fill:${color}"/><path d="${line}" vector-effect="non-scaling-stroke" style="stroke:${color}"/></svg>`;
+	// Values past a scale that leaves them out run over the top edge.
+	let overflows = values.some(v => v > max) ? " overflows" : "";
+	return `<svg class="sparkline scale-${scale}${overflows}" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true"><path d="${area}" class="area" style="fill:${color}"/><path d="${line}" vector-effect="non-scaling-stroke" style="stroke:${color}"/></svg>`;
 };
 
 const SW = 240;
@@ -205,64 +215,68 @@ const SM = { top: 12, right: 40, bottom: 24, left: 40 };
 // Each axis is shared across frameworks so sizes stay comparable.
 function smallMultiples({ id, title, description, measures, nameOf = f => f.name, versionOf, order = [] }) {
 	let x = timeX(SM.left, SW - SM.left - SM.right);
-	let [primary, secondary, alt] = measures.map(m => {
+	let scaled = skip => measures.map(m => {
 		let rows = chartRows(m.value);
-		let { ticks, ratio } = linearScale(rowsMax(rows), 3);
+		let { ticks, ratio } = linearScale(rowsMax(rows, skip), 3);
 		return { ...m, rows, ticks, y: v => SH - SM.bottom - ratio(v) * (SH - SM.top - SM.bottom) };
 	});
+	let [primary, secondary, alt] = scaled();
 	let pathFor = ({ rows, y }, i) => rows.map((r, j) => r.values[i] == null ? "" : `${j && rows[j - 1].values[i] != null ? "L" : "M"}${x(r.date).toFixed(1)},${y(r.values[i]).toFixed(1)}`).join("");
 
 	// Panels follow `order` (framework ids), with anything missing from it at the end.
 	let rank = f => order.includes(f.id) ? order.indexOf(f.id) : Infinity;
-	let panels = series.toSorted((a, b) => rank(a) - rank(b)).map(f => {
-		let i = series.indexOf(f);
-		let color = `var(--series-${f.slot})`;
-		let present = primary.rows.filter(r => r.values[i] != null);
-		let { y } = primary;
-		let area = present.length ? `M${x(present[0].date).toFixed(1)},${y(0)}${present.map(r => `L${x(r.date).toFixed(1)},${y(r.values[i]).toFixed(1)}`).join("")}L${x(present.at(-1).date).toFixed(1)},${y(0)}Z` : "";
-		// The dashed value only shows in the tooltip where it differs from the solid one.
-		let altValue = j => alt && alt.rows[j].values[i] !== primary.rows[j].values[i] ? alt.rows[j].values[i] : null;
-		let versions = versionOf ? primary.rows.map(r => {
-			let snap = get(r.date, f.id);
-			return snap && !snap.error ? versionOf(snap) : undefined;
-		}) : [];
-		let points = primary.rows.map((r, j) => ({ x: x(r.date), label: formatDate(r.date), version: versions[j], values: [r.values[i], altValue(j), secondary.rows[j].values[i]] }));
-		// Mark where the major version changes (0.x counts by minor), labeling the first one at the left edge.
-		let major = v => v && (v.startsWith("0.") ? v.split(".").slice(0, 2).join(".") : v.split(".")[0]);
-		let changes = versions.flatMap((v, j) => {
-			let prev = versions.slice(0, j).findLast(Boolean);
-			return v && major(v) !== major(prev) ? [{ x: x(primary.rows[j].date), label: `v${major(v)}`, first: !prev }] : [];
-		});
-		// Drop a label that would run into the next one (about 5 units per character at this size).
-		let versionMarks = changes.map((c, k) => {
-			let next = changes[k + 1];
-			let fits = !next || c.x + 3 + c.label.length * 5 + 2 <= next.x;
-			return (c.first ? "" : `<line class="version-mark" x1="${c.x.toFixed(1)}" x2="${c.x.toFixed(1)}" y1="${SM.top}" y2="${SH - SM.bottom}"/>`)
-				+ (fits ? `<text class="tick version" x="${(c.x + 3).toFixed(1)}" y="${SM.top - 4}">${esc(c.label)}</text>` : "");
+	let panelsFor = skip => {
+		let [primary, secondary, alt] = scaled(skip);
+		return series.toSorted((a, b) => rank(a) - rank(b)).map(f => {
+			let i = series.indexOf(f);
+			let color = `var(--series-${f.slot})`;
+			let present = primary.rows.filter(r => r.values[i] != null);
+			let { y } = primary;
+			let area = present.length ? `M${x(present[0].date).toFixed(1)},${y(0)}${present.map(r => `L${x(r.date).toFixed(1)},${y(r.values[i]).toFixed(1)}`).join("")}L${x(present.at(-1).date).toFixed(1)},${y(0)}Z` : "";
+			// The dashed value only shows in the tooltip where it differs from the solid one.
+			let altValue = j => alt && alt.rows[j].values[i] !== primary.rows[j].values[i] ? alt.rows[j].values[i] : null;
+			let versions = versionOf ? primary.rows.map(r => {
+				let snap = get(r.date, f.id);
+				return snap && !snap.error ? versionOf(snap) : undefined;
+			}) : [];
+			let points = primary.rows.map((r, j) => ({ x: x(r.date), label: formatDate(r.date), version: versions[j], values: [r.values[i], altValue(j), secondary.rows[j].values[i]] }));
+			// Mark where the major version changes (0.x counts by minor), labeling the first one at the left edge.
+			let major = v => v && (v.startsWith("0.") ? v.split(".").slice(0, 2).join(".") : v.split(".")[0]);
+			let changes = versions.flatMap((v, j) => {
+				let prev = versions.slice(0, j).findLast(Boolean);
+				return v && major(v) !== major(prev) ? [{ x: x(primary.rows[j].date), label: `v${major(v)}`, first: !prev }] : [];
+			});
+			// Drop a label that would run into the next one (about 5 units per character at this size).
+			let versionMarks = changes.map((c, k) => {
+				let next = changes[k + 1];
+				let fits = !next || c.x + 3 + c.label.length * 5 + 2 <= next.x;
+				return (c.first ? "" : `<line class="version-mark" x1="${c.x.toFixed(1)}" x2="${c.x.toFixed(1)}" y1="${SM.top}" y2="${SH - SM.bottom}"/>`)
+					+ (fits ? `<text class="tick version" x="${(c.x + 3).toFixed(1)}" y="${SM.top - 4}">${esc(c.label)}</text>` : "");
+			}).join("");
+			// Tooltips use a measure's shorter `tooltip` label when it has one.
+			let labels = [{ name: primary.label, color }, { name: alt?.tooltip ?? alt?.label, color, style: "dashed" }, { name: secondary.label, color, style: "dotted" }];
+			return `<div class="panel">
+				<h3>${icon(f)}${esc(nameOf(f))}${requestTimeCaution(f, present.at(-1)?.values[i])}</h3>
+				<div class="plot${f.id === skip ? " overflows" : ""}">
+					<svg viewBox="0 0 ${SW} ${SH}" role="img" aria-label="${esc(`${nameOf(f)}: ${title}`)}" tabindex="0" data-labels="${esc(JSON.stringify(labels))}" data-points="${esc(JSON.stringify(points))}">
+						${primary.ticks.map(t => `<line class="grid" x1="${SM.left}" x2="${SW - SM.right}" y1="${y(t)}" y2="${y(t)}"/><text class="tick" x="${SW - SM.right + 6}" y="${y(t)}" dominant-baseline="middle">${num(t)}</text>`).join("")}
+						${secondary.ticks.map(t => `<text class="tick secondary" x="${SM.left - 6}" y="${secondary.y(t)}" text-anchor="end" dominant-baseline="middle">${compact(t)}</text>`).join("")}
+						<line class="axis" x1="${SM.left}" x2="${SW - SM.right}" y1="${y(0)}" y2="${y(0)}"/>
+						<text class="tick" x="${SM.left}" y="${SH - 6}">${formatDate(dates[0], { month: "short", year: "2-digit" })}</text>
+						<text class="tick" x="${SW - SM.right}" y="${SH - 6}" text-anchor="end">${formatDate(latestDate, { month: "short", year: "2-digit" })}</text>
+						${versionMarks}
+						<path d="${area}" class="area" style="fill:${color}"/>
+						<path d="${pathFor(secondary, i)}" class="line dotted" style="stroke:${color}"/>
+						${alt ? `<path d="${pathFor({ rows: alt.rows, y }, i)}" class="line dashed" style="stroke:${color}"/>` : ""}
+						<path d="${pathFor(primary, i)}" class="line" style="stroke:${color}"/>
+						<line class="crosshair" y1="${SM.top}" y2="${SH - SM.bottom}" visibility="hidden"/>
+					</svg>
+					<div class="tooltip-anchor"></div>
+					<div class="tooltip" hidden></div>
+				</div>
+			</div>`;
 		}).join("");
-		// Tooltips use a measure's shorter `tooltip` label when it has one.
-		let labels = [{ name: primary.label, color }, { name: alt?.tooltip ?? alt?.label, color, style: "dashed" }, { name: secondary.label, color, style: "dotted" }];
-		return `<div class="panel">
-			<h3>${icon(f)}${esc(nameOf(f))}${requestTimeCaution(f, present.at(-1)?.values[i])}</h3>
-			<div class="plot">
-				<svg viewBox="0 0 ${SW} ${SH}" role="img" aria-label="${esc(`${nameOf(f)}: ${title}`)}" tabindex="0" data-labels="${esc(JSON.stringify(labels))}" data-points="${esc(JSON.stringify(points))}">
-					${primary.ticks.map(t => `<line class="grid" x1="${SM.left}" x2="${SW - SM.right}" y1="${y(t)}" y2="${y(t)}"/><text class="tick" x="${SW - SM.right + 6}" y="${y(t)}" dominant-baseline="middle">${num(t)}</text>`).join("")}
-					${secondary.ticks.map(t => `<text class="tick secondary" x="${SM.left - 6}" y="${secondary.y(t)}" text-anchor="end" dominant-baseline="middle">${compact(t)}</text>`).join("")}
-					<line class="axis" x1="${SM.left}" x2="${SW - SM.right}" y1="${y(0)}" y2="${y(0)}"/>
-					<text class="tick" x="${SM.left}" y="${SH - 6}">${formatDate(dates[0], { month: "short", year: "2-digit" })}</text>
-					<text class="tick" x="${SW - SM.right}" y="${SH - 6}" text-anchor="end">${formatDate(latestDate, { month: "short", year: "2-digit" })}</text>
-					${versionMarks}
-					<path d="${area}" class="area" style="fill:${color}"/>
-					<path d="${pathFor(secondary, i)}" class="line dotted" style="stroke:${color}"/>
-					${alt ? `<path d="${pathFor({ rows: alt.rows, y }, i)}" class="line dashed" style="stroke:${color}"/>` : ""}
-					<path d="${pathFor(primary, i)}" class="line" style="stroke:${color}"/>
-					<line class="crosshair" y1="${SM.top}" y2="${SH - SM.bottom}" visibility="hidden"/>
-				</svg>
-				<div class="tooltip-anchor"></div>
-				<div class="tooltip" hidden></div>
-			</div>
-		</div>`;
-	}).join("");
+	};
 
 	return `<figure class="chart" id="${id}">
 	<figcaption>
@@ -270,7 +284,7 @@ function smallMultiples({ id, title, description, measures, nameOf = f => f.name
 		${description ? `<p>${esc(description)}</p>` : ""}
 		<ul class="keys"><li><i class="dotted"></i>${esc(secondary.label)} (left axis)</li><li><i></i>${esc(primary.label)} (right axis)</li>${alt ? `<li><i class="dashed"></i>${esc(alt.label)} (right axis)</li>` : ""}</ul>
 	</figcaption>
-	<div class="multiples">${panels}</div>
+	${scales.map(({ id, skip }) => `<div class="multiples scale-${id}">${panelsFor(skip)}</div>`).join("")}
 	<div class="stack">${dataTable(primary.rows, primary.label, nameOf, alt)}${dataTable(secondary.rows, secondary.label, nameOf)}</div>
 </figure>`;
 }
@@ -518,6 +532,9 @@ td.spark { position: relative; width: 5.2em; padding-inline: 0; }
 .icon.support.warn { margin-inline-start: 0; }
 .icon { width: 1.375em; height: 1.375em; vertical-align: -0.3em; margin-inline-end: 0.5em; overflow: visible; }
 .plot { position: relative; anchor-scope: --point; }
+/* Overflowing charts sit beneath their neighbors, and a hovered or focused chart rises so its tooltip stays on top. */
+.plot:not(.overflows) { z-index: 1; }
+.plot:is(:hover, :focus-within) { z-index: 2; }
 /* Script moves this to the hovered point; the fixed tooltip anchors beside it and flips sides at the viewport edge, since it is wider than the plot. */
 .tooltip-anchor { position: absolute; inset-block: 0; width: 0; anchor-name: --point; }
 .plot svg { display: block; width: 100%; height: auto; overflow: visible; }
@@ -527,8 +544,15 @@ td.spark { position: relative; width: 5.2em; padding-inline: 0; }
 .tick { fill: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
 .line { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
 .dot { stroke: var(--surface); stroke-width: 2; }
+/* Charts scale without the outlier while its checkbox is checked. */
+/* Checkboxes stay in sync, so either one decides. */
+:root:not(:has(.exclude-outlier:checked)) .scale-trimmed, :root:has(.exclude-outlier:checked) .scale-all { display: none; }
+.toggle { color: var(--text-2); font-size: 0.875em; }
 .multiples { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1.5em; }
 .panel h3 { font-size: 0.875em; font-weight: 500; margin: 0 0 0.5em; }
+/* Overflowing sparklines sit beneath the rows they run into. */
+.sparkline { z-index: 1; }
+.sparkline.overflows { overflow: visible; z-index: 0; }
 .line.dotted { stroke-dasharray: 0 4; }
 .line.dashed { stroke-dasharray: 5 4; stroke-linecap: butt; }
 .keys i.dotted, .tooltip i.dotted { height: 0; background: none; border-top: 2px dotted currentColor; }
@@ -539,7 +563,7 @@ td.spark { position: relative; width: 5.2em; padding-inline: 0; }
 .keys li { display: flex; align-items: center; gap: 0.4em; }
 .keys i, .tooltip i { width: 12px; height: 2px; border-radius: 1px; }
 .keys i { color: var(--text-2); background: currentColor; }
-.area { opacity: 0.1; }
+.area { opacity: 0.35; }
 .version-mark { stroke: var(--axis); stroke-width: 1; stroke-dasharray: 2 2; }
 .tick.version { font-size: 8px; }
 .crosshair { stroke: var(--axis); stroke-width: 1; }
@@ -665,6 +689,7 @@ ${sprite}
 	</hgroup>
 	<div class="stack">
 		${scoreboard}
+		${outlierToggle}
 		<ul class="footnotes">
 			${correlation(latest.map(({ s }) => [s.dependencies, s.vulnerabilities.total]))}
 			<li>Vulnerabilities are affected packages in the install tree, as reported by <code>npm audit</code>. Next.js and Vite bundle many dependencies into their published code, and those are checked too wherever they appear in the install tree. Raw npm audit leaves them out.</li>
@@ -692,6 +717,7 @@ ${sprite}
 	</hgroup>
 	<div class="stack">
 		${coreScoreboard}
+		${outlierToggle}
 		<ul class="footnotes">
 			${correlation(latestCore.map(({ s: { core } }) => [core.dependencies, core.vulnerabilities.total]))}
 			<li>Includes required peer dependencies, like Vite and Svelte for SvelteKit.</li>
@@ -703,6 +729,12 @@ ${sprite}
 </section>
 </main>
 <script type="module">
+// Keeps every outlier checkbox in sync.
+const toggles = document.querySelectorAll(".exclude-outlier");
+for (const toggle of toggles) {
+	toggle.addEventListener("change", () => toggles.forEach(other => other.checked = toggle.checked));
+}
+
 // Hours since the last update, relative to the viewer's clock.
 for (const time of document.querySelectorAll("time[data-since]")) {
 	const hours = Math.round((Date.now() - new Date(time.dateTime)) / 36e5);
