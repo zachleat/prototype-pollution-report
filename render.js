@@ -164,7 +164,7 @@ function linearScale(max, count = 5) {
 // Charts and sparklines render at both scales, and the outlier checkbox picks which one shows.
 const OUTLIER = "gatsby";
 const outlierName = frameworks.find(f => f.id === OUTLIER)?.name;
-const outlierToggle = outlierName ? `<label class="toggle"><input type="checkbox" class="include-outlier" checked> Include ${esc(outlierName)} in y-axis scale</label>` : "";
+const outlierToggle = outlierName ? `<label class="toggle"><input type="checkbox" class="include-outlier" checked disabled> Include ${esc(outlierName)} in y-axis scale</label>` : "";
 const scales = [{ id: "all" }, ...(outlierName ? [{ id: "trimmed", skip: OUTLIER }] : [])];
 
 const chartRows = value => dates.map(date => ({ date, values: series.map(f => {
@@ -549,6 +549,7 @@ td.spark { position: relative; width: 5.2em; padding-inline: 0; }
 /* Checkboxes stay in sync, so either one decides. */
 :root:has(.include-outlier:checked) .scale-trimmed, :root:not(:has(.include-outlier:checked)) .scale-all { display: none; }
 .toggle { align-self: flex-end; color: var(--text-2); font-size: 0.875em; }
+label:has([disabled]) { opacity: .65; }
 .multiples { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1.5em; }
 .panel h3 { font-size: 0.875em; font-weight: 500; margin: 0 0 0.5em; }
 /* Overflowing sparklines sit beneath the rows they run into. */
@@ -734,6 +735,7 @@ ${sprite}
 // Keeps every outlier checkbox in sync.
 const toggles = document.querySelectorAll(".include-outlier");
 for (const toggle of toggles) {
+	toggle.disabled = false;
 	toggle.addEventListener("change", () => toggles.forEach(other => other.checked = toggle.checked));
 }
 

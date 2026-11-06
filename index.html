@@ -155,6 +155,7 @@ td.spark { position: relative; width: 5.2em; padding-inline: 0; }
 /* Checkboxes stay in sync, so either one decides. */
 :root:has(.include-outlier:checked) .scale-trimmed, :root:not(:has(.include-outlier:checked)) .scale-all { display: none; }
 .toggle { align-self: flex-end; color: var(--text-2); font-size: 0.875em; }
+label:has([disabled]) { opacity: .65; }
 .multiples { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1.5em; }
 .panel h3 { font-size: 0.875em; font-weight: 500; margin: 0 0 0.5em; }
 /* Overflowing sparklines sit beneath the rows they run into. */
@@ -517,7 +518,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="sev"> <span class="badge critical">critical<span class="count">50</span></span> <span class="badge high" title="248 high">248</span> <span class="badge moderate" title="29 moderate">29</span> <span class="badge low" title="15 low">15</span></td>
 	</tr></tbody>
 </table></div>
-		<label class="toggle"><input type="checkbox" class="include-outlier" checked> Include Gatsby in y-axis scale</label>
+		<label class="toggle"><input type="checkbox" class="include-outlier" checked disabled> Include Gatsby in y-axis scale</label>
 		<ul class="footnotes">
 			<li>Across these 10 frameworks, dependencies and vulnerabilities correlate at r = 0.93.</li>
 			<li>Vulnerabilities are affected packages in the install tree, as reported by <code>npm audit</code>. Next.js and Vite bundle many dependencies into their published code, and those are checked too wherever they appear in the install tree. Raw npm audit leaves them out.</li>
@@ -917,7 +918,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 					<div class="tooltip" hidden></div>
 				</div>
 			</div></div>
-	<label class="toggle"><input type="checkbox" class="include-outlier" checked> Include Gatsby in y-axis scale</label>
+	<label class="toggle"><input type="checkbox" class="include-outlier" checked disabled> Include Gatsby in y-axis scale</label>
 	<div class="stack"><details>
 		<summary>Vulnerabilities data table</summary>
 		<p class="note">Raw npm audit (bundled dependencies not counted) counts in parentheses where they differ.</p>
@@ -1079,7 +1080,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="sev"> <span class="badge high">high<span class="count">35</span></span> <span class="badge moderate" title="9 moderate">9</span> <span class="badge low" title="5 low">5</span></td>
 	</tr></tbody>
 </table></div>
-		<label class="toggle"><input type="checkbox" class="include-outlier" checked> Include Gatsby in y-axis scale</label>
+		<label class="toggle"><input type="checkbox" class="include-outlier" checked disabled> Include Gatsby in y-axis scale</label>
 		<ul class="footnotes">
 			<li>Across these 10 frameworks, dependencies and vulnerabilities correlate at r = 0.94.</li>
 			<li>Includes required peer dependencies, like Vite and Svelte for SvelteKit.</li>
@@ -1474,7 +1475,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 					<div class="tooltip" hidden></div>
 				</div>
 			</div></div>
-	<label class="toggle"><input type="checkbox" class="include-outlier" checked> Include Gatsby in y-axis scale</label>
+	<label class="toggle"><input type="checkbox" class="include-outlier" checked disabled> Include Gatsby in y-axis scale</label>
 	<div class="stack"><details>
 		<summary>Vulnerabilities data table</summary>
 		<p class="note">Raw npm audit (bundled dependencies not counted) counts in parentheses where they differ.</p>
@@ -1497,6 +1498,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 // Keeps every outlier checkbox in sync.
 const toggles = document.querySelectorAll(".include-outlier");
 for (const toggle of toggles) {
+	toggle.disabled = false;
 	toggle.addEventListener("change", () => toggles.forEach(other => other.checked = toggle.checked));
 }
 
