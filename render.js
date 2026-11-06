@@ -164,7 +164,7 @@ function linearScale(max, count = 5) {
 // Charts and sparklines render at both scales, and the outlier checkbox picks which one shows.
 const OUTLIER = "gatsby";
 const outlierName = frameworks.find(f => f.id === OUTLIER)?.name;
-const outlierToggle = outlierName ? `<label class="toggle"><input type="checkbox" class="exclude-outlier"> Ignore ${esc(outlierName)} for y-axis scale.</label>` : "";
+const outlierToggle = outlierName ? `<label class="toggle"><input type="checkbox" class="include-outlier" checked> Include ${esc(outlierName)} in y-axis scale</label>` : "";
 const scales = [{ id: "all" }, ...(outlierName ? [{ id: "trimmed", skip: OUTLIER }] : [])];
 
 const chartRows = value => dates.map(date => ({ date, values: series.map(f => {
@@ -285,6 +285,7 @@ function smallMultiples({ id, title, description, measures, nameOf = f => f.name
 		<ul class="keys"><li><i class="dotted"></i>${esc(secondary.label)} (left axis)</li><li><i></i>${esc(primary.label)} (right axis)</li>${alt ? `<li><i class="dashed"></i>${esc(alt.label)} (right axis)</li>` : ""}</ul>
 	</figcaption>
 	${scales.map(({ id, skip }) => `<div class="multiples scale-${id}">${panelsFor(skip)}</div>`).join("")}
+	${outlierToggle}
 	<div class="stack">${dataTable(primary.rows, primary.label, nameOf, alt)}${dataTable(secondary.rows, secondary.label, nameOf)}</div>
 </figure>`;
 }
@@ -544,15 +545,16 @@ td.spark { position: relative; width: 5.2em; padding-inline: 0; }
 .tick { fill: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
 .line { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
 .dot { stroke: var(--surface); stroke-width: 2; }
-/* Charts scale without the outlier while its checkbox is checked. */
+/* Charts scale without the outlier while its checkbox is unchecked. */
 /* Checkboxes stay in sync, so either one decides. */
-:root:not(:has(.exclude-outlier:checked)) .scale-trimmed, :root:has(.exclude-outlier:checked) .scale-all { display: none; }
-.toggle { color: var(--text-2); font-size: 0.875em; }
+:root:has(.include-outlier:checked) .scale-trimmed, :root:not(:has(.include-outlier:checked)) .scale-all { display: none; }
+.toggle { align-self: flex-end; color: var(--text-2); font-size: 0.875em; }
 .multiples { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1.5em; }
 .panel h3 { font-size: 0.875em; font-weight: 500; margin: 0 0 0.5em; }
 /* Overflowing sparklines sit beneath the rows they run into. */
 .sparkline { z-index: 1; }
-.sparkline.overflows { overflow: visible; z-index: 0; }
+.sparkline.overflows { overflow: visible; z-index: 0; opacity: 0.35; }
+.plot.overflows svg { opacity: 0.35; }
 .line.dotted { stroke-dasharray: 0 4; }
 .line.dashed { stroke-dasharray: 5 4; stroke-linecap: butt; }
 .keys i.dotted, .tooltip i.dotted { height: 0; background: none; border-top: 2px dotted currentColor; }
@@ -730,7 +732,7 @@ ${sprite}
 </main>
 <script type="module">
 // Keeps every outlier checkbox in sync.
-const toggles = document.querySelectorAll(".exclude-outlier");
+const toggles = document.querySelectorAll(".include-outlier");
 for (const toggle of toggles) {
 	toggle.addEventListener("change", () => toggles.forEach(other => other.checked = toggle.checked));
 }
