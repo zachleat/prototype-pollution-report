@@ -46,12 +46,10 @@ async function request(url) {
 		if (res.ok) {
 			return res;
 		}
-		if (res.status === 404 || attempt === 3) {
+		if (res.status === 404 || attempt === 6) {
 			throw new Error(`${res.status} ${url}`);
 		}
-		if (res.status === 429) {
-			await sleep(2 ** attempt * 1000);
-		}
+		await sleep((Number(res.headers.get("retry-after")) || 2 ** attempt) * 1000);
 	}
 }
 
