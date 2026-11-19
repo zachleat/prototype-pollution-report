@@ -7822,9 +7822,9 @@
 	},
 	{
 		"date": "2025-12-01",
-		"collectedAt": "2026-11-19T20:40:32.312Z",
+		"collectedAt": "2026-11-19T21:50:49.902Z",
 		"framework": "lit",
-		"packageCount": 40,
+		"packageCount": 38,
 		"core": {
 			"name": "lit",
 			"version": "3.3.1",
@@ -7850,8 +7850,8 @@
 		"bundlers": {
 			"next": "15.5.6"
 		},
-		"dependencies": 1027,
-		"thirdPartyDependencies": 983,
+		"dependencies": 935,
+		"thirdPartyDependencies": 893,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 5,
@@ -7981,18 +7981,6 @@
 					"total": 1
 				},
 				"vendoredBy": "next"
-			},
-			{
-				"name": "tachometer",
-				"severity": "high",
-				"vulnerabilities": {
-					"info": 0,
-					"low": 0,
-					"moderate": 0,
-					"high": 1,
-					"critical": 0,
-					"total": 1
-				}
 			},
 			{
 				"name": "ws",
@@ -8465,9 +8453,7 @@
 			"lit": "3.3.1",
 			"lit-element": "4.2.1",
 			"lit-html": "3.3.1",
-			"playground-elements": "0.21.2",
-			"tachometer": "0.7.2",
-			"wireit": "0.14.12"
+			"playground-elements": "0.21.2"
 		},
 		"published": {
 			"@lit-labs/analyzer": "2025-02-14",
@@ -8507,9 +8493,7 @@
 			"lit": "2025-07-11",
 			"lit-element": "2025-07-11",
 			"lit-html": "2025-07-11",
-			"playground-elements": "2025-10-02",
-			"tachometer": "2025-07-03",
-			"wireit": "2025-04-10"
+			"playground-elements": "2025-10-02"
 		}
 	},
 	{
@@ -15713,9 +15697,9 @@
 	},
 	{
 		"date": "2026-01-01",
-		"collectedAt": "2026-11-19T20:41:38.973Z",
+		"collectedAt": "2026-11-19T21:51:37.452Z",
 		"framework": "lit",
-		"packageCount": 41,
+		"packageCount": 39,
 		"core": {
 			"name": "lit",
 			"version": "3.3.2",
@@ -15741,8 +15725,8 @@
 		"bundlers": {
 			"next": "15.5.9"
 		},
-		"dependencies": 1041,
-		"thirdPartyDependencies": 996,
+		"dependencies": 947,
+		"thirdPartyDependencies": 904,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 5,
@@ -15860,18 +15844,6 @@
 					"total": 1
 				},
 				"vendoredBy": "next"
-			},
-			{
-				"name": "tachometer",
-				"severity": "high",
-				"vulnerabilities": {
-					"info": 0,
-					"low": 0,
-					"moderate": 0,
-					"high": 1,
-					"critical": 0,
-					"total": 1
-				}
 			},
 			{
 				"name": "ws",
@@ -16345,9 +16317,7 @@
 			"lit": "3.3.2",
 			"lit-element": "4.2.2",
 			"lit-html": "3.3.2",
-			"playground-elements": "0.21.2",
-			"tachometer": "0.7.2",
-			"wireit": "0.14.12"
+			"playground-elements": "0.21.2"
 		},
 		"published": {
 			"@lit-labs/analyzer": "2025-12-23",
@@ -16388,9 +16358,7 @@
 			"lit": "2025-12-23",
 			"lit-element": "2025-12-23",
 			"lit-html": "2025-12-23",
-			"playground-elements": "2025-10-02",
-			"tachometer": "2025-07-03",
-			"wireit": "2025-04-10"
+			"playground-elements": "2025-10-02"
 		}
 	},
 	{
@@ -23606,9 +23574,9 @@
 	},
 	{
 		"date": "2026-02-01",
-		"collectedAt": "2026-11-19T20:42:10.228Z",
+		"collectedAt": "2026-11-19T21:51:50.765Z",
 		"framework": "lit",
-		"packageCount": 41,
+		"packageCount": 39,
 		"core": {
 			"name": "lit",
 			"version": "3.3.2",
@@ -23634,8 +23602,8 @@
 		"bundlers": {
 			"next": "15.5.11"
 		},
-		"dependencies": 1041,
-		"thirdPartyDependencies": 996,
+		"dependencies": 947,
+		"thirdPartyDependencies": 904,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 9,
@@ -23766,18 +23734,6 @@
 					"total": 1
 				},
 				"vendoredBy": "next"
-			},
-			{
-				"name": "tachometer",
-				"severity": "high",
-				"vulnerabilities": {
-					"info": 0,
-					"low": 0,
-					"moderate": 0,
-					"high": 1,
-					"critical": 0,
-					"total": 1
-				}
 			},
 			{
 				"name": "tar",
@@ -24252,9 +24208,7 @@
 			"lit": "3.3.2",
 			"lit-element": "4.2.2",
 			"lit-html": "3.3.2",
-			"playground-elements": "0.21.2",
-			"tachometer": "0.7.2",
-			"wireit": "0.14.12"
+			"playground-elements": "0.21.2"
 		},
 		"published": {
 			"@lit-labs/analyzer": "2025-12-23",
@@ -24295,9 +24249,7 @@
 			"lit": "2025-12-23",
 			"lit-element": "2025-12-23",
 			"lit-html": "2025-12-23",
-			"playground-elements": "2025-10-02",
-			"tachometer": "2025-07-03",
-			"wireit": "2025-04-10"
+			"playground-elements": "2025-10-02"
 		}
 	},
 	{
@@ -31862,9 +31814,9 @@
 	},
 	{
 		"date": "2026-03-01",
-		"collectedAt": "2026-11-19T20:42:40.774Z",
+		"collectedAt": "2026-11-19T21:52:03.152Z",
 		"framework": "lit",
-		"packageCount": 41,
+		"packageCount": 39,
 		"core": {
 			"name": "lit",
 			"version": "3.3.2",
@@ -31890,8 +31842,8 @@
 		"bundlers": {
 			"next": "15.5.12"
 		},
-		"dependencies": 1041,
-		"thirdPartyDependencies": 996,
+		"dependencies": 947,
+		"thirdPartyDependencies": 904,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 10,
@@ -32022,18 +31974,6 @@
 					"total": 1
 				},
 				"vendoredBy": "next"
-			},
-			{
-				"name": "tachometer",
-				"severity": "high",
-				"vulnerabilities": {
-					"info": 0,
-					"low": 0,
-					"moderate": 0,
-					"high": 1,
-					"critical": 0,
-					"total": 1
-				}
 			},
 			{
 				"name": "tar",
@@ -32522,9 +32462,7 @@
 			"lit": "3.3.2",
 			"lit-element": "4.2.2",
 			"lit-html": "3.3.2",
-			"playground-elements": "0.21.2",
-			"tachometer": "0.7.2",
-			"wireit": "0.14.12"
+			"playground-elements": "0.21.2"
 		},
 		"published": {
 			"@lit-labs/analyzer": "2025-12-23",
@@ -32565,9 +32503,7 @@
 			"lit": "2025-12-23",
 			"lit-element": "2025-12-23",
 			"lit-html": "2025-12-23",
-			"playground-elements": "2025-10-02",
-			"tachometer": "2025-07-03",
-			"wireit": "2025-04-10"
+			"playground-elements": "2025-10-02"
 		}
 	},
 	{
@@ -40422,9 +40358,9 @@
 	},
 	{
 		"date": "2026-04-01",
-		"collectedAt": "2026-11-19T20:43:11.110Z",
+		"collectedAt": "2026-11-19T21:52:15.559Z",
 		"framework": "lit",
-		"packageCount": 41,
+		"packageCount": 39,
 		"core": {
 			"name": "lit",
 			"version": "3.3.2",
@@ -40450,23 +40386,23 @@
 		"bundlers": {
 			"next": "15.5.14"
 		},
-		"dependencies": 1040,
-		"thirdPartyDependencies": 995,
+		"dependencies": 946,
+		"thirdPartyDependencies": 903,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 11,
-			"moderate": 4,
+			"moderate": 2,
 			"high": 19,
 			"critical": 0,
-			"total": 34
+			"total": 32
 		},
 		"advisories": {
 			"info": 0,
 			"low": 10,
-			"moderate": 6,
+			"moderate": 5,
 			"high": 16,
 			"critical": 0,
-			"total": 32
+			"total": 31
 		},
 		"vulnerablePackages": [
 			{
@@ -40512,10 +40448,10 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 0,
-					"moderate": 1,
+					"moderate": 0,
 					"high": 2,
 					"critical": 0,
-					"total": 3
+					"total": 2
 				},
 				"vendoredBy": "next"
 			},
@@ -40597,18 +40533,6 @@
 				"vendoredBy": "next"
 			},
 			{
-				"name": "tachometer",
-				"severity": "high",
-				"vulnerabilities": {
-					"info": 0,
-					"low": 0,
-					"moderate": 0,
-					"high": 1,
-					"critical": 0,
-					"total": 1
-				}
-			},
-			{
 				"name": "tar",
 				"severity": "high",
 				"vulnerabilities": {
@@ -40657,19 +40581,6 @@
 					"critical": 0,
 					"total": 2
 				}
-			},
-			{
-				"name": "glob",
-				"severity": "moderate",
-				"vulnerabilities": {
-					"info": 0,
-					"low": 0,
-					"moderate": 1,
-					"high": 0,
-					"critical": 0,
-					"total": 1
-				},
-				"vendoredBy": "next"
 			},
 			{
 				"name": "icss-utils",
@@ -40802,18 +40713,6 @@
 				"vendoredBy": "next"
 			},
 			{
-				"name": "wireit",
-				"severity": "moderate",
-				"vulnerabilities": {
-					"info": 0,
-					"low": 0,
-					"moderate": 2,
-					"high": 0,
-					"critical": 0,
-					"total": 2
-				}
-			},
-			{
 				"name": "compression",
 				"severity": "low",
 				"vulnerabilities": {
@@ -40908,10 +40807,10 @@
 		"nonVendoredVulnerabilities": {
 			"info": 0,
 			"low": 0,
-			"moderate": 2,
+			"moderate": 0,
 			"high": 4,
 			"critical": 0,
-			"total": 6
+			"total": 4
 		},
 		"vendored": {
 			"next@15.5.14": {
@@ -41134,9 +41033,7 @@
 			"lit": "3.3.2",
 			"lit-element": "4.2.2",
 			"lit-html": "3.3.2",
-			"playground-elements": "0.21.2",
-			"tachometer": "0.7.2",
-			"wireit": "0.14.12"
+			"playground-elements": "0.21.2"
 		},
 		"published": {
 			"@lit-labs/analyzer": "2025-12-23",
@@ -41177,9 +41074,7 @@
 			"lit": "2025-12-23",
 			"lit-element": "2025-12-23",
 			"lit-html": "2025-12-23",
-			"playground-elements": "2025-10-02",
-			"tachometer": "2025-07-03",
-			"wireit": "2025-04-10"
+			"playground-elements": "2025-10-02"
 		}
 	},
 	{
@@ -49200,9 +49095,9 @@
 	},
 	{
 		"date": "2026-05-01",
-		"collectedAt": "2026-11-19T20:43:40.015Z",
+		"collectedAt": "2026-11-19T21:52:27.857Z",
 		"framework": "lit",
-		"packageCount": 41,
+		"packageCount": 39,
 		"core": {
 			"name": "lit",
 			"version": "3.3.2",
@@ -49228,23 +49123,23 @@
 		"bundlers": {
 			"next": "15.5.15"
 		},
-		"dependencies": 1035,
-		"thirdPartyDependencies": 990,
+		"dependencies": 941,
+		"thirdPartyDependencies": 898,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 11,
-			"moderate": 4,
+			"moderate": 2,
 			"high": 19,
 			"critical": 0,
-			"total": 34
+			"total": 32
 		},
 		"advisories": {
 			"info": 0,
 			"low": 10,
-			"moderate": 7,
+			"moderate": 6,
 			"high": 16,
 			"critical": 0,
-			"total": 33
+			"total": 32
 		},
 		"vulnerablePackages": [
 			{
@@ -49290,10 +49185,10 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 0,
-					"moderate": 1,
+					"moderate": 0,
 					"high": 2,
 					"critical": 0,
-					"total": 3
+					"total": 2
 				},
 				"vendoredBy": "next"
 			},
@@ -49375,18 +49270,6 @@
 				"vendoredBy": "next"
 			},
 			{
-				"name": "tachometer",
-				"severity": "high",
-				"vulnerabilities": {
-					"info": 0,
-					"low": 0,
-					"moderate": 0,
-					"high": 1,
-					"critical": 0,
-					"total": 1
-				}
-			},
-			{
 				"name": "tar",
 				"severity": "high",
 				"vulnerabilities": {
@@ -49435,19 +49318,6 @@
 					"critical": 0,
 					"total": 2
 				}
-			},
-			{
-				"name": "glob",
-				"severity": "moderate",
-				"vulnerabilities": {
-					"info": 0,
-					"low": 0,
-					"moderate": 1,
-					"high": 0,
-					"critical": 0,
-					"total": 1
-				},
-				"vendoredBy": "next"
 			},
 			{
 				"name": "icss-utils",
@@ -49580,18 +49450,6 @@
 				"vendoredBy": "next"
 			},
 			{
-				"name": "wireit",
-				"severity": "moderate",
-				"vulnerabilities": {
-					"info": 0,
-					"low": 0,
-					"moderate": 2,
-					"high": 0,
-					"critical": 0,
-					"total": 2
-				}
-			},
-			{
 				"name": "compression",
 				"severity": "low",
 				"vulnerabilities": {
@@ -49686,10 +49544,10 @@
 		"nonVendoredVulnerabilities": {
 			"info": 0,
 			"low": 0,
-			"moderate": 4,
+			"moderate": 2,
 			"high": 4,
 			"critical": 0,
-			"total": 8
+			"total": 6
 		},
 		"vendored": {
 			"next@15.5.15": {
@@ -49912,9 +49770,7 @@
 			"lit": "3.3.2",
 			"lit-element": "4.2.2",
 			"lit-html": "3.3.2",
-			"playground-elements": "0.21.2",
-			"tachometer": "0.7.2",
-			"wireit": "0.14.12"
+			"playground-elements": "0.21.2"
 		},
 		"published": {
 			"@lit-labs/analyzer": "2025-12-23",
@@ -49955,9 +49811,7 @@
 			"lit": "2025-12-23",
 			"lit-element": "2025-12-23",
 			"lit-html": "2025-12-23",
-			"playground-elements": "2025-10-02",
-			"tachometer": "2025-07-03",
-			"wireit": "2025-04-10"
+			"playground-elements": "2025-10-02"
 		}
 	},
 	{
@@ -58095,9 +57949,9 @@
 	},
 	{
 		"date": "2026-06-01",
-		"collectedAt": "2026-11-19T20:44:09.384Z",
+		"collectedAt": "2026-11-19T21:52:40.413Z",
 		"framework": "lit",
-		"packageCount": 41,
+		"packageCount": 39,
 		"core": {
 			"name": "lit",
 			"version": "3.3.3",
@@ -58123,23 +57977,23 @@
 		"bundlers": {
 			"next": "15.5.18"
 		},
-		"dependencies": 1036,
-		"thirdPartyDependencies": 991,
+		"dependencies": 942,
+		"thirdPartyDependencies": 899,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 11,
-			"moderate": 4,
+			"moderate": 2,
 			"high": 19,
 			"critical": 0,
-			"total": 34
+			"total": 32
 		},
 		"advisories": {
 			"info": 0,
 			"low": 10,
-			"moderate": 8,
+			"moderate": 7,
 			"high": 16,
 			"critical": 0,
-			"total": 34
+			"total": 33
 		},
 		"vulnerablePackages": [
 			{
@@ -58185,10 +58039,10 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 0,
-					"moderate": 1,
+					"moderate": 0,
 					"high": 2,
 					"critical": 0,
-					"total": 3
+					"total": 2
 				},
 				"vendoredBy": "next"
 			},
@@ -58318,19 +58172,6 @@
 					"critical": 0,
 					"total": 2
 				}
-			},
-			{
-				"name": "glob",
-				"severity": "moderate",
-				"vulnerabilities": {
-					"info": 0,
-					"low": 0,
-					"moderate": 1,
-					"high": 0,
-					"critical": 0,
-					"total": 1
-				},
-				"vendoredBy": "next"
 			},
 			{
 				"name": "icss-utils",
@@ -58463,18 +58304,6 @@
 				"vendoredBy": "next"
 			},
 			{
-				"name": "wireit",
-				"severity": "moderate",
-				"vulnerabilities": {
-					"info": 0,
-					"low": 0,
-					"moderate": 2,
-					"high": 0,
-					"critical": 0,
-					"total": 2
-				}
-			},
-			{
 				"name": "compression",
 				"severity": "low",
 				"vulnerabilities": {
@@ -58556,10 +58385,10 @@
 		"nonVendoredVulnerabilities": {
 			"info": 0,
 			"low": 0,
-			"moderate": 4,
+			"moderate": 2,
 			"high": 4,
 			"critical": 0,
-			"total": 8
+			"total": 6
 		},
 		"vendored": {
 			"next@15.5.18": {
@@ -58782,9 +58611,7 @@
 			"lit": "3.3.3",
 			"lit-element": "4.2.2",
 			"lit-html": "3.3.3",
-			"playground-elements": "0.21.2",
-			"tachometer": "0.7.2",
-			"wireit": "0.14.12"
+			"playground-elements": "0.21.2"
 		},
 		"published": {
 			"@lit-labs/analyzer": "2025-12-23",
@@ -58825,9 +58652,7 @@
 			"lit": "2026-05-14",
 			"lit-element": "2025-12-23",
 			"lit-html": "2026-05-14",
-			"playground-elements": "2025-10-02",
-			"tachometer": "2025-07-03",
-			"wireit": "2025-04-10"
+			"playground-elements": "2025-10-02"
 		}
 	},
 	{
@@ -67235,9 +67060,9 @@
 	},
 	{
 		"date": "2026-07-01",
-		"collectedAt": "2026-11-19T20:44:37.050Z",
+		"collectedAt": "2026-11-19T21:52:51.426Z",
 		"framework": "lit",
-		"packageCount": 41,
+		"packageCount": 39,
 		"core": {
 			"name": "lit",
 			"version": "3.3.3",
@@ -67263,8 +67088,8 @@
 		"bundlers": {
 			"next": "15.5.19"
 		},
-		"dependencies": 1036,
-		"thirdPartyDependencies": 991,
+		"dependencies": 942,
+		"thirdPartyDependencies": 899,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 11,
@@ -67939,9 +67764,7 @@
 			"lit": "3.3.3",
 			"lit-element": "4.2.2",
 			"lit-html": "3.3.3",
-			"playground-elements": "0.21.2",
-			"tachometer": "0.7.2",
-			"wireit": "0.14.13"
+			"playground-elements": "0.21.2"
 		},
 		"published": {
 			"@lit-labs/analyzer": "2025-12-23",
@@ -67982,9 +67805,7 @@
 			"lit": "2026-05-14",
 			"lit-element": "2025-12-23",
 			"lit-html": "2026-05-14",
-			"playground-elements": "2025-10-02",
-			"tachometer": "2025-07-03",
-			"wireit": "2026-06-24"
+			"playground-elements": "2025-10-02"
 		}
 	},
 	{
@@ -76499,9 +76320,9 @@
 	},
 	{
 		"date": "2026-08-01",
-		"collectedAt": "2026-11-19T20:45:06.159Z",
+		"collectedAt": "2026-11-19T21:53:02.218Z",
 		"framework": "lit",
-		"packageCount": 41,
+		"packageCount": 39,
 		"core": {
 			"name": "lit",
 			"version": "3.3.3",
@@ -76527,8 +76348,8 @@
 		"bundlers": {
 			"next": "15.5.22"
 		},
-		"dependencies": 1036,
-		"thirdPartyDependencies": 991,
+		"dependencies": 942,
+		"thirdPartyDependencies": 899,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 11,
@@ -77203,9 +77024,7 @@
 			"lit": "3.3.3",
 			"lit-element": "4.2.2",
 			"lit-html": "3.3.3",
-			"playground-elements": "0.21.2",
-			"tachometer": "0.7.2",
-			"wireit": "0.14.13"
+			"playground-elements": "0.21.2"
 		},
 		"published": {
 			"@lit-labs/analyzer": "2025-12-23",
@@ -77246,9 +77065,7 @@
 			"lit": "2026-05-14",
 			"lit-element": "2025-12-23",
 			"lit-html": "2026-05-14",
-			"playground-elements": "2025-10-02",
-			"tachometer": "2025-07-03",
-			"wireit": "2026-06-24"
+			"playground-elements": "2025-10-02"
 		}
 	},
 	{
@@ -85917,9 +85734,9 @@
 	},
 	{
 		"date": "2026-09-01",
-		"collectedAt": "2026-11-19T20:45:32.767Z",
+		"collectedAt": "2026-11-19T21:53:12.969Z",
 		"framework": "lit",
-		"packageCount": 41,
+		"packageCount": 39,
 		"core": {
 			"name": "lit",
 			"version": "3.3.3",
@@ -85945,8 +85762,8 @@
 		"bundlers": {
 			"next": "15.5.25"
 		},
-		"dependencies": 1037,
-		"thirdPartyDependencies": 992,
+		"dependencies": 943,
+		"thirdPartyDependencies": 900,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 11,
@@ -86597,9 +86414,7 @@
 			"lit": "3.3.3",
 			"lit-element": "4.2.2",
 			"lit-html": "3.3.3",
-			"playground-elements": "0.21.2",
-			"tachometer": "0.7.2",
-			"wireit": "0.14.13"
+			"playground-elements": "0.21.2"
 		},
 		"published": {
 			"@lit-labs/analyzer": "2025-12-23",
@@ -86640,9 +86455,7 @@
 			"lit": "2026-05-14",
 			"lit-element": "2025-12-23",
 			"lit-html": "2026-05-14",
-			"playground-elements": "2025-10-02",
-			"tachometer": "2025-07-03",
-			"wireit": "2026-06-24"
+			"playground-elements": "2025-10-02"
 		}
 	},
 	{
@@ -95189,9 +95002,9 @@
 	},
 	{
 		"date": "2026-10-01",
-		"collectedAt": "2026-11-19T20:46:22.141Z",
+		"collectedAt": "2026-11-19T21:53:22.964Z",
 		"framework": "lit",
-		"packageCount": 41,
+		"packageCount": 39,
 		"core": {
 			"name": "lit",
 			"version": "3.3.3",
@@ -95217,8 +95030,8 @@
 		"bundlers": {
 			"next": "15.5.27"
 		},
-		"dependencies": 1037,
-		"thirdPartyDependencies": 992,
+		"dependencies": 943,
+		"thirdPartyDependencies": 900,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 11,
@@ -95884,9 +95697,7 @@
 			"lit": "3.3.3",
 			"lit-element": "4.2.2",
 			"lit-html": "3.3.3",
-			"playground-elements": "0.21.2",
-			"tachometer": "0.7.2",
-			"wireit": "0.14.13"
+			"playground-elements": "0.21.2"
 		},
 		"published": {
 			"@lit-labs/analyzer": "2025-12-23",
@@ -95927,9 +95738,7 @@
 			"lit": "2026-05-14",
 			"lit-element": "2025-12-23",
 			"lit-html": "2026-05-14",
-			"playground-elements": "2025-10-02",
-			"tachometer": "2025-07-03",
-			"wireit": "2026-06-24"
+			"playground-elements": "2025-10-02"
 		}
 	},
 	{
@@ -120233,9 +120042,9 @@
 	},
 	{
 		"date": "2026-11-01",
-		"collectedAt": "2026-11-19T20:47:05.086Z",
+		"collectedAt": "2026-11-19T21:53:32.482Z",
 		"framework": "lit",
-		"packageCount": 41,
+		"packageCount": 39,
 		"core": {
 			"name": "lit",
 			"version": "3.3.3",
@@ -120261,8 +120070,8 @@
 		"bundlers": {
 			"next": "15.5.28"
 		},
-		"dependencies": 1043,
-		"thirdPartyDependencies": 998,
+		"dependencies": 945,
+		"thirdPartyDependencies": 902,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 10,
@@ -120956,9 +120765,7 @@
 			"lit": "3.3.3",
 			"lit-element": "4.2.2",
 			"lit-html": "3.3.3",
-			"playground-elements": "0.21.2",
-			"tachometer": "0.7.2",
-			"wireit": "0.15.0"
+			"playground-elements": "0.21.2"
 		},
 		"published": {
 			"@lit-labs/analyzer": "2025-12-23",
@@ -120999,9 +120806,7 @@
 			"lit": "2026-05-14",
 			"lit-element": "2025-12-23",
 			"lit-html": "2026-05-14",
-			"playground-elements": "2025-10-02",
-			"tachometer": "2025-07-03",
-			"wireit": "2026-10-24"
+			"playground-elements": "2025-10-02"
 		}
 	},
 	{
@@ -265383,9 +265188,9 @@
 	},
 	{
 		"date": "2026-11-19",
-		"collectedAt": "2026-11-19T21:23:32.514Z",
+		"collectedAt": "2026-11-19T21:53:41.576Z",
 		"framework": "lit",
-		"packageCount": 41,
+		"packageCount": 39,
 		"core": {
 			"name": "lit",
 			"version": "3.3.3",
@@ -265411,8 +265216,8 @@
 		"bundlers": {
 			"next": "15.5.29"
 		},
-		"dependencies": 1041,
-		"thirdPartyDependencies": 996,
+		"dependencies": 944,
+		"thirdPartyDependencies": 901,
 		"vulnerabilities": {
 			"info": 0,
 			"low": 10,
@@ -266106,9 +265911,7 @@
 			"lit": "3.3.3",
 			"lit-element": "4.2.2",
 			"lit-html": "3.3.3",
-			"playground-elements": "0.21.3",
-			"tachometer": "0.7.2",
-			"wireit": "0.15.0"
+			"playground-elements": "0.21.3"
 		},
 		"published": {
 			"@lit-labs/analyzer": "2025-12-23",
@@ -266149,9 +265952,7 @@
 			"lit": "2026-05-14",
 			"lit-element": "2025-12-23",
 			"lit-html": "2026-05-14",
-			"playground-elements": "2026-11-19",
-			"tachometer": "2025-07-03",
-			"wireit": "2026-10-24"
+			"playground-elements": "2026-11-19"
 		}
 	},
 	{
