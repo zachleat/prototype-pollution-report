@@ -416,7 +416,7 @@ let details = latest.map(({ f, s, date }) => `<details class="ecosystem">
 			let p = s.vulnerablePackages.find(p => p.name === name);
 			return `<li class="bundled">${p ? `${packagePills(p).trim()} ` : ""}<a href="https://www.npmjs.com/package/${esc(name)}/v/${esc(spec.slice(name.length + 1))}">${esc(name)}</a> <span class="muted">${esc(spec.slice(name.length + 1))}</span></li>`;
 		}).join("") + (clean ? `<li class="bundled"><em><code>${esc(parent)}</code> bundled ${num(clean)} more deps without vulnerabilities, not shown here.</em></li>` : "");
-	}).join("")}</ul>
+	}).join("")}${f.exclude?.length ? `<li class="bundled-heading">Excluded</li>${f.exclude.map(name => `<li class="bundled"><a href="https://www.npmjs.com/package/${esc(name)}">${esc(name)}</a></li>`).join("")}` : ""}</ul>
 	${Object.values(s.unresolvedVendored || {}).map(unresolved => `<!-- <p class="note">Not published to npm, so not checked: ${unresolved.map(esc).join(", ")}.</p> -->`).join("")}
 </details>`).join("");
 
