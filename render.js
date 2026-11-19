@@ -290,15 +290,22 @@ function smallMultiples({ id, title, description, measures, nameOf = f => f.name
 </figure>`;
 }
 
+// Average vulnerability total over the last two months breaks ties; frameworks without data sort last.
+const recentDates = dates.filter(d => time(d) >= time(latestDate) - 60 * 864e5);
+const recentAverage = (f, pick) => {
+	let totals = recentDates.map(d => get(d, f.id)).filter(s => s && !s.error).map(s => pick(s)?.vulnerabilities.total).filter(n => n != null);
+	return totals.length ? totals.reduce((a, b) => a + b, 0) / totals.length : Infinity;
+};
+
 // A framework whose latest collection failed falls back to its most recent successful snapshot, flagged as outdated.
 let latest = series
 	.map(f => ({ f, date: dates.findLast(d => get(d, f.id) && !get(d, f.id).error) }))
 	.filter(({ date }) => date)
 	.map(({ f, date }) => ({ f, date, s: get(date, f.id) }))
-	.sort((a, b) => a.s.vulnerabilities.total - b.s.vulnerabilities.total);
+	.sort((a, b) => a.s.vulnerabilities.total - b.s.vulnerabilities.total || recentAverage(a.f, s => s) - recentAverage(b.f, s => s));
 let latestCore = latest
 	.filter(({ s }) => s.core)
-	.toSorted((a, b) => a.s.core.vulnerabilities.total - b.s.core.vulnerabilities.total);
+	.toSorted((a, b) => a.s.core.vulnerabilities.total - b.s.core.vulnerabilities.total || recentAverage(a.f, s => s.core) - recentAverage(b.f, s => s.core));
 
 // Pearson correlation coefficient.
 let pearson = pairs => {
@@ -695,6 +702,7 @@ ${sprite}
 		${outlierToggle}
 		<ul class="footnotes">
 			${correlation(latest.map(({ s }) => [s.dependencies, s.vulnerabilities.total]))}
+			<li>Ties are broken by the lowest average vulnerability count over the last two months.</li>
 			<li>Vulnerabilities are affected packages in the install tree, as reported by <code>npm audit</code>. Next.js and Vite bundle many dependencies into their published code, and those are checked too wherever they appear in the install tree. Raw npm audit leaves them out.</li>
 			<li>Note that Vite’s bundled dependencies run in its dev server and at build time, not when serving production requests.</li>
 			<li>Advisories are distinct GitHub security advisories matched anywhere in the install tree. One advisory can flag every package that depends on the affected one, and one package can have several advisories, so this can be higher or lower than Vulnerabilities.</li>
@@ -723,6 +731,7 @@ ${sprite}
 		${outlierToggle}
 		<ul class="footnotes">
 			${correlation(latestCore.map(({ s: { core } }) => [core.dependencies, core.vulnerabilities.total]))}
+			<li>Ties are broken by the lowest average vulnerability count over the last two months.</li>
 			<li>Includes required peer dependencies, like Vite and Svelte for SvelteKit.</li>
 			<li>Note that Vite’s bundled dependencies run in its dev server and at build time, not when serving production requests.</li>
 			<li>Forecasts count every package equally and are not currently weighted by download count.</li>
