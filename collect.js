@@ -426,10 +426,14 @@ async function audit(packages, date, { peers = false, force = false } = {}) {
 		report.lock = lock.packages;
 		report.direct = new Set(Object.keys(lock.packages[""].dependencies || {}));
 		report.dependents = new Map();
-		for (let path of Object.keys(lock.packages).filter(Boolean)) {
+		report.parentPaths = new Map();
+		for (let path of Object.keys(lock.packages)) {
 			for (let child of resolveEdges(lock.packages, path)) {
-				let dep = lockName(lock.packages, child);
-				report.dependents.set(dep, (report.dependents.get(dep) || new Set()).add(lockName(lock.packages, path)));
+				report.parentPaths.set(child, (report.parentPaths.get(child) || new Set()).add(path));
+				if (path) {
+					let dep = lockName(lock.packages, child);
+					report.dependents.set(dep, (report.dependents.get(dep) || new Set()).add(lockName(lock.packages, path)));
+				}
 			}
 		}
 		return report;
@@ -540,27 +544,33 @@ function summarize(report, date, owned, vendoredUnder = new Map()) {
 	]);
 	let severityOf = name => SEVERITIES[rank.get(name)];
 
-	// Vulnerable packages reachable from a package through its `via` dependency chain, itself included.
-	let reachable = name => {
+	// Vulnerable packages in each direct dependency's installed tree, since npm only flags a dependent when no version in its range is safe, even if a fresh install picks a vulnerable one.
+	let reached = new Map();
+	let paths = Object.keys(report.lock).filter(Boolean);
+	for (let name of rank.keys()) {
 		let seen = new Set();
-		for (let stack = [name]; stack.length;) {
-			let next = stack.pop();
-			if (!seen.has(next) && rank.has(next)) {
-				seen.add(next);
-				stack.push(...vulns[next].via.filter(via => typeof via === "string"));
+		for (let stack = [...vulns[name].nodes || paths.filter(path => lockName(report.lock, path) === name)]; stack.length;) {
+			let path = stack.pop();
+			if (seen.has(path)) {
+				continue;
 			}
+			seen.add(path);
+			let parents = report.parentPaths.get(path) || new Set();
+			if (parents.has("")) {
+				let direct = lockName(report.lock, path);
+				reached.set(direct, (reached.get(direct) || new Set()).add(name));
+			}
+			stack.push(...[...parents].filter(Boolean));
 		}
-		return [...seen];
-	};
+	}
 
 	return {
 		dependencies: report.installed.size,
 		thirdPartyDependencies: [...report.installed.values()].filter(name => !owned.has(name)).length,
 		vulnerabilities: count([...rank.keys()].map(severityOf)),
 		advisories: count([...advisories.values()]),
-		vulnerablePackages: Object.values(vulns)
-			.filter(v => v.isDirect && rank.has(v.name))
-			.map(v => ({ name: v.name, severity: severityOf(v.name), vulnerabilities: count(reachable(v.name).map(severityOf)) }))
+		vulnerablePackages: [...reached]
+			.map(([name, names]) => ({ name, severity: SEVERITIES[Math.max(...[...names].map(n => rank.get(n)))], vulnerabilities: count([...names].map(severityOf)) }))
 			.sort((a, b) => SEVERITIES.indexOf(b.severity) - SEVERITIES.indexOf(a.severity) || a.name.localeCompare(b.name)),
 	};
 }
