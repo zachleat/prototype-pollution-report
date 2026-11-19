@@ -235,7 +235,7 @@ function smallMultiples({ id, title, description, measures, nameOf = f => f.name
 				let snap = get(r.date, f.id);
 				return snap && !snap.error ? versionOf(snap) : undefined;
 			}) : [];
-			let points = primary.rows.map((r, j) => ({ x: x(r.date), label: formatDate(r.date), version: versions[j], values: [r.values[i], altValue(j), secondary.rows[j].values[i]] }));
+			let points = primary.rows.map((r, j) => ({ x: x(r.date), label: formatDate(r.date), version: versions[j], values: [r.values[i], altValue(j), secondary.rows[j].values[i]] })).filter(p => p.values.some(v => v != null));
 			// Mark where the major version changes (0.x counts by minor), labeling the first one at the left edge.
 			let major = v => v && (v.startsWith("0.") ? v.split(".").slice(0, 2).join(".") : v.split(".")[0]);
 			let changes = versions.flatMap((v, j) => {
