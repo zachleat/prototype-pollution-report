@@ -1,13 +1,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { faCircleCheck as faCircleCheckRegular, faCircleXmark } from "@fortawesome/free-regular-svg-icons";
 import { faArrowDown, faArrowUp, faArrowUpRightFromSquare, faBook, faBoxOpen, faCircleCheck, faCircleInfo, faCloud, faCloudBolt, faCloudRain, faCloudShowersHeavy, faCloudSun, faSun } from "@fortawesome/free-solid-svg-icons";
-import { faWordpressSimple } from "@fortawesome/free-brands-svg-icons";
 import frameworks from "./frameworks.js";
-
-// Shown in the rendering table only, since it isn't audited.
-const renderingOnly = [
-	{ id: "wordpress", createAudit: { label: "—" }, mpa: "default", spa: "no", static: "no", requestTime: "default", name: "WordPress", icon: faWordpressSimple, color: "light-dark(#21759b, #4f94d4)" },
-];
 
 const snapshots = JSON.parse(await readFile(new URL("./data/snapshots.json", import.meta.url), "utf8"));
 const OUTPUT = new URL("./index.html", import.meta.url);
@@ -122,7 +116,7 @@ const seriesVars = mode => series.map(f => `--series-${f.slot}: ${f.color[mode]}
 
 const symbol = (id, { icon: [w, h, , , d] }) => `<symbol id="${id}" viewBox="0 0 ${w} ${h}"><path d="${d}"/></symbol>`;
 const sprite = `<svg class="sprite" aria-hidden="true">${[
-	...[...series, ...renderingOnly].map(f => symbol(`icon-${f.id}`, f.icon)),
+	...series.map(f => symbol(`icon-${f.id}`, f.icon)),
 	...Object.entries(SUPPORT).map(([key, { icon }]) => symbol(`support-${key}`, icon)),
 	symbol("support-warn", faCircleInfo),
 	...FORECAST.map(({ id, icon }) => symbol(`weather-${id}`, icon)),
@@ -132,7 +126,7 @@ const sprite = `<svg class="sprite" aria-hidden="true">${[
 	symbol("docs", faBook),
 	symbol("external", faArrowUpRightFromSquare),
 ].join("")}</svg>`;
-const icon = f => `<svg class="icon" aria-hidden="true" style="fill:${f.slot ? `var(--series-${f.slot})` : f.color}"><use href="#icon-${f.id}"/></svg>`;
+const icon = f => `<svg class="icon" aria-hidden="true" style="fill:var(--series-${f.slot})"><use href="#icon-${f.id}"/></svg>`;
 
 // Only the most severe pill is labeled; the rest show counts, with the severity in the tooltip.
 const pills = counts => SEVERITIES.filter(sev => counts[sev]).map((sev, i) => i ? ` <span class="badge ${sev}" title="${num(counts[sev])} ${sev}">${num(counts[sev])}</span>` : ` <span class="badge ${sev}">${sev}<span class="count">${num(counts[sev])}</span></span>`).join("");
@@ -167,9 +161,10 @@ const outlierName = frameworks.find(f => f.id === OUTLIER)?.name;
 const outlierToggle = outlierName ? `<label class="toggle"><input type="checkbox" class="include-outlier" checked disabled> Include ${esc(outlierName)} in y-axis scale</label>` : "";
 const scales = [{ id: "all" }, ...(outlierName ? [{ id: "trimmed", skip: OUTLIER }] : [])];
 
+// Failed collections are `null` gaps; dates a framework wasn't collected on are `undefined`, which lines skip over.
 const chartRows = value => dates.map(date => ({ date, values: series.map(f => {
 	let s = get(date, f.id);
-	return s && !s.error ? value(s) ?? null : null;
+	return s ? (s.error ? null : value(s) ?? null) : undefined;
 }) }));
 // `skip` leaves a framework's values out of the scale, so its chart overflows.
 const rowsMax = (rows, skip) => Math.max(...rows.flatMap(r => r.values.filter((v, i) => v != null && series[i].id !== skip)));
@@ -193,12 +188,13 @@ const sparkline = (f, value) => scales.map(({ id, skip }) => sparklineAt(f, valu
 const sparklineAt = (f, value, skip, scale) => {
 	// Zero sits just above the bottom edge so its stroke isn't clipped; the fill still runs to the edge, hidden under the stroke and outline at 0.
 	let [w, h, pad, base] = [60, 16, 1.5, 0.5];
-	let valuesOf = f => dates.map(d => (s => s && !s.error ? value(s) ?? null : null)(get(d, f.id)));
+	let valuesOf = f => dates.map(d => (s => s ? (s.error ? null : value(s) ?? null) : undefined)(get(d, f.id)));
 	let values = valuesOf(f);
 	let max = Math.max(1, ...series.filter(f => f.id !== skip).flatMap(valuesOf).filter(v => v != null));
 	let span = time(latestDate) - time(dates[0]) || 1;
 	let points = values.map((v, j) => v == null ? null : [((time(dates[j]) - time(dates[0])) / span * w).toFixed(1), (h - base - v / max * (h - pad - base)).toFixed(1)]);
-	let segments = points.reduce((all, p, j) => (p && (points[j - 1] ? all.at(-1).push(p) : all.push([p])), all), []);
+	let kept = points.filter((p, j) => values[j] !== undefined);
+	let segments = kept.reduce((all, p, j) => (p && (kept[j - 1] ? all.at(-1).push(p) : all.push([p])), all), []);
 	let line = segments.map(s => s.map(([x, y], k) => `${k ? "L" : "M"}${x},${y}`).join("")).join("");
 	let area = segments.map(s => `M${s[0][0]},${h}${s.map(([x, y]) => `L${x},${y}`).join("")}L${s.at(-1)[0]},${h}Z`).join("");
 	let color = `var(--series-${f.slot})`;
@@ -221,7 +217,7 @@ function smallMultiples({ id, title, description, measures, nameOf = f => f.name
 		return { ...m, rows, ticks, y: v => SH - SM.bottom - ratio(v) * (SH - SM.top - SM.bottom) };
 	});
 	let [primary, secondary, alt] = scaled();
-	let pathFor = ({ rows, y }, i) => rows.map((r, j) => r.values[i] == null ? "" : `${j && rows[j - 1].values[i] != null ? "L" : "M"}${x(r.date).toFixed(1)},${y(r.values[i]).toFixed(1)}`).join("");
+	let pathFor = ({ rows, y }, i) => rows.filter(r => r.values[i] !== undefined).map((r, j, kept) => r.values[i] == null ? "" : `${j && kept[j - 1].values[i] != null ? "L" : "M"}${x(r.date).toFixed(1)},${y(r.values[i]).toFixed(1)}`).join("");
 
 	// Panels follow `order` (framework ids), with anything missing from it at the end.
 	let rank = f => order.includes(f.id) ? order.indexOf(f.id) : Infinity;
@@ -345,7 +341,7 @@ let renderingTable = `<div class="scroll"><table class="scoreboard compact">
 			<th>SPA</th>
 		</tr>
 	</thead>
-	<tbody>${[...series, ...renderingOnly].toSorted((a, b) => ecosystemRank(a) - ecosystemRank(b) || coreRank(a) - coreRank(b) || ecosystemTotal(a) - ecosystemTotal(b) || coreTotal(a) - coreTotal(b) || a.name.localeCompare(b.name)).map(f => `<tr${staleRow(staleDateOf(f))}>
+	<tbody>${series.toSorted((a, b) => ecosystemRank(a) - ecosystemRank(b) || coreRank(a) - coreRank(b) || ecosystemTotal(a) - ecosystemTotal(b) || coreTotal(a) - coreTotal(b) || a.name.localeCompare(b.name)).map(f => `<tr${staleRow(staleDateOf(f))}>
 		<th scope="row">${icon(f)}${esc(f.name)}${stale(staleDateOf(f))}</th>
 		${(s => s ? forecast(s.vulnerabilities) : "<td></td>")(latestOf(f))}
 		${(core => core ? forecast(core.vulnerabilities) : "<td></td>")(latestOf(f)?.core)}

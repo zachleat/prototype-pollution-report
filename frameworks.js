@@ -1,5 +1,5 @@
 import { faAngular, faBuildAwesome, faSvelte } from "@fortawesome/free-brands-svg-icons";
-import { faAstro, faGatsby, faNextjs, faNuxt, faRemix, faSolid, faTanstack } from "./logos.js";
+import { faAstro, faGatsby, faLit, faNextjs, faNuxt, faPreact, faRemix, faSolid, faTanstack } from "./logos.js";
 
 // Each ecosystem is every package owned by its npm orgs (narrowed by `match`), plus `include`, minus `exclude`; `core` is also audited alone, labeled `coreName` when set.
 // `static` and `requestTime` say whether a framework can build static output or run code per request ("no", "yes" or "default").
@@ -20,4 +20,6 @@ export default [
 	{ id: "solid", createAudit: { status: "shown", tool: "create-solid@0.12.0", how: "create-solid doesn’t install; your own npm install shows its audit" }, mpa: "no", spa: "default", static: "yes", requestTime: "default", name: "Solid", orgs: ["solidjs"], core: "@solidjs/start", coreName: "SolidStart", include: ["solid-js", "create-solid", "vite-plugin-solid", "babel-preset-solid", "babel-plugin-jsx-dom-expressions", "dom-expressions", "solid-refresh"], icon: faSolid, color: { light: "#2c4f7c", dark: "#76b3e1" } },
 	// Remix 2 merged into React Router, and Remix 3 is a new framework under the old name, so all three lineages count as one ecosystem.
 	{ id: "remix", createAudit: { status: "shown", tool: "remix@3.2.0", how: "remix new doesn’t install; your own npm install shows its audit" }, mpa: "yes", spa: "default", static: "no", requestTime: "default", name: "Remix", orgs: ["remix-run", "react-router"], include: ["remix", "create-remix", "react-router", "react-router-dom", "create-react-router"], core: "remix", icon: faRemix, color: { light: "#1a6fe0", dark: "#3992ff" } },
+	{ id: "preact", createAudit: { status: "hidden", tool: "create-preact@0.6.0", how: "create-preact installs with output ignored" }, mpa: "yes", spa: "default", static: "yes", requestTime: "yes", name: "Preact", orgs: ["preact"], core: "preact", icon: faPreact, color: { light: "#673ab8", dark: "#a985e6" } },
+	{ id: "lit", createAudit: { status: "shown", manual: "Manual install", manualUrl: "https://lit.dev/docs/getting-started/", how: "No create tool; your own npm install shows its audit" }, mpa: "default", spa: "yes", static: "yes", requestTime: "yes", name: "Lit", orgs: ["lit", "lit-labs"], core: "lit", icon: faLit, color: { light: "#324fff", dark: "#7b8cff" } },
 ];

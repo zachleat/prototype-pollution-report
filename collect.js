@@ -97,19 +97,16 @@ function isEligible(packument) {
 		&& !Object.values({ ...latest.dependencies, ...latest.optionalDependencies, ...latest.peerDependencies }).some(spec => /^(catalog|workspace):/.test(spec));
 }
 
-// Current `latest` if it existed on that date, otherwise the highest stable version published by then.
-function versionAt(packument, date) {
+// Current `latest` if it existed on that date (and fits), otherwise the highest stable version published by then that fits.
+function versionAt(packument, date, fits = () => true) {
 	let latest = packument["dist-tags"].latest;
-	if (date === today) {
-		return latest;
-	}
 	let cutoff = new Date(date).getTime();
-	let publishedBy = v => new Date(packument.time[v]).getTime() < cutoff;
-	if (publishedBy(latest)) {
+	let publishedBy = v => date === today || new Date(packument.time[v]).getTime() < cutoff;
+	if (publishedBy(latest) && fits(latest)) {
 		return latest;
 	}
 	return Object.keys(packument.versions)
-		.filter(v => !parseVersion(v).pre && packument.time[v] && publishedBy(v))
+		.filter(v => !parseVersion(v).pre && packument.time[v] && publishedBy(v) && fits(v))
 		.sort(compareVersions)
 		.pop();
 }
@@ -615,11 +612,13 @@ for (let framework of selected) {
 				}
 			}
 
-			// Without a core version, the latest bundler as of the date stands in when any official package depends on it.
+			// Without a core version, the latest bundler as of the date that fits an official peer range stands in when any official package depends on it.
 			for (let name of Object.keys(VENDORED)) {
 				let official = ([pkg, version]) => pkg === name || ["dependencies", "optionalDependencies", "peerDependencies"].some(field => ecosystem.find(p => p.name === pkg).versions[version]?.[field]?.[name]);
 				if (!bundlers.some(([bundler]) => bundler === name) && !packages.some(([pkg]) => pkg === name) && packages.some(official)) {
-					bundlers.push([name, versionAt(await getPackument(name), date)]);
+					let ranges = packages.map(([pkg, version]) => ecosystem.find(p => p.name === pkg).versions[version]?.peerDependencies?.[name]).filter(Boolean);
+					let packument = await getPackument(name);
+					bundlers.push([name, versionAt(packument, date, v => !ranges.length || ranges.some(range => satisfies(v, range))) ?? versionAt(packument, date)]);
 				}
 			}
 
