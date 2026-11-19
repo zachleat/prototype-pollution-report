@@ -243392,7 +243392,7 @@
 	},
 	{
 		"date": "2026-11-19",
-		"collectedAt": "2026-11-19T11:41:16.178Z",
+		"collectedAt": "2026-11-19T15:46:04.747Z",
 		"framework": "11ty",
 		"packageCount": 45,
 		"core": {
@@ -243615,7 +243615,7 @@
 			"@11ty/eleventy-plugin-webc": "0.11.2",
 			"@11ty/eleventy-server-browsersync": "2.0.0",
 			"@11ty/eleventy-upgrade-help": "3.0.2",
-			"@11ty/eleventy-utils": "3.0.1",
+			"@11ty/eleventy-utils": "3.1.0",
 			"@11ty/find-generator": "2.1.0",
 			"@11ty/font-awesome": "2.0.0",
 			"@11ty/gray-matter": "3.0.0",
@@ -243662,7 +243662,7 @@
 			"@11ty/eleventy-plugin-webc": "2023-12-16",
 			"@11ty/eleventy-server-browsersync": "2026-08-08",
 			"@11ty/eleventy-upgrade-help": "2025-12-02",
-			"@11ty/eleventy-utils": "2026-10-13",
+			"@11ty/eleventy-utils": "2026-11-19",
 			"@11ty/find-generator": "2026-11-13",
 			"@11ty/font-awesome": "2026-09-16",
 			"@11ty/gray-matter": "2026-07-29",
@@ -243683,7 +243683,7 @@
 	},
 	{
 		"date": "2026-11-19",
-		"collectedAt": "2026-11-19T11:48:25.937Z",
+		"collectedAt": "2026-11-19T15:56:59.668Z",
 		"framework": "angular",
 		"packageCount": 50,
 		"core": {
@@ -243755,6 +243755,18 @@
 					"high": 0,
 					"critical": 0,
 					"total": 4
+				}
+			},
+			{
+				"name": "@angular/bazel",
+				"severity": "moderate",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 2,
+					"high": 0,
+					"critical": 0,
+					"total": 2
 				}
 			}
 		],
@@ -243987,7 +243999,7 @@
 	},
 	{
 		"date": "2026-11-19",
-		"collectedAt": "2026-11-19T11:44:53.442Z",
+		"collectedAt": "2026-11-19T15:52:06.316Z",
 		"framework": "astro",
 		"packageCount": 61,
 		"core": {
@@ -244048,10 +244060,10 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 0,
-					"moderate": 7,
-					"high": 13,
-					"critical": 3,
-					"total": 23
+					"moderate": 5,
+					"high": 1,
+					"critical": 2,
+					"total": 8
 				}
 			},
 			{
@@ -244090,6 +244102,58 @@
 					"critical": 0,
 					"total": 3
 				}
+			},
+			{
+				"name": "@rollup/plugin-alias",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 0,
+					"high": 1,
+					"critical": 0,
+					"total": 1
+				},
+				"vendoredBy": "vite"
+			},
+			{
+				"name": "@rollup/plugin-commonjs",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 0,
+					"high": 1,
+					"critical": 0,
+					"total": 1
+				},
+				"vendoredBy": "vite"
+			},
+			{
+				"name": "@rollup/plugin-dynamic-import-vars",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 0,
+					"high": 1,
+					"critical": 0,
+					"total": 1
+				},
+				"vendoredBy": "vite"
+			},
+			{
+				"name": "@rollup/pluginutils",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 0,
+					"high": 1,
+					"critical": 0,
+					"total": 1
+				},
+				"vendoredBy": "vite"
 			},
 			{
 				"name": "brace-expansion",
@@ -244256,6 +244320,18 @@
 					"high": 0,
 					"critical": 0,
 					"total": 2
+				}
+			},
+			{
+				"name": "@astrojs/svelte",
+				"severity": "moderate",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 1,
+					"high": 0,
+					"critical": 0,
+					"total": 1
 				}
 			},
 			{
@@ -244749,7 +244825,7 @@
 	},
 	{
 		"date": "2026-11-19",
-		"collectedAt": "2026-11-19T11:45:52.750Z",
+		"collectedAt": "2026-11-19T15:53:45.729Z",
 		"framework": "gatsby",
 		"packageCount": 133,
 		"core": {
@@ -244804,9 +244880,9 @@
 					"info": 0,
 					"low": 0,
 					"moderate": 3,
-					"high": 2,
-					"critical": 5,
-					"total": 10
+					"high": 7,
+					"critical": 6,
+					"total": 16
 				}
 			},
 			{
@@ -244814,11 +244890,11 @@
 				"severity": "critical",
 				"vulnerabilities": {
 					"info": 0,
-					"low": 2,
-					"moderate": 16,
-					"high": 53,
-					"critical": 14,
-					"total": 85
+					"low": 0,
+					"moderate": 3,
+					"high": 2,
+					"critical": 1,
+					"total": 6
 				}
 			},
 			{
@@ -244839,10 +244915,10 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 2,
-					"moderate": 16,
-					"high": 53,
-					"critical": 13,
-					"total": 84
+					"moderate": 9,
+					"high": 35,
+					"critical": 1,
+					"total": 47
 				}
 			},
 			{
@@ -244863,10 +244939,10 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 2,
-					"moderate": 15,
-					"high": 52,
-					"critical": 12,
-					"total": 81
+					"moderate": 9,
+					"high": 35,
+					"critical": 1,
+					"total": 47
 				}
 			},
 			{
@@ -244876,9 +244952,9 @@
 					"info": 0,
 					"low": 2,
 					"moderate": 12,
-					"high": 91,
+					"high": 87,
 					"critical": 9,
-					"total": 114
+					"total": 110
 				}
 			},
 			{
@@ -244887,10 +244963,10 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 2,
-					"moderate": 15,
-					"high": 55,
-					"critical": 13,
-					"total": 85
+					"moderate": 9,
+					"high": 36,
+					"critical": 2,
+					"total": 49
 				}
 			},
 			{
@@ -244899,10 +244975,10 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 2,
-					"moderate": 16,
-					"high": 55,
-					"critical": 14,
-					"total": 87
+					"moderate": 9,
+					"high": 36,
+					"critical": 3,
+					"total": 50
 				}
 			},
 			{
@@ -244911,10 +244987,10 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 2,
-					"moderate": 16,
-					"high": 53,
-					"critical": 14,
-					"total": 85
+					"moderate": 9,
+					"high": 36,
+					"critical": 2,
+					"total": 49
 				}
 			},
 			{
@@ -244923,10 +244999,10 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 2,
-					"moderate": 16,
-					"high": 56,
-					"critical": 15,
-					"total": 89
+					"moderate": 10,
+					"high": 39,
+					"critical": 4,
+					"total": 55
 				}
 			},
 			{
@@ -244935,10 +245011,10 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 0,
-					"moderate": 3,
-					"high": 3,
-					"critical": 3,
-					"total": 9
+					"moderate": 2,
+					"high": 0,
+					"critical": 1,
+					"total": 3
 				}
 			},
 			{
@@ -244946,11 +245022,11 @@
 				"severity": "critical",
 				"vulnerabilities": {
 					"info": 0,
-					"low": 3,
-					"moderate": 16,
-					"high": 69,
-					"critical": 17,
-					"total": 105
+					"low": 1,
+					"moderate": 2,
+					"high": 24,
+					"critical": 6,
+					"total": 33
 				}
 			},
 			{
@@ -244958,11 +245034,11 @@
 				"severity": "critical",
 				"vulnerabilities": {
 					"info": 0,
-					"low": 3,
-					"moderate": 16,
-					"high": 65,
-					"critical": 16,
-					"total": 100
+					"low": 1,
+					"moderate": 2,
+					"high": 20,
+					"critical": 5,
+					"total": 28
 				}
 			},
 			{
@@ -244972,9 +245048,9 @@
 					"info": 0,
 					"low": 3,
 					"moderate": 16,
-					"high": 63,
+					"high": 62,
 					"critical": 14,
-					"total": 96
+					"total": 95
 				}
 			},
 			{
@@ -244982,11 +245058,11 @@
 				"severity": "critical",
 				"vulnerabilities": {
 					"info": 0,
-					"low": 2,
-					"moderate": 16,
-					"high": 59,
-					"critical": 16,
-					"total": 93
+					"low": 0,
+					"moderate": 2,
+					"high": 12,
+					"critical": 5,
+					"total": 19
 				}
 			},
 			{
@@ -244996,9 +245072,9 @@
 					"info": 0,
 					"low": 3,
 					"moderate": 10,
-					"high": 39,
+					"high": 40,
 					"critical": 5,
-					"total": 57
+					"total": 58
 				}
 			},
 			{
@@ -245019,10 +245095,10 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 2,
-					"moderate": 15,
-					"high": 52,
-					"critical": 13,
-					"total": 82
+					"moderate": 9,
+					"high": 35,
+					"critical": 2,
+					"total": 48
 				}
 			},
 			{
@@ -245031,10 +245107,10 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 2,
-					"moderate": 16,
-					"high": 55,
-					"critical": 18,
-					"total": 91
+					"moderate": 9,
+					"high": 38,
+					"critical": 7,
+					"total": 56
 				}
 			},
 			{
@@ -245054,11 +245130,11 @@
 				"severity": "high",
 				"vulnerabilities": {
 					"info": 0,
-					"low": 0,
+					"low": 1,
 					"moderate": 0,
 					"high": 2,
 					"critical": 0,
-					"total": 2
+					"total": 3
 				}
 			},
 			{
@@ -245068,9 +245144,9 @@
 					"info": 0,
 					"low": 0,
 					"moderate": 2,
-					"high": 13,
+					"high": 15,
 					"critical": 0,
-					"total": 15
+					"total": 17
 				}
 			},
 			{
@@ -245080,9 +245156,9 @@
 					"info": 0,
 					"low": 0,
 					"moderate": 0,
-					"high": 13,
+					"high": 8,
 					"critical": 0,
-					"total": 13
+					"total": 8
 				}
 			},
 			{
@@ -245140,9 +245216,9 @@
 					"info": 0,
 					"low": 0,
 					"moderate": 0,
-					"high": 4,
+					"high": 6,
 					"critical": 0,
-					"total": 4
+					"total": 6
 				}
 			},
 			{
@@ -245155,6 +245231,30 @@
 					"high": 36,
 					"critical": 0,
 					"total": 47
+				}
+			},
+			{
+				"name": "gatsby-graphql-source-toolkit",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 2,
+					"moderate": 9,
+					"high": 35,
+					"critical": 0,
+					"total": 46
+				}
+			},
+			{
+				"name": "gatsby-interface",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 2,
+					"moderate": 9,
+					"high": 35,
+					"critical": 0,
+					"total": 46
 				}
 			},
 			{
@@ -245391,10 +245491,10 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 2,
-					"moderate": 10,
-					"high": 49,
+					"moderate": 9,
+					"high": 37,
 					"critical": 0,
-					"total": 61
+					"total": 48
 				}
 			},
 			{
@@ -245428,9 +245528,9 @@
 					"info": 0,
 					"low": 2,
 					"moderate": 9,
-					"high": 40,
+					"high": 37,
 					"critical": 0,
-					"total": 51
+					"total": 48
 				}
 			},
 			{
@@ -245500,9 +245600,9 @@
 					"info": 0,
 					"low": 2,
 					"moderate": 9,
-					"high": 38,
+					"high": 40,
 					"critical": 0,
-					"total": 49
+					"total": 51
 				}
 			},
 			{
@@ -245572,9 +245672,9 @@
 					"info": 0,
 					"low": 2,
 					"moderate": 9,
-					"high": 36,
+					"high": 38,
 					"critical": 0,
-					"total": 47
+					"total": 49
 				}
 			},
 			{
@@ -245656,9 +245756,9 @@
 					"info": 0,
 					"low": 2,
 					"moderate": 9,
-					"high": 40,
+					"high": 37,
 					"critical": 0,
-					"total": 51
+					"total": 48
 				}
 			},
 			{
@@ -245692,9 +245792,9 @@
 					"info": 0,
 					"low": 2,
 					"moderate": 9,
-					"high": 40,
+					"high": 37,
 					"critical": 0,
-					"total": 51
+					"total": 48
 				}
 			},
 			{
@@ -245704,9 +245804,9 @@
 					"info": 0,
 					"low": 2,
 					"moderate": 9,
-					"high": 40,
+					"high": 37,
 					"critical": 0,
-					"total": 51
+					"total": 48
 				}
 			},
 			{
@@ -245740,9 +245840,9 @@
 					"info": 0,
 					"low": 2,
 					"moderate": 9,
-					"high": 40,
+					"high": 37,
 					"critical": 0,
-					"total": 51
+					"total": 48
 				}
 			},
 			{
@@ -245775,10 +245875,10 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 2,
-					"moderate": 10,
-					"high": 41,
+					"moderate": 9,
+					"high": 37,
 					"critical": 0,
-					"total": 53
+					"total": 48
 				}
 			},
 			{
@@ -245799,10 +245899,10 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 2,
-					"moderate": 10,
-					"high": 40,
+					"moderate": 9,
+					"high": 36,
 					"critical": 0,
-					"total": 52
+					"total": 47
 				}
 			},
 			{
@@ -245894,11 +245994,11 @@
 				"severity": "high",
 				"vulnerabilities": {
 					"info": 0,
-					"low": 2,
-					"moderate": 9,
-					"high": 36,
+					"low": 0,
+					"moderate": 0,
+					"high": 1,
 					"critical": 0,
-					"total": 47
+					"total": 1
 				}
 			},
 			{
@@ -245906,11 +246006,11 @@
 				"severity": "high",
 				"vulnerabilities": {
 					"info": 0,
-					"low": 2,
-					"moderate": 9,
-					"high": 37,
+					"low": 0,
+					"moderate": 0,
+					"high": 1,
 					"critical": 0,
-					"total": 48
+					"total": 1
 				}
 			},
 			{
@@ -245918,11 +246018,11 @@
 				"severity": "high",
 				"vulnerabilities": {
 					"info": 0,
-					"low": 2,
-					"moderate": 9,
-					"high": 36,
+					"low": 0,
+					"moderate": 0,
+					"high": 1,
 					"critical": 0,
-					"total": 47
+					"total": 1
 				}
 			},
 			{
@@ -245930,11 +246030,11 @@
 				"severity": "high",
 				"vulnerabilities": {
 					"info": 0,
-					"low": 2,
-					"moderate": 9,
-					"high": 36,
+					"low": 0,
+					"moderate": 0,
+					"high": 1,
 					"critical": 0,
-					"total": 47
+					"total": 1
 				}
 			},
 			{
@@ -245942,11 +246042,11 @@
 				"severity": "high",
 				"vulnerabilities": {
 					"info": 0,
-					"low": 2,
-					"moderate": 9,
-					"high": 36,
+					"low": 0,
+					"moderate": 0,
+					"high": 1,
 					"critical": 0,
-					"total": 47
+					"total": 1
 				}
 			},
 			{
@@ -245954,11 +246054,11 @@
 				"severity": "high",
 				"vulnerabilities": {
 					"info": 0,
-					"low": 3,
-					"moderate": 10,
-					"high": 53,
+					"low": 1,
+					"moderate": 2,
+					"high": 14,
 					"critical": 0,
-					"total": 66
+					"total": 17
 				}
 			},
 			{
@@ -246015,10 +246115,10 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 2,
-					"moderate": 10,
-					"high": 41,
+					"moderate": 9,
+					"high": 37,
 					"critical": 0,
-					"total": 53
+					"total": 48
 				}
 			},
 			{
@@ -246064,9 +246164,9 @@
 					"info": 0,
 					"low": 2,
 					"moderate": 9,
-					"high": 38,
+					"high": 36,
 					"critical": 0,
-					"total": 49
+					"total": 47
 				}
 			},
 			{
@@ -246463,7 +246563,7 @@
 	},
 	{
 		"date": "2026-11-19",
-		"collectedAt": "2026-11-19T11:44:03.938Z",
+		"collectedAt": "2026-11-19T15:50:47.329Z",
 		"framework": "next",
 		"packageCount": 27,
 		"core": {
@@ -246524,11 +246624,11 @@
 				"severity": "critical",
 				"vulnerabilities": {
 					"info": 0,
-					"low": 10,
-					"moderate": 2,
-					"high": 18,
-					"critical": 4,
-					"total": 34
+					"low": 0,
+					"moderate": 0,
+					"high": 0,
+					"critical": 2,
+					"total": 2
 				}
 			},
 			{
@@ -246536,11 +246636,11 @@
 				"severity": "critical",
 				"vulnerabilities": {
 					"info": 0,
-					"low": 10,
-					"moderate": 2,
-					"high": 18,
-					"critical": 4,
-					"total": 34
+					"low": 0,
+					"moderate": 0,
+					"high": 0,
+					"critical": 2,
+					"total": 2
 				}
 			},
 			{
@@ -246548,11 +246648,11 @@
 				"severity": "critical",
 				"vulnerabilities": {
 					"info": 0,
-					"low": 10,
-					"moderate": 2,
-					"high": 18,
-					"critical": 4,
-					"total": 34
+					"low": 0,
+					"moderate": 0,
+					"high": 0,
+					"critical": 2,
+					"total": 2
 				}
 			},
 			{
@@ -246560,11 +246660,11 @@
 				"severity": "critical",
 				"vulnerabilities": {
 					"info": 0,
-					"low": 11,
-					"moderate": 3,
-					"high": 18,
-					"critical": 4,
-					"total": 36
+					"low": 2,
+					"moderate": 1,
+					"high": 0,
+					"critical": 2,
+					"total": 5
 				}
 			},
 			{
@@ -246584,11 +246684,11 @@
 				"severity": "critical",
 				"vulnerabilities": {
 					"info": 0,
-					"low": 10,
-					"moderate": 2,
-					"high": 18,
-					"critical": 4,
-					"total": 34
+					"low": 0,
+					"moderate": 0,
+					"high": 0,
+					"critical": 2,
+					"total": 2
 				}
 			},
 			{
@@ -246596,11 +246696,11 @@
 				"severity": "critical",
 				"vulnerabilities": {
 					"info": 0,
-					"low": 10,
-					"moderate": 2,
-					"high": 18,
-					"critical": 3,
-					"total": 33
+					"low": 0,
+					"moderate": 0,
+					"high": 0,
+					"critical": 1,
+					"total": 1
 				}
 			},
 			{
@@ -247193,7 +247293,7 @@
 	},
 	{
 		"date": "2026-11-19",
-		"collectedAt": "2026-11-19T11:42:18.957Z",
+		"collectedAt": "2026-11-19T15:47:50.111Z",
 		"framework": "nuxt",
 		"packageCount": 57,
 		"core": {
@@ -247257,10 +247357,10 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 0,
-					"moderate": 5,
-					"high": 8,
-					"critical": 3,
-					"total": 16
+					"moderate": 3,
+					"high": 4,
+					"critical": 2,
+					"total": 9
 				}
 			},
 			{
@@ -247270,9 +247370,9 @@
 					"info": 0,
 					"low": 0,
 					"moderate": 5,
-					"high": 28,
+					"high": 31,
 					"critical": 9,
-					"total": 42
+					"total": 45
 				}
 			},
 			{
@@ -247306,10 +247406,10 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 0,
-					"moderate": 1,
-					"high": 4,
+					"moderate": 0,
+					"high": 2,
 					"critical": 0,
-					"total": 5
+					"total": 2
 				}
 			},
 			{
@@ -247317,11 +247417,11 @@
 				"severity": "high",
 				"vulnerabilities": {
 					"info": 0,
-					"low": 0,
-					"moderate": 1,
-					"high": 18,
+					"low": 1,
+					"moderate": 2,
+					"high": 19,
 					"critical": 0,
-					"total": 19
+					"total": 22
 				}
 			},
 			{
@@ -247330,10 +247430,10 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 0,
-					"moderate": 3,
-					"high": 6,
+					"moderate": 2,
+					"high": 2,
 					"critical": 0,
-					"total": 9
+					"total": 4
 				}
 			},
 			{
@@ -247343,9 +247443,21 @@
 					"info": 0,
 					"low": 0,
 					"moderate": 0,
-					"high": 5,
+					"high": 7,
 					"critical": 0,
-					"total": 5
+					"total": 7
+				}
+			},
+			{
+				"name": "@nuxt/hints",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 0,
+					"high": 4,
+					"critical": 0,
+					"total": 4
 				}
 			},
 			{
@@ -247403,9 +247515,9 @@
 					"info": 0,
 					"low": 0,
 					"moderate": 0,
-					"high": 4,
+					"high": 5,
 					"critical": 0,
-					"total": 4
+					"total": 5
 				}
 			},
 			{
@@ -247426,10 +247538,10 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 0,
-					"moderate": 3,
-					"high": 5,
+					"moderate": 0,
+					"high": 1,
 					"critical": 0,
-					"total": 8
+					"total": 1
 				}
 			},
 			{
@@ -247475,9 +247587,9 @@
 					"info": 0,
 					"low": 0,
 					"moderate": 0,
-					"high": 9,
+					"high": 10,
 					"critical": 0,
-					"total": 9
+					"total": 10
 				}
 			},
 			{
@@ -248056,7 +248168,7 @@
 	},
 	{
 		"date": "2026-11-19",
-		"collectedAt": "2026-11-19T11:50:30.420Z",
+		"collectedAt": "2026-11-19T16:00:07.166Z",
 		"framework": "remix",
 		"packageCount": 95,
 		"core": {
@@ -248110,9 +248222,9 @@
 					"info": 0,
 					"low": 2,
 					"moderate": 0,
-					"high": 3,
+					"high": 2,
 					"critical": 2,
-					"total": 7
+					"total": 6
 				}
 			},
 			{
@@ -248120,11 +248232,11 @@
 				"severity": "critical",
 				"vulnerabilities": {
 					"info": 0,
-					"low": 1,
-					"moderate": 7,
-					"high": 15,
-					"critical": 10,
-					"total": 33
+					"low": 0,
+					"moderate": 4,
+					"high": 8,
+					"critical": 7,
+					"total": 19
 				}
 			},
 			{
@@ -248132,11 +248244,11 @@
 				"severity": "critical",
 				"vulnerabilities": {
 					"info": 0,
-					"low": 1,
+					"low": 0,
 					"moderate": 0,
-					"high": 3,
+					"high": 2,
 					"critical": 2,
-					"total": 6
+					"total": 4
 				}
 			},
 			{
@@ -248144,11 +248256,11 @@
 				"severity": "critical",
 				"vulnerabilities": {
 					"info": 0,
-					"low": 1,
-					"moderate": 7,
-					"high": 15,
-					"critical": 12,
-					"total": 35
+					"low": 0,
+					"moderate": 4,
+					"high": 8,
+					"critical": 9,
+					"total": 21
 				}
 			},
 			{
@@ -248158,9 +248270,9 @@
 					"info": 0,
 					"low": 1,
 					"moderate": 0,
-					"high": 3,
+					"high": 2,
 					"critical": 2,
-					"total": 6
+					"total": 5
 				}
 			},
 			{
@@ -248168,11 +248280,11 @@
 				"severity": "critical",
 				"vulnerabilities": {
 					"info": 0,
-					"low": 1,
+					"low": 0,
 					"moderate": 0,
-					"high": 3,
+					"high": 2,
 					"critical": 1,
-					"total": 5
+					"total": 3
 				}
 			},
 			{
@@ -248180,11 +248292,11 @@
 				"severity": "critical",
 				"vulnerabilities": {
 					"info": 0,
-					"low": 1,
-					"moderate": 7,
-					"high": 15,
-					"critical": 11,
-					"total": 34
+					"low": 0,
+					"moderate": 4,
+					"high": 8,
+					"critical": 8,
+					"total": 20
 				}
 			},
 			{
@@ -248192,11 +248304,11 @@
 				"severity": "critical",
 				"vulnerabilities": {
 					"info": 0,
-					"low": 1,
-					"moderate": 7,
-					"high": 15,
-					"critical": 12,
-					"total": 35
+					"low": 0,
+					"moderate": 4,
+					"high": 8,
+					"critical": 9,
+					"total": 21
 				}
 			},
 			{
@@ -248204,11 +248316,11 @@
 				"severity": "critical",
 				"vulnerabilities": {
 					"info": 0,
-					"low": 1,
+					"low": 0,
 					"moderate": 0,
-					"high": 3,
+					"high": 2,
 					"critical": 3,
-					"total": 7
+					"total": 5
 				}
 			},
 			{
@@ -248216,11 +248328,23 @@
 				"severity": "critical",
 				"vulnerabilities": {
 					"info": 0,
-					"low": 1,
+					"low": 0,
 					"moderate": 2,
-					"high": 4,
+					"high": 3,
 					"critical": 2,
-					"total": 9
+					"total": 7
+				}
+			},
+			{
+				"name": "@remix-run/v1-route-convention",
+				"severity": "critical",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 4,
+					"high": 9,
+					"critical": 7,
+					"total": 20
 				}
 			},
 			{
@@ -248230,9 +248354,9 @@
 					"info": 0,
 					"low": 1,
 					"moderate": 0,
-					"high": 3,
+					"high": 2,
 					"critical": 2,
-					"total": 6
+					"total": 5
 				}
 			},
 			{
@@ -248265,11 +248389,11 @@
 				"severity": "high",
 				"vulnerabilities": {
 					"info": 0,
-					"low": 1,
+					"low": 0,
 					"moderate": 0,
-					"high": 4,
+					"high": 3,
 					"critical": 0,
-					"total": 5
+					"total": 3
 				}
 			},
 			{
@@ -248277,11 +248401,11 @@
 				"severity": "high",
 				"vulnerabilities": {
 					"info": 0,
-					"low": 1,
+					"low": 0,
 					"moderate": 0,
-					"high": 5,
+					"high": 4,
 					"critical": 0,
-					"total": 6
+					"total": 4
 				}
 			},
 			{
@@ -248289,11 +248413,11 @@
 				"severity": "high",
 				"vulnerabilities": {
 					"info": 0,
-					"low": 1,
+					"low": 0,
 					"moderate": 0,
-					"high": 5,
+					"high": 4,
 					"critical": 0,
-					"total": 6
+					"total": 4
 				}
 			},
 			{
@@ -248301,11 +248425,11 @@
 				"severity": "high",
 				"vulnerabilities": {
 					"info": 0,
-					"low": 1,
+					"low": 0,
 					"moderate": 0,
-					"high": 4,
+					"high": 3,
 					"critical": 0,
-					"total": 5
+					"total": 3
 				}
 			},
 			{
@@ -248313,27 +248437,15 @@
 				"severity": "high",
 				"vulnerabilities": {
 					"info": 0,
-					"low": 1,
+					"low": 0,
 					"moderate": 2,
-					"high": 4,
+					"high": 3,
 					"critical": 0,
-					"total": 7
+					"total": 5
 				}
 			},
 			{
 				"name": "@remix-run/server-runtime",
-				"severity": "high",
-				"vulnerabilities": {
-					"info": 0,
-					"low": 1,
-					"moderate": 0,
-					"high": 3,
-					"critical": 0,
-					"total": 4
-				}
-			},
-			{
-				"name": "@remix-run/v1-route-convention",
 				"severity": "high",
 				"vulnerabilities": {
 					"info": 0,
@@ -248342,6 +248454,18 @@
 					"high": 2,
 					"critical": 0,
 					"total": 2
+				}
+			},
+			{
+				"name": "@remix-run/v1-meta",
+				"severity": "high",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 2,
+					"high": 3,
+					"critical": 0,
+					"total": 5
 				}
 			},
 			{
@@ -248449,6 +248573,30 @@
 				"vendoredBy": "vite"
 			},
 			{
+				"name": "@remix-run/cli",
+				"severity": "moderate",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 1,
+					"high": 0,
+					"critical": 0,
+					"total": 1
+				}
+			},
+			{
+				"name": "@remix-run/test",
+				"severity": "moderate",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 1,
+					"high": 0,
+					"critical": 0,
+					"total": 1
+				}
+			},
+			{
 				"name": "follow-redirects",
 				"severity": "moderate",
 				"vulnerabilities": {
@@ -248473,6 +248621,18 @@
 					"total": 1
 				},
 				"vendoredBy": "vite"
+			},
+			{
+				"name": "remix",
+				"severity": "moderate",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 1,
+					"high": 0,
+					"critical": 0,
+					"total": 1
+				}
 			},
 			{
 				"name": "yaml",
@@ -249067,7 +249227,7 @@
 	},
 	{
 		"date": "2026-11-19",
-		"collectedAt": "2026-11-19T11:50:00.915Z",
+		"collectedAt": "2026-11-19T15:59:18.369Z",
 		"framework": "solid",
 		"packageCount": 27,
 		"core": {
@@ -249121,7 +249281,32 @@
 			"critical": 0,
 			"total": 2
 		},
-		"vulnerablePackages": [],
+		"vulnerablePackages": [
+			{
+				"name": "@solidjs/ogp",
+				"severity": "moderate",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 3,
+					"high": 0,
+					"critical": 0,
+					"total": 3
+				}
+			},
+			{
+				"name": "@solidjs/vite-plugin-nitro-2",
+				"severity": "moderate",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 4,
+					"high": 0,
+					"critical": 0,
+					"total": 4
+				}
+			}
+		],
 		"nonVendoredVulnerabilities": {
 			"info": 0,
 			"low": 0,
@@ -249314,7 +249499,7 @@
 	},
 	{
 		"date": "2026-11-19",
-		"collectedAt": "2026-11-19T11:41:42.888Z",
+		"collectedAt": "2026-11-19T15:46:46.695Z",
 		"framework": "svelte",
 		"packageCount": 47,
 		"core": {
@@ -249400,9 +249585,9 @@
 					"info": 0,
 					"low": 0,
 					"moderate": 0,
-					"high": 11,
+					"high": 4,
 					"critical": 0,
-					"total": 11
+					"total": 4
 				}
 			},
 			{
@@ -249412,9 +249597,9 @@
 					"info": 0,
 					"low": 0,
 					"moderate": 0,
-					"high": 12,
+					"high": 5,
 					"critical": 0,
-					"total": 12
+					"total": 5
 				}
 			},
 			{
@@ -249424,9 +249609,9 @@
 					"info": 0,
 					"low": 0,
 					"moderate": 0,
-					"high": 12,
+					"high": 5,
 					"critical": 0,
-					"total": 12
+					"total": 5
 				}
 			},
 			{
@@ -249436,9 +249621,9 @@
 					"info": 0,
 					"low": 0,
 					"moderate": 0,
-					"high": 11,
+					"high": 4,
 					"critical": 0,
-					"total": 11
+					"total": 4
 				}
 			},
 			{
@@ -249448,9 +249633,9 @@
 					"info": 0,
 					"low": 0,
 					"moderate": 0,
-					"high": 12,
+					"high": 5,
 					"critical": 0,
-					"total": 12
+					"total": 5
 				}
 			},
 			{
@@ -249460,9 +249645,9 @@
 					"info": 0,
 					"low": 0,
 					"moderate": 0,
-					"high": 9,
+					"high": 2,
 					"critical": 0,
-					"total": 9
+					"total": 2
 				}
 			},
 			{
@@ -249472,9 +249657,9 @@
 					"info": 0,
 					"low": 0,
 					"moderate": 0,
-					"high": 11,
+					"high": 4,
 					"critical": 0,
-					"total": 11
+					"total": 4
 				}
 			},
 			{
@@ -249484,9 +249669,9 @@
 					"info": 0,
 					"low": 0,
 					"moderate": 0,
-					"high": 11,
+					"high": 4,
 					"critical": 0,
-					"total": 11
+					"total": 4
 				}
 			},
 			{
@@ -249496,9 +249681,9 @@
 					"info": 0,
 					"low": 0,
 					"moderate": 0,
-					"high": 11,
+					"high": 4,
 					"critical": 0,
-					"total": 11
+					"total": 4
 				}
 			},
 			{
@@ -249508,9 +249693,9 @@
 					"info": 0,
 					"low": 0,
 					"moderate": 0,
-					"high": 10,
+					"high": 3,
 					"critical": 0,
-					"total": 10
+					"total": 3
 				}
 			},
 			{
@@ -249520,9 +249705,9 @@
 					"info": 0,
 					"low": 0,
 					"moderate": 0,
-					"high": 10,
+					"high": 3,
 					"critical": 0,
-					"total": 10
+					"total": 3
 				}
 			},
 			{
@@ -249532,9 +249717,9 @@
 					"info": 0,
 					"low": 0,
 					"moderate": 0,
-					"high": 9,
+					"high": 2,
 					"critical": 0,
-					"total": 9
+					"total": 2
 				}
 			},
 			{
@@ -249544,9 +249729,9 @@
 					"info": 0,
 					"low": 0,
 					"moderate": 0,
-					"high": 8,
+					"high": 1,
 					"critical": 0,
-					"total": 8
+					"total": 1
 				}
 			},
 			{
@@ -249800,7 +249985,7 @@
 	},
 	{
 		"date": "2026-11-19",
-		"collectedAt": "2026-11-19T11:49:12.279Z",
+		"collectedAt": "2026-11-19T15:58:05.126Z",
 		"framework": "tanstack-start",
 		"packageCount": 81,
 		"core": {
@@ -249852,15 +250037,27 @@
 		},
 		"vulnerablePackages": [
 			{
+				"name": "@tanstack/nitro-v2-vite-plugin",
+				"severity": "critical",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 0,
+					"high": 3,
+					"critical": 1,
+					"total": 4
+				}
+			},
+			{
 				"name": "@tanstack/react-router-server",
 				"severity": "critical",
 				"vulnerabilities": {
 					"info": 0,
 					"low": 0,
-					"moderate": 4,
-					"high": 18,
+					"moderate": 1,
+					"high": 7,
 					"critical": 8,
-					"total": 30
+					"total": 16
 				}
 			},
 			{
@@ -249869,10 +250066,10 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 0,
-					"moderate": 4,
-					"high": 18,
-					"critical": 8,
-					"total": 30
+					"moderate": 1,
+					"high": 5,
+					"critical": 3,
+					"total": 9
 				}
 			},
 			{
@@ -249881,10 +250078,22 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 0,
-					"moderate": 4,
-					"high": 18,
-					"critical": 8,
-					"total": 30
+					"moderate": 1,
+					"high": 12,
+					"critical": 3,
+					"total": 16
+				}
+			},
+			{
+				"name": "@tanstack/react-start-plugin",
+				"severity": "critical",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 0,
+					"high": 12,
+					"critical": 1,
+					"total": 13
 				}
 			},
 			{
@@ -249893,10 +250102,10 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 0,
-					"moderate": 4,
-					"high": 18,
-					"critical": 8,
-					"total": 30
+					"moderate": 1,
+					"high": 5,
+					"critical": 3,
+					"total": 9
 				}
 			},
 			{
@@ -249905,10 +250114,22 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 0,
-					"moderate": 4,
-					"high": 18,
-					"critical": 8,
-					"total": 30
+					"moderate": 1,
+					"high": 12,
+					"critical": 3,
+					"total": 16
+				}
+			},
+			{
+				"name": "@tanstack/solid-start-plugin",
+				"severity": "critical",
+				"vulnerabilities": {
+					"info": 0,
+					"low": 0,
+					"moderate": 0,
+					"high": 12,
+					"critical": 1,
+					"total": 13
 				}
 			},
 			{
@@ -249917,10 +250138,10 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 0,
-					"moderate": 4,
-					"high": 18,
-					"critical": 8,
-					"total": 30
+					"moderate": 1,
+					"high": 5,
+					"critical": 3,
+					"total": 9
 				}
 			},
 			{
@@ -249929,10 +250150,10 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 0,
-					"moderate": 4,
-					"high": 18,
-					"critical": 11,
-					"total": 33
+					"moderate": 1,
+					"high": 12,
+					"critical": 6,
+					"total": 19
 				}
 			},
 			{
@@ -249941,10 +250162,10 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 0,
-					"moderate": 4,
-					"high": 18,
-					"critical": 8,
-					"total": 30
+					"moderate": 1,
+					"high": 5,
+					"critical": 3,
+					"total": 9
 				}
 			},
 			{
@@ -249953,10 +250174,10 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 0,
-					"moderate": 4,
-					"high": 18,
-					"critical": 8,
-					"total": 30
+					"moderate": 0,
+					"high": 4,
+					"critical": 3,
+					"total": 7
 				}
 			},
 			{
@@ -249965,10 +250186,10 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 0,
-					"moderate": 4,
-					"high": 18,
-					"critical": 8,
-					"total": 30
+					"moderate": 1,
+					"high": 12,
+					"critical": 3,
+					"total": 16
 				}
 			},
 			{
@@ -249977,10 +250198,10 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 0,
-					"moderate": 4,
-					"high": 9,
-					"critical": 3,
-					"total": 16
+					"moderate": 1,
+					"high": 0,
+					"critical": 2,
+					"total": 3
 				}
 			},
 			{
@@ -249989,10 +250210,10 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 0,
-					"moderate": 4,
-					"high": 18,
-					"critical": 8,
-					"total": 30
+					"moderate": 1,
+					"high": 5,
+					"critical": 3,
+					"total": 9
 				}
 			},
 			{
@@ -250001,10 +250222,10 @@
 				"vulnerabilities": {
 					"info": 0,
 					"low": 0,
-					"moderate": 4,
-					"high": 18,
-					"critical": 9,
-					"total": 31
+					"moderate": 0,
+					"high": 4,
+					"critical": 4,
+					"total": 8
 				}
 			},
 			{
@@ -250045,27 +250266,15 @@
 				}
 			},
 			{
-				"name": "@tanstack/react-start-plugin",
+				"name": "@tanstack/router-zod-adapter",
 				"severity": "high",
 				"vulnerabilities": {
 					"info": 0,
 					"low": 0,
 					"moderate": 0,
-					"high": 9,
+					"high": 1,
 					"critical": 0,
-					"total": 9
-				}
-			},
-			{
-				"name": "@tanstack/solid-start-plugin",
-				"severity": "high",
-				"vulnerabilities": {
-					"info": 0,
-					"low": 0,
-					"moderate": 0,
-					"high": 9,
-					"critical": 0,
-					"total": 9
+					"total": 1
 				}
 			},
 			{
