@@ -1,6 +1,6 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { faCircleCheck as faCircleCheckRegular, faCircleXmark } from "@fortawesome/free-regular-svg-icons";
-import { faArrowDown, faArrowUp, faArrowUpRightFromSquare, faBook, faBoxOpen, faCircleCheck, faCircleInfo, faCloud, faCloudBolt, faCloudRain, faCloudShowersHeavy, faCloudSun, faSun } from "@fortawesome/free-solid-svg-icons";
+import { faArrowDown, faArrowUp, faArrowUpRightFromSquare, faBook, faBoxOpen, faCircleCheck, faCircleInfo, faCloud, faCloudBolt, faCloudRain, faCloudShowersHeavy, faCloudSun, faCube, faCubes, faListUl, faSun } from "@fortawesome/free-solid-svg-icons";
 import frameworks from "./frameworks.js";
 
 const snapshots = JSON.parse(await readFile(new URL("./data/snapshots.json", import.meta.url), "utf8"));
@@ -107,8 +107,10 @@ const distance = d => Math.abs(time(d) - (time(latestDate) - 21 * 864e5));
 const baseline = dates.slice(0, -1).reduce((best, d) => distance(d) < distance(best) ? d : best, dates[0]);
 const collectedAt = snapshots.filter(s => s.date === latestDate && s.collectedAt).map(s => s.collectedAt).sort().at(-1);
 const lastUpdated = collectedAt
-	? `<time datetime="${collectedAt}" data-since>${new Intl.DateTimeFormat("en-US", { timeZone: "UTC", dateStyle: "medium", timeStyle: "short" }).format(new Date(collectedAt))} UTC</time>`
+	? `<time datetime="${collectedAt}">${new Intl.DateTimeFormat("en-US", { timeZone: "UTC", dateStyle: "medium", timeStyle: "short" }).format(new Date(collectedAt))} UTC</time>`
 	: formatDate(latestDate);
+// The fixed-width badge is filled in by script, relative to the viewer's clock.
+const sinceBadge = collectedAt ? ` <time class="badge age since" datetime="${collectedAt}">&nbsp;</time>` : "";
 const byKey = new Map(snapshots.map(s => [`${s.date}|${s.framework}`, s]));
 const get = (date, id) => byKey.get(`${date}|${id}`);
 const series = frameworks.map((f, i) => ({ ...f, slot: i + 1 }));
@@ -123,6 +125,9 @@ const sprite = `<svg class="sprite" aria-hidden="true">${[
 	symbol("trend-up", faArrowUp),
 	symbol("trend-down", faArrowDown),
 	symbol("bundle", faBoxOpen),
+	symbol("toc-ecosystem", faCubes),
+	symbol("toc-core", faCube),
+	symbol("toc-packages", faListUl),
 	symbol("docs", faBook),
 	symbol("external", faArrowUpRightFromSquare),
 ].join("")}</svg>`;
@@ -499,6 +504,13 @@ header, hgroup, figcaption { display: flex; flex-direction: column; gap: 0.5em; 
 header { margin-block-end: 2em; }
 hgroup { margin: 0; }
 section { margin: 0 0 2em; }
+/* Anchor targets clear the sticky nav. */
+[id] { scroll-margin-block-start: 4em; }
+.toc { font-size: 0.875em; margin-block-end: 2em; }
+.toc ol { display: flex; flex-wrap: wrap; gap: 0.5em; list-style: none; margin: 0; padding: 0; }
+.toc a { display: block; padding: 0.25em 0.75em; border-radius: 4px; background: var(--surface); box-shadow: inset 0 0 0 1px var(--axis); color: var(--text-2); font-weight: 500; text-decoration: none; }
+.section-icon { width: 1em; height: 1em; vertical-align: -0.125em; margin-inline-end: 0.4em; fill: currentColor; }
+.toc a:is(:hover, :focus-visible) { color: var(--text); box-shadow: inset 0 0 0 1px var(--text-2); }
 .card {
 	background: var(--surface);
 	border: 1px solid var(--border);
@@ -635,9 +647,13 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 .badge.severe { background: var(--severe); color: #0b0b0b; }
 .badge.moderate { background: var(--warning); color: #0b0b0b; }
 .badge.low { background: #c3c2b7; color: #0b0b0b; }
+.badge.rank.low { background: #e5e3d2; box-shadow: inset 0 0 0 1px #c3c2b7; }
+.badge.rank.moderate { background: #fccd3f; }
 /* An inset shadow outlines the pill without changing its height. */
 /* A translucent tint stays subtle on both light and dark surfaces. */
 .badge.none { background: rgb(255 214 10 / 0.12); color: var(--text); box-shadow: inset 0 0 0 1px var(--sun); }
+/* The width is reserved before script fills in the text. */
+.badge.since { min-width: 4.5em; justify-content: center; }
 .badge.age, .badge.bundling { color: var(--text-2); font-weight: 500; box-shadow: inset 0 0 0 1px var(--axis); }
 /* A translucent purple stays subtle in both modes. */
 /* Header pills are a key, not data, so they sit back. */
@@ -674,25 +690,34 @@ ${sprite}
 <main id="main">
 <header>
 	<h1>Prototype Pollution Report</h1>
-	<p class="note">Every non-deprecated package published by each framework’s npm organization, installed as of the first of each month and checked with <code>npm audit</code>. Last updated ${lastUpdated}.</p>
+	<p class="note">Every non-deprecated package published by each framework’s npm organization, installed as of the first of each month and checked with <code>npm audit</code>. Last updated${sinceBadge} ${lastUpdated}.</p>
 </header>
 
-<section class="stack">
-	<p class="note">Forecasts weight each vulnerability by severity (${Object.entries(SEVERITY_POINTS).map(([sev, points]) => `${sev} ${points}`).join(", ")}) and rank the total from clear to storms.</p>
-	${forecastLegend}
-</section>
+<nav class="toc" aria-label="Table of contents">
+	<ol>
+		<li><a href="#forecast"><svg class="section-icon" aria-hidden="true"><use href="#weather-partly-cloudy"/></svg>Forecast</a></li>
+		<li><a href="#ecosystem"><svg class="section-icon" aria-hidden="true"><use href="#toc-ecosystem"/></svg>Ecosystem Scoreboard</a></li>
+		<li><a href="#core"><svg class="section-icon" aria-hidden="true"><use href="#toc-core"/></svg>Core-only Scoreboard</a></li>
+		<li><a href="#packages"><svg class="section-icon" aria-hidden="true"><use href="#toc-packages"/></svg>Full Package Lists</a></li>
+	</ol>
+</nav>
 
-<section class="card">
+<section class="card" id="forecast">
+	<hgroup>
+		<h2><svg class="section-icon" aria-hidden="true"><use href="#weather-partly-cloudy"/></svg>Forecast</h2>
+		<p class="note">Forecasts weight each vulnerability by severity (${Object.entries(SEVERITY_POINTS).map(([sev, points]) => `${sev} ${points}`).join(", ")}) and rank the total from clear to storms.</p>
+	</hgroup>
 	<div class="stack">
+		${forecastLegend}
 		${renderingTable}
 		<p class="footnote">In a static build, server dependencies are limited to the build machine. A ReDoS in a Markdown parser might slow down a build, but visitors can’t trigger it. ${cautionIcon(REQUEST_TIME_WARNING)}Request-time code runs on a live server, where anyone loading a page can reach it. Note that client dependencies ship to the browser either way, so their vulnerabilities can affect both Build-time and Request-time projects.</p>
 		<p class="footnote">Shows npm audit is whether the framework’s official create tool shows <code>npm audit</code> results, including high severity vulnerabilities, after it installs dependencies. Hover a cell to see how it’s hidden.</p>
 	</div>
 </section>
 
-<section class="card">
+<section class="card" id="ecosystem">
 	<hgroup>
-		<h2>Ecosystem Scoreboard</h2>
+		<h2><svg class="section-icon" aria-hidden="true"><use href="#toc-ecosystem"/></svg>Ecosystem Scoreboard</h2>
 		<p class="note">As of ${formatDate(latestDate)}, sorted by fewest vulnerabilities.</p>
 	</hgroup>
 	<div class="stack">
@@ -713,15 +738,11 @@ ${sprite}
 	</div>
 	${smallMultiples({ id: "vulnerabilities", title: "Vulnerabilities over time (all official packages)", order: latest.map(({ f }) => f.id), measures: [{ label: "Vulnerabilities", value: s => s.vulnerabilities.total }, { label: "Dependencies", value: s => s.dependencies }, { label: "Raw npm audit (bundled dependencies not counted)", tooltip: "Raw npm audit", value: s => s.nonVendoredVulnerabilities?.total ?? s.vulnerabilities.total }] })}
 	${failures.length ? `<p class="note">Missing data, where the install failed: ${failures.map(s => `${esc(series.find(f => f.id === s.framework)?.name ?? s.framework)} on ${formatDate(s.date)}`).join(", ")}.</p>` : ""}
-	<div class="stack">
-		<h3>Package Lists</h3>
-		${details}
-	</div>
 </section>
 
-<section class="card">
+<section class="card" id="core">
 	<hgroup>
-		<h2>Core Scoreboard</h2>
+		<h2><svg class="section-icon" aria-hidden="true"><use href="#toc-core"/></svg>Core-only Scoreboard</h2>
 		<p class="note">Each framework’s main package installed on its own. As of ${formatDate(latestDate)}, sorted by fewest vulnerabilities.</p>
 	</hgroup>
 	<div class="stack">
@@ -737,6 +758,13 @@ ${sprite}
 	</div>
 	${smallMultiples({ id: "core-vulnerabilities", title: "Vulnerabilities over time (core package only)", order: latestCore.map(({ f }) => f.id), measures: [{ label: "Vulnerabilities", value: s => s.core?.vulnerabilities.total }, { label: "Dependencies", value: s => s.core?.dependencies }, { label: "Raw npm audit (bundled dependencies not counted)", tooltip: "Raw npm audit", value: s => s.core?.nonVendoredVulnerabilities?.total ?? s.core?.vulnerabilities.total }], nameOf: f => f.coreName ?? f.name, versionOf: s => s.core?.version })}
 </section>
+
+<section class="card" id="packages">
+	<h2><svg class="section-icon" aria-hidden="true"><use href="#toc-packages"/></svg>Full Package Lists</h2>
+	<div class="stack">
+		${details}
+	</div>
+</section>
 </main>
 <script type="module">
 // Keeps every outlier checkbox in sync.
@@ -746,10 +774,9 @@ for (const toggle of toggles) {
 	toggle.addEventListener("change", () => toggles.forEach(other => other.checked = toggle.checked));
 }
 
-// Hours since the last update, relative to the viewer's clock.
-for (const time of document.querySelectorAll("time[data-since]")) {
+for (const time of document.querySelectorAll("time.since")) {
 	const hours = Math.round((Date.now() - new Date(time.dateTime)) / 36e5);
-	time.after(" (" + (hours < 1 ? "less than an hour ago" : new Intl.RelativeTimeFormat("en-US").format(-hours, "hour")) + ")");
+	time.textContent = hours < 1 ? "<1h ago" : new Intl.RelativeTimeFormat("en-US", { style: "narrow" }).format(-hours, "hour");
 }
 
 for (const svg of document.querySelectorAll("svg[data-points]")) {
