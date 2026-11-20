@@ -13,9 +13,9 @@ const FORECAST = [
 	{ id: "clear", label: "Clear", max: 0, icon: faSun, severity: "none" },
 	{ id: "partly-cloudy", label: "Partly cloudy", max: 24, icon: faCloudSun, severity: "low" },
 	{ id: "cloudy", label: "Cloudy", max: 124, icon: faCloud, severity: "moderate" },
-	{ id: "rain", label: "Rain", max: 249, icon: faCloudRain, severity: "high" },
-	{ id: "heavy-rain", label: "Heavy rain", max: 624, icon: faCloudShowersHeavy, severity: "severe" },
-	{ id: "storms", label: "Storms", max: Infinity, icon: faCloudBolt, severity: "critical" },
+	{ id: "rain", label: "Rain", max: 249, icon: faCloudRain, severity: "severe" },
+	{ id: "heavy-rain", label: "Heavy rain", max: 624, icon: faCloudShowersHeavy, severity: "critical" },
+	{ id: "storms", label: "Storms", max: Infinity, icon: faCloudBolt, severity: "extreme" },
 ];
 const SEVERITY_POINTS = { critical: 10, high: 6, moderate: 3, low: 1 };
 const forecastScore = counts => Object.entries(SEVERITY_POINTS).reduce((sum, [sev, points]) => sum + (counts[sev] ?? 0) * points, 0);
@@ -445,7 +445,8 @@ let html = `<!doctype html>
 	--good: #0ca30c;
 	--critical: #d03b3b;
 	--serious: #ec835a;
-	--severe: #e25f4a;
+	--extreme: #821a28;
+	--severe: #ed8433;
 	--sun: #ffd60a;
 	--warning: #fab219;
 }
@@ -630,6 +631,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 .badge { display: inline-flex; align-items: center; line-height: 1.5; white-space: nowrap; font-size: 0.875em; padding: 0 0.4em; border-radius: 4px; color: #fff; }
 .badge.critical { background: var(--critical); }
 .badge.high { background: var(--serious); color: #0b0b0b; }
+.badge.extreme { background: var(--extreme); }
 .badge.severe { background: var(--severe); color: #0b0b0b; }
 .badge.moderate { background: var(--warning); color: #0b0b0b; }
 .badge.low { background: #c3c2b7; color: #0b0b0b; }
@@ -642,13 +644,13 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 .badge.stale { background: var(--caution); color: #0b0b0b; font-weight: 600; }
 .badge.key { opacity: 0.65; }
 .badge.bundling { background: rgb(100 108 255 / 0.14); }
-.badge.rank { gap: 0.3em; font-weight: 600; }
+.badge.rank { gap: 0.3em; font-weight: 600; font-size: 1.25em; }
 /* The divider runs the full pill height since pills have no block padding. */
 .badge .count { font-weight: 600; padding-inline-start: 0.4em; margin-inline-start: 0.4em; border-inline-start: 1px solid color-mix(in srgb, currentColor 40%, transparent); }
 .badge.rank .weather { fill: currentColor; }
 .bundle, .docs { width: 1em; height: 1em; vertical-align: -0.125em; margin-inline-end: 0.3em; fill: currentColor; }
 .external { width: 0.75em; height: 0.75em; margin-inline-start: 0.3em; fill: currentColor; }
-.badge.rank.none .weather { fill: var(--sun); }
+.badge.rank.none .weather { fill: light-dark(#f9cc05, var(--sun)); }
 </style>
 </head>
 <body>
