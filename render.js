@@ -735,7 +735,7 @@ ${sprite}
 		${forecastLegend}
 		${renderingTable}
 		<p class="footnote">In a static build, server dependencies are limited to the build machine. A ReDoS in a Markdown parser might slow down a build, but visitors can’t trigger it. ${cautionIcon(REQUEST_TIME_WARNING)}Request-time code runs on a live server, where anyone loading a page can reach it. Note that client dependencies ship to the browser either way, so their vulnerabilities can affect both Build-time and Request-time projects.</p>
-		<p class="footnote">Shows npm audit is whether the framework’s official create tool shows <code>npm audit</code> results, including high severity vulnerabilities, after it installs dependencies. Hover a cell to see how it’s hidden.</p>
+		<p class="footnote">Many create tools swallow npm’s install output, so new projects start without ever seeing its vulnerability warnings. <em>Shows npm audit</em> marks the frameworks that leave <code>npm audit</code> results visible. Hover a cell for details.</p>
 	</div>
 </section>
 
@@ -748,16 +748,14 @@ ${sprite}
 		${scoreboard}
 		${outlierToggle}
 		<ul class="footnotes">
-			${correlation(latest.map(({ s }) => [s.dependencies, s.vulnerabilities.total]))}
+			<li>Past dates only count advisories published by that date.</li>
 			<li>Ties are broken by the lowest average vulnerability count over the last two months.</li>
-			<li>Vulnerabilities are affected packages in the install tree, as reported by <code>npm audit</code>. Next.js and Vite bundle many dependencies into their published code, and those are checked too wherever they appear in the install tree. Raw npm audit leaves them out.</li>
-			<li>Note that Vite’s bundled dependencies run in its dev server and at build time, not when serving production requests.</li>
+			${correlation(latest.map(({ s }) => [s.dependencies, s.vulnerabilities.total]))}
+			<li>Vulnerabilities are affected packages in the install tree, as reported by <code>npm audit</code>. Next.js and Vite bundle many dependencies into their published code, and those are checked too wherever they appear in the install tree. Raw npm audit leaves them out. Note that Vite’s bundled dependencies run in its dev server and at build time, not when serving production requests.</li>
 			<li>Advisories are distinct GitHub security advisories matched anywhere in the install tree. One advisory can flag every package that depends on the affected one, and one package can have several advisories, so this can be higher or lower than Vulnerabilities.</li>
 			<li>Dependencies are unique <code>name@version</code> pairs across the whole ecosystem, installed together in one tree. Shared dependencies count once per version. Platform-specific builds of a native package (one per OS and CPU) count once. Third-party means not published by the framework’s npm organization.</li>
-			<li>Past dates only count advisories published by that date.</li>
 			<li>Snapshots are fresh installs, which pick up the newest patch releases each package allows.</li>
 			<li>Each ecosystem also installs its core package’s required peer dependencies, like Vite for SvelteKit or React for Next.js, and its core package’s version of Vite (or the latest Vite, if the core doesn’t use it), so older versions from stale packages don’t displace it. Peer dependencies of other official packages aren’t installed.</li>
-			<li>Forecasts count every package equally and are not currently weighted by download count.</li>
 		</ul>
 	</div>
 	${smallMultiples({ id: "vulnerabilities", title: "Vulnerabilities over time (all official packages)", order: latest.map(({ f }) => f.id), measures: [{ label: "Vulnerabilities", value: s => s.vulnerabilities.total }, { label: "Dependencies", value: s => s.dependencies }, { label: "Raw npm audit (bundled dependencies not counted)", tooltip: "Raw npm audit", value: s => s.nonVendoredVulnerabilities?.total ?? s.vulnerabilities.total }] })}
@@ -773,11 +771,10 @@ ${sprite}
 		${coreScoreboard}
 		${outlierToggle}
 		<ul class="footnotes">
-			${correlation(latestCore.map(({ s: { core } }) => [core.dependencies, core.vulnerabilities.total]))}
 			<li>Ties are broken by the lowest average vulnerability count over the last two months.</li>
+			${correlation(latestCore.map(({ s: { core } }) => [core.dependencies, core.vulnerabilities.total]))}
 			<li>Includes required peer dependencies, like Vite and Svelte for SvelteKit.</li>
 			<li>Note that Vite’s bundled dependencies run in its dev server and at build time, not when serving production requests.</li>
-			<li>Forecasts count every package equally and are not currently weighted by download count.</li>
 		</ul>
 	</div>
 	${smallMultiples({ id: "core-vulnerabilities", title: "Vulnerabilities over time (core package only)", order: latestCore.map(({ f }) => f.id), measures: [{ label: "Vulnerabilities", value: s => s.core?.vulnerabilities.total }, { label: "Dependencies", value: s => s.core?.dependencies }, { label: "Raw npm audit (bundled dependencies not counted)", tooltip: "Raw npm audit", value: s => s.core?.nonVendoredVulnerabilities?.total ?? s.core?.vulnerabilities.total }], nameOf: f => f.coreName ?? f.name, versionOf: s => s.core?.version })}
