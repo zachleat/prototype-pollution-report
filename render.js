@@ -148,6 +148,8 @@ const bundles = s => Object.entries(s.vendored || {}).map(([key, deps]) => {
 // Bundled packages count once per unique version across bundlers.
 const bundledCount = (s, field) => new Set(bundles(s).flatMap(b => b[field])).size;
 const officialAffected = s => s.vulnerablePackages.filter(p => !p.vendoredBy && s.packages[p.name]).length;
+// The affected count is left off when nothing is bundled.
+const bundledCell = s => `<td class="n">${num(bundledCount(s, "specs"))}${bundledCount(s, "specs") ? `<br><span class="third-party">(${num(bundledCount(s, "affected"))})</span>` : ""}</td>`;
 // The raw npm audit count (no vendored packages), shown only where it differs.
 const rawAudit = s => s.nonVendoredVulnerabilities && s.nonVendoredVulnerabilities.total !== s.vulnerabilities.total ? `<br><span class="third-party">(${num(s.nonVendoredVulnerabilities.total)})</span>` : "";
 
@@ -387,7 +389,7 @@ let scoreboard = `<div class="scroll"><table class="scoreboard">
 		<td class="n">${num(s.advisories.total)}</td>
 		<td class="n">${num(s.packageCount)}<br><span class="third-party">(${num(officialAffected(s))})</span></td>
 		<td class="n">${num(s.dependencies)}<br><span class="third-party">(${num(s.thirdPartyDependencies)})</span></td>
-		<td class="n">${num(bundledCount(s, "specs"))}<br><span class="third-party">(${num(bundledCount(s, "affected"))})</span></td>
+		${bundledCell(s)}
 		<td class="sev">${pills(s.vulnerabilities) || `<span class="muted">—</span>`}</td>
 	</tr>`).join("")}</tbody>
 </table></div>`;
@@ -412,7 +414,7 @@ let coreScoreboard = `<div class="scroll"><table class="scoreboard">
 		<td class="spark">${sparkline(f, s => s.core?.vulnerabilities.total)}</td>
 		<td class="n">${num(core.advisories.total)}</td>
 		<td class="n">${num(core.dependencies)}<br><span class="third-party">(${num(core.thirdPartyDependencies)})</span></td>
-		${!coreHasBundled ? "" : `<td class="n">${core.vendored ? `${num(bundledCount(core, "specs"))}<br><span class="third-party">(${num(bundledCount(core, "affected"))})</span>` : "—"}</td>`}
+		${!coreHasBundled ? "" : `${bundledCell(core)}`}
 		<td class="sev">${pills(core.vulnerabilities) || `<span class="muted">—</span>`}</td>
 	</tr>`).join("")}</tbody>
 </table></div>`;
@@ -680,7 +682,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 .badge .count { font-weight: 600; padding-inline-start: 0.4em; margin-inline-start: 0.4em; border-inline-start: 1px solid color-mix(in srgb, currentColor 40%, transparent); }
 .badge.rank .weather { fill: currentColor; }
 .title { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5em 1em; }
-.health .badge { font-size: 2em; padding-block-start: 0.2em; }
+.health .badge { font-size: 1.5em; padding-block-start: 0.2em; }
 .health .caption { font-size: 0.4em; text-transform: uppercase; letter-spacing: 0.05em; }
 .health .badge { flex-direction: column; }
 .bundle, .docs { width: 1em; height: 1em; vertical-align: -0.125em; margin-inline-end: 0.3em; fill: currentColor; }

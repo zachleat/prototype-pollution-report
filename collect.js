@@ -93,11 +93,15 @@ function isEligible(packument) {
 		&& !latest.cpu
 		&& !latest.version.startsWith("0.0.0")
 		&& !/-(edge|nightly|canary)$/.test(packument.name)
-		// Publishing without pnpm can leave `catalog:` and `workspace:` specs that npm can't resolve.
-		&& !Object.values({ ...latest.dependencies, ...latest.optionalDependencies, ...latest.peerDependencies }).some(spec => /^(catalog|workspace):/.test(spec));
+		&& isInstallable(latest);
 }
 
-// Current `latest` if it existed on that date (and fits), otherwise the highest stable version published by then that fits.
+// Publishing without pnpm can leave `catalog:` and `workspace:` specs that npm can't resolve.
+function isInstallable(manifest) {
+	return !Object.values({ ...manifest.dependencies, ...manifest.optionalDependencies, ...manifest.peerDependencies }).some(spec => /^(catalog|workspace):/.test(spec));
+}
+
+// Current `latest` if it existed on that date (and fits), otherwise the highest stable, installable version published by then that fits.
 function versionAt(packument, date, fits = () => true) {
 	let latest = packument["dist-tags"].latest;
 	let cutoff = new Date(date).getTime();
@@ -106,7 +110,7 @@ function versionAt(packument, date, fits = () => true) {
 		return latest;
 	}
 	return Object.keys(packument.versions)
-		.filter(v => !parseVersion(v).pre && packument.time[v] && publishedBy(v) && fits(v))
+		.filter(v => !parseVersion(v).pre && packument.time[v] && publishedBy(v) && fits(v) && isInstallable(packument.versions[v]))
 		.sort(compareVersions)
 		.pop();
 }
