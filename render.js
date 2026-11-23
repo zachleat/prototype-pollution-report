@@ -20,9 +20,9 @@ const FORECAST = [
 const SEVERITY_POINTS = { critical: 10, high: 6, moderate: 3, low: 1 };
 const forecastScore = counts => Object.entries(SEVERITY_POINTS).reduce((sum, [sev, points]) => sum + (counts[sev] ?? 0) * points, 0);
 // The bucket's rank shows beside the icon, from 0 (clear) to 5 (storms).
-const rankPill = index => {
+const rankPill = (index, caption = "") => {
 	let { id, label, severity } = FORECAST[index];
-	return `<span class="badge rank ${severity}"><svg class="weather" role="img" aria-label="${label}"><use href="#weather-${id}"/></svg>${index}</span>`;
+	return `<span class="badge rank ${severity}">${caption}<svg class="weather" role="img" aria-label="${label}"><use href="#weather-${id}"/></svg>${index}</span>`;
 };
 const forecastRank = counts => FORECAST.findIndex(f => forecastScore(counts) <= f.max);
 const forecast = counts => {
@@ -328,6 +328,15 @@ let ecosystemRank = f => (s => s ? forecastRank(s.vulnerabilities) : Infinity)(l
 let coreRank = f => (core => core ? forecastRank(core.vulnerabilities) : Infinity)(latestOf(f)?.core);
 let coreTotal = f => latestOf(f)?.core?.vulnerabilities.total ?? Infinity;
 let ecosystemTotal = f => latestOf(f)?.vulnerabilities.total ?? Infinity;
+// Overall health averages each framework's ecosystem forecast rank, plus a penalty per way its vulnerabilities stay out of sight.
+const HEALTH_PENALTY = 0.25;
+let hidesAudit = f => ["hidden", "partial"].includes(f.createAudit?.status);
+let hidesBundled = s => s.nonVendoredVulnerabilities != null && s.nonVendoredVulnerabilities.total < s.vulnerabilities.total;
+let healthOf = ({ f, s }) => Math.min(FORECAST.length - 1, forecastRank(s.vulnerabilities) + HEALTH_PENALTY * (hidesAudit(f) + hidesBundled(s)));
+let healthAverage = latest.reduce((sum, l) => sum + healthOf(l), 0) / latest.length;
+let healthRank = Math.round(healthAverage);
+let health = `<p class="health" title="${FORECAST[healthRank].label}">${rankPill(healthRank, `<span class="caption">Overall</span>`)}</p>`;
+
 let renderingTable = `<div class="scroll"><table class="scoreboard compact">
 	<thead>
 		<tr>
@@ -367,6 +376,7 @@ let scoreboard = `<div class="scroll"><table class="scoreboard">
 		<th class="n">GitHub<br>Advisories</th>
 		<th class="n">Packages<br><span class="third-party">(Affected)</span></th>
 		<th class="n">Dependencies<br><span class="third-party">(Third-party)</span></th>
+		<th class="n">Bundled deps<br><span class="third-party">(Affected)</span></th>
 		<th>Severity<br>${SEVERITIES.map(sev => `<span class="badge ${sev} key">${sev}</span>`).join(" ")}</th>
 	</tr></thead>
 	<tbody>${latest.map(({ f, s, date }) => `<tr${staleRow(date)}>
@@ -377,10 +387,13 @@ let scoreboard = `<div class="scroll"><table class="scoreboard">
 		<td class="n">${num(s.advisories.total)}</td>
 		<td class="n">${num(s.packageCount)}<br><span class="third-party">(${num(officialAffected(s))})</span></td>
 		<td class="n">${num(s.dependencies)}<br><span class="third-party">(${num(s.thirdPartyDependencies)})</span></td>
+		<td class="n">${num(bundledCount(s, "specs"))}<br><span class="third-party">(${num(bundledCount(s, "affected"))})</span></td>
 		<td class="sev">${pills(s.vulnerabilities) || `<span class="muted">—</span>`}</td>
 	</tr>`).join("")}</tbody>
 </table></div>`;
 
+// Core snapshots only carry bundled data once they've been recollected.
+let coreHasBundled = latestCore.some(({ s }) => s.core.vendored);
 let coreScoreboard = `<div class="scroll"><table class="scoreboard">
 	<thead><tr>
 		<th>Forecast</th>
@@ -389,6 +402,7 @@ let coreScoreboard = `<div class="scroll"><table class="scoreboard">
 		<th>Over Time</th>
 		<th class="n">GitHub<br>Advisories</th>
 		<th class="n">Dependencies<br><span class="third-party">(Third-party)</span></th>
+		${coreHasBundled ? `<th class="n">Bundled deps<br><span class="third-party">(Affected)</span></th>` : ""}
 		<th>Severity<br>${SEVERITIES.map(sev => `<span class="badge ${sev} key">${sev}</span>`).join(" ")}</th>
 	</tr></thead>
 	<tbody>${latestCore.map(({ f, date, s: { core, published } }) => `<tr${staleRow(date)}>
@@ -398,6 +412,7 @@ let coreScoreboard = `<div class="scroll"><table class="scoreboard">
 		<td class="spark">${sparkline(f, s => s.core?.vulnerabilities.total)}</td>
 		<td class="n">${num(core.advisories.total)}</td>
 		<td class="n">${num(core.dependencies)}<br><span class="third-party">(${num(core.thirdPartyDependencies)})</span></td>
+		${!coreHasBundled ? "" : `<td class="n">${core.vendored ? `${num(bundledCount(core, "specs"))}<br><span class="third-party">(${num(bundledCount(core, "affected"))})</span>` : "—"}</td>`}
 		<td class="sev">${pills(core.vulnerabilities) || `<span class="muted">—</span>`}</td>
 	</tr>`).join("")}</tbody>
 </table></div>`;
@@ -664,6 +679,10 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 /* The divider runs the full pill height since pills have no block padding. */
 .badge .count { font-weight: 600; padding-inline-start: 0.4em; margin-inline-start: 0.4em; border-inline-start: 1px solid color-mix(in srgb, currentColor 40%, transparent); }
 .badge.rank .weather { fill: currentColor; }
+.title { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5em 1em; }
+.health .badge { font-size: 2em; padding-block-start: 0.2em; }
+.health .caption { font-size: 0.4em; text-transform: uppercase; letter-spacing: 0.05em; }
+.health .badge { flex-direction: column; }
 .bundle, .docs { width: 1em; height: 1em; vertical-align: -0.125em; margin-inline-end: 0.3em; fill: currentColor; }
 .external { width: 0.75em; height: 0.75em; margin-inline-start: 0.3em; fill: currentColor; }
 .badge.rank.none .weather { fill: light-dark(#f9cc05, var(--sun)); }
@@ -689,7 +708,10 @@ ${sprite}
 <!-- /zachleat nav -->
 <main id="main">
 <header>
-	<h1>Prototype Pollution Report</h1>
+	<div class="title">
+		<h1>Prototype Pollution Report</h1>
+		${health}
+	</div>
 	<p class="note">Every non-deprecated package published by each framework’s npm organization, installed as of the first of each month and checked with <code>npm audit</code>. Last updated${sinceBadge} ${lastUpdated}.</p>
 </header>
 

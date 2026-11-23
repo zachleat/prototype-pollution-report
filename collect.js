@@ -241,6 +241,44 @@ async function getVendored(name, version) {
 	return vendoredCache.get(key);
 }
 
+// Bundled copies npm audit flagged by install path, since a package can be vulnerable in one bundled version but not another.
+function flaggedCopies(report, vulnerablePackages, vendored, aliasOf) {
+	let flagged = new Set(vulnerablePackages.map(p => p.name));
+	return Object.fromEntries(Object.entries(vendored).map(([key, deps]) => [key, Object.values(deps).filter(spec => {
+		let name = spec.slice(0, spec.lastIndexOf("@"));
+		return flagged.has(name) && report.vulnerabilities[name]?.nodes?.includes(`node_modules/${aliasOf.get(spec)}`);
+	})]));
+}
+
+// `--legacy-peer-deps` drops peers, so a bundled copy's required peer links to the flagged copy its own bundler ships.
+function linkBundledPeers(report, vendored, aliasOf) {
+	let nameOf = spec => spec.slice(0, spec.lastIndexOf("@"));
+	let pathOf = spec => `node_modules/${aliasOf.get(spec)}`;
+	let flagged = spec => report.vulnerabilities[nameOf(spec)]?.nodes?.includes(pathOf(spec));
+	for (let deps of Object.values(vendored)) {
+		let specs = Object.values(deps);
+		// Repeats until stable, since a newly flagged copy can be another copy's peer.
+		for (let changed = true; changed;) {
+			changed = false;
+			for (let spec of specs) {
+				let p = report.lock[pathOf(spec)];
+				if (!p || flagged(spec)) {
+					continue;
+				}
+				let via = Object.entries(p.peerDependencies || {})
+					.filter(([peer, range]) => !p.peerDependenciesMeta?.[peer]?.optional && specs.some(s => nameOf(s) === peer && flagged(s) && satisfies(s.slice(peer.length + 1), range)))
+					.map(([peer]) => peer);
+				if (via.length) {
+					let name = nameOf(spec);
+					let existing = report.vulnerabilities[name];
+					report.vulnerabilities[name] = { name, ...existing, via: [...(existing?.via || []), ...via], nodes: [...(existing?.nodes || []), pathOf(spec)] };
+					changed = true;
+				}
+			}
+		}
+	}
+}
+
 // Finds packages in an audited tree that bundle dependencies, and aliases that install those dependencies for a second audit.
 async function getBundled(report, roots = report.direct) {
 	let aliases = new Map();
@@ -265,7 +303,7 @@ async function getBundled(report, roots = report.direct) {
 			aliases.set(alias, `npm:${spec}`);
 			aliasOf.set(spec, alias);
 			vendoredBy.set(v.name, name);
-			vendoredUnder.set(name, (vendoredUnder.get(name) || new Set()).add(v.name));
+			vendoredUnder.set(name, (vendoredUnder.get(name) || new Map()).set(alias, v.name));
 			vendored[key] = { ...vendored[key], [v.dir]: spec };
 		}
 	}
@@ -505,8 +543,9 @@ function summarize(report, date, owned, vendoredUnder = new Map()) {
 			}
 		}
 	};
-	for (let [parent, names] of vendoredUnder) {
-		let via = [...names].filter(name => vulns[name]);
+	for (let [parent, copies] of vendoredUnder) {
+		// Only a flagged bundled copy counts, since the same name can be vulnerable at another version elsewhere in the tree.
+		let via = [...new Set([...copies].filter(([alias, name]) => vulns[name]?.nodes?.includes(`node_modules/${alias}`)).map(([, name]) => name))];
 		if (via.length) {
 			link(parent, via);
 		}
@@ -602,13 +641,16 @@ for (let framework of selected) {
 				let coreReport = plainCore;
 				if (bundled.aliases.length) {
 					({ report: coreReport, peersSkipped } = await auditCore([core, ...bundled.aliases], date));
+					linkBundledPeers(coreReport, bundled.vendored, bundled.aliasOf);
 				}
 				await fetchPublishedDates(coreReport);
-				let { dependencies, thirdPartyDependencies, vulnerabilities, advisories } = summarize(coreReport, date, owned, bundled.vendoredUnder);
+				let { dependencies, thirdPartyDependencies, vulnerabilities, advisories, vulnerablePackages } = summarize(coreReport, date, owned, bundled.vendoredUnder);
 				snapshot.core = { name: core[0], version: core[1], dependencies, thirdPartyDependencies, vulnerabilities, advisories, ...(peersSkipped && { peersSkipped }) };
 				if (bundled.aliases.length) {
 					await fetchPublishedDates(plainCore);
 					snapshot.core.nonVendoredVulnerabilities = summarize(plainCore, date, owned).vulnerabilities;
+					snapshot.core.vendored = bundled.vendored;
+					snapshot.core.vendoredAffected = flaggedCopies(coreReport, vulnerablePackages, bundled.vendored, bundled.aliasOf);
 				}
 			}
 
@@ -637,6 +679,7 @@ for (let framework of selected) {
 			let plain = await audit([...packages, ...peers, ...bundlers], date);
 			let { aliases, aliasOf, vendoredBy, vendoredUnder, vendored, unresolved, users } = await getBundled(plain, new Set(packages.map(([name]) => name)));
 			let report = aliases.length ? await audit([...packages, ...peers, ...bundlers, ...aliases], date) : plain;
+			linkBundledPeers(report, vendored, aliasOf);
 			await fetchPublishedDates(report);
 			Object.assign(snapshot, summarize(report, date, owned, vendoredUnder));
 			for (let p of snapshot.vulnerablePackages) {
@@ -649,12 +692,7 @@ for (let framework of selected) {
 				snapshot.nonVendoredVulnerabilities = summarize(plain, date, owned).vulnerabilities;
 				snapshot.vendored = vendored;
 				snapshot.vendoredUsers = users;
-				// Bundled copies npm audit flagged by install path, since a package can be vulnerable in one bundled version but not another.
-				let flagged = new Set(snapshot.vulnerablePackages.map(p => p.name));
-				snapshot.vendoredAffected = Object.fromEntries(Object.entries(vendored).map(([key, deps]) => [key, Object.values(deps).filter(spec => {
-					let name = spec.slice(0, spec.lastIndexOf("@"));
-					return flagged.has(name) && report.vulnerabilities[name]?.nodes?.includes(`node_modules/${aliasOf.get(spec)}`);
-				})]));
+				snapshot.vendoredAffected = flaggedCopies(report, snapshot.vulnerablePackages, vendored, aliasOf);
 			}
 			if (Object.keys(unresolved).length) {
 				snapshot.unresolvedVendored = unresolved;

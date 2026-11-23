@@ -268,6 +268,10 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 /* The divider runs the full pill height since pills have no block padding. */
 .badge .count { font-weight: 600; padding-inline-start: 0.4em; margin-inline-start: 0.4em; border-inline-start: 1px solid color-mix(in srgb, currentColor 40%, transparent); }
 .badge.rank .weather { fill: currentColor; }
+.title { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5em 1em; }
+.health .badge { font-size: 2em; padding-block-start: 0.2em; }
+.health .caption { font-size: 0.4em; text-transform: uppercase; letter-spacing: 0.05em; }
+.health .badge { flex-direction: column; }
 .bundle, .docs { width: 1em; height: 1em; vertical-align: -0.125em; margin-inline-end: 0.3em; fill: currentColor; }
 .external { width: 0.75em; height: 0.75em; margin-inline-start: 0.3em; fill: currentColor; }
 .badge.rank.none .weather { fill: light-dark(#f9cc05, var(--sun)); }
@@ -293,7 +297,10 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 <!-- /zachleat nav -->
 <main id="main">
 <header>
-	<h1>Prototype Pollution Report</h1>
+	<div class="title">
+		<h1>Prototype Pollution Report</h1>
+		<p class="health" title="Heavy rain"><span class="badge rank critical"><span class="caption">Overall</span><svg class="weather" role="img" aria-label="Heavy rain"><use href="#weather-heavy-rain"/></svg>4</span></p>
+	</div>
 	<p class="note">Every non-deprecated package published by each framework’s npm organization, installed as of the first of each month and checked with <code>npm audit</code>. Last updated <time class="badge age since" datetime="2026-11-23T07:50:46.547Z">&nbsp;</time> <time datetime="2026-11-23T07:50:46.547Z">Nov 23, 2026, 7:50 AM UTC</time>.</p>
 </header>
 
@@ -461,6 +468,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<th class="n">GitHub<br>Advisories</th>
 		<th class="n">Packages<br><span class="third-party">(Affected)</span></th>
 		<th class="n">Dependencies<br><span class="third-party">(Third-party)</span></th>
+		<th class="n">Bundled deps<br><span class="third-party">(Affected)</span></th>
 		<th>Severity<br><span class="badge critical key">critical</span> <span class="badge high key">high</span> <span class="badge moderate key">moderate</span> <span class="badge low key">low</span></th>
 	</tr></thead>
 	<tbody><tr>
@@ -471,6 +479,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="n">4</td>
 		<td class="n">46<br><span class="third-party">(2)</span></td>
 		<td class="n">632<br><span class="third-party">(574)</span></td>
+		<td class="n">100<br><span class="third-party">(0)</span></td>
 		<td class="sev"> <span class="badge high">high<span class="count">3</span></span></td>
 	</tr><tr>
 		<td class="forecast" title="Partly cloudy"><span class="badge rank low"><svg class="weather" role="img" aria-label="Partly cloudy"><use href="#weather-partly-cloudy"/></svg>1</span></td>
@@ -480,6 +489,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="n">2</td>
 		<td class="n">27<br><span class="third-party">(2)</span></td>
 		<td class="n">576<br><span class="third-party">(546)</span></td>
+		<td class="n">100<br><span class="third-party">(0)</span></td>
 		<td class="sev"> <span class="badge moderate">moderate<span class="count">7</span></span></td>
 	</tr><tr>
 		<td class="forecast" title="Cloudy"><span class="badge rank moderate"><svg class="weather" role="img" aria-label="Cloudy"><use href="#weather-cloudy"/></svg>2</span></td>
@@ -489,6 +499,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="n">4</td>
 		<td class="n">50<br><span class="third-party">(3)</span></td>
 		<td class="n">884<br><span class="third-party">(828)</span></td>
+		<td class="n">100<br><span class="third-party">(0)</span></td>
 		<td class="sev"> <span class="badge high">high<span class="count">5</span></span> <span class="badge moderate" title="6 moderate">6</span></td>
 	</tr><tr>
 		<td class="forecast" title="Rain"><span class="badge rank severe"><svg class="weather" role="img" aria-label="Rain"><use href="#weather-rain"/></svg>3</span></td>
@@ -498,6 +509,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="n">61</td>
 		<td class="n">39<br><span class="third-party">(2)</span></td>
 		<td class="n">944<br><span class="third-party">(901)</span></td>
+		<td class="n">135<br><span class="third-party">(21)</span></td>
 		<td class="sev"> <span class="badge critical">critical<span class="count">5</span></span> <span class="badge high" title="22 high">22</span> <span class="badge moderate" title="2 moderate">2</span> <span class="badge low" title="10 low">10</span></td>
 	</tr><tr>
 		<td class="forecast" title="Rain"><span class="badge rank severe"><svg class="weather" role="img" aria-label="Rain"><use href="#weather-rain"/></svg>3</span></td>
@@ -507,6 +519,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="n">94</td>
 		<td class="n">63<br><span class="third-party">(7)</span></td>
 		<td class="n">1,577<br><span class="third-party">(1,513)</span></td>
+		<td class="n">207<br><span class="third-party">(17)</span></td>
 		<td class="sev"> <span class="badge critical">critical<span class="count">3</span></span> <span class="badge high" title="24 high">24</span> <span class="badge moderate" title="13 moderate">13</span></td>
 	</tr><tr>
 		<td class="forecast" title="Heavy rain"><span class="badge rank critical"><svg class="weather" role="img" aria-label="Heavy rain"><use href="#weather-heavy-rain"/></svg>4</span></td>
@@ -516,6 +529,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="n">35</td>
 		<td class="n">47<br><span class="third-party">(15)</span></td>
 		<td class="n">860<br><span class="third-party">(807)</span></td>
+		<td class="n">100<br><span class="third-party">(0)</span></td>
 		<td class="sev"> <span class="badge critical">critical<span class="count">10</span></span> <span class="badge high" title="25 high">25</span> <span class="badge moderate" title="6 moderate">6</span> <span class="badge low" title="1 low">1</span></td>
 	</tr><tr>
 		<td class="forecast" title="Rain"><span class="badge rank severe"><svg class="weather" role="img" aria-label="Rain"><use href="#weather-rain"/></svg>3</span></td>
@@ -525,6 +539,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="n">64</td>
 		<td class="n">27<br><span class="third-party">(8)</span></td>
 		<td class="n">973<br><span class="third-party">(943)</span></td>
+		<td class="n">139<br><span class="third-party">(24)</span></td>
 		<td class="sev"> <span class="badge critical">critical<span class="count">9</span></span> <span class="badge high" title="20 high">20</span> <span class="badge moderate" title="3 moderate">3</span> <span class="badge low" title="11 low">11</span></td>
 	</tr><tr>
 		<td class="forecast" title="Heavy rain"><span class="badge rank critical"><svg class="weather" role="img" aria-label="Heavy rain"><use href="#weather-heavy-rain"/></svg>4</span></td>
@@ -534,6 +549,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="n">63</td>
 		<td class="n">95<br><span class="third-party">(23)</span></td>
 		<td class="n">1,124<br><span class="third-party">(1,020)</span></td>
+		<td class="n">223<br><span class="third-party">(15)</span></td>
 		<td class="sev"> <span class="badge critical">critical<span class="count">17</span></span> <span class="badge high" title="21 high">21</span> <span class="badge moderate" title="7 moderate">7</span> <span class="badge low" title="2 low">2</span></td>
 	</tr><tr>
 		<td class="forecast" title="Heavy rain"><span class="badge rank critical"><svg class="weather" role="img" aria-label="Heavy rain"><use href="#weather-heavy-rain"/></svg>4</span></td>
@@ -543,6 +559,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="n">106</td>
 		<td class="n">81<br><span class="third-party">(23)</span></td>
 		<td class="n">1,089<br><span class="third-party">(993)</span></td>
+		<td class="n">258<br><span class="third-party">(21)</span></td>
 		<td class="sev"> <span class="badge critical">critical<span class="count">21</span></span> <span class="badge high" title="38 high">38</span> <span class="badge moderate" title="4 moderate">4</span> <span class="badge low" title="1 low">1</span></td>
 	</tr><tr>
 		<td class="forecast" title="Heavy rain"><span class="badge rank critical"><svg class="weather" role="img" aria-label="Heavy rain"><use href="#weather-heavy-rain"/></svg>4</span></td>
@@ -552,6 +569,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="n">103</td>
 		<td class="n">57<br><span class="third-party">(20)</span></td>
 		<td class="n">2,427<br><span class="third-party">(2,354)</span></td>
+		<td class="n">154<br><span class="third-party">(5)</span></td>
 		<td class="sev"> <span class="badge critical">critical<span class="count">12</span></span> <span class="badge high" title="76 high">76</span> <span class="badge moderate" title="12 moderate">12</span> <span class="badge low" title="1 low">1</span></td>
 	</tr><tr>
 		<td class="forecast" title="Storms"><span class="badge rank extreme"><svg class="weather" role="img" aria-label="Storms"><use href="#weather-storms"/></svg>5</span></td>
@@ -561,6 +579,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="n">167</td>
 		<td class="n">47<br><span class="third-party">(11)</span></td>
 		<td class="n">2,017<br><span class="third-party">(1,967)</span></td>
+		<td class="n">202<br><span class="third-party">(14)</span></td>
 		<td class="sev"> <span class="badge critical">critical<span class="count">35</span></span> <span class="badge high" title="91 high">91</span> <span class="badge moderate" title="12 moderate">12</span> <span class="badge low" title="5 low">5</span></td>
 	</tr><tr>
 		<td class="forecast" title="Storms"><span class="badge rank extreme"><svg class="weather" role="img" aria-label="Storms"><use href="#weather-storms"/></svg>5</span></td>
@@ -570,6 +589,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="n">176</td>
 		<td class="n">133<br><span class="third-party">(118)</span></td>
 		<td class="n">3,361<br><span class="third-party">(3,202)</span></td>
+		<td class="n">0<br><span class="third-party">(0)</span></td>
 		<td class="sev"> <span class="badge critical">critical<span class="count">50</span></span> <span class="badge high" title="248 high">248</span> <span class="badge moderate" title="29 moderate">29</span> <span class="badge low" title="4 low">4</span></td>
 	</tr></tbody>
 </table></div>
@@ -1084,6 +1104,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<th>Over Time</th>
 		<th class="n">GitHub<br>Advisories</th>
 		<th class="n">Dependencies<br><span class="third-party">(Third-party)</span></th>
+		
 		<th>Severity<br><span class="badge critical key">critical</span> <span class="badge high key">high</span> <span class="badge moderate key">moderate</span> <span class="badge low key">low</span></th>
 	</tr></thead>
 	<tbody><tr>
@@ -1093,6 +1114,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="spark"><svg class="sparkline scale-all" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0,16L0.0,15.5L4.7,15.5L9.5,15.5L14.3,15.5L18.6,15.5L23.4,15.5L28.1,15.5L32.9,15.5L37.5,15.5L42.3,15.5L47.1,15.5L51.8,15.5L56.3,15.5L56.4,15.5L56.6,15.5L56.7,15.5L56.9,15.5L57.1,15.5L57.2,15.5L57.4,15.5L57.5,15.5L57.7,15.5L57.8,15.5L58.0,15.5L58.1,15.5L58.3,15.5L58.4,15.5L58.6,15.5L58.8,15.5L58.9,15.5L59.1,15.5L59.2,15.5L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5L60.0,16Z" class="area" style="fill:var(--series-7)"/><path d="M0.0,15.5L4.7,15.5L9.5,15.5L14.3,15.5L18.6,15.5L23.4,15.5L28.1,15.5L32.9,15.5L37.5,15.5L42.3,15.5L47.1,15.5L51.8,15.5L56.3,15.5L56.4,15.5L56.6,15.5L56.7,15.5L56.9,15.5L57.1,15.5L57.2,15.5L57.4,15.5L57.5,15.5L57.7,15.5L57.8,15.5L58.0,15.5L58.1,15.5L58.3,15.5L58.4,15.5L58.6,15.5L58.8,15.5L58.9,15.5L59.1,15.5L59.2,15.5L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5" vector-effect="non-scaling-stroke" style="stroke:var(--series-7)"/></svg><svg class="sparkline scale-trimmed" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0,16L0.0,15.5L4.7,15.5L9.5,15.5L14.3,15.5L18.6,15.5L23.4,15.5L28.1,15.5L32.9,15.5L37.5,15.5L42.3,15.5L47.1,15.5L51.8,15.5L56.3,15.5L56.4,15.5L56.6,15.5L56.7,15.5L56.9,15.5L57.1,15.5L57.2,15.5L57.4,15.5L57.5,15.5L57.7,15.5L57.8,15.5L58.0,15.5L58.1,15.5L58.3,15.5L58.4,15.5L58.6,15.5L58.8,15.5L58.9,15.5L59.1,15.5L59.2,15.5L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5L60.0,16Z" class="area" style="fill:var(--series-7)"/><path d="M0.0,15.5L4.7,15.5L9.5,15.5L14.3,15.5L18.6,15.5L23.4,15.5L28.1,15.5L32.9,15.5L37.5,15.5L42.3,15.5L47.1,15.5L51.8,15.5L56.3,15.5L56.4,15.5L56.6,15.5L56.7,15.5L56.9,15.5L57.1,15.5L57.2,15.5L57.4,15.5L57.5,15.5L57.7,15.5L57.8,15.5L58.0,15.5L58.1,15.5L58.3,15.5L58.4,15.5L58.6,15.5L58.8,15.5L58.9,15.5L59.1,15.5L59.2,15.5L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5" vector-effect="non-scaling-stroke" style="stroke:var(--series-7)"/></svg></td>
 		<td class="n">0</td>
 		<td class="n">3<br><span class="third-party">(2)</span></td>
+		
 		<td class="sev"><span class="muted">—</span></td>
 	</tr><tr>
 		<td class="forecast" title="Clear"><span class="badge rank none"><svg class="weather" role="img" aria-label="Clear"><use href="#weather-clear"/></svg>0</span></td>
@@ -1101,6 +1123,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="spark"><svg class="sparkline scale-all" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4.7,16L4.7,15.5L9.5,15.5L14.3,15.5L18.6,15.5L23.4,15.5L28.1,15.5L32.9,15.5L37.5,15.5L42.3,15.5L47.1,15.5L51.8,15.5L56.6,15.5L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5L60.0,16Z" class="area" style="fill:var(--series-12)"/><path d="M4.7,15.5L9.5,15.5L14.3,15.5L18.6,15.5L23.4,15.5L28.1,15.5L32.9,15.5L37.5,15.5L42.3,15.5L47.1,15.5L51.8,15.5L56.6,15.5L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5" vector-effect="non-scaling-stroke" style="stroke:var(--series-12)"/></svg><svg class="sparkline scale-trimmed" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4.7,16L4.7,15.5L9.5,15.5L14.3,15.5L18.6,15.5L23.4,15.5L28.1,15.5L32.9,15.5L37.5,15.5L42.3,15.5L47.1,15.5L51.8,15.5L56.6,15.5L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5L60.0,16Z" class="area" style="fill:var(--series-12)"/><path d="M4.7,15.5L9.5,15.5L14.3,15.5L18.6,15.5L23.4,15.5L28.1,15.5L32.9,15.5L37.5,15.5L42.3,15.5L47.1,15.5L51.8,15.5L56.6,15.5L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5" vector-effect="non-scaling-stroke" style="stroke:var(--series-12)"/></svg></td>
 		<td class="n">0</td>
 		<td class="n">6<br><span class="third-party">(1)</span></td>
+		
 		<td class="sev"><span class="muted">—</span></td>
 	</tr><tr>
 		<td class="forecast" title="Clear"><span class="badge rank none"><svg class="weather" role="img" aria-label="Clear"><use href="#weather-clear"/></svg>0</span></td>
@@ -1109,6 +1132,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="spark"><svg class="sparkline scale-all" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4.7,16L4.7,15.5L9.5,15.5L14.3,15.5L18.6,15.5L23.4,15.5L28.1,15.5L32.9,15.5L37.5,15.5L42.3,15.5L47.1,15.5L51.8,15.5L56.6,15.5L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5L60.0,16Z" class="area" style="fill:var(--series-11)"/><path d="M4.7,15.5L9.5,15.5L14.3,15.5L18.6,15.5L23.4,15.5L28.1,15.5L32.9,15.5L37.5,15.5L42.3,15.5L47.1,15.5L51.8,15.5L56.6,15.5L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5" vector-effect="non-scaling-stroke" style="stroke:var(--series-11)"/></svg><svg class="sparkline scale-trimmed" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4.7,16L4.7,15.5L9.5,15.5L14.3,15.5L18.6,15.5L23.4,15.5L28.1,15.5L32.9,15.5L37.5,15.5L42.3,15.5L47.1,15.5L51.8,15.5L56.6,15.5L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5L60.0,16Z" class="area" style="fill:var(--series-11)"/><path d="M4.7,15.5L9.5,15.5L14.3,15.5L18.6,15.5L23.4,15.5L28.1,15.5L32.9,15.5L37.5,15.5L42.3,15.5L47.1,15.5L51.8,15.5L56.6,15.5L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5" vector-effect="non-scaling-stroke" style="stroke:var(--series-11)"/></svg></td>
 		<td class="n">0</td>
 		<td class="n">1<br><span class="third-party">(0)</span></td>
+		
 		<td class="sev"><span class="muted">—</span></td>
 	</tr><tr>
 		<td class="forecast" title="Clear"><span class="badge rank none"><svg class="weather" role="img" aria-label="Clear"><use href="#weather-clear"/></svg>0</span></td>
@@ -1117,6 +1141,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="spark"><svg class="sparkline scale-all" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0,16L0.0,15.5L4.7,15.5L9.5,15.5L14.3,15.5L18.6,15.5L23.4,14.6L28.1,15.5L32.9,15.5L37.5,15.5L42.3,15.5L47.1,15.5L51.8,15.5L56.3,15.5L56.4,15.5L56.6,15.5L56.7,15.5L56.9,15.5L57.1,15.5L57.2,15.5L57.4,15.5L57.5,15.5L57.7,15.5L57.8,15.5L58.0,15.5L58.1,15.5L58.3,15.5L58.4,15.5L58.6,15.5L58.8,15.5L58.9,15.5L59.1,15.5L59.2,13.6L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5L60.0,16Z" class="area" style="fill:var(--series-8)"/><path d="M0.0,15.5L4.7,15.5L9.5,15.5L14.3,15.5L18.6,15.5L23.4,14.6L28.1,15.5L32.9,15.5L37.5,15.5L42.3,15.5L47.1,15.5L51.8,15.5L56.3,15.5L56.4,15.5L56.6,15.5L56.7,15.5L56.9,15.5L57.1,15.5L57.2,15.5L57.4,15.5L57.5,15.5L57.7,15.5L57.8,15.5L58.0,15.5L58.1,15.5L58.3,15.5L58.4,15.5L58.6,15.5L58.8,15.5L58.9,15.5L59.1,15.5L59.2,13.6L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5" vector-effect="non-scaling-stroke" style="stroke:var(--series-8)"/></svg><svg class="sparkline scale-trimmed" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0,16L0.0,15.5L4.7,15.5L9.5,15.5L14.3,15.5L18.6,15.5L23.4,14.0L28.1,15.5L32.9,15.5L37.5,15.5L42.3,15.5L47.1,15.5L51.8,15.5L56.3,15.5L56.4,15.5L56.6,15.5L56.7,15.5L56.9,15.5L57.1,15.5L57.2,15.5L57.4,15.5L57.5,15.5L57.7,15.5L57.8,15.5L58.0,15.5L58.1,15.5L58.3,15.5L58.4,15.5L58.6,15.5L58.8,15.5L58.9,15.5L59.1,15.5L59.2,12.5L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5L60.0,16Z" class="area" style="fill:var(--series-8)"/><path d="M0.0,15.5L4.7,15.5L9.5,15.5L14.3,15.5L18.6,15.5L23.4,14.0L28.1,15.5L32.9,15.5L37.5,15.5L42.3,15.5L47.1,15.5L51.8,15.5L56.3,15.5L56.4,15.5L56.6,15.5L56.7,15.5L56.9,15.5L57.1,15.5L57.2,15.5L57.4,15.5L57.5,15.5L57.7,15.5L57.8,15.5L58.0,15.5L58.1,15.5L58.3,15.5L58.4,15.5L58.6,15.5L58.8,15.5L58.9,15.5L59.1,15.5L59.2,12.5L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5" vector-effect="non-scaling-stroke" style="stroke:var(--series-8)"/></svg></td>
 		<td class="n">0</td>
 		<td class="n">97<br><span class="third-party">(81)</span></td>
+		
 		<td class="sev"><span class="muted">—</span></td>
 	</tr><tr>
 		<td class="forecast" title="Clear"><span class="badge rank none"><svg class="weather" role="img" aria-label="Clear"><use href="#weather-clear"/></svg>0</span></td>
@@ -1125,6 +1150,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="spark"><svg class="sparkline scale-all" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0,16L0.0,15.5L4.7,15.5L9.5,15.5L14.3,15.5L18.6,15.5L23.4,15.5L28.1,15.5L32.9,15.5L37.5,15.5L42.3,15.5L47.1,15.5L51.8,15.5L56.3,15.5L56.4,14.9L56.6,14.9L56.7,14.9L56.9,15.5L57.1,15.5L57.2,15.5L57.4,15.5L57.5,15.5L57.7,15.5L57.8,15.5L58.0,15.5L58.1,15.5L58.3,15.5L58.4,15.5L58.6,15.5L58.8,15.5L58.9,15.5L59.1,15.5L59.2,13.6L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5L60.0,16Z" class="area" style="fill:var(--series-1)"/><path d="M0.0,15.5L4.7,15.5L9.5,15.5L14.3,15.5L18.6,15.5L23.4,15.5L28.1,15.5L32.9,15.5L37.5,15.5L42.3,15.5L47.1,15.5L51.8,15.5L56.3,15.5L56.4,14.9L56.6,14.9L56.7,14.9L56.9,15.5L57.1,15.5L57.2,15.5L57.4,15.5L57.5,15.5L57.7,15.5L57.8,15.5L58.0,15.5L58.1,15.5L58.3,15.5L58.4,15.5L58.6,15.5L58.8,15.5L58.9,15.5L59.1,15.5L59.2,13.6L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5" vector-effect="non-scaling-stroke" style="stroke:var(--series-1)"/></svg><svg class="sparkline scale-trimmed" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0,16L0.0,15.5L4.7,15.5L9.5,15.5L14.3,15.5L18.6,15.5L23.4,15.5L28.1,15.5L32.9,15.5L37.5,15.5L42.3,15.5L47.1,15.5L51.8,15.5L56.3,15.5L56.4,14.6L56.6,14.6L56.7,14.6L56.9,15.5L57.1,15.5L57.2,15.5L57.4,15.5L57.5,15.5L57.7,15.5L57.8,15.5L58.0,15.5L58.1,15.5L58.3,15.5L58.4,15.5L58.6,15.5L58.8,15.5L58.9,15.5L59.1,15.5L59.2,12.5L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5L60.0,16Z" class="area" style="fill:var(--series-1)"/><path d="M0.0,15.5L4.7,15.5L9.5,15.5L14.3,15.5L18.6,15.5L23.4,15.5L28.1,15.5L32.9,15.5L37.5,15.5L42.3,15.5L47.1,15.5L51.8,15.5L56.3,15.5L56.4,14.6L56.6,14.6L56.7,14.6L56.9,15.5L57.1,15.5L57.2,15.5L57.4,15.5L57.5,15.5L57.7,15.5L57.8,15.5L58.0,15.5L58.1,15.5L58.3,15.5L58.4,15.5L58.6,15.5L58.8,15.5L58.9,15.5L59.1,15.5L59.2,12.5L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5" vector-effect="non-scaling-stroke" style="stroke:var(--series-1)"/></svg></td>
 		<td class="n">0</td>
 		<td class="n">127<br><span class="third-party">(116)</span></td>
+		
 		<td class="sev"><span class="muted">—</span></td>
 	</tr><tr>
 		<td class="forecast" title="Clear"><span class="badge rank none"><svg class="weather" role="img" aria-label="Clear"><use href="#weather-clear"/></svg>0</span></td>
@@ -1133,6 +1159,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="spark"><svg class="sparkline scale-all" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0,16L0.0,15.5L4.7,15.5L9.5,15.5L14.3,15.5L18.6,15.5L23.4,15.5L28.1,15.1L32.9,14.7L37.5,15.1L42.3,14.7L47.1,14.9L51.8,14.9L56.3,15.5L56.4,14.9L56.6,14.9L56.7,14.9L56.9,14.9L57.1,14.9L57.2,15.5L57.4,15.5L57.5,15.5L57.7,15.5L57.8,15.5L58.0,15.5L58.1,15.5L58.3,15.5L58.4,15.5L58.6,15.5L58.8,15.5L58.9,15.5L59.1,15.5L59.2,12.9L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5L60.0,16Z" class="area" style="fill:var(--series-5)"/><path d="M0.0,15.5L4.7,15.5L9.5,15.5L14.3,15.5L18.6,15.5L23.4,15.5L28.1,15.1L32.9,14.7L37.5,15.1L42.3,14.7L47.1,14.9L51.8,14.9L56.3,15.5L56.4,14.9L56.6,14.9L56.7,14.9L56.9,14.9L57.1,14.9L57.2,15.5L57.4,15.5L57.5,15.5L57.7,15.5L57.8,15.5L58.0,15.5L58.1,15.5L58.3,15.5L58.4,15.5L58.6,15.5L58.8,15.5L58.9,15.5L59.1,15.5L59.2,12.9L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5" vector-effect="non-scaling-stroke" style="stroke:var(--series-5)"/></svg><svg class="sparkline scale-trimmed" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0,16L0.0,15.5L4.7,15.5L9.5,15.5L14.3,15.5L18.6,15.5L23.4,15.5L28.1,14.9L32.9,14.3L37.5,14.9L42.3,14.3L47.1,14.6L51.8,14.6L56.3,15.5L56.4,14.6L56.6,14.6L56.7,14.6L56.9,14.6L57.1,14.6L57.2,15.5L57.4,15.5L57.5,15.5L57.7,15.5L57.8,15.5L58.0,15.5L58.1,15.5L58.3,15.5L58.4,15.5L58.6,15.5L58.8,15.5L58.9,15.5L59.1,15.5L59.2,11.3L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5L60.0,16Z" class="area" style="fill:var(--series-5)"/><path d="M0.0,15.5L4.7,15.5L9.5,15.5L14.3,15.5L18.6,15.5L23.4,15.5L28.1,14.9L32.9,14.3L37.5,14.9L42.3,14.3L47.1,14.6L51.8,14.6L56.3,15.5L56.4,14.6L56.6,14.6L56.7,14.6L56.9,14.6L57.1,14.6L57.2,15.5L57.4,15.5L57.5,15.5L57.7,15.5L57.8,15.5L58.0,15.5L58.1,15.5L58.3,15.5L58.4,15.5L58.6,15.5L58.8,15.5L58.9,15.5L59.1,15.5L59.2,11.3L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5" vector-effect="non-scaling-stroke" style="stroke:var(--series-5)"/></svg></td>
 		<td class="n">0</td>
 		<td class="n">328<br><span class="third-party">(318)</span></td>
+		
 		<td class="sev"><span class="muted">—</span></td>
 	</tr><tr>
 		<td class="forecast" title="Clear"><span class="badge rank none"><svg class="weather" role="img" aria-label="Clear"><use href="#weather-clear"/></svg>0</span></td>
@@ -1141,6 +1168,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="spark"><svg class="sparkline scale-all" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4.7,16L4.7,15.5L9.5,15.5L14.3,14.6L18.6,14.0L23.4,14.6L28.1,14.2L32.9,13.8L37.5,13.8L42.3,13.4L47.1,14.9L51.8,14.9L56.3,15.5L56.4,14.7L56.6,14.7L56.7,14.7L56.9,14.7L57.1,14.7L57.2,15.5L57.4,15.5L57.5,15.5L57.7,15.5L57.8,15.5L58.0,15.5L58.1,15.5L58.3,15.5L58.4,15.5L58.6,15.5L58.8,15.5L58.9,15.5L59.1,15.5L59.2,13.2L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5L60.0,16Z" class="area" style="fill:var(--series-9)"/><path d="M4.7,15.5L9.5,15.5L14.3,14.6L18.6,14.0L23.4,14.6L28.1,14.2L32.9,13.8L37.5,13.8L42.3,13.4L47.1,14.9L51.8,14.9L56.3,15.5L56.4,14.7L56.6,14.7L56.7,14.7L56.9,14.7L57.1,14.7L57.2,15.5L57.4,15.5L57.5,15.5L57.7,15.5L57.8,15.5L58.0,15.5L58.1,15.5L58.3,15.5L58.4,15.5L58.6,15.5L58.8,15.5L58.9,15.5L59.1,15.5L59.2,13.2L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5" vector-effect="non-scaling-stroke" style="stroke:var(--series-9)"/></svg><svg class="sparkline scale-trimmed" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4.7,16L4.7,15.5L9.5,15.5L14.3,14.0L18.6,13.1L23.4,14.0L28.1,13.4L32.9,12.8L37.5,12.8L42.3,12.2L47.1,14.6L51.8,14.6L56.3,15.5L56.4,14.3L56.6,14.3L56.7,14.3L56.9,14.3L57.1,14.3L57.2,15.5L57.4,15.5L57.5,15.5L57.7,15.5L57.8,15.5L58.0,15.5L58.1,15.5L58.3,15.5L58.4,15.5L58.6,15.5L58.8,15.5L58.9,15.5L59.1,15.5L59.2,11.9L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5L60.0,16Z" class="area" style="fill:var(--series-9)"/><path d="M4.7,15.5L9.5,15.5L14.3,14.0L18.6,13.1L23.4,14.0L28.1,13.4L32.9,12.8L37.5,12.8L42.3,12.2L47.1,14.6L51.8,14.6L56.3,15.5L56.4,14.3L56.6,14.3L56.7,14.3L56.9,14.3L57.1,14.3L57.2,15.5L57.4,15.5L57.5,15.5L57.7,15.5L57.8,15.5L58.0,15.5L58.1,15.5L58.3,15.5L58.4,15.5L58.6,15.5L58.8,15.5L58.9,15.5L59.1,15.5L59.2,11.9L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5" vector-effect="non-scaling-stroke" style="stroke:var(--series-9)"/></svg></td>
 		<td class="n">0</td>
 		<td class="n">280<br><span class="third-party">(273)</span></td>
+		
 		<td class="sev"><span class="muted">—</span></td>
 	</tr><tr>
 		<td class="forecast" title="Clear"><span class="badge rank none"><svg class="weather" role="img" aria-label="Clear"><use href="#weather-clear"/></svg>0</span></td>
@@ -1149,6 +1177,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="spark"><svg class="sparkline scale-all" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0,16L0.0,15.1L4.7,15.1L9.5,15.1L14.3,15.1L18.6,15.1L23.4,15.1L28.1,14.7L32.9,14.6L37.5,14.7L42.3,14.4L47.1,14.6L51.8,14.2L56.3,14.9L56.4,14.6L56.6,14.6L56.7,14.6L56.9,14.6L57.1,14.6L57.2,14.9L57.4,14.9L57.5,14.9L57.7,14.9L57.8,14.9L58.0,14.9L58.1,14.9L58.3,14.9L58.4,14.9L58.6,14.9L58.8,14.9L58.9,14.9L59.1,15.5L59.2,13.4L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5L60.0,16Z" class="area" style="fill:var(--series-2)"/><path d="M0.0,15.1L4.7,15.1L9.5,15.1L14.3,15.1L18.6,15.1L23.4,15.1L28.1,14.7L32.9,14.6L37.5,14.7L42.3,14.4L47.1,14.6L51.8,14.2L56.3,14.9L56.4,14.6L56.6,14.6L56.7,14.6L56.9,14.6L57.1,14.6L57.2,14.9L57.4,14.9L57.5,14.9L57.7,14.9L57.8,14.9L58.0,14.9L58.1,14.9L58.3,14.9L58.4,14.9L58.6,14.9L58.8,14.9L58.9,14.9L59.1,15.5L59.2,13.4L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5" vector-effect="non-scaling-stroke" style="stroke:var(--series-2)"/></svg><svg class="sparkline scale-trimmed" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0,16L0.0,14.9L4.7,14.9L9.5,14.9L14.3,14.9L18.6,14.9L23.4,14.9L28.1,14.3L32.9,14.0L37.5,14.3L42.3,13.7L47.1,14.0L51.8,13.4L56.3,14.6L56.4,14.0L56.6,14.0L56.7,14.0L56.9,14.0L57.1,14.0L57.2,14.6L57.4,14.6L57.5,14.6L57.7,14.6L57.8,14.6L58.0,14.6L58.1,14.6L58.3,14.6L58.4,14.6L58.6,14.6L58.8,14.6L58.9,14.6L59.1,15.5L59.2,12.2L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5L60.0,16Z" class="area" style="fill:var(--series-2)"/><path d="M0.0,14.9L4.7,14.9L9.5,14.9L14.3,14.9L18.6,14.9L23.4,14.9L28.1,14.3L32.9,14.0L37.5,14.3L42.3,13.7L47.1,14.0L51.8,13.4L56.3,14.6L56.4,14.0L56.6,14.0L56.7,14.0L56.9,14.0L57.1,14.0L57.2,14.6L57.4,14.6L57.5,14.6L57.7,14.6L57.8,14.6L58.0,14.6L58.1,14.6L58.3,14.6L58.4,14.6L58.6,14.6L58.8,14.6L58.9,14.6L59.1,15.5L59.2,12.2L59.4,15.5L59.5,15.5L59.7,15.5L59.8,15.5L60.0,15.5" vector-effect="non-scaling-stroke" style="stroke:var(--series-2)"/></svg></td>
 		<td class="n">0</td>
 		<td class="n">165<br><span class="third-party">(161)</span></td>
+		
 		<td class="sev"><span class="muted">—</span></td>
 	</tr><tr>
 		<td class="forecast" title="Partly cloudy"><span class="badge rank low"><svg class="weather" role="img" aria-label="Partly cloudy"><use href="#weather-partly-cloudy"/></svg>1</span></td>
@@ -1157,6 +1186,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="spark"><svg class="sparkline scale-all" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4.7,16L4.7,15.5L9.5,15.5L14.3,15.5L18.6,15.5L23.4,15.5L28.1,15.5L32.9,15.5L37.5,15.5L42.3,15.5L47.1,15.5L51.8,15.5L56.3,15.3L56.4,15.3L56.6,15.3L56.7,15.3L56.9,15.3L57.1,15.3L57.2,15.3L57.4,15.3L57.5,15.3L57.7,15.3L57.8,15.3L58.0,15.3L58.1,15.3L58.3,15.3L58.4,15.3L58.6,15.3L58.8,15.3L58.9,15.3L59.1,15.3L59.2,14.2L59.4,15.3L59.5,15.3L59.7,15.3L59.8,15.3L60.0,15.3L60.0,16Z" class="area" style="fill:var(--series-10)"/><path d="M4.7,15.5L9.5,15.5L14.3,15.5L18.6,15.5L23.4,15.5L28.1,15.5L32.9,15.5L37.5,15.5L42.3,15.5L47.1,15.5L51.8,15.5L56.3,15.3L56.4,15.3L56.6,15.3L56.7,15.3L56.9,15.3L57.1,15.3L57.2,15.3L57.4,15.3L57.5,15.3L57.7,15.3L57.8,15.3L58.0,15.3L58.1,15.3L58.3,15.3L58.4,15.3L58.6,15.3L58.8,15.3L58.9,15.3L59.1,15.3L59.2,14.2L59.4,15.3L59.5,15.3L59.7,15.3L59.8,15.3L60.0,15.3" vector-effect="non-scaling-stroke" style="stroke:var(--series-10)"/></svg><svg class="sparkline scale-trimmed" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4.7,16L4.7,15.5L9.5,15.5L14.3,15.5L18.6,15.5L23.4,15.5L28.1,15.5L32.9,15.5L37.5,15.5L42.3,15.5L47.1,15.5L51.8,15.5L56.3,15.2L56.4,15.2L56.6,15.2L56.7,15.2L56.9,15.2L57.1,15.2L57.2,15.2L57.4,15.2L57.5,15.2L57.7,15.2L57.8,15.2L58.0,15.2L58.1,15.2L58.3,15.2L58.4,15.2L58.6,15.2L58.8,15.2L58.9,15.2L59.1,15.2L59.2,13.4L59.4,15.2L59.5,15.2L59.7,15.2L59.8,15.2L60.0,15.2L60.0,16Z" class="area" style="fill:var(--series-10)"/><path d="M4.7,15.5L9.5,15.5L14.3,15.5L18.6,15.5L23.4,15.5L28.1,15.5L32.9,15.5L37.5,15.5L42.3,15.5L47.1,15.5L51.8,15.5L56.3,15.2L56.4,15.2L56.6,15.2L56.7,15.2L56.9,15.2L57.1,15.2L57.2,15.2L57.4,15.2L57.5,15.2L57.7,15.2L57.8,15.2L58.0,15.2L58.1,15.2L58.3,15.2L58.4,15.2L58.6,15.2L58.8,15.2L58.9,15.2L59.1,15.2L59.2,13.4L59.4,15.2L59.5,15.2L59.7,15.2L59.8,15.2L60.0,15.2" vector-effect="non-scaling-stroke" style="stroke:var(--series-10)"/></svg></td>
 		<td class="n">1</td>
 		<td class="n">100<br><span class="third-party">(50)</span></td>
+		
 		<td class="sev"> <span class="badge low">low<span class="count">1</span></span></td>
 	</tr><tr>
 		<td class="forecast" title="Partly cloudy"><span class="badge rank low"><svg class="weather" role="img" aria-label="Partly cloudy"><use href="#weather-partly-cloudy"/></svg>1</span></td>
@@ -1165,6 +1195,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="spark"><svg class="sparkline scale-all" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4.7,16L4.7,15.5L9.5,15.5L14.3,15.5L18.6,14.9L23.4,15.5L28.1,15.1L32.9,14.7L37.5,14.7L42.3,14.7L47.1,14.9L51.8,13.6L56.3,14.2L56.4,10.6L56.6,10.6L56.7,10.6L56.9,11.0L57.1,11.0L57.2,13.2L57.4,13.2L57.5,13.2L57.7,13.2L57.8,13.2L58.0,13.2L58.1,13.2L58.3,13.2L58.4,13.2L58.6,13.6L58.8,13.6L58.9,13.6L59.1,14.0L59.2,6.6L59.4,14.0L59.5,14.0L59.7,14.0L59.8,14.0L60.0,14.0L60.0,16Z" class="area" style="fill:var(--series-3)"/><path d="M4.7,15.5L9.5,15.5L14.3,15.5L18.6,14.9L23.4,15.5L28.1,15.1L32.9,14.7L37.5,14.7L42.3,14.7L47.1,14.9L51.8,13.6L56.3,14.2L56.4,10.6L56.6,10.6L56.7,10.6L56.9,11.0L57.1,11.0L57.2,13.2L57.4,13.2L57.5,13.2L57.7,13.2L57.8,13.2L58.0,13.2L58.1,13.2L58.3,13.2L58.4,13.2L58.6,13.6L58.8,13.6L58.9,13.6L59.1,14.0L59.2,6.6L59.4,14.0L59.5,14.0L59.7,14.0L59.8,14.0L60.0,14.0" vector-effect="non-scaling-stroke" style="stroke:var(--series-3)"/></svg><svg class="sparkline scale-trimmed" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4.7,16L4.7,15.5L9.5,15.5L14.3,15.5L18.6,14.6L23.4,15.5L28.1,14.9L32.9,14.3L37.5,14.3L42.3,14.3L47.1,14.6L51.8,12.5L56.3,13.4L56.4,7.8L56.6,7.8L56.7,7.8L56.9,8.4L57.1,8.4L57.2,11.9L57.4,11.9L57.5,11.9L57.7,11.9L57.8,11.9L58.0,11.9L58.1,11.9L58.3,11.9L58.4,11.9L58.6,12.5L58.8,12.5L58.9,12.5L59.1,13.1L59.2,1.5L59.4,13.1L59.5,13.1L59.7,13.1L59.8,13.1L60.0,13.1L60.0,16Z" class="area" style="fill:var(--series-3)"/><path d="M4.7,15.5L9.5,15.5L14.3,15.5L18.6,14.6L23.4,15.5L28.1,14.9L32.9,14.3L37.5,14.3L42.3,14.3L47.1,14.6L51.8,12.5L56.3,13.4L56.4,7.8L56.6,7.8L56.7,7.8L56.9,8.4L57.1,8.4L57.2,11.9L57.4,11.9L57.5,11.9L57.7,11.9L57.8,11.9L58.0,11.9L58.1,11.9L58.3,11.9L58.4,11.9L58.6,12.5L58.8,12.5L58.9,12.5L59.1,13.1L59.2,1.5L59.4,13.1L59.5,13.1L59.7,13.1L59.8,13.1L60.0,13.1" vector-effect="non-scaling-stroke" style="stroke:var(--series-3)"/></svg></td>
 		<td class="n">1</td>
 		<td class="n">570<br><span class="third-party">(558)</span></td>
+		
 		<td class="sev"> <span class="badge moderate">moderate<span class="count">8</span></span></td>
 	</tr><tr>
 		<td class="forecast" title="Rain"><span class="badge rank severe"><svg class="weather" role="img" aria-label="Rain"><use href="#weather-rain"/></svg>3</span></td>
@@ -1173,6 +1204,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="spark"><svg class="sparkline scale-all" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0,16L0.0,12.5L4.7,12.5L9.5,12.3L14.3,11.5L18.6,10.6L23.4,10.6L28.1,10.4L32.9,10.4L37.5,10.0L42.3,9.6L47.1,10.0L51.8,9.8L56.3,9.4L56.4,9.1L56.6,9.1L56.7,9.1L56.9,9.1L57.1,9.1L57.2,9.1L57.4,9.1L57.5,9.1L57.7,9.1L57.8,9.1L58.0,9.1L58.1,9.1L58.3,9.1L58.4,9.1L58.6,9.1L58.8,9.1L58.9,9.3L59.1,9.1L59.2,8.9L59.4,9.1L59.5,9.1L59.7,9.1L59.8,9.1L60.0,9.1L60.0,16Z" class="area" style="fill:var(--series-4)"/><path d="M0.0,12.5L4.7,12.5L9.5,12.3L14.3,11.5L18.6,10.6L23.4,10.6L28.1,10.4L32.9,10.4L37.5,10.0L42.3,9.6L47.1,10.0L51.8,9.8L56.3,9.4L56.4,9.1L56.6,9.1L56.7,9.1L56.9,9.1L57.1,9.1L57.2,9.1L57.4,9.1L57.5,9.1L57.7,9.1L57.8,9.1L58.0,9.1L58.1,9.1L58.3,9.1L58.4,9.1L58.6,9.1L58.8,9.1L58.9,9.3L59.1,9.1L59.2,8.9L59.4,9.1L59.5,9.1L59.7,9.1L59.8,9.1L60.0,9.1" vector-effect="non-scaling-stroke" style="stroke:var(--series-4)"/></svg><svg class="sparkline scale-trimmed" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0,16L0.0,10.7L4.7,10.7L9.5,10.4L14.3,9.2L18.6,7.8L23.4,7.8L28.1,7.5L32.9,7.5L37.5,6.9L42.3,6.3L47.1,6.9L51.8,6.6L56.3,6.0L56.4,5.4L56.6,5.4L56.7,5.4L56.9,5.4L57.1,5.4L57.2,5.4L57.4,5.4L57.5,5.4L57.7,5.4L57.8,5.4L58.0,5.4L58.1,5.4L58.3,5.4L58.4,5.4L58.6,5.4L58.8,5.4L58.9,5.7L59.1,5.4L59.2,5.1L59.4,5.4L59.5,5.4L59.7,5.4L59.8,5.4L60.0,5.4L60.0,16Z" class="area" style="fill:var(--series-4)"/><path d="M0.0,10.7L4.7,10.7L9.5,10.4L14.3,9.2L18.6,7.8L23.4,7.8L28.1,7.5L32.9,7.5L37.5,6.9L42.3,6.3L47.1,6.9L51.8,6.6L56.3,6.0L56.4,5.4L56.6,5.4L56.7,5.4L56.9,5.4L57.1,5.4L57.2,5.4L57.4,5.4L57.5,5.4L57.7,5.4L57.8,5.4L58.0,5.4L58.1,5.4L58.3,5.4L58.4,5.4L58.6,5.4L58.8,5.4L58.9,5.7L59.1,5.4L59.2,5.1L59.4,5.4L59.5,5.4L59.7,5.4L59.8,5.4L60.0,5.4" vector-effect="non-scaling-stroke" style="stroke:var(--series-4)"/></svg></td>
 		<td class="n">60</td>
 		<td class="n">665<br><span class="third-party">(661)</span></td>
+		
 		<td class="sev"> <span class="badge critical">critical<span class="count">3</span></span> <span class="badge high" title="19 high">19</span> <span class="badge moderate" title="2 moderate">2</span> <span class="badge low" title="10 low">10</span></td>
 	</tr><tr>
 		<td class="forecast" title="Rain"><span class="badge rank severe"><svg class="weather" role="img" aria-label="Rain"><use href="#weather-rain"/></svg>3</span></td>
@@ -1181,6 +1213,7 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 		<td class="spark"><svg class="sparkline scale-all" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0,16L0.0,13.8L4.7,13.8L9.5,13.2L14.3,13.0L18.6,12.3L23.4,10.0L28.1,8.9L32.9,8.7L37.5,8.9L42.3,8.3L47.1,8.1L51.8,7.4L56.3,6.2L56.4,1.5L56.6,1.5L56.7,1.5L56.9,1.5L57.1,1.5L57.2,6.2L57.4,6.2L57.5,6.2L57.7,6.2L57.8,6.2L58.0,6.2L58.1,6.2L58.3,6.2L58.4,6.2L58.6,6.2L58.8,6.2L58.9,6.2L59.1,6.8L59.2,3.4L59.4,6.8L59.5,6.8L59.7,6.8L59.8,6.8L60.0,6.8L60.0,16Z" class="area" style="fill:var(--series-6)"/><path d="M0.0,13.8L4.7,13.8L9.5,13.2L14.3,13.0L18.6,12.3L23.4,10.0L28.1,8.9L32.9,8.7L37.5,8.9L42.3,8.3L47.1,8.1L51.8,7.4L56.3,6.2L56.4,1.5L56.6,1.5L56.7,1.5L56.9,1.5L57.1,1.5L57.2,6.2L57.4,6.2L57.5,6.2L57.7,6.2L57.8,6.2L58.0,6.2L58.1,6.2L58.3,6.2L58.4,6.2L58.6,6.2L58.8,6.2L58.9,6.2L59.1,6.8L59.2,3.4L59.4,6.8L59.5,6.8L59.7,6.8L59.8,6.8L60.0,6.8" vector-effect="non-scaling-stroke" style="stroke:var(--series-6)"/></svg><svg class="sparkline scale-trimmed overflows" viewBox="0 0 60 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0.0,16L0.0,12.8L4.7,12.8L9.5,11.9L14.3,11.6L18.6,10.4L23.4,6.9L28.1,5.1L32.9,4.8L37.5,5.1L42.3,4.2L47.1,3.9L51.8,2.7L56.3,0.9L56.4,-6.5L56.6,-6.5L56.7,-6.5L56.9,-6.5L57.1,-6.5L57.2,0.9L57.4,0.9L57.5,0.9L57.7,0.9L57.8,0.9L58.0,0.9L58.1,0.9L58.3,0.9L58.4,0.9L58.6,0.9L58.8,0.9L58.9,0.9L59.1,1.8L59.2,-3.6L59.4,1.8L59.5,1.8L59.7,1.8L59.8,1.8L60.0,1.8L60.0,16Z" class="area" style="fill:var(--series-6)"/><path d="M0.0,12.8L4.7,12.8L9.5,11.9L14.3,11.6L18.6,10.4L23.4,6.9L28.1,5.1L32.9,4.8L37.5,5.1L42.3,4.2L47.1,3.9L51.8,2.7L56.3,0.9L56.4,-6.5L56.6,-6.5L56.7,-6.5L56.9,-6.5L57.1,-6.5L57.2,0.9L57.4,0.9L57.5,0.9L57.7,0.9L57.8,0.9L58.0,0.9L58.1,0.9L58.3,0.9L58.4,0.9L58.6,0.9L58.8,0.9L58.9,0.9L59.1,1.8L59.2,-3.6L59.4,1.8L59.5,1.8L59.7,1.8L59.8,1.8L60.0,1.8" vector-effect="non-scaling-stroke" style="stroke:var(--series-6)"/></svg></td>
 		<td class="n">24</td>
 		<td class="n">1,252<br><span class="third-party">(1,231)</span></td>
+		
 		<td class="sev"> <span class="badge high">high<span class="count">35</span></span> <span class="badge moderate" title="9 moderate">9</span> <span class="badge low" title="2 low">2</span></td>
 	</tr></tbody>
 </table></div>
