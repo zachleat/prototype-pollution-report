@@ -682,9 +682,15 @@ td.sev { white-space: normal; line-height: 1.6; min-width: 12em; }
 .badge .count { font-weight: 600; padding-inline-start: 0.4em; margin-inline-start: 0.4em; border-inline-start: 1px solid color-mix(in srgb, currentColor 40%, transparent); }
 .badge.rank .weather { fill: currentColor; }
 .title { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5em 1em; }
-.health .badge { font-size: 1.5em; padding-block-start: 0.2em; }
+/* The heading soaks up the free space so the score only stretches on the line it wraps to alone. */
+.title h1 { flex: 999 1 auto; }
+.health { display: flex; flex: 1 1 auto; }
+.health .badge { flex: 1 1 auto; flex-direction: column; justify-content: center; font-size: 1.5em; padding-block-start: 0.2em; }
 .health .caption { font-size: 0.4em; text-transform: uppercase; letter-spacing: 0.05em; }
-.health .badge { flex-direction: column; }
+/* Below the width where the heading pushes the score onto its own line, the full-width pill reads better horizontally. */
+@media (width < 30em) {
+	.health .badge { flex-direction: row; padding-block: 0.3em; }
+}
 .bundle, .docs { width: 1em; height: 1em; vertical-align: -0.125em; margin-inline-end: 0.3em; fill: currentColor; }
 .external { width: 0.75em; height: 0.75em; margin-inline-start: 0.3em; fill: currentColor; }
 .badge.rank.none .weather { fill: light-dark(#f9cc05, var(--sun)); }
