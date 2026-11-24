@@ -1,5 +1,5 @@
 import { faAngular, faBuildAwesome, faSvelte } from "@fortawesome/free-brands-svg-icons";
-import { faAstro, faGatsby, faLit, faNextjs, faNuxt, faPreact, faRemix, faSolid, faTanstack } from "./logos.js";
+import { faAstro, faGatsby, faLit, faNextjs, faNuxt, faPreact, faRemix, faSolid, faTanstack, faVite } from "./logos.js";
 
 // Each ecosystem is every package owned by its npm orgs (narrowed by `match`), plus `include`, minus `exclude`; `core` is also audited alone, labeled `coreName` when set.
 // `static` and `requestTime` say whether a framework can build static output or run code per request ("no", "yes" or "default").
@@ -22,4 +22,5 @@ export default [
 	{ id: "remix", createAudit: { status: "shown", tool: "remix@3.2.0", how: "remix new doesn’t install; your own npm install shows its audit" }, mpa: "yes", spa: "default", static: "no", requestTime: "default", name: "Remix", orgs: ["remix-run", "react-router"], include: ["remix", "create-remix", "react-router", "react-router-dom", "create-react-router"], core: "remix", icon: faRemix, color: { light: "#1a6fe0", dark: "#3992ff" } },
 	{ id: "preact", createAudit: { status: "hidden", tool: "create-preact@0.6.0", how: "create-preact installs with output ignored" }, mpa: "yes", spa: "default", static: "yes", requestTime: "yes", name: "Preact", orgs: ["preact"], core: "preact", icon: faPreact, color: { light: "#673ab8", dark: "#a985e6" } },
 	{ id: "lit", createAudit: { status: "shown", manual: "Manual install", manualUrl: "https://lit.dev/docs/getting-started/", how: "No create tool; your own npm install shows its audit" }, mpa: "default", spa: "yes", static: "yes", requestTime: "yes", name: "Lit", orgs: ["lit", "lit-labs"], core: "lit", exclude: ["tachometer", "wireit"], icon: faLit, color: { light: "#324fff", dark: "#7b8cff" } },
+	{ id: "vite", createAudit: { status: "partial", tool: "create-vite@9.3.4", how: "create-vite shows install output, but vite bundles many of its dependencies where npm audit can’t see them" }, mpa: "yes", spa: "default", static: "default", requestTime: "yes", name: "Vite", orgs: ["vitejs"], core: "vite", icon: faVite, color: { light: "#a87d00", dark: "#ffc517" } },
 ];
