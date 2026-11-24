@@ -741,7 +741,9 @@ ${sprite}
 		${forecastLegend}
 		${renderingTable}
 		<p class="footnote">In a static build, server dependencies are limited to the build machine. A ReDoS in a Markdown parser might slow down a build, but visitors can’t trigger it. ${cautionIcon(REQUEST_TIME_WARNING)}Request-time code runs on a live server, where anyone loading a page can reach it. Note that client dependencies ship to the browser either way, so their vulnerabilities can affect both Build-time and Request-time projects.</p>
-		<p class="footnote">Many create tools swallow npm’s install output, so new projects start without ever seeing its vulnerability warnings. <em>Shows npm audit</em> marks the frameworks that leave <code>npm audit</code> results visible. Hover a cell for details.</p>
+		<p class="footnote">npm is the only package manager that audits on install at all. pnpm and Yarn audit only when you ask, with <code>pnpm audit</code> or <code>yarn npm audit</code> — and each create tool here prompts to ask which package manager is preferred.</p>
+		<p class="footnote">Furthermore, many create tools swallow npm’s install output, so new projects start without ever seeing its vulnerability warnings while using npm. <em>Shows npm audit</em> marks the frameworks that leave <code>npm audit</code> results visible.</p>
+		<p class="footnote">There are two ways it disappears. <code>npm install --no-audit</code> skips the audit entirely, which is what <code>create-gatsby</code> does. More often the audit still runs and the create tool captures its output: <code>create-astro</code> and the TanStack CLI discard it, <code>create-preact</code> ignores it, <code>create-nuxt</code> and <code>ng new</code> print it only when the install fails, and <code>sv create</code> clears the log once the install succeeds. Running <code>npm audit</code> manually will show the same warnings the tool hid.</p>
 	</div>
 </section>
 
